@@ -1,0 +1,6 @@
+{
+  "item.betterfauna.gender_test": "Gender Test",
+  "item.betterfauna.pregnancy_test": "Pregnancy Test",
+  "message.betterfauna.milk.fail_daily": "This animal has already been milked today",
+  "message.betterfauna.milk.fail_gender": "This animal is male and cannot be milked"
+}

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "dev.zestyblaze.betterfauna.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AnimalMixin",
+    "BreedGoalMixin",
+    "ChickenMixin",
+    "MilkingMixin",
+    "PersistentEntitySectionManagerMixin",
+    "ThrownEggMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

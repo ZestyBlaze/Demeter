@@ -1,0 +1,5 @@
+TODO:
+- Animals can rarely breed on their own
+- Separate Models for Baby Animals
+- Visualisation for Pregnancy in animals
+- Merge `IPregnancyComponent` into `IAnimalComponent`
