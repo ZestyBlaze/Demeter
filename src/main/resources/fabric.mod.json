@@ -19,9 +19,6 @@
 		"main": [
 			"dev.zestyblaze.betterfauna.BetterFauna"
 		],
-		"client": [
-			"dev.zestyblaze.betterfauna.BetterFaunaClient"
-		],
 		"fabric-datagen": [
 			"dev.zestyblaze.betterfauna.data.BetterFaunaDataGenerator"
 		],
@@ -30,11 +27,7 @@
 		]
 	},
 	"mixins": [
-		"betterfauna.mixins.json",
-		{
-			"config": "betterfauna.client.mixins.json",
-			"environment": "client"
-		}
+		"betterfauna.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.3",
