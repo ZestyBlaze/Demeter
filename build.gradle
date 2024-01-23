@@ -11,21 +11,15 @@ base {
 }
 
 repositories {
-	maven {
-		name = "a"
-		url "https://maven.parchmentmc.org"
-	}
+	maven { url "https://maven.parchmentmc.org" }
 	maven { url "https://maven.ladysnake.org/releases" }
 	maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
 }
 
 loom {
-    splitEnvironmentSourceSets()
-
 	mods {
 		"betterfauna" {
 			sourceSet sourceSets.main
-			sourceSet sourceSets.client
 		}
 	}
 
