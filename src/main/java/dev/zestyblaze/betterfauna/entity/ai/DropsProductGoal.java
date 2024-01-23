@@ -34,9 +34,9 @@ public class DropsProductGoal extends MoveToBlockGoal {
 
         mob.getLookControl().setLookAt(blockPos.getX() + 0.5d, blockPos.getY() + 1, blockPos.getZ() + 0.5d, 10.0f, mob.getMaxHeadXRot());
 
-        if (!mob.level().isClientSide() && mob.level() instanceof ServerLevel serverLevel && mob.blockPosition().closerThan(blockPos,2.5)) {
+        if (!mob.level().isClientSide() && mob.blockPosition().closerThan(blockPos,2.5)) {
            if (mob instanceof Pig) {
-               serverLevel.addFreshEntity(new ItemEntity(serverLevel, blockPos.getX() + 0.5d, blockPos.getY() + 1, blockPos.getZ() + 0.5d, new ItemStack(ItemRegistry.TRUFFLE)));
+               mob.level().addFreshEntity(new ItemEntity(mob.level(), blockPos.getX() + 0.5d, blockPos.getY() + 1, blockPos.getZ() + 0.5d, new ItemStack(ItemRegistry.TRUFFLE)));
                tryTicks = 9999;
            }
         }
