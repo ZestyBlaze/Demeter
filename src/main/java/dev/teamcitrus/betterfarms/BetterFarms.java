@@ -1,14 +1,12 @@
 package dev.teamcitrus.betterfarms;
 
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
-import dev.teamcitrus.betterfarms.data.BFStatsListener;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import dev.teamcitrus.betterfarms.registry.ItemRegistry;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

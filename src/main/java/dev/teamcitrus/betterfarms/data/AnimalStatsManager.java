@@ -2,7 +2,6 @@ package dev.teamcitrus.betterfarms.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.teamcitrus.betterfarms.event.custom.NewDayEvent;
 import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
