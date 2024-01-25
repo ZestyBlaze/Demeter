@@ -2,6 +2,7 @@ package dev.teamcitrus.betterfarms.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
@@ -12,7 +13,7 @@ public class AnimalStatsManager {
     private final int daysPregnant;
 
     // Pregnancy Variables
-    private boolean isPregnant;
+    private boolean isPregnant = false;
     private int daysLeftUntilBirth;
     private Animal otherParent;
 
@@ -30,10 +31,11 @@ public class AnimalStatsManager {
      */
     public void onNewDay(Animal self) {
         if (isPregnant) {
+            BetterFarms.LOGGER.warn("Animal Pregnant on New Day");
             daysLeftUntilBirth--;
             if (daysLeftUntilBirth <= 0) {
                 AnimalUtil.handleBirth(self, (ServerLevel)self.level(), otherParent);
-                isPregnant = false;
+                setPregnant(false, null);
             }
         }
     }
@@ -47,7 +49,7 @@ public class AnimalStatsManager {
         this.isPregnant = value;
         this.otherParent = otherParent;
         if (value) {
-            this.daysLeftUntilBirth = daysPregnant;
+            this.daysLeftUntilBirth = getDaysPregnant();
         }
     }
 
@@ -56,5 +58,9 @@ public class AnimalStatsManager {
      */
     public int getDaysPregnant() {
         return daysPregnant;
+    }
+
+    public boolean getPregnant() {
+        return isPregnant;
     }
 }
