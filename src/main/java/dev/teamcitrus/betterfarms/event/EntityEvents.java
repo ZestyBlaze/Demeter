@@ -1,8 +1,8 @@
 package dev.teamcitrus.betterfarms.event;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
+import dev.teamcitrus.betterfarms.util.AnimalGenders;
 import net.minecraft.world.entity.animal.Animal;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,7 +16,7 @@ public class EntityEvents {
     public static void onEntityAdded(EntityJoinLevelEvent event) {
         if (!event.loadedFromDisk() && event.getEntity() instanceof Animal animal) {
             animal.getData(AttachmentRegistry.ANIMAL).setGender(
-                    AnimalAttachment.Gender.values()[event.getEntity().level().random.nextInt(AnimalAttachment.Gender.values().length - 1)]
+                    AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalGenders.values().length)]
             );
         }
     }

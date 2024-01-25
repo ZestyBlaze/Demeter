@@ -1,7 +1,8 @@
 package dev.teamcitrus.betterfarms.item;
 
-import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
+import dev.teamcitrus.betterfarms.data.BFStatsListener;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
+import dev.teamcitrus.betterfarms.util.AnimalGenders;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,8 +21,8 @@ public class GenderTestItem extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         if (!interactionTarget.level().isClientSide()) {
-            if (interactionTarget instanceof Animal animal) {
-                AnimalAttachment.Gender gender = animal.getData(AttachmentRegistry.ANIMAL).getGender();
+            if (interactionTarget instanceof Animal animal && BFStatsListener.newMap.containsKey(animal.getType())) {
+                AnimalGenders gender = animal.getData(AttachmentRegistry.ANIMAL).getGender();
                 player.displayClientMessage(Component.literal("Animal is: " + StringUtils.capitalize(gender.getId())), true);
                 return InteractionResult.SUCCESS;
             }

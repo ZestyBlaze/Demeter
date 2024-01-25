@@ -18,7 +18,7 @@ public class CodecTestItem extends Item {
     public InteractionResult interactLivingEntity(ItemStack pStack, Player pPlayer, LivingEntity pInteractionTarget, InteractionHand pUsedHand) {
         if (BFStatsListener.newMap.containsKey(pInteractionTarget.getType())) {
             pPlayer.displayClientMessage(Component.literal("Total of " +
-                    BFStatsListener.getManager(pInteractionTarget).getDaysPregnant()
+                    BFStatsListener.getManager(pInteractionTarget).daysPregnant()
                     + " days pregnant"), true
             );
             return InteractionResult.SUCCESS;

@@ -2,9 +2,9 @@ package dev.teamcitrus.betterfarms.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
 import dev.teamcitrus.betterfarms.data.BFStatsListener;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
+import dev.teamcitrus.betterfarms.util.AnimalGenders;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.animal.Animal;
@@ -19,10 +19,10 @@ public class BreedGoalMixin {
     )
     private void betterFauna$handleMultipleOffspring(Animal instance, ServerLevel serverLevel, Animal animal, Operation<Void> original) {
         if (BFStatsListener.newMap.containsKey(instance.getType())) {
-            if (instance.getData(AttachmentRegistry.ANIMAL).getGender().equals(AnimalAttachment.Gender.FEMALE)) {
-                BFStatsListener.getManager(instance).setPregnant(true, animal);
+            if (instance.getData(AttachmentRegistry.ANIMAL).getGender().equals(AnimalGenders.FEMALE)) {
+                instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
             } else {
-                BFStatsListener.getManager(animal).setPregnant(true, animal);
+                animal.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
             }
             instance.resetLove();
             animal.resetLove();

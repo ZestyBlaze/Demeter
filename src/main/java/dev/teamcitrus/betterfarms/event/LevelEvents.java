@@ -3,6 +3,7 @@ package dev.teamcitrus.betterfarms.event;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.data.BFStatsListener;
 import dev.teamcitrus.betterfarms.event.custom.NewDayEvent;
+import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -22,7 +23,7 @@ public class LevelEvents {
     @SubscribeEvent
     public static void onNewDay(NewDayEvent event) {
         event.getLevel().getEntities(EntityTypeTest.forClass(Animal.class), animal -> BFStatsListener.newMap.containsKey(animal.getType())).forEach(animal -> {
-            BFStatsListener.getManager(animal).onNewDay(animal);
+            animal.getData(AttachmentRegistry.ANIMAL).onNewDay(animal);
         });
     }
 }
