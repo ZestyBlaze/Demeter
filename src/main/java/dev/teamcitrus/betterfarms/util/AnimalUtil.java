@@ -1,10 +1,9 @@
 package dev.teamcitrus.betterfarms.util;
 
-import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
+import dev.teamcitrus.betterfarms.BetterFarms;
+import dev.teamcitrus.betterfarms.data.BFStatsListener;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.animal.Rabbit;
 
 public class AnimalUtil {
     public static boolean isAnimalHappy(Animal animal) {
@@ -13,10 +12,12 @@ public class AnimalUtil {
     }
 
     public static void handleBirth(Animal self, ServerLevel serverLevel, Animal otherEntity) {
-        if (self instanceof Pig || self instanceof Rabbit) {
-            breedMultiple(self, serverLevel, otherEntity, self instanceof Pig ? BetterFarmsConfig.pigsMultipleChildrenMax.get() : BetterFarmsConfig.rabbitsMultipleChildrenMax.get());
-        } else {
+        if (BFStatsListener.getManager(self).getMaxChildrenPerBirth() > 1) {
+            breedMultiple(self, serverLevel, otherEntity, BFStatsListener.getManager(self).getMaxChildrenPerBirth());
+        } else if (BFStatsListener.getManager(self).getMaxChildrenPerBirth() == 1) {
             self.spawnChildFromBreeding(serverLevel, otherEntity);
+        } else {
+            BetterFarms.LOGGER.error("An error has occurred when a {} attempted to give birth as there were 0 'maxChildrenPerBirth' specified", self.getName().getString());
         }
     }
 
