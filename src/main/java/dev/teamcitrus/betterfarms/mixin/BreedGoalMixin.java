@@ -2,9 +2,9 @@ package dev.teamcitrus.betterfarms.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
 import dev.teamcitrus.betterfarms.data.BFStatsListener;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
-import dev.teamcitrus.betterfarms.util.AnimalGenders;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.animal.Animal;
@@ -23,7 +23,7 @@ public class BreedGoalMixin {
                 original.call(instance, serverLevel, animal);
             }
 
-            if (instance.getData(AttachmentRegistry.ANIMAL).getGender().equals(AnimalGenders.FEMALE)) {
+            if (instance.getData(AttachmentRegistry.ANIMAL).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
                 instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
             } else {
                 animal.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
