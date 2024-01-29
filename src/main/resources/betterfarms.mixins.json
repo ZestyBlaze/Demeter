@@ -3,7 +3,9 @@
   "package": "dev.teamcitrus.betterfarms.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BreedGoalMixin"
+    "AnimalMixin",
+    "BreedGoalMixin",
+    "ThrownEggMixin"
   ],
   "injectors": {
     "defaultRequire": 1
