@@ -10,5 +10,5 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class AttachmentRegistry {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, BetterFarms.MODID);
 
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalAttachment>> ANIMAL = ATTACHMENT_TYPES.register("animal", () -> AttachmentType.builder(AnimalAttachment::new).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalAttachment>> ANIMAL = ATTACHMENT_TYPES.register("animal", () -> AttachmentType.builder(AnimalAttachment::new).serialize(AnimalAttachment.CODEC).build());
 }
