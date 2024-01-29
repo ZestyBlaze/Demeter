@@ -17,8 +17,12 @@ public class BreedGoalMixin {
             method = "breed",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Animal;spawnChildFromBreeding(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/animal/Animal;)V")
     )
-    private void betterFauna$handleMultipleOffspring(Animal instance, ServerLevel serverLevel, Animal animal, Operation<Void> original) {
+    private void betterFauna$handlePregnancy(Animal instance, ServerLevel serverLevel, Animal animal, Operation<Void> original) {
         if (BFStatsListener.newMap.containsKey(instance.getType())) {
+            if (BFStatsListener.getManager(instance).getDaysPregnant() == 0 || BFStatsListener.getManager(animal).getDaysPregnant() == 0) {
+                original.call(instance, serverLevel, animal);
+            }
+
             if (instance.getData(AttachmentRegistry.ANIMAL).getGender().equals(AnimalGenders.FEMALE)) {
                 instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
             } else {
