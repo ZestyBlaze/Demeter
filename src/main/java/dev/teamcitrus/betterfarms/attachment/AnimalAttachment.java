@@ -39,7 +39,7 @@ public class AnimalAttachment {
         this.isPregnant = value;
         this.otherParent = otherParent;
         if (value) {
-            this.daysLeftUntilBirth = BFStatsListener.getManager(animal).daysPregnant();
+            this.daysLeftUntilBirth = BFStatsListener.getManager(animal).getDaysPregnant();
         }
     }
     
