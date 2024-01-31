@@ -7,7 +7,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import org.joml.Vector3f;
 
 public class FluidTypeRegistry {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, BetterFarms.MODID);
@@ -17,10 +16,9 @@ public class FluidTypeRegistry {
             () -> new BaseFluidType(
                     new ResourceLocation("block/water_still"),
                     new ResourceLocation("block/water_flow"),
-                    BetterFarms.createId("misc/in_milk"),
-                    0xffffff,
-                    new Vector3f(1, 1, 1),
-                    FluidType.Properties.create().canPushEntity(false).canConvertToSource(false)
+                    FluidType.Properties.create()
+                            .density(1024)
+                            .viscosity(1024)
             )
     );
 }

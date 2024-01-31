@@ -12,7 +12,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 public class BetterFarmsClient {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(FluidRegistry.SOURCE_MILK.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(FluidRegistry.MILK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(FluidRegistry.FLOWING_MILK.get(), RenderType.translucent());
     }
 }
