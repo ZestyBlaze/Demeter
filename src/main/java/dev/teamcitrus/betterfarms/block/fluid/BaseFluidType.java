@@ -9,19 +9,13 @@ import java.util.function.Consumer;
 public class BaseFluidType extends FluidType {
     private final ResourceLocation stillTexture;
     private final ResourceLocation flowingTexture;
+    private final int tintColor;
 
-    public BaseFluidType(ResourceLocation stillTexture, ResourceLocation flowingTexture, Properties properties) {
+    public BaseFluidType(ResourceLocation stillTexture, ResourceLocation flowingTexture, int tintColor, Properties properties) {
         super(properties);
         this.stillTexture = stillTexture;
         this.flowingTexture = flowingTexture;
-    }
-
-    public ResourceLocation getStillTexture() {
-        return stillTexture;
-    }
-
-    public ResourceLocation getFlowingTexture() {
-        return flowingTexture;
+        this.tintColor = tintColor;
     }
 
     @Override
@@ -35,6 +29,11 @@ public class BaseFluidType extends FluidType {
             @Override
             public ResourceLocation getFlowingTexture() {
                 return flowingTexture;
+            }
+
+            @Override
+            public int getTintColor() {
+                return tintColor;
             }
         });
     }

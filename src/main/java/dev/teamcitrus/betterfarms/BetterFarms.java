@@ -2,7 +2,6 @@ package dev.teamcitrus.betterfarms;
 
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
 import dev.teamcitrus.betterfarms.registry.*;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
@@ -23,9 +22,5 @@ public class BetterFarms {
         FluidTypeRegistry.FLUID_TYPES.register(bus);
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BetterFarmsConfig.GENERAL_SPEC);
-    }
-
-    public static ResourceLocation createId(String name) {
-        return new ResourceLocation(MODID, name);
     }
 }

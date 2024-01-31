@@ -16,9 +16,8 @@ public class FluidTypeRegistry {
             () -> new BaseFluidType(
                     new ResourceLocation("block/water_still"),
                     new ResourceLocation("block/water_flow"),
-                    FluidType.Properties.create()
-                            .density(1024)
-                            .viscosity(1024)
+                    0xFAF9F6,
+                    FluidType.Properties.create().density(1024).viscosity(1024)
             )
     );
 }
