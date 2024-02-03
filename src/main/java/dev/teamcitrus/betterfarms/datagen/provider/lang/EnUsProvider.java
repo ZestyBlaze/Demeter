@@ -20,6 +20,10 @@ public class EnUsProvider extends LanguageProvider {
         Set<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ItemRegistry.ITEMS.getEntries());
 
         add("itemGroup.betterfarms", "Better Farms");
+        add("advancement.betterfarms.root", "BetterFarms");
+        add("advancement.betterfarms.root.desc", "The Introduction to the Farming Overhaul!");
+        add("message.betterfarms.milk.fail_daily", "This animal has already been milked today");
+        add("message.betterfarms.milk.fail_gender", "This animal is male and cannot be milked");
 
         items.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("item\\.betterfarms\\.", "");

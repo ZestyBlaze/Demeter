@@ -9,14 +9,17 @@ Most of this mod can be configured with either changing values around in `config
 For example, to add support for a cow, the file is constructed as such:
 ```json
 {
-  "daysPregnant": 9
+  "daysPregnant": 9,
+  "canBeMilked": true
 }
 ```
 
-This means the manager will now recognise the `minecraft:cow` as a valid target for the mod and because a value for `daysPregnant` has been passed, it will take 9 days for a birth to occur
+This means the manager will now recognise the `minecraft:cow` as a valid target for the mod and because a value for `daysPregnant` has been passed, it will take 9 days for a birth to occur, as well as accepting the animal as a valid milking target
 
 To add support for a new mob that the mod does not provide default support for, you can create a json file in the following location: `data/{mod_name}/betterfarms/stats/{mob_id}.json`, where `{mod_name}` is the Mod ID of the mod and the `{mob_id}` is the registered ID for it (E.g. `minecraft:cow` for a cow)
 
 The full list of valid values for the JSON are as follows, with their defaults:
 
 - "daysPregnant" (Default = 0): How many days the specified animal will take to give birth. A value of 0 will give birth immediately
+- "maxChildrenPerBirth" (Default = 1): The max size a birth litter can be. Note: Value should **NOT** be 0. All litter sizes larger than 1 will then vary between 1 and x, with x being the value
+- "canBeMilked" (Default = false): If the mod should add support for milking to the animal

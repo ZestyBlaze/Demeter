@@ -18,8 +18,8 @@ public class CodecTestItem extends Item {
     public InteractionResult interactLivingEntity(ItemStack pStack, Player pPlayer, LivingEntity pInteractionTarget, InteractionHand pUsedHand) {
         if (BFStatsListener.newMap.containsKey(pInteractionTarget.getType())) {
             pPlayer.displayClientMessage(Component.literal("Total of " +
-                    BFStatsListener.getManager(pInteractionTarget).getDaysPregnant()
-                    + " days pregnant"), true
+                    BFStatsListener.getManager(pInteractionTarget).canBeMilked()
+                    + " max children"), true
             );
             return InteractionResult.SUCCESS;
         }

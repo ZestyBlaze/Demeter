@@ -28,8 +28,6 @@ public class ItemRegistry {
     public static final DeferredItem<Item> CODEC_TEST = ITEMS.register("codec_test", CodecTestItem::new);
     public static final DeferredItem<Item> GENDER_TEST = ITEMS.register("gender_test", GenderTestItem::new);
     public static final DeferredItem<Item> PREGNANCY_TEST = ITEMS.register("pregnancy_test", PregnancyTestItem::new);
-    public static final DeferredItem<Item> VIAL = ITEMS.registerSimpleItem("vial");
-    public static final DeferredItem<Item> SYRINGE = ITEMS.registerSimpleItem("syringe");
     public static final DeferredItem<Item> TRUFFLE = ITEMS.registerSimpleItem("truffle", new Item.Properties().food(new FoodProperties.Builder()
                     .nutrition(6).saturationMod(1.2f)
                     .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 15 * 20), 1.0f)

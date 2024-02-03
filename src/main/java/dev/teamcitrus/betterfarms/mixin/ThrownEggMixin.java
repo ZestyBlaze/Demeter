@@ -12,7 +12,7 @@ public class ThrownEggMixin {
             method = "onHit",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I", ordinal = 0)
     )
-    private int betterFauna$noChickenSpawnFromEgg(RandomSource instance, int i) {
+    private int betterFarms$noChickenSpawnFromEgg(RandomSource instance, int i) {
         return 1;
     }
 }

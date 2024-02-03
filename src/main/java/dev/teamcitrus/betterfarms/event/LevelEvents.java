@@ -25,5 +25,8 @@ public class LevelEvents {
         event.getLevel().getEntities(EntityTypeTest.forClass(Animal.class), animal -> BFStatsListener.newMap.containsKey(animal.getType())).forEach(animal -> {
             animal.getData(AttachmentRegistry.ANIMAL).onNewDay(animal);
         });
+        event.getLevel().getEntities(EntityTypeTest.forClass(Animal.class), animal -> BFStatsListener.newMap.containsKey(animal.getType()) && (BFStatsListener.getManager(animal).canBeMilked() && animal.hasData(AttachmentRegistry.MILK))).forEach(animal -> {
+            animal.getData(AttachmentRegistry.MILK).setHasBeenMilked(false);
+        });
     }
 }

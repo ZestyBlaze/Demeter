@@ -5,6 +5,7 @@
   "mixins": [
     "AnimalMixin",
     "BreedGoalMixin",
+    "CowGoatMixin",
     "ThrownEggMixin"
   ],
   "injectors": {
