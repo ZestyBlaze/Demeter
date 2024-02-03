@@ -1,7 +1,9 @@
 package dev.teamcitrus.betterfarms.util;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
+import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
 import dev.teamcitrus.betterfarms.data.BFStatsListener;
+import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
 
@@ -9,6 +11,10 @@ public class AnimalUtil {
     public static boolean isAnimalHappy(Animal animal) {
         return true;
         //return animal.getComponent(CapabilityRegistry.ANIMAL).getHappiness() >= BetterFaunaConfig.animalHappinessMin.get(); TODO: Will be an equation that calculates health, hunger, warmth and love levels for a "happy" level
+    }
+
+    public static AnimalAttachment.AnimalGenders getGender(Animal animal) {
+        return animal.getData(AttachmentRegistry.ANIMAL).getGender();
     }
 
     public static void handleBirth(Animal self, ServerLevel serverLevel, Animal otherEntity) {

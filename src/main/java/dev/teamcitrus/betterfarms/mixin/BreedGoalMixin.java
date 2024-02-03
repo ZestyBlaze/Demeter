@@ -2,9 +2,10 @@ package dev.teamcitrus.betterfarms.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
+import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.betterfarms.data.BFStatsListener;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
+import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.animal.Animal;
@@ -19,11 +20,11 @@ public class BreedGoalMixin {
     )
     private void betterFarms$handlePregnancy(Animal instance, ServerLevel serverLevel, Animal animal, Operation<Void> original) {
         if (BFStatsListener.newMap.containsKey(instance.getType())) {
-            if (BFStatsListener.getManager(instance).getDaysPregnant() == 0 || BFStatsListener.getManager(animal).getDaysPregnant() == 0) {
+            if (BFStatsListener.getManager(instance).getDaysPregnant() == 0) {
                 original.call(instance, serverLevel, animal);
             }
 
-            if (instance.getData(AttachmentRegistry.ANIMAL).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
+            if (AnimalUtil.getGender(instance).equals(AnimalGenders.FEMALE)) {
                 instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
             } else {
                 animal.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
