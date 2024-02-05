@@ -3,7 +3,8 @@ package dev.teamcitrus.betterfarms.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.betterfarms.attachment.MilkAttachment;
-import dev.teamcitrus.betterfarms.data.BFStatsListener;
+import dev.teamcitrus.betterfarms.data.AnimalStats;
+import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -19,7 +20,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,10 +44,12 @@ public class AnimalMixin {
             cancellable = true)
     private void betterFarms$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (pPlayer.level().isClientSide) return;
-        if (!(BFStatsListener.newMap.containsKey(animal.getType()) && BFStatsListener.getManager(animal).canBeMilked())) return;
+        AnimalStats stats = BFStatsManager.getStats(animal);
+        if (!(BFStatsManager.newMap.containsKey(animal.getType()) && stats.milking().isPresent())) return;
+        AnimalStats.MilkingCodec milking = stats.milking().get();
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
-        if (!stack.is(Items.BUCKET)) return;
+        if (!stack.is(milking.input())) return;
         if (!AnimalUtil.getGender(animal).equals(AnimalGenders.FEMALE)) {
             pPlayer.displayClientMessage(Component.translatable("message.betterfarms.milk.fail_gender").withStyle(ChatFormatting.RED), true);
             return;
@@ -59,7 +61,7 @@ public class AnimalMixin {
             return;
         }
 
-        ItemStack result = ItemUtils.createFilledResult(stack, pPlayer, Items.MILK_BUCKET.getDefaultInstance());
+        ItemStack result = ItemUtils.createFilledResult(stack, pPlayer, milking.output().getDefaultInstance());
         ServerPlayer serverPlayer = (ServerPlayer)pPlayer;
         serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.COW_MILK), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
         pPlayer.setItemInHand(pHand, result);

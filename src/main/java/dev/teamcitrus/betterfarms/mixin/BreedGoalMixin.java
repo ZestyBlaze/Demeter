@@ -3,7 +3,7 @@ package dev.teamcitrus.betterfarms.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
-import dev.teamcitrus.betterfarms.data.BFStatsListener;
+import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.server.level.ServerLevel;
@@ -19,8 +19,8 @@ public class BreedGoalMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Animal;spawnChildFromBreeding(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/animal/Animal;)V")
     )
     private void betterFarms$handlePregnancy(Animal instance, ServerLevel serverLevel, Animal animal, Operation<Void> original) {
-        if (BFStatsListener.newMap.containsKey(instance.getType())) {
-            if (BFStatsListener.getManager(instance).getDaysPregnant() == 0) {
+        if (BFStatsManager.newMap.containsKey(instance.getType())) {
+            if (BFStatsManager.getStats(instance).daysPregnant() == 0) {
                 original.call(instance, serverLevel, animal);
             }
 

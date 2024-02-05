@@ -1,7 +1,7 @@
 package dev.teamcitrus.betterfarms.event;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.data.BFStatsListener;
+import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.event.custom.NewDayEvent;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import net.minecraft.world.entity.animal.Animal;
@@ -22,10 +22,10 @@ public class LevelEvents {
 
     @SubscribeEvent
     public static void onNewDay(NewDayEvent event) {
-        event.getLevel().getEntities(EntityTypeTest.forClass(Animal.class), animal -> BFStatsListener.newMap.containsKey(animal.getType())).forEach(animal -> {
+        event.getLevel().getEntities(EntityTypeTest.forClass(Animal.class), animal -> BFStatsManager.newMap.containsKey(animal.getType())).forEach(animal -> {
             animal.getData(AttachmentRegistry.ANIMAL).onNewDay(animal);
         });
-        event.getLevel().getEntities(EntityTypeTest.forClass(Animal.class), animal -> BFStatsListener.newMap.containsKey(animal.getType()) && (BFStatsListener.getManager(animal).canBeMilked() && animal.hasData(AttachmentRegistry.MILK))).forEach(animal -> {
+        event.getLevel().getEntities(EntityTypeTest.forClass(Animal.class), animal -> BFStatsManager.newMap.containsKey(animal.getType()) && (BFStatsManager.getStats(animal).milking().isPresent())).forEach(animal -> {
             animal.getData(AttachmentRegistry.MILK).setHasBeenMilked(false);
         });
     }

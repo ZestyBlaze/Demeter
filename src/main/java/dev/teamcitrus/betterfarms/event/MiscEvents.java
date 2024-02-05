@@ -1,7 +1,7 @@
 package dev.teamcitrus.betterfarms.event;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.data.BFStatsListener;
+import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -10,6 +10,6 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 public class MiscEvents {
     @SubscribeEvent
     public static void reloadListeners(AddReloadListenerEvent event) {
-        event.addListener(new BFStatsListener());
+        event.addListener(new BFStatsManager());
     }
 }

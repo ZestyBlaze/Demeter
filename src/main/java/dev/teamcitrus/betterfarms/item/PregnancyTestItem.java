@@ -1,6 +1,6 @@
 package dev.teamcitrus.betterfarms.item;
 
-import dev.teamcitrus.betterfarms.data.BFStatsListener;
+import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -20,7 +20,7 @@ public class PregnancyTestItem extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         if (!interactionTarget.level().isClientSide()) {
-            if (interactionTarget instanceof Animal animal && BFStatsListener.newMap.containsKey(animal.getType())) {
+            if (interactionTarget instanceof Animal animal && BFStatsManager.newMap.containsKey(animal.getType())) {
                 boolean value = animal.getData(AttachmentRegistry.ANIMAL).getPregnant();
                 player.displayClientMessage(Component.literal("Pregnancy is: " + StringUtils.capitalize(String.valueOf(value))), true);
                 return InteractionResult.SUCCESS;

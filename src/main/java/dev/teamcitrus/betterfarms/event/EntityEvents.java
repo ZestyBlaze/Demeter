@@ -2,7 +2,7 @@ package dev.teamcitrus.betterfarms.event;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
-import dev.teamcitrus.betterfarms.data.BFStatsListener;
+import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import net.minecraft.world.entity.animal.Animal;
 import net.neoforged.bus.api.Event;
@@ -19,8 +19,8 @@ public class EntityEvents {
             animal.getData(AttachmentRegistry.ANIMAL).setGender(
                     AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length - 1)]
             );
-            if (BFStatsListener.newMap.containsKey(animal.getType())) {
-                if (BFStatsListener.getManager(animal).canBeMilked()) {
+            if (BFStatsManager.newMap.containsKey(animal.getType())) {
+                if (BFStatsManager.getStats(animal).milking().isPresent()) {
                     animal.getData(AttachmentRegistry.MILK);
                 }
             }

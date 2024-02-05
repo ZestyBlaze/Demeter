@@ -15,10 +15,10 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BFStatsListener extends SimpleJsonResourceReloadListener {
-    public static final Map<EntityType<?>, AnimalStatsManager> newMap = new HashMap<>();
+public class BFStatsManager extends SimpleJsonResourceReloadListener {
+    public static final Map<EntityType<?>, AnimalStats> newMap = new HashMap<>();
 
-    public BFStatsListener() {
+    public BFStatsManager() {
         super(new GsonBuilder().setPrettyPrinting().create(), "betterfarms/stats");
     }
 
@@ -27,7 +27,7 @@ public class BFStatsListener extends SimpleJsonResourceReloadListener {
         newMap.clear();
         for (Map.Entry<ResourceLocation, JsonElement> entry : map.entrySet()) {
             if (BuiltInRegistries.ENTITY_TYPE.containsKey(entry.getKey())) {
-                AnimalStatsManager.CODEC.parse(
+                AnimalStats.CODEC.parse(
                         JsonOps.INSTANCE, entry.getValue())
                         .resultOrPartial(errorMsg -> BetterFarms.LOGGER.error("Failed to parse data json for {} due to: {}", entry.getKey(), errorMsg))
                         .ifPresent(value -> newMap.put(BuiltInRegistries.ENTITY_TYPE.get(entry.getKey()), value));
@@ -35,7 +35,7 @@ public class BFStatsListener extends SimpleJsonResourceReloadListener {
         }
     }
 
-    public static AnimalStatsManager getManager(LivingEntity livingEntity) {
+    public static AnimalStats getStats(LivingEntity livingEntity) {
         return newMap.get(livingEntity.getType());
     }
 }
