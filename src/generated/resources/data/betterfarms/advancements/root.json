@@ -22,6 +22,7 @@
     "icon": {
       "item": "minecraft:leather"
     },
+    "show_toast": false,
     "title": {
       "translate": "advancement.betterfarms.root"
     }

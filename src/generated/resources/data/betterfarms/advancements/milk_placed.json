@@ -1,0 +1,34 @@
+{
+  "parent": "betterfarms:root",
+  "criteria": {
+    "milk_placed": {
+      "conditions": {
+        "location": [
+          {
+            "block": "betterfarms:milk_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancement.betterfarms.milk_placed.desc"
+    },
+    "icon": {
+      "item": "minecraft:milk_bucket"
+    },
+    "title": {
+      "translate": "advancement.betterfarms.milk_placed"
+    }
+  },
+  "requirements": [
+    [
+      "milk_placed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
