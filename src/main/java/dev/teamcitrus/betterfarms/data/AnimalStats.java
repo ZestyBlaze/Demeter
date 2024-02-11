@@ -1,14 +1,11 @@
 package dev.teamcitrus.betterfarms.data;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.KeyDispatchCodec;
-import com.mojang.serialization.codecs.ListCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-import java.util.List;
 import java.util.Optional;
 
 public record AnimalStats(int daysPregnant, int maxChildrenPerBirth, Optional<MilkingCodec> milking) {
