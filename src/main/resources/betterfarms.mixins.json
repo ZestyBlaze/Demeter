@@ -5,6 +5,7 @@
   "mixins": [
     "AnimalMixin",
     "BreedGoalMixin",
+    "ChickenMixin",
     "CowGoatMixin",
     "ThrownEggMixin"
   ],
