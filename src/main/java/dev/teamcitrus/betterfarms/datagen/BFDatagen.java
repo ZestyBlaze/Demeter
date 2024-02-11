@@ -2,6 +2,7 @@ package dev.teamcitrus.betterfarms.datagen;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.datagen.provider.BFAdvancementProvider;
+import dev.teamcitrus.betterfarms.datagen.provider.BFRecipeProvider;
 import dev.teamcitrus.betterfarms.datagen.provider.lang.EnUsProvider;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
@@ -30,6 +31,7 @@ public class BFDatagen {
         ExistingFileHelper helper = event.getExistingFileHelper();
 
         gen.addProvider(event.includeServer(), new BFAdvancementProvider(output, provider, helper));
+        gen.addProvider(event.includeServer(), new BFRecipeProvider(output));
         gen.addProvider(event.includeClient(), new EnUsProvider(output));
 
         gen.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(
