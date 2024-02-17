@@ -17,6 +17,10 @@ public class AnimalUtil {
         return animal.getData(AttachmentRegistry.ANIMAL).getGender();
     }
 
+    public static boolean areOppositeGenders(Animal animal1, Animal animal2) {
+        return getGender(animal1) != getGender(animal2);
+    }
+
     public static void handleBirth(Animal self, ServerLevel serverLevel, Animal otherEntity) {
         if (BFStatsManager.getStats(self).maxChildrenPerBirth() > 1) {
             breedMultiple(self, serverLevel, otherEntity, BFStatsManager.getStats(self).maxChildrenPerBirth());
