@@ -23,6 +23,10 @@ public class BFRecipeProvider extends RecipeProvider {
         ).requires(Ingredient.of(Items.MILK_BUCKET)).requires(Ingredient.of(Items.GLASS_BOTTLE), 3)
                 .unlockedBy("has_item", has(Items.MILK_BUCKET))
                 .save(pRecipeOutput, BetterFarms.id("bf_bucket_to_bottles"));
-        ;
+
+        ShapelessRecipeBuilder.shapeless(
+                RecipeCategory.BUILDING_BLOCKS,
+                ItemRegistry.MAPLE_PLANKS, 4
+        ).requires(Ingredient.of(ItemRegistry.MAPLE_LOG)).unlockedBy("has_item", has(ItemRegistry.MAPLE_LOG)).save(pRecipeOutput);
     }
 }

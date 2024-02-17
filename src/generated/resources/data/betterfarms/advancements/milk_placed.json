@@ -14,10 +14,10 @@
     }
   },
   "display": {
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancement.betterfarms.milk_placed.desc"
     },
+    "hidden": true,
     "icon": {
       "item": "minecraft:milk_bucket"
     },

@@ -1,8 +1,7 @@
 package dev.teamcitrus.betterfarms.datagen;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.datagen.provider.BFAdvancementProvider;
-import dev.teamcitrus.betterfarms.datagen.provider.BFRecipeProvider;
+import dev.teamcitrus.betterfarms.datagen.provider.*;
 import dev.teamcitrus.betterfarms.datagen.provider.lang.EnUsProvider;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
@@ -30,6 +29,10 @@ public class BFDatagen {
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
+        gen.addProvider(event.includeClient(), new BFBlockStateProvider(output, helper));
+        gen.addProvider(event.includeClient(), new BFItemModelProvider(output, helper));
+
+        gen.addProvider(event.includeServer(), new BFDataMapGenerator(output, provider));
         gen.addProvider(event.includeServer(), new BFAdvancementProvider(output, provider, helper));
         gen.addProvider(event.includeServer(), new BFRecipeProvider(output));
         gen.addProvider(event.includeClient(), new EnUsProvider(output));

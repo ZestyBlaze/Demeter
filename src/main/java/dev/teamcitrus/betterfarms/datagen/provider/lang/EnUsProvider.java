@@ -1,14 +1,17 @@
 package dev.teamcitrus.betterfarms.datagen.provider.lang;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
+import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class EnUsProvider extends LanguageProvider {
     public EnUsProvider(PackOutput output) {
@@ -17,14 +20,25 @@ public class EnUsProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        Set<DeferredHolder<Block, ? extends Block>> blocks = new HashSet<>(BlockRegistry.BLOCKS.getEntries());
         Set<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ItemRegistry.ITEMS.getEntries());
+
+        takeAll(items, i -> i.get() instanceof BlockItem);
 
         add("itemGroup.betterfarms", "Better Farms");
         add("advancement.betterfarms.root", "BetterFarms");
         add("advancement.betterfarms.root.desc", "The Introduction to the Farming Overhaul!");
+        add("advancement.betterfarms.milk_placed", "Did you try drink a Bucket of Milk?");
+        add("advancement.betterfarms.milk_placed.desc", "Damn you are thirsty");
+        add("message.betterfarms.baby_spawned", "One of your animals has given birth!");
         add("message.betterfarms.milk.fail_daily", "This animal has already been milked today");
         add("message.betterfarms.milk.fail_gender", "This animal is male and cannot be milked");
 
+        blocks.forEach(i -> {
+            String name = i.get().getDescriptionId().replaceFirst("block\\.betterfarms\\.", "");
+            name = toTitleCase(name, "_");
+            add(i.get().getDescriptionId(), name);
+        });
         items.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("item\\.betterfarms\\.", "");
             name = toTitleCase(name, "_");
@@ -43,5 +57,26 @@ public class EnUsProvider extends LanguageProvider {
             stringBuilder.append(Character.toUpperCase(string.charAt(0))).append(string.substring(1)).append(regex);
         }
         return stringBuilder.toString().trim().replaceAll(regex, " ").substring(0, stringBuilder.length() - 1);
+    }
+
+    /**
+     * removes all entry from a collection based off of a predicate and returns all items removed in a new collection
+     */
+    public static <T> Collection<T> takeAll(Collection<T> src, Predicate<T> pred) {
+        List<T> ret = new ArrayList<>();
+
+        Iterator<T> iter = src.iterator();
+        while (iter.hasNext()) {
+            T item = iter.next();
+            if (pred.test(item)) {
+                iter.remove();
+                ret.add(item);
+            }
+        }
+
+        if (ret.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return ret;
     }
 }

@@ -1,12 +1,20 @@
 {
+  "advancement.betterfarms.milk_placed": "Did you try drink a Bucket of Milk?",
+  "advancement.betterfarms.milk_placed.desc": "Damn you are thirsty",
   "advancement.betterfarms.root": "BetterFarms",
   "advancement.betterfarms.root.desc": "The Introduction to the Farming Overhaul!",
+  "block.betterfarms.maple_leaves": "Maple Leaves",
+  "block.betterfarms.maple_log": "Maple Log",
+  "block.betterfarms.maple_planks": "Maple Planks",
+  "block.betterfarms.milk_block": "Milk Block",
+  "block.betterfarms.milk_cauldron": "Milk Cauldron",
   "item.betterfarms.codec_test": "Codec Test",
   "item.betterfarms.gender_test": "Gender Test",
   "item.betterfarms.milk_bottle": "Milk Bottle",
   "item.betterfarms.pregnancy_test": "Pregnancy Test",
   "item.betterfarms.truffle": "Truffle",
   "itemGroup.betterfarms": "Better Farms",
+  "message.betterfarms.baby_spawned": "One of your animals has given birth!",
   "message.betterfarms.milk.fail_daily": "This animal has already been milked today",
   "message.betterfarms.milk.fail_gender": "This animal is male and cannot be milked"
 }

@@ -5,11 +5,14 @@ import dev.teamcitrus.betterfarms.item.CodecTestItem;
 import dev.teamcitrus.betterfarms.item.GenderTestItem;
 import dev.teamcitrus.betterfarms.item.MilkBottleItem;
 import dev.teamcitrus.betterfarms.item.PregnancyTestItem;
+import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.client.gui.components.toasts.TutorialToast;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -35,4 +38,7 @@ public class ItemRegistry {
                     .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 15 * 20), 1.0f)
                     .build())
     );
+    public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
+    public static final DeferredItem<BlockItem> MAPLE_PLANKS = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_PLANKS);
+    public static final DeferredItem<BlockItem> MAPLE_LEAVES = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LEAVES);
 }
