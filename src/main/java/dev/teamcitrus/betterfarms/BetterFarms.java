@@ -3,6 +3,7 @@ package dev.teamcitrus.betterfarms;
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
 import dev.teamcitrus.betterfarms.entity.HarvestGoddess;
 import dev.teamcitrus.betterfarms.registry.*;
+import net.minecraft.client.renderer.entity.HuskRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
@@ -25,6 +26,7 @@ public class BetterFarms {
         FluidRegistry.FLUIDS.register(bus);
         FluidTypeRegistry.FLUID_TYPES.register(bus);
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, BetterFarmsConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BetterFarmsConfig.GENERAL_SPEC);
 
         bus.addListener(this::entityAttributesEvent);
