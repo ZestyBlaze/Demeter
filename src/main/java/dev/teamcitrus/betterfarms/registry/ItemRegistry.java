@@ -5,8 +5,6 @@ import dev.teamcitrus.betterfarms.item.CodecTestItem;
 import dev.teamcitrus.betterfarms.item.GenderTestItem;
 import dev.teamcitrus.betterfarms.item.MilkBottleItem;
 import dev.teamcitrus.betterfarms.item.PregnancyTestItem;
-import net.minecraft.client.gui.components.toasts.SystemToast;
-import net.minecraft.client.gui.components.toasts.TutorialToast;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
