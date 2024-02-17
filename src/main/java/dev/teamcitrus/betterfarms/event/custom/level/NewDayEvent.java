@@ -1,4 +1,4 @@
-package dev.teamcitrus.betterfarms.event.custom;
+package dev.teamcitrus.betterfarms.event.custom.level;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;

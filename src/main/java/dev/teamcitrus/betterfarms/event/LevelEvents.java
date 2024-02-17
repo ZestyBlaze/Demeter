@@ -2,7 +2,7 @@ package dev.teamcitrus.betterfarms.event;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.data.BFStatsManager;
-import dev.teamcitrus.betterfarms.event.custom.NewDayEvent;
+import dev.teamcitrus.betterfarms.event.custom.level.NewDayEvent;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.entity.EntityTypeTest;
