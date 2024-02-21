@@ -1,4 +1,4 @@
-package dev.teamcitrus.betterfarms.client.renderer;
+package dev.teamcitrus.betterfarms.client.renderer.entity;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.BetterFarmsClient;

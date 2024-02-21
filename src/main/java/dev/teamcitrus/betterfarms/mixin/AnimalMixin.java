@@ -1,12 +1,12 @@
 package dev.teamcitrus.betterfarms.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import dev.teamcitrus.betterfarms.api.util.AnimalUtil;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.betterfarms.attachment.MilkAttachment;
 import dev.teamcitrus.betterfarms.data.AnimalStats;
 import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
-import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

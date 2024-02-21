@@ -1,14 +1,18 @@
 package dev.teamcitrus.betterfarms.datagen.provider.lang;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
+import dev.teamcitrus.betterfarms.api.quality.Quality;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.ItemRegistry;
+import dev.teamcitrus.betterfarms.registry.MobEffectRegistry;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -22,14 +26,17 @@ public class EnUsProvider extends LanguageProvider {
     protected void addTranslations() {
         Set<DeferredHolder<Block, ? extends Block>> blocks = new HashSet<>(BlockRegistry.BLOCKS.getEntries());
         Set<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ItemRegistry.ITEMS.getEntries());
+        Set<DeferredHolder<MobEffect, ? extends MobEffect>> mobEffects = new HashSet<>(MobEffectRegistry.MOB_EFFECTS.getEntries());
+        Quality[] qualities = Quality.values();
 
         takeAll(items, i -> i.get() instanceof BlockItem);
 
-        add("itemGroup.betterfarms", "Better Farms");
         add("advancement.betterfarms.root", "BetterFarms");
         add("advancement.betterfarms.root.desc", "The Introduction to the Farming Overhaul!");
         add("advancement.betterfarms.milk_placed", "Did you try drink a Bucket of Milk?");
         add("advancement.betterfarms.milk_placed.desc", "Damn you are thirsty");
+        add("item.betterfarms.quality_tooltip", "Quality: %s");
+        add("itemGroup.betterfarms", "Better Farms");
         add("message.betterfarms.baby_spawned", "One of your animals has given birth!");
         add("message.betterfarms.milk.fail_daily", "This animal has already been milked today");
         add("message.betterfarms.milk.fail_gender", "This animal is male and cannot be milked");
@@ -44,6 +51,12 @@ public class EnUsProvider extends LanguageProvider {
             name = toTitleCase(name, "_");
             add(i.get().getDescriptionId(), name);
         });
+        mobEffects.forEach(i -> {
+            String name = i.get().getDescriptionId().replaceFirst("effect\\.betterfarms\\.", "");
+            name = makeProper(toTitleCase(name, "_"));
+            add(i.get().getDescriptionId(), name);
+        });
+        Arrays.stream(qualities).forEach(quality -> add("item.betterfarms.quality_tooltip." + quality.getName(), StringUtils.capitalize(quality.getName())));
     }
 
     /**
@@ -57,6 +70,11 @@ public class EnUsProvider extends LanguageProvider {
             stringBuilder.append(Character.toUpperCase(string.charAt(0))).append(string.substring(1)).append(regex);
         }
         return stringBuilder.toString().trim().replaceAll(regex, " ").substring(0, stringBuilder.length() - 1);
+    }
+
+    public String makeProper(String s) {
+        s = s.replaceAll("Blessing", "Goddess' Blessing");
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
     /**

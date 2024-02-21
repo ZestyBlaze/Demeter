@@ -2,10 +2,10 @@ package dev.teamcitrus.betterfarms.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import dev.teamcitrus.betterfarms.api.util.AnimalUtil;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
-import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.animal.Animal;
