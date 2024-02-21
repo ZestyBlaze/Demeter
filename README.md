@@ -10,11 +10,11 @@ For example, to add support for a cow, the file is constructed as such:
 ```json
 {
   "daysPregnant": 9,
-  "canBeMilked": true
+  "milking": {}
 }
 ```
 
-This means the manager will now recognise the `minecraft:cow` as a valid target for the mod and because a value for `daysPregnant` has been passed, it will take 9 days for a birth to occur, as well as accepting the animal as a valid milking target
+This means the manager will now recognise the `minecraft:cow` as a valid target for the mod and because a value for `daysPregnant` has been passed, it will take 9 days for a birth to occur, as well as accepting the animal as a valid milking target with the default input and output items
 
 To add support for a new mob that the mod does not provide default support for, you can create a json file in the following location: `data/{mod_name}/betterfarms/stats/{mob_id}.json`, where `{mod_name}` is the Mod ID of the mod and the `{mob_id}` is the registered ID for it (E.g. `minecraft:cow` for a cow)
 
