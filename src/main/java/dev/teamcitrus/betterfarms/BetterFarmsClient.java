@@ -1,7 +1,6 @@
 package dev.teamcitrus.betterfarms;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.teamcitrus.betterfarms.api.quality.Quality;
 import dev.teamcitrus.betterfarms.api.util.QualityUtil;
 import dev.teamcitrus.betterfarms.client.renderer.entity.HarvestGoddessRenderer;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
@@ -14,13 +13,10 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
