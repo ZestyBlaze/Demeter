@@ -19,7 +19,7 @@ public class BFStatsManager extends SimpleJsonResourceReloadListener {
     public static final Map<EntityType<?>, AnimalStats> newMap = new HashMap<>();
 
     public BFStatsManager() {
-        super(new GsonBuilder().setPrettyPrinting().create(), "betterfarms/stats");
+        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "betterfarms/stats");
     }
 
     @Override
@@ -31,6 +31,8 @@ public class BFStatsManager extends SimpleJsonResourceReloadListener {
                         JsonOps.INSTANCE, entry.getValue())
                         .resultOrPartial(errorMsg -> BetterFarms.LOGGER.error("Failed to parse data json for {} due to: {}", entry.getKey(), errorMsg))
                         .ifPresent(value -> newMap.put(BuiltInRegistries.ENTITY_TYPE.get(entry.getKey()), value));
+            } else {
+                BetterFarms.LOGGER.error("Failed to parse data json for {} as it is not a valid entity!", entry.getKey());
             }
         }
     }

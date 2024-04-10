@@ -23,7 +23,7 @@ public class GuiGraphicsMixin {
             return;
         }
         pose.popPose();
-        BetterFarmsClient.renderIcon((GuiGraphics) (Object) this, pFont, pStack, pX, pY);
+        BetterFarmsClient.renderIcon((GuiGraphics)(Object)this, pStack, pX, pY);
         pose.pushPose();
     }
 }

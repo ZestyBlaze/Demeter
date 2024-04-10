@@ -34,8 +34,9 @@ public class BFDatagen {
 
         gen.addProvider(event.includeServer(), new BFDataMapGenerator(output, provider));
         gen.addProvider(event.includeServer(), new BFAdvancementProvider(output, provider, helper));
+        gen.addProvider(event.includeServer(), BFLootProvider.create(output));
 
-        BFBlockTagsProvider blockTags = new BFBlockTagsProvider(output, provider, helper);
+        BFBlockTagProvider blockTags = new BFBlockTagProvider(output, provider, helper);
         gen.addProvider(event.includeServer(), blockTags);
         gen.addProvider(event.includeServer(), new BFItemTagProvider(output, provider, blockTags.contentsGetter(), helper));
         gen.addProvider(event.includeServer(), new BFRecipeProvider(output));

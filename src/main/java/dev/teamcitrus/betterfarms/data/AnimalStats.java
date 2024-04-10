@@ -5,13 +5,18 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.List;
 import java.util.Optional;
 
-public record AnimalStats(int daysPregnant, int maxChildrenPerBirth, Optional<MilkingCodec> milking) {
+public record AnimalStats(int daysPregnant, int minChildrenPerBirth, int maxChildrenPerBirth,
+                          Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking) {
     public static final Codec<AnimalStats> CODEC = RecordCodecBuilder.create(func -> func.group(
             Codec.INT.optionalFieldOf("daysPregnant", 0).forGetter(a -> a.daysPregnant),
+            Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(a -> a.minChildrenPerBirth),
             Codec.INT.optionalFieldOf("maxChildrenPerBirth", 1).forGetter(a -> a.maxChildrenPerBirth),
+            Ingredient.LIST_CODEC.optionalFieldOf("breedingItems").forGetter(a -> a.breedingItems),
             MilkingCodec.CODEC.optionalFieldOf("milking").forGetter(a -> a.milking)
     ).apply(func, AnimalStats::new));
 

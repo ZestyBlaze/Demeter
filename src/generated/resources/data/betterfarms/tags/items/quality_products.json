@@ -1,5 +1,14 @@
 {
   "values": [
-    "minecraft:carrot"
+    "minecraft:wheat",
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:melon_slice",
+    "minecraft:beetroot",
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:pufferfish",
+    "minecraft:tropical_fish",
+    "#minecraft:wool"
   ]
 }

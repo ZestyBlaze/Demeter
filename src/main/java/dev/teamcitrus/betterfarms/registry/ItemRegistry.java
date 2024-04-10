@@ -1,15 +1,9 @@
 package dev.teamcitrus.betterfarms.registry;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.item.CodecTestItem;
-import dev.teamcitrus.betterfarms.item.GenderTestItem;
-import dev.teamcitrus.betterfarms.item.MilkBottleItem;
-import dev.teamcitrus.betterfarms.item.PregnancyTestItem;
+import dev.teamcitrus.betterfarms.item.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -23,20 +17,27 @@ public class ItemRegistry {
 
     private static final DeferredHolder<CreativeModeTab, CreativeModeTab> BETTER_FARMS_TAB = CREATIVE_MODE_TABS.register("betterfarms", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.betterfarms"))
-            .icon(() -> ItemRegistry.TRUFFLE.get().getDefaultInstance())
+            .icon(() -> ItemRegistry.MAPLE_LOG.get().getDefaultInstance())
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
             .build());
 
     public static final DeferredItem<Item> CODEC_TEST = ITEMS.register("codec_test", CodecTestItem::new);
     public static final DeferredItem<Item> GENDER_TEST = ITEMS.register("gender_test", GenderTestItem::new);
     public static final DeferredItem<Item> PREGNANCY_TEST = ITEMS.register("pregnancy_test", PregnancyTestItem::new);
+    public static final DeferredItem<Item> LOVE_ITEM = ITEMS.register("love_checker", LoveCheckerItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
-    public static final DeferredItem<Item> TRUFFLE = ITEMS.registerSimpleItem("truffle", new Item.Properties().food(new FoodProperties.Builder()
-                    .nutrition(6).saturationMod(1.2f)
-                    .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 15 * 20), 1.0f)
-                    .build())
-    );
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
+    public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_WOOD);
     public static final DeferredItem<BlockItem> MAPLE_PLANKS = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_PLANKS);
+    public static final DeferredItem<BlockItem> MAPLE_STAIRS = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_STAIRS);
+    public static final DeferredItem<BlockItem> MAPLE_SLAB = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SLAB);
+    public static final DeferredItem<BlockItem> MAPLE_FENCE = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_FENCE);
+    public static final DeferredItem<BlockItem> MAPLE_FENCE_GATE = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_FENCE_GATE);
+    public static final DeferredItem<BlockItem> MAPLE_DOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_DOOR);
+    public static final DeferredItem<BlockItem> MAPLE_TRAPDOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_TRAPDOOR);
+    public static final DeferredItem<BlockItem> MAPLE_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> MAPLE_BUTTON = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_BUTTON);
     public static final DeferredItem<BlockItem> MAPLE_LEAVES = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LEAVES);
 }

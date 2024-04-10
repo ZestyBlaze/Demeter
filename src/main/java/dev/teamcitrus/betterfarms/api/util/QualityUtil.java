@@ -2,10 +2,36 @@ package dev.teamcitrus.betterfarms.api.util;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.api.quality.Quality;
+import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
+import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagProvider;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Random;
+
 public class QualityUtil {
+    private static final Random random = new Random();
+
+    public static void randomiseQuality(ItemStack stack) {
+        if (!stack.is(BFItemTagProvider.QUALITY_PRODUCTS)) return;
+        int value = random.nextInt(100);
+        if (value <= BetterFarmsConfig.netheriteQualityChance.get()) {
+            writeQualityToTag(stack, Quality.NETHERITE);
+        }
+        if (value <= BetterFarmsConfig.diamondQualityChance.get() && value > BetterFarmsConfig.netheriteQualityChance.get()) {
+            writeQualityToTag(stack, Quality.DIAMOND);
+        }
+        if (value <= BetterFarmsConfig.goldQualityChance.get() && value > BetterFarmsConfig.diamondQualityChance.get()) {
+            writeQualityToTag(stack, Quality.GOLD);
+        }
+        if (value <= BetterFarmsConfig.ironQualityChance.get() && value > BetterFarmsConfig.goldQualityChance.get()) {
+            writeQualityToTag(stack, Quality.IRON);
+        }
+        if (value <= BetterFarmsConfig.copperQualityChance.get() && value > BetterFarmsConfig.ironQualityChance.get()) {
+            writeQualityToTag(stack, Quality.COPPER);
+        }
+    }
+
     @Nullable
     public static Quality getQuality(ItemStack stack) {
         return getQualityFromNumber(getQualityNumber(stack));

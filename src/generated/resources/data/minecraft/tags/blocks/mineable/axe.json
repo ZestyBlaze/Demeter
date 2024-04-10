@@ -1,0 +1,17 @@
+{
+  "values": [
+    "betterfarms:maple_log",
+    "betterfarms:maple_wood",
+    "betterfarms:stripped_maple_log",
+    "betterfarms:stripped_maple_wood",
+    "betterfarms:maple_planks",
+    "betterfarms:maple_stairs",
+    "betterfarms:maple_slab",
+    "betterfarms:maple_fence",
+    "betterfarms:maple_fence_gate",
+    "betterfarms:maple_door",
+    "betterfarms:maple_trapdoor",
+    "betterfarms:maple_pressure_plate",
+    "betterfarms:maple_button"
+  ]
+}

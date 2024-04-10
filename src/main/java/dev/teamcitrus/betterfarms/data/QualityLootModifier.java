@@ -3,9 +3,7 @@ package dev.teamcitrus.betterfarms.data;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.teamcitrus.betterfarms.api.quality.Quality;
 import dev.teamcitrus.betterfarms.api.util.QualityUtil;
-import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagProvider;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -26,10 +24,7 @@ public class QualityLootModifier extends LootModifier {
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        generatedLoot.forEach(stack -> {
-            if (!stack.is(BFItemTagProvider.QUALITY_PRODUCTS)) return;
-            QualityUtil.writeQualityToTag(stack, Quality.NETHERITE);
-        });
+        generatedLoot.forEach(QualityUtil::randomiseQuality);
         return generatedLoot;
     }
 

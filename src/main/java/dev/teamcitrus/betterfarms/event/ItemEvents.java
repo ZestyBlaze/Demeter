@@ -10,6 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
@@ -108,11 +110,13 @@ public class ItemEvents {
         if (event.getItemStack().getItem() == Items.MILK_BUCKET) {
             event.setCanceled(true);
         }
-        if (event.getItemStack().is(BFItemTagProvider.QUALITY_PRODUCTS) && !event.getLevel().isClientSide()) {
-            QualityUtil.writeQualityToTag(
-                    event.getItemStack(),
-                    Quality.values()[event.getLevel().random.nextInt(Quality.values().length)]
-            );
+    }
+
+    @SubscribeEvent
+    public static void itemFished(ItemFishedEvent event) {
+        if (!event.getEntity().level().isClientSide()) {
+            NonNullList<ItemStack> items = event.getDrops();
+            items.forEach(QualityUtil::randomiseQuality);
         }
     }
 

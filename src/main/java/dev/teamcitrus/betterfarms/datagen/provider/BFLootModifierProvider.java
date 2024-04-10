@@ -15,10 +15,38 @@ public class BFLootModifierProvider extends GlobalLootModifierProvider {
 
     @Override
     protected void start() {
+        add("quality_wheat",
+                new QualityLootModifier(
+                        new LootItemCondition[] {
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.WHEAT).build()
+                        }
+                )
+        );
         add("quality_carrots",
                 new QualityLootModifier(
                         new LootItemCondition[] {
                                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.CARROTS).build()
+                        }
+                )
+        );
+        add("quality_potato",
+                new QualityLootModifier(
+                        new LootItemCondition[] {
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.POTATOES).build()
+                        }
+                )
+        );
+        add("quality_melon",
+                new QualityLootModifier(
+                        new LootItemCondition[] {
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.MELON).build()
+                        }
+                )
+        );
+        add("quality_beetroots",
+                new QualityLootModifier(
+                        new LootItemCondition[] {
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.BEETROOTS).build()
                         }
                 )
         );

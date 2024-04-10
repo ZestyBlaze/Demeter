@@ -1,6 +1,10 @@
 {
   "entries": [
-    "betterfarms:quality_carrots"
+    "betterfarms:quality_melon",
+    "betterfarms:quality_potato",
+    "betterfarms:quality_beetroots",
+    "betterfarms:quality_carrots",
+    "betterfarms:quality_wheat"
   ],
   "replace": false
 }

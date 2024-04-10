@@ -2,19 +2,25 @@ package dev.teamcitrus.betterfarms.api.util;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
+import dev.teamcitrus.betterfarms.data.AnimalStats;
 import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
 
 public class AnimalUtil {
+    public static AnimalAttachment getAnimalData(Animal animal) {
+        return animal.getData(AttachmentRegistry.ANIMAL);
+    }
+
     public static boolean isAnimalHappy(Animal animal) {
-        return true;
-        //return animal.getComponent(CapabilityRegistry.ANIMAL).getHappiness() >= BetterFaunaConfig.animalHappinessMin.get(); TODO: Will be an equation that calculates health, hunger, warmth and love levels for a "happy" level
+        //TODO: Will be an equation that calculates health, hunger, warmth and love levels for a "happy" level
+        return getAnimalData(animal).getLoveForKeeper() >= 80;
     }
 
     public static AnimalAttachment.AnimalGenders getGender(Animal animal) {
-        return animal.getData(AttachmentRegistry.ANIMAL).getGender();
+        return getAnimalData(animal).getGender();
     }
 
     public static boolean areOppositeGenders(Animal animal1, Animal animal2) {
@@ -22,12 +28,12 @@ public class AnimalUtil {
     }
 
     public static void handleBirth(Animal self, ServerLevel serverLevel, Animal otherEntity) {
-        if (BFStatsManager.getStats(self).maxChildrenPerBirth() > 1) {
-            breedMultiple(self, serverLevel, otherEntity, BFStatsManager.getStats(self).maxChildrenPerBirth());
-        } else if (BFStatsManager.getStats(self).maxChildrenPerBirth() == 1) {
-            self.spawnChildFromBreeding(serverLevel, otherEntity);
-        } else {
-            BetterFarms.LOGGER.error("An error has occurred when a {} attempted to give birth as there were 0 'maxChildrenPerBirth' specified", self.getName().getString());
+        try {
+            AnimalStats stats = BFStatsManager.getStats(self);
+            int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.minChildrenPerBirth(), stats.maxChildrenPerBirth());
+            breedMultiple(self, serverLevel, otherEntity, numberOfTimes);
+        } catch (IllegalArgumentException e) {
+            BetterFarms.LOGGER.error(Component.translatable("error.betterfarms.maxhighermin").getString());
         }
     }
 
