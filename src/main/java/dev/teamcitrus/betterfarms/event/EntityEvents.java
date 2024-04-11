@@ -68,6 +68,10 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void onBabySpawned(BabyEntitySpawnEvent event) {
+        if (BFStatsManager.newMap.containsKey(event.getChild().getType())) {
+            AnimalUtil.getAnimalData((Animal) event.getChild()).setDaysLeftUntilGrown(BFStatsManager.getStats(event.getChild()).daysToGrowUp());
+        }
+
         if (event.getCausedByPlayer() == null) return;
         ServerPlayer player = (ServerPlayer)event.getCausedByPlayer();
         if (BetterFarmsConfig.animalBirthAlert.get()) {

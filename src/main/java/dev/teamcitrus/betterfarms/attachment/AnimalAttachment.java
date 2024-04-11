@@ -35,6 +35,9 @@ public class AnimalAttachment {
     private int daysLeftUntilBirth;
     private Animal otherParent;
 
+    // Growing Variables
+    private int daysLeftUntilGrown;
+
     public AnimalAttachment() {
         this("", 0, false, false, AnimalGenders.NONE.getId(), false);
     }
@@ -67,6 +70,13 @@ public class AnimalAttachment {
                 AnimalUtil.handleBirth(self, (ServerLevel)self.level(), otherParent);
                 this.isPregnant = false;
                 this.otherParent = null;
+            }
+        }
+
+        if (self.isBaby()) {
+            --daysLeftUntilGrown;
+            if (daysLeftUntilGrown <= 0) {
+                self.setBaby(false);
             }
         }
 
@@ -126,6 +136,10 @@ public class AnimalAttachment {
 
     public boolean hasBeenFedToday() {
         return hasBeenFedToday;
+    }
+
+    public void setDaysLeftUntilGrown(int daysLeftUntilGrown) {
+        this.daysLeftUntilGrown = daysLeftUntilGrown;
     }
 
     /**
