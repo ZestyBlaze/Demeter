@@ -39,7 +39,10 @@ public class AnimalMixin {
 
     @WrapOperation(
             method = "isFood",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z")
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
+            )
     )
     private boolean betterFarms$isFood(ItemStack stack, Item item, Operation<Boolean> original) {
         if (!BFStatsManager.newMap.containsKey(better_Fauna$animal.getType())) return original.call(stack, item);
@@ -97,7 +100,10 @@ public class AnimalMixin {
 
     @ModifyExpressionValue(
             method = "canMate",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Animal;isInLove()Z", ordinal = 0)
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/animal/Animal;isInLove()Z",
+                    ordinal = 0
+            )
     )
     private boolean betterFarms$checkMateGender(boolean original, Animal otherEntity) {
         return original && AnimalUtil.areOppositeGenders(better_Fauna$animal, otherEntity);

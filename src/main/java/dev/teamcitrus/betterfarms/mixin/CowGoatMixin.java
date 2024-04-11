@@ -10,7 +10,10 @@ import org.spongepowered.asm.mixin.injection.At;
 public class CowGoatMixin {
     @ModifyExpressionValue(
             method = "mobInteract",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z")
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
+            )
     )
     private boolean betterFarms$stopVanillaMilking(boolean original) {
         return false;

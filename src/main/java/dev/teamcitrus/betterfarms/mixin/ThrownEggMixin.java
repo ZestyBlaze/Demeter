@@ -10,7 +10,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class ThrownEggMixin {
     @Redirect(
             method = "onHit",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I", ordinal = 0)
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/util/RandomSource;nextInt(I)I",
+                    ordinal = 0
+            )
     )
     private int betterFarms$noChickenSpawnFromEgg(RandomSource instance, int i) {
         return 1;
