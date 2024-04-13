@@ -2,8 +2,8 @@ package dev.teamcitrus.betterfarms.registry;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.item.*;
+import dev.teamcitrus.betterfarms.item.dev.*;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -37,6 +37,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> GENDER_TEST = DEV_ITEMS.register("gender_test", GenderTestItem::new);
     public static final DeferredItem<Item> PREGNANCY_TEST = DEV_ITEMS.register("pregnancy_test", PregnancyTestItem::new);
     public static final DeferredItem<Item> LOVE_ITEM = DEV_ITEMS.register("love_checker", LoveCheckerItem::new);
+    public static final DeferredItem<Item> MISC_ITEM = DEV_ITEMS.register("misc_test", MiscTestItem::new);
 
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);

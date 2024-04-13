@@ -38,6 +38,7 @@ public class EnUsProvider extends LanguageProvider {
         add("advancement.betterfarms.milk_placed", "Milky Time");
         add("advancement.betterfarms.milk_placed.desc", "Victorians used to bathe in this stuff");
         add("error.betterfarms.maxhighermin", "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' resulting in the birth failing!");
+        add("error.betterfarms.namesloadfail", "Error while loading names");
         add("item.betterfarms.quality_tooltip", "Quality: %s");
         add("itemGroup.betterfarms", "Better Farms");
         add("itemGroup.betterfarms.dev", "Better Farms - Dev");
