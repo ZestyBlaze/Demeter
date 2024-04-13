@@ -7,6 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +26,15 @@ public class BetterFarms {
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, BetterFarmsConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BetterFarmsConfig.GENERAL_SPEC);
+
+        if (isDevEnv()) {
+            ItemRegistry.DEV_ITEMS.register(bus);
+            ItemRegistry.DEV_TABS.register(bus);
+        }
+    }
+
+    public static boolean isDevEnv() {
+        return !FMLLoader.isProduction();
     }
 
     public static ResourceLocation id(String name) {

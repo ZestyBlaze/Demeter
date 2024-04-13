@@ -2,18 +2,23 @@ package dev.teamcitrus.betterfarms.registry;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.item.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(BetterFarms.MODID);
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BetterFarms.MODID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, BetterFarms.MODID);
+
+    public static final DeferredRegister.Items DEV_ITEMS = DeferredRegister.createItems(BetterFarms.MODID);
+    public static final DeferredRegister<CreativeModeTab> DEV_TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, BetterFarms.MODID);
 
     private static final DeferredHolder<CreativeModeTab, CreativeModeTab> BETTER_FARMS_TAB = CREATIVE_MODE_TABS.register("betterfarms", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.betterfarms"))
@@ -21,10 +26,18 @@ public class ItemRegistry {
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
             .build());
 
-    public static final DeferredItem<Item> CODEC_TEST = ITEMS.register("codec_test", CodecTestItem::new);
-    public static final DeferredItem<Item> GENDER_TEST = ITEMS.register("gender_test", GenderTestItem::new);
-    public static final DeferredItem<Item> PREGNANCY_TEST = ITEMS.register("pregnancy_test", PregnancyTestItem::new);
-    public static final DeferredItem<Item> LOVE_ITEM = ITEMS.register("love_checker", LoveCheckerItem::new);
+    private static final DeferredHolder<CreativeModeTab, CreativeModeTab> DEV_ITEMS_TAB = DEV_TABS.register("betterfarms_dev", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.betterfarms.dev"))
+            .icon(Items.COMMAND_BLOCK::getDefaultInstance)
+            .displayItems(((pParameters, pOutput) -> ItemRegistry.DEV_ITEMS.getEntries().forEach(item -> pOutput.accept(item.get()))))
+            .build()
+    );
+
+    public static final DeferredItem<Item> CODEC_TEST = DEV_ITEMS.register("codec_test", CodecTestItem::new);
+    public static final DeferredItem<Item> GENDER_TEST = DEV_ITEMS.register("gender_test", GenderTestItem::new);
+    public static final DeferredItem<Item> PREGNANCY_TEST = DEV_ITEMS.register("pregnancy_test", PregnancyTestItem::new);
+    public static final DeferredItem<Item> LOVE_ITEM = DEV_ITEMS.register("love_checker", LoveCheckerItem::new);
+
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);

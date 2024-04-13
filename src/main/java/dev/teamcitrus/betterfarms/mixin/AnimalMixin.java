@@ -3,6 +3,7 @@ package dev.teamcitrus.betterfarms.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.api.util.AnimalUtil;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.betterfarms.attachment.MilkAttachment;
@@ -95,7 +96,7 @@ public class AnimalMixin {
             cancellable = true
     )
     private void betterFarms$setInLove(Player pPlayer, CallbackInfo ci) {
-        if (!AnimalUtil.isAnimalHappy(better_Fauna$animal) && FMLLoader.isProduction()) ci.cancel();
+        if (!AnimalUtil.isAnimalHappy(better_Fauna$animal) && !BetterFarms.isDevEnv()) ci.cancel();
     }
 
     @ModifyExpressionValue(

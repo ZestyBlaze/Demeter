@@ -31,6 +31,8 @@ public class EnUsProvider extends LanguageProvider {
 
         takeAll(items, i -> i.get() instanceof BlockItem);
 
+        items.addAll(ItemRegistry.DEV_ITEMS.getEntries());
+
         add("advancement.betterfarms.root", "BetterFarms");
         add("advancement.betterfarms.root.desc", "The Introduction to the Farming Overhaul!");
         add("advancement.betterfarms.milk_placed", "Milky Time");
@@ -38,6 +40,7 @@ public class EnUsProvider extends LanguageProvider {
         add("error.betterfarms.maxhighermin", "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' resulting in the birth failing!");
         add("item.betterfarms.quality_tooltip", "Quality: %s");
         add("itemGroup.betterfarms", "Better Farms");
+        add("itemGroup.betterfarms.dev", "Better Farms - Dev");
         add("message.betterfarms.baby_spawned", "One of your animals has given birth!");
         add("message.betterfarms.animal_petted", "You pet your %s for today");
         add("message.betterfarms.milk.fail_daily", "This animal has already been milked today");
