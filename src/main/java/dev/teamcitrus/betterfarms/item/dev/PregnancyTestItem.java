@@ -1,4 +1,4 @@
-package dev.teamcitrus.betterfarms.item;
+package dev.teamcitrus.betterfarms.item.dev;
 
 import dev.teamcitrus.betterfarms.api.util.AnimalUtil;
 import dev.teamcitrus.betterfarms.data.BFStatsManager;
