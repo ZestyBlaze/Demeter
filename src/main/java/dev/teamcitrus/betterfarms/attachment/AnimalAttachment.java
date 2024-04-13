@@ -134,10 +134,6 @@ public class AnimalAttachment {
         this.hasBeenFedToday = hasBeenFedToday;
     }
 
-    public boolean hasBeenFedToday() {
-        return hasBeenFedToday;
-    }
-
     public void setDaysLeftUntilGrown(int daysLeftUntilGrown) {
         this.daysLeftUntilGrown = daysLeftUntilGrown;
     }
