@@ -39,7 +39,7 @@ public class AnimalAttachment {
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this("", 0, false, false, AnimalGenders.NONE.getId(), false);
+        this("", 0, false, false, AnimalGenders.MALE.getId(), false);
     }
 
     public AnimalAttachment(String keeperUUID, int loveForKeeper, boolean hasBeenPetToday, boolean hasBeenFedToday, String gender, boolean isPregnant) {
@@ -164,7 +164,7 @@ public class AnimalAttachment {
     }
 
     public enum AnimalGenders {
-        MALE("male"), FEMALE("female"), NONE("none");
+        MALE("male"), FEMALE("female");
 
         private final String id;
 
@@ -179,10 +179,9 @@ public class AnimalAttachment {
         public static AnimalGenders getGender(String id) {
             if (id.equals(FEMALE.getId())) {
                 return FEMALE;
-            } else if (id.equals(MALE.getId())) {
+            } else {
                 return MALE;
             }
-            return NONE;
         }
     }
 }

@@ -35,7 +35,7 @@ public class EntityEvents {
         if (!(event.getEntity() instanceof Animal animal)) return;
         if (!event.loadedFromDisk()) {
             animal.getData(AttachmentRegistry.ANIMAL).setGender(
-                    AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length - 1)]
+                    AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)]
             );
             if (BFStatsManager.newMap.containsKey(animal.getType())) {
                 if (BFStatsManager.getStats(animal).milking().isPresent()) {
