@@ -16,7 +16,7 @@ public class AnimalUtil {
 
     public static boolean isAnimalHappy(Animal animal) {
         //TODO: Will be an equation that calculates health, hunger, warmth and love levels for a "happy" level
-        return getAnimalData(animal).getLoveForKeeper() >= 80;
+        return getAnimalData(animal).getLove() >= 80;
     }
 
     public static AnimalAttachment.AnimalGenders getGender(Animal animal) {

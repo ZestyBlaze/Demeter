@@ -20,10 +20,10 @@ public class LoveCheckerItem extends Item {
         if (!interactionTarget.level().isClientSide()) {
             if (interactionTarget instanceof Animal animal) {
                 if (!player.isCrouching()) {
-                    int value = AnimalUtil.getAnimalData(animal).getLoveForKeeper();
+                    int value = AnimalUtil.getAnimalData(animal).getLove();
                     player.displayClientMessage(Component.literal("Love is is: " + value), true);
                 } else {
-                    AnimalUtil.getAnimalData(animal).setLoveForKeeper(50);
+                    AnimalUtil.getAnimalData(animal).setLove(50);
                     player.displayClientMessage(Component.literal("Changed love value"), true);
                 }
                 return InteractionResult.SUCCESS;

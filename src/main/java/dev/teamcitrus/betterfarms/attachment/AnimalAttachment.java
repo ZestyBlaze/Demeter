@@ -9,12 +9,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
-
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("keeper").forGetter(o -> o.keeperUUID),
-            Codec.INT.fieldOf("loveForKeeper").forGetter(o -> o.loveForKeeper),
+            Codec.INT.fieldOf("loveForKeeper").forGetter(o -> o.love),
             Codec.BOOL.fieldOf("hasBeenPetToday").forGetter(o -> o.hasBeenPetToday),
             Codec.BOOL.fieldOf("hasBeenFedToday").forGetter(o -> o.hasBeenFedToday),
             Codec.STRING.fieldOf("gender").forGetter(o -> o.gender.getId()),
@@ -22,8 +19,7 @@ public class AnimalAttachment {
     ).apply(instance, AnimalAttachment::new));
 
     // Animal Life Variables
-    private String keeperUUID;
-    private int loveForKeeper;
+    private int love;
     private boolean hasBeenPetToday;
     private boolean hasBeenFedToday;
 
@@ -39,12 +35,11 @@ public class AnimalAttachment {
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this("", 0, false, false, AnimalGenders.MALE.getId(), false);
+        this(0, false, false, AnimalGenders.MALE.getId(), false);
     }
 
-    public AnimalAttachment(String keeperUUID, int loveForKeeper, boolean hasBeenPetToday, boolean hasBeenFedToday, String gender, boolean isPregnant) {
-        this.keeperUUID = keeperUUID;
-        this.loveForKeeper = loveForKeeper;
+    public AnimalAttachment(int love, boolean hasBeenPetToday, boolean hasBeenFedToday, String gender, boolean isPregnant) {
+        this.love = love;
         this.hasBeenPetToday = hasBeenPetToday;
         this.hasBeenFedToday = hasBeenFedToday;
         this.gender = AnimalGenders.getGender(gender);
@@ -82,20 +77,8 @@ public class AnimalAttachment {
         this.hasBeenFedToday = false;
     }
 
-    public void setKeeperUUID(UUID keeperUUID) {
-        setKeeperUUID(keeperUUID.toString());
-    }
-
-    public void setKeeperUUID(String keeperUUID) {
-        this.keeperUUID = keeperUUID;
-    }
-
-    public String getKeeperUUID() {
-        return keeperUUID;
-    }
-
-    public void setLoveForKeeper(int loveForKeeper) {
-        this.loveForKeeper = loveForKeeper;
+    public void setLove(int love) {
+        this.love = love;
     }
 
     /**
@@ -104,19 +87,19 @@ public class AnimalAttachment {
      * @param value Can be positive to increase or negative to decrease
      */
     public void alterLoveForKeeper(int value) {
-        if ((loveForKeeper += value) > 100) {
-            this.loveForKeeper = 100;
+        if ((love += value) > 100) {
+            this.love = 100;
             return;
         }
-        if ((loveForKeeper-= value) < 0) {
-            this.loveForKeeper = 0;
+        if ((love-= value) < 0) {
+            this.love = 0;
             return;
         }
-        this.loveForKeeper += value;
+        this.love += value;
     }
 
-    public int getLoveForKeeper() {
-        return loveForKeeper;
+    public int getLove() {
+        return love;
     }
 
     public void setHasBeenPetToday(boolean hasBeenPetToday) {
