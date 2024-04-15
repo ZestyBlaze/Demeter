@@ -9,7 +9,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
 #logoFile="examplemod.png"
-#credits="" #optional
+credits="Goomy for helping come up with some of the names!"
 authors="${mod_authors}"
 description='''${mod_description}'''
 

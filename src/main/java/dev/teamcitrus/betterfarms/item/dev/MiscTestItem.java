@@ -18,7 +18,8 @@ public class MiscTestItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         if (!pLevel.isClientSide()) {
-            BetterFarms.LOGGER.info(NamesLoader.NAMES);
+            BetterFarms.LOGGER.info(NamesLoader.MALE_NAMES);
+            BetterFarms.LOGGER.info(NamesLoader.FEMALE_NAMES);
         }
         return InteractionResultHolder.fail(stack);
     }
