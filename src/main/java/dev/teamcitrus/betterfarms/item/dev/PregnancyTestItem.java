@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PregnancyTestItem extends Item {
     public PregnancyTestItem() {
-        super(new Item.Properties());
+        super(new Properties());
     }
 
     @Override

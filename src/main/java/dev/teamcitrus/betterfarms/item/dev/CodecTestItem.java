@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class CodecTestItem extends Item {
     public CodecTestItem() {
-        super(new Item.Properties());
+        super(new Properties());
     }
 
     @Override

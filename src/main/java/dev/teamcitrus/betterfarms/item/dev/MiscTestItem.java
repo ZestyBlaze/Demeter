@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 public class MiscTestItem extends Item {
     public MiscTestItem() {
-        super(new Item.Properties());
+        super(new Properties());
     }
 
     @Override

@@ -14,7 +14,7 @@ import net.neoforged.neoforge.common.EffectCures;
 
 public class MilkBottleItem extends MilkBucketItem {
     public MilkBottleItem() {
-        super(new Item.Properties().stacksTo(16));
+        super(new Properties().stacksTo(16));
     }
 
     @Override
