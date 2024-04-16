@@ -3,6 +3,7 @@ package dev.teamcitrus.betterfarms.attachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.betterfarms.api.util.AnimalUtil;
+import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
 import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.event.custom.level.NewDayEvent;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +23,7 @@ public class AnimalAttachment {
     private int love;
     private boolean hasBeenPetToday;
     private boolean hasBeenFedToday;
+    private int daysSinceFed;
 
     // Gender Variables
     private AnimalGenders gender;
@@ -62,6 +64,13 @@ public class AnimalAttachment {
                 AnimalUtil.handleBirth(self, (ServerLevel)self.level(), otherParent);
                 this.isPregnant = false;
                 this.otherParent = null;
+            }
+        }
+
+        if (!hasBeenFedToday) {
+            daysSinceFed++;
+            if (daysSinceFed >= BetterFarmsConfig.daysBeforeAnimalDie.get()) {
+                self.die(self.level().damageSources().genericKill());
             }
         }
 

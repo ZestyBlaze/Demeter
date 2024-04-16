@@ -8,6 +8,7 @@ public class BetterFarmsConfig {
 
     //General Config
     public static ModConfigSpec.IntValue animalHappinessMin;
+    public static ModConfigSpec.IntValue daysBeforeAnimalDie;
 
     public static ModConfigSpec.IntValue copperQualityChance;
     public static ModConfigSpec.IntValue ironQualityChance;
@@ -31,6 +32,8 @@ public class BetterFarmsConfig {
         builder.push("All Animals");
         animalHappinessMin = builder.comment("The minimum value of happiness required for an animal to be considered 'happy'")
                 .defineInRange("animalHappinessMin", 65, 0, 100);
+        daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
+                        .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
         builder.pop();
         builder.push("Quality Crops");
         copperQualityChance = builder.comment("The chance for copper quality to appear. Example: 60 = 60% chance. 0 to disable").defineInRange("copperQualityChance", 40, 0, 100);
