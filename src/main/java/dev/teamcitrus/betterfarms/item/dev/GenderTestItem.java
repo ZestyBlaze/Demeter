@@ -21,7 +21,7 @@ public class GenderTestItem extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         if (!interactionTarget.level().isClientSide()) {
-            if (interactionTarget instanceof Animal animal && BFStatsManager.newMap.containsKey(animal.getType())) {
+            if (interactionTarget instanceof Animal animal) {
                 AnimalGenders gender = AnimalUtil.getAnimalData(animal).getGender();
                 player.displayClientMessage(Component.literal("Animal is: " + StringUtils.capitalize(gender.getId())), true);
                 return InteractionResult.SUCCESS;
