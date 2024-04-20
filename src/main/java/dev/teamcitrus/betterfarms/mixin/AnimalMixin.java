@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.api.util.AnimalUtil;
+import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.betterfarms.attachment.MilkAttachment;
 import dev.teamcitrus.betterfarms.data.AnimalStats;
@@ -87,6 +88,18 @@ public class AnimalMixin {
         pPlayer.setItemInHand(pHand, result);
         attachment.setHasBeenMilked(true);
         cir.setReturnValue(InteractionResult.SUCCESS);
+    }
+
+    @Inject(
+            method = "mobInteract",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/animal/Animal;getAge()I",
+                    shift = At.Shift.AFTER
+            )
+    )
+    private void betterFarms$mobInteract(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
+        AnimalUtil.getAnimalData(better_Fauna$animal).setHasBeenFedToday(true);
     }
 
     @Inject(
