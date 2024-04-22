@@ -20,8 +20,8 @@ public class NamesLoader {
         List<String> males = new ArrayList<>();
         List<String> females = new ArrayList<>();
 
-        String result1 = IOUtils.toString(Objects.requireNonNull(NamesLoader.class.getResourceAsStream("/assets/betterfarms/names/male.json")), StandardCharsets.UTF_8);
-        String result2 = IOUtils.toString(Objects.requireNonNull(NamesLoader.class.getResourceAsStream("/assets/betterfarms/names/female.json")), StandardCharsets.UTF_8);
+        String result1 = IOUtils.toString(Objects.requireNonNull(NamesLoader.class.getResourceAsStream("/data/betterfarms/names/male.json")), StandardCharsets.UTF_8);
+        String result2 = IOUtils.toString(Objects.requireNonNull(NamesLoader.class.getResourceAsStream("/data/betterfarms/names/female.json")), StandardCharsets.UTF_8);
 
         JsonObject object1 = JsonParser.parseString(result1).getAsJsonObject();
         JsonObject object2 = JsonParser.parseString(result2).getAsJsonObject();
