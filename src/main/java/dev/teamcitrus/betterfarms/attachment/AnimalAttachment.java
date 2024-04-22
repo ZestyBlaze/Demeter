@@ -67,7 +67,7 @@ public class AnimalAttachment {
             }
         }
 
-        if (!hasBeenFedToday) {
+        if (!hasBeenFedToday && BetterFarmsConfig.animalsDieOfHunger.get()) {
             daysSinceFed++;
             if (daysSinceFed >= BetterFarmsConfig.daysBeforeAnimalDie.get()) {
                 self.die(self.level().damageSources().genericKill());
