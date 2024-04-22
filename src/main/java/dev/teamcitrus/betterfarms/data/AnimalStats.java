@@ -10,8 +10,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.List;
 import java.util.Optional;
 
-public record AnimalStats(int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth,
-                          Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking) {
+public record AnimalStats(
+        int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth,
+        Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking
+) {
     public static final Codec<AnimalStats> CODEC = RecordCodecBuilder.create(func -> func.group(
             Codec.INT.optionalFieldOf("daysPregnant", 0).forGetter(a -> a.daysPregnant),
             Codec.INT.optionalFieldOf("daysToGrowUp", 0).forGetter(a -> a.daysToGrowUp),
