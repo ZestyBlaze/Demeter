@@ -2,7 +2,7 @@ package dev.teamcitrus.betterfarms.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.betterfarms.BetterFarmsClient;
-import dev.teamcitrus.betterfarms.api.util.QualityUtil;
+import dev.teamcitrus.betterfarms.util.QualityUtil;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;

@@ -1,9 +1,9 @@
-package dev.teamcitrus.betterfarms.api.util;
+package dev.teamcitrus.betterfarms.util;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.api.quality.Quality;
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
 import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagProvider;
+import dev.teamcitrus.betterfarms.quality.Quality;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 

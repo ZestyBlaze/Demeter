@@ -34,6 +34,7 @@
   "item.betterfarms.quality_tooltip.gold": "Gold",
   "item.betterfarms.quality_tooltip.iron": "Iron",
   "item.betterfarms.quality_tooltip.netherite": "Netherite",
+  "item.betterfarms.registry_test": "Registry Test",
   "itemGroup.betterfarms": "Better Farms",
   "itemGroup.betterfarms.dev": "Better Farms - Dev",
   "message.betterfarms.animal_petted": "You pet your %s for today",
