@@ -15,12 +15,12 @@ public record AnimalStats(
         Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking
 ) {
     public static final Codec<AnimalStats> CODEC = RecordCodecBuilder.create(func -> func.group(
-            Codec.INT.optionalFieldOf("daysPregnant", 0).forGetter(a -> a.daysPregnant),
-            Codec.INT.optionalFieldOf("daysToGrowUp", 0).forGetter(a -> a.daysToGrowUp),
-            Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(a -> a.minChildrenPerBirth),
-            Codec.INT.optionalFieldOf("maxChildrenPerBirth", 1).forGetter(a -> a.maxChildrenPerBirth),
-            Ingredient.LIST_CODEC.optionalFieldOf("breedingItems").forGetter(a -> a.breedingItems),
-            MilkingCodec.CODEC.optionalFieldOf("milking").forGetter(a -> a.milking)
+            Codec.INT.optionalFieldOf("daysPregnant", 0).forGetter(AnimalStats::daysPregnant),
+            Codec.INT.optionalFieldOf("daysToGrowUp", 0).forGetter(AnimalStats::daysToGrowUp),
+            Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(AnimalStats::minChildrenPerBirth),
+            Codec.INT.optionalFieldOf("maxChildrenPerBirth", 1).forGetter(AnimalStats::maxChildrenPerBirth),
+            Ingredient.LIST_CODEC.optionalFieldOf("breedingItems").forGetter(AnimalStats::breedingItems),
+            MilkingCodec.CODEC.optionalFieldOf("milking").forGetter(AnimalStats::milking)
     ).apply(func, AnimalStats::new));
 
     public record MilkingCodec(Item input, Item output) {

@@ -1,7 +1,8 @@
 package dev.teamcitrus.betterfarms.registry;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.item.*;
+import dev.teamcitrus.betterfarms.item.AnimalTagItem;
+import dev.teamcitrus.betterfarms.item.MilkBottleItem;
 import dev.teamcitrus.betterfarms.item.dev.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -22,7 +23,7 @@ public class ItemRegistry {
 
     private static final DeferredHolder<CreativeModeTab, CreativeModeTab> BETTER_FARMS_TAB = CREATIVE_MODE_TABS.register("betterfarms", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.betterfarms"))
-            .icon(() -> ItemRegistry.MAPLE_LOG.get().getDefaultInstance())
+            .icon(ItemRegistry.MAPLE_LOG.get()::getDefaultInstance)
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
             .build());
 

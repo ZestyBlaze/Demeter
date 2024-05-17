@@ -20,10 +20,8 @@ public class AnimalAttachment {
     ).apply(instance, AnimalAttachment::new));
 
     // Animal Life Variables
-    private int love;
-    private boolean hasBeenPetToday;
-    private boolean hasBeenFedToday;
-    private int daysSinceFed;
+    private int love, daysSinceFed;
+    private boolean hasBeenPetToday, hasBeenFedToday;
 
     // Gender Variables
     private AnimalGenders gender;
