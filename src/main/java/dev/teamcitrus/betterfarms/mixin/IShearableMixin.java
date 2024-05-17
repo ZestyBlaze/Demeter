@@ -1,7 +1,7 @@
 package dev.teamcitrus.betterfarms.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import dev.teamcitrus.betterfarms.api.util.QualityUtil;
+import dev.teamcitrus.betterfarms.util.QualityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

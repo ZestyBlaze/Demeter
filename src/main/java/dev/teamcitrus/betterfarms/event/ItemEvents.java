@@ -1,11 +1,11 @@
 package dev.teamcitrus.betterfarms.event;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.api.quality.Quality;
-import dev.teamcitrus.betterfarms.api.util.QualityUtil;
 import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagProvider;
+import dev.teamcitrus.betterfarms.quality.Quality;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.FluidRegistry;
+import dev.teamcitrus.betterfarms.util.QualityUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;

@@ -1,4 +1,4 @@
-package dev.teamcitrus.betterfarms.api.util;
+package dev.teamcitrus.betterfarms.util;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;

@@ -2,13 +2,18 @@ package dev.teamcitrus.betterfarms;
 
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
 import dev.teamcitrus.betterfarms.data.NamesLoader;
+import dev.teamcitrus.betterfarms.network.PayloadHelper;
 import dev.teamcitrus.betterfarms.registry.*;
+import dev.teamcitrus.betterfarms.reload.ReloadListenerPackets;
+import dev.teamcitrus.betterfarms.test.TestRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +35,8 @@ public class BetterFarms {
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, BetterFarmsConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BetterFarmsConfig.GENERAL_SPEC);
+        bus.register(this);
+        bus.register(new PayloadHelper());
 
         if (isDevEnv()) {
             ItemRegistry.DEV_ITEMS.register(bus);
@@ -42,6 +49,14 @@ public class BetterFarms {
             LOGGER.error(Component.translatable("error.betterfarms.namesloadfail").getString());
             e.printStackTrace();
         }
+    }
+
+    @SubscribeEvent
+    public void setup(FMLCommonSetupEvent event) {
+        PayloadHelper.registerPayload(new ReloadListenerPackets.Start.Provider());
+        PayloadHelper.registerPayload(new ReloadListenerPackets.Content.Provider<>());
+        PayloadHelper.registerPayload(new ReloadListenerPackets.End.Provider());
+        TestRegistry.INSTANCE.registerToBus();
     }
 
     public static boolean isDevEnv() {

@@ -1,4 +1,4 @@
-package dev.teamcitrus.betterfarms.api.quality;
+package dev.teamcitrus.betterfarms.quality;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

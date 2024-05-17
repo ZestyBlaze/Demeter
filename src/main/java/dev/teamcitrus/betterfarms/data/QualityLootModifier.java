@@ -3,7 +3,7 @@ package dev.teamcitrus.betterfarms.data;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.teamcitrus.betterfarms.api.util.QualityUtil;
+import dev.teamcitrus.betterfarms.util.QualityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;

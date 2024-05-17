@@ -39,6 +39,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> PREGNANCY_TEST = DEV_ITEMS.register("pregnancy_test", PregnancyTestItem::new);
     public static final DeferredItem<Item> LOVE_ITEM = DEV_ITEMS.register("love_checker", LoveCheckerItem::new);
     public static final DeferredItem<Item> MISC_ITEM = DEV_ITEMS.register("misc_test", MiscTestItem::new);
+    public static final DeferredItem<Item> REGISTRY_ITEM = DEV_ITEMS.register("registry_test", RegistryTestItem::new);
 
     public static final DeferredItem<Item> ANIMAL_TAG = ITEMS.register("animal_tag", AnimalTagItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);

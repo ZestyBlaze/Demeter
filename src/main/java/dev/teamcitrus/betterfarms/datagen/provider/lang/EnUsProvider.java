@@ -1,7 +1,7 @@
 package dev.teamcitrus.betterfarms.datagen.provider.lang;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.api.quality.Quality;
+import dev.teamcitrus.betterfarms.quality.Quality;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;

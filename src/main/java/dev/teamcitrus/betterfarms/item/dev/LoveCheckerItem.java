@@ -1,6 +1,6 @@
 package dev.teamcitrus.betterfarms.item.dev;
 
-import dev.teamcitrus.betterfarms.api.util.AnimalUtil;
+import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
