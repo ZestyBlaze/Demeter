@@ -16,6 +16,6 @@ public class AgeableMobMixin {
             )
     )
     private void betterFarms$aiStep(AgeableMob instance, int pAge) {
-        if (BFStatsManager.getStats(instance).daysToGrowUp() == 0) instance.setAge(++pAge);
+        if (BFStatsManager.newMap.containsKey(instance.getType()) && BFStatsManager.getStats(instance).daysToGrowUp() == 0) instance.setAge(++pAge);
     }
 }
