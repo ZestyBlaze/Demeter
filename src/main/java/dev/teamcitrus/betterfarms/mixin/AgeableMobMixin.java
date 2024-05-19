@@ -1,7 +1,8 @@
 package dev.teamcitrus.betterfarms.mixin;
 
-import dev.teamcitrus.betterfarms.data.BFStatsManager;
+import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.animal.Animal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -16,6 +17,8 @@ public class AgeableMobMixin {
             )
     )
     private void betterFarms$aiStep(AgeableMob instance, int pAge) {
-        if (BFStatsManager.newMap.containsKey(instance.getType()) && BFStatsManager.getStats(instance).daysToGrowUp() == 0) instance.setAge(++pAge);
+        if (instance instanceof Animal animal &&
+                AnimalUtil.statsContains(animal) &&
+                AnimalUtil.getStats(animal).get().daysToGrowUp() == 0) instance.setAge(++pAge);
     }
 }

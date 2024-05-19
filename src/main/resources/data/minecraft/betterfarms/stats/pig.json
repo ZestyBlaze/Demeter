@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:pig",
   "daysPregnant": 4,
   "minChildrenPerBirth": 4,
   "maxChildrenPerBirth": 7
