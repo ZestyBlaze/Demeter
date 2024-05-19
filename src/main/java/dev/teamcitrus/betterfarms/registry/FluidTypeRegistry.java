@@ -1,7 +1,7 @@
 package dev.teamcitrus.betterfarms.registry;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.fluid.BaseFluidType;
+import dev.teamcitrus.citruslib.fluid.CommonFluidType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.common.SoundActions;
@@ -14,9 +14,9 @@ import org.joml.Vector3f;
 public class FluidTypeRegistry {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, BetterFarms.MODID);
 
-    public static final DeferredHolder<FluidType, BaseFluidType> MILK_FLUID_TYPE = FLUID_TYPES.register(
+    public static final DeferredHolder<FluidType, CommonFluidType> MILK_FLUID_TYPE = FLUID_TYPES.register(
             "milk_fluid",
-            () -> new BaseFluidType(
+            () -> new CommonFluidType(
                     new ResourceLocation("block/water_still"),
                     new ResourceLocation("block/water_flow"),
                     0xFFFEFCFF,
@@ -26,7 +26,9 @@ public class FluidTypeRegistry {
                             .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                             .supportsBoating(true)
                             .density(10)
-                            .viscosity(15)
+                            .viscosity(15),
+                    0.75f,
+                    2f
             )
     );
 }

@@ -1,7 +1,7 @@
 package dev.teamcitrus.betterfarms.test;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.reload.DynamicRegistry;
+import dev.teamcitrus.citruslib.reload.DynamicRegistry;
 
 public class TestRegistry extends DynamicRegistry<ITest> {
     public static final TestRegistry INSTANCE = new TestRegistry();

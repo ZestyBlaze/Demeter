@@ -2,9 +2,7 @@ package dev.teamcitrus.betterfarms;
 
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
 import dev.teamcitrus.betterfarms.data.NamesLoader;
-import dev.teamcitrus.betterfarms.network.PayloadHelper;
 import dev.teamcitrus.betterfarms.registry.*;
-import dev.teamcitrus.betterfarms.reload.ReloadListenerPackets;
 import dev.teamcitrus.betterfarms.test.TestRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,8 +33,6 @@ public class BetterFarms {
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, BetterFarmsConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BetterFarmsConfig.GENERAL_SPEC);
-        bus.register(this);
-        bus.register(new PayloadHelper());
 
         if (isDevEnv()) {
             ItemRegistry.DEV_ITEMS.register(bus);
@@ -53,9 +49,6 @@ public class BetterFarms {
 
     @SubscribeEvent
     public void setup(FMLCommonSetupEvent event) {
-        PayloadHelper.registerPayload(new ReloadListenerPackets.Start.Provider());
-        PayloadHelper.registerPayload(new ReloadListenerPackets.Content.Provider<>());
-        PayloadHelper.registerPayload(new ReloadListenerPackets.End.Provider());
         TestRegistry.INSTANCE.registerToBus();
     }
 
