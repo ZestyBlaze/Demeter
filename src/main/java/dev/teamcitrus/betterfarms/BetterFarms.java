@@ -2,10 +2,9 @@ package dev.teamcitrus.betterfarms;
 
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
 import dev.teamcitrus.betterfarms.data.NamesLoader;
-import dev.teamcitrus.betterfarms.network.PayloadHelper;
+import dev.teamcitrus.betterfarms.data.StatsRegistry;
 import dev.teamcitrus.betterfarms.registry.*;
-import dev.teamcitrus.betterfarms.reload.ReloadListenerPackets;
-import dev.teamcitrus.betterfarms.test.TestRegistry;
+import dev.teamcitrus.citruslib.util.ModUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -14,7 +13,6 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,9 +34,8 @@ public class BetterFarms {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, BetterFarmsConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BetterFarmsConfig.GENERAL_SPEC);
         bus.register(this);
-        bus.register(new PayloadHelper());
 
-        if (isDevEnv()) {
+        if (ModUtils.isDevelopmentEnvironment()) {
             ItemRegistry.DEV_ITEMS.register(bus);
             ItemRegistry.DEV_TABS.register(bus);
         }
@@ -53,14 +50,7 @@ public class BetterFarms {
 
     @SubscribeEvent
     public void setup(FMLCommonSetupEvent event) {
-        PayloadHelper.registerPayload(new ReloadListenerPackets.Start.Provider());
-        PayloadHelper.registerPayload(new ReloadListenerPackets.Content.Provider<>());
-        PayloadHelper.registerPayload(new ReloadListenerPackets.End.Provider());
-        TestRegistry.INSTANCE.registerToBus();
-    }
-
-    public static boolean isDevEnv() {
-        return !FMLLoader.isProduction();
+        StatsRegistry.INSTANCE.registerToBus();
     }
 
     public static ResourceLocation id(String name) {

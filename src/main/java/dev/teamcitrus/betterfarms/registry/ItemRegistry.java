@@ -34,7 +34,6 @@ public class ItemRegistry {
             .build()
     );
 
-    public static final DeferredItem<Item> CODEC_TEST = DEV_ITEMS.register("codec_test", CodecTestItem::new);
     public static final DeferredItem<Item> GENDER_TEST = DEV_ITEMS.register("gender_test", GenderTestItem::new);
     public static final DeferredItem<Item> PREGNANCY_TEST = DEV_ITEMS.register("pregnancy_test", PregnancyTestItem::new);
     public static final DeferredItem<Item> LOVE_ITEM = DEV_ITEMS.register("love_checker", LoveCheckerItem::new);

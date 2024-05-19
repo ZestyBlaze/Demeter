@@ -3,14 +3,14 @@ package dev.teamcitrus.betterfarms.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.betterfarms.attachment.MilkAttachment;
 import dev.teamcitrus.betterfarms.data.AnimalStats;
-import dev.teamcitrus.betterfarms.data.AnimalStats.MilkingCodec;
-import dev.teamcitrus.betterfarms.data.BFStatsManager;
+import dev.teamcitrus.betterfarms.data.IStats;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import dev.teamcitrus.betterfarms.util.AnimalUtil;
+import dev.teamcitrus.citruslib.reload.DynamicHolder;
+import dev.teamcitrus.citruslib.util.ModUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -45,10 +45,10 @@ public class AnimalMixin {
             )
     )
     private boolean betterFarms$isFood(ItemStack stack, Item item, Operation<Boolean> original) {
-        if (!BFStatsManager.newMap.containsKey(better_Fauna$animal.getType())) return original.call(stack, item);
-        AnimalStats stats = BFStatsManager.getStats(better_Fauna$animal);
-        if (stats.breedingItems().isEmpty()) return original.call(stack, item);
-        for (Ingredient ingredient : stats.breedingItems().get()) {
+        if (!AnimalUtil.statsContains(better_Fauna$animal)) return original.call(stack, item);
+        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(better_Fauna$animal);
+        if (stats.get().breedingItems().isEmpty()) return original.call(stack, item);
+        for (Ingredient ingredient : stats.get().breedingItems().get()) {
             if (ingredient.test(stack)) {
                 AnimalUtil.getAnimalData(better_Fauna$animal).setHasBeenFedToday(true);
                 return true;
@@ -64,9 +64,9 @@ public class AnimalMixin {
     )
     private void betterFarms$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (pPlayer.level().isClientSide) return;
-        AnimalStats stats = BFStatsManager.getStats(better_Fauna$animal);
-        if (!(BFStatsManager.newMap.containsKey(better_Fauna$animal.getType()) && stats.milking().isPresent())) return;
-        MilkingCodec milking = stats.milking().get();
+        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(better_Fauna$animal);
+        if (!(AnimalUtil.statsContains(better_Fauna$animal) && stats.get().milking().isPresent())) return;
+        IStats.MilkingCodec milking = stats.get().milking().get();
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
         if (!stack.is(milking.input())) return;
@@ -107,7 +107,7 @@ public class AnimalMixin {
             cancellable = true
     )
     private void betterFarms$setInLove(Player pPlayer, CallbackInfo ci) {
-        if (!AnimalUtil.isAnimalHappy(better_Fauna$animal) && !BetterFarms.isDevEnv()) ci.cancel();
+        if (!AnimalUtil.isAnimalHappy(better_Fauna$animal) && !ModUtils.isDevelopmentEnvironment()) ci.cancel();
     }
 
     @ModifyExpressionValue(
