@@ -3,7 +3,6 @@ package dev.teamcitrus.betterfarms.attachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
-import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import net.minecraft.server.level.ServerLevel;
@@ -134,7 +133,7 @@ public class AnimalAttachment {
         this.isPregnant = value;
         this.otherParent = otherParent;
         if (value) {
-            this.daysLeftUntilBirth = BFStatsManager.getStats(animal).daysPregnant();
+            this.daysLeftUntilBirth = AnimalUtil.getStats(animal).get().daysPregnant();
         }
     }
 

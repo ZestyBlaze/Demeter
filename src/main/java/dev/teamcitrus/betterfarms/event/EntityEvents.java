@@ -3,7 +3,6 @@ package dev.teamcitrus.betterfarms.event;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.attachment.AnimalAttachment;
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
-import dev.teamcitrus.betterfarms.data.BFStatsManager;
 import dev.teamcitrus.betterfarms.registry.AttachmentRegistry;
 import dev.teamcitrus.betterfarms.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -37,8 +36,8 @@ public class EntityEvents {
             animal.getData(AttachmentRegistry.ANIMAL).setGender(
                     AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)]
             );
-            if (BFStatsManager.newMap.containsKey(animal.getType())) {
-                if (BFStatsManager.getStats(animal).milking().isPresent()) {
+            if (AnimalUtil.statsContains(animal)) {
+                if (AnimalUtil.getStats(animal).get().milking().isPresent()) {
                     animal.getData(AttachmentRegistry.MILK);
                 }
             }
@@ -68,8 +67,9 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void onBabySpawned(BabyEntitySpawnEvent event) {
-        if (BFStatsManager.newMap.containsKey(event.getChild().getType())) {
-            AnimalUtil.getAnimalData((Animal) event.getChild()).setDaysLeftUntilGrown(BFStatsManager.getStats(event.getChild()).daysToGrowUp());
+        if (!(event.getChild() instanceof Animal child)) return;
+        if (AnimalUtil.statsContains(child)) {
+            AnimalUtil.getAnimalData(child).setDaysLeftUntilGrown(AnimalUtil.getStats(child).get().daysToGrowUp());
         }
 
         if (event.getCausedByPlayer() == null) return;

@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:cow",
   "daysPregnant": 9,
   "milking": {}
 }
