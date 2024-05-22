@@ -34,6 +34,7 @@ public class BFItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.LOGS_THAT_BURN).add(BlockRegistry.MAPLE_LOG.get().asItem(), BlockRegistry.MAPLE_WOOD.get().asItem(),
                 BlockRegistry.STRIPPED_MAPLE_LOG.get().asItem(), BlockRegistry.STRIPPED_MAPLE_WOOD.get().asItem());
         tag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL).add(BlockRegistry.MAPLE_LOG.get().asItem());
+        /*
         tag(ItemTags.PLANKS).add(BlockRegistry.MAPLE_PLANKS.get().asItem());
         tag(ItemTags.STAIRS).add(BlockRegistry.MAPLE_STAIRS.get().asItem());
         tag(ItemTags.WOODEN_STAIRS).add(BlockRegistry.MAPLE_STAIRS.get().asItem());
@@ -52,5 +53,6 @@ public class BFItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.WOODEN_SLABS).add(BlockRegistry.MAPLE_SLAB.get().asItem());
         tag(ItemTags.LEAVES).add(BlockRegistry.MAPLE_LEAVES.get().asItem());
         //tag(ItemTags.SAPLINGS).add(BlockRegistry.MAPLE_SAPLING.get().asItem());
+         */
     }
 }

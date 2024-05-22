@@ -31,6 +31,7 @@ public class BFBlockTagProvider extends BlockTagsProvider {
                 BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.STRIPPED_MAPLE_WOOD.get());
         tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(BlockRegistry.MAPLE_LOG.get());
         tag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL).add(BlockRegistry.MAPLE_LOG.get());
+        /*
         tag(BlockTags.PLANKS).add(BlockRegistry.MAPLE_PLANKS.get());
         tag(BlockTags.STAIRS).add(BlockRegistry.MAPLE_STAIRS.get());
         tag(BlockTags.WOODEN_STAIRS).add(BlockRegistry.MAPLE_STAIRS.get());
@@ -56,6 +57,9 @@ public class BFBlockTagProvider extends BlockTagsProvider {
                 BlockRegistry.MAPLE_FENCE_GATE.get(), BlockRegistry.MAPLE_DOOR.get(), BlockRegistry.MAPLE_TRAPDOOR.get(),
                 BlockRegistry.MAPLE_PRESSURE_PLATE.get(), BlockRegistry.MAPLE_BUTTON.get()
         );
+         */
+        tag(BlockTags.MINEABLE_WITH_AXE).add(BlockRegistry.MAPLE_LOG.get(), BlockRegistry.MAPLE_WOOD.get(),
+                BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.STRIPPED_MAPLE_WOOD.get());
         tag(BlockTags.MINEABLE_WITH_HOE).add(BlockRegistry.MAPLE_LEAVES.get());
     }
 }

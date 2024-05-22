@@ -1,15 +1,5 @@
-// 1.20.4	2024-04-02T22:26:28.9388623	Item Models: betterfarms
-6e589740c5369c756f9b59739a2cd3f6fc4d905f assets/betterfarms/models/item/maple_button.json
-15cf9c6f7b4ba68157b0835fc19a501ff094717d assets/betterfarms/models/item/maple_door.json
-47f448cc6c3b5258beb81fde72250864fd040c2d assets/betterfarms/models/item/maple_fence.json
-3037bd7e3566564d4a304977052debad74a6a74f assets/betterfarms/models/item/maple_fence_gate.json
-2779bcbd01463899ac87b6fa2d55c98351e23cc6 assets/betterfarms/models/item/maple_leaves.json
+// 1.20.4	2024-05-22T22:05:47.4863016	Item Models: betterfarms
 1a999f5814e231bd21ad2f7d5dfd532095d2cf6a assets/betterfarms/models/item/maple_log.json
-92e9f5708f9c99d1ee8a1ac74e679a7a1cfd8485 assets/betterfarms/models/item/maple_planks.json
-24a50a569cb302177af818c25939cac62b2ed810 assets/betterfarms/models/item/maple_pressure_plate.json
-c9f780e7fab297dd0fd8407f988870946f9f8d3d assets/betterfarms/models/item/maple_slab.json
-da8d098634398ffed43aa906cb28f48eefb69852 assets/betterfarms/models/item/maple_stairs.json
-623808e5190ffcf1b3ccfcfa0827e1e030e9b1f7 assets/betterfarms/models/item/maple_trapdoor.json
 6563a55a581effd291433841ecce42d1edd774b0 assets/betterfarms/models/item/maple_wood.json
 d13c18ccd71aff5a5215d4ff6221ebc14f3fb4a2 assets/betterfarms/models/item/stripped_maple_log.json
 be8f0c5585d8a9ca67c5a957b253af5d43dde49b assets/betterfarms/models/item/stripped_maple_wood.json

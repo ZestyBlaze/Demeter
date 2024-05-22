@@ -20,6 +20,7 @@ public class BFItemModelProvider extends ItemModelProvider {
         toBlock(BlockRegistry.MAPLE_WOOD.get());
         toBlock(BlockRegistry.STRIPPED_MAPLE_LOG.get());
         toBlock(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
+        /*
         toBlock(BlockRegistry.MAPLE_PLANKS.get());
         toBlock(BlockRegistry.MAPLE_STAIRS.get());
         toBlock(BlockRegistry.MAPLE_SLAB.get());
@@ -30,6 +31,8 @@ public class BFItemModelProvider extends ItemModelProvider {
         toBlock(BlockRegistry.MAPLE_LEAVES.get());
         basicItem(BlockRegistry.MAPLE_DOOR.get().asItem());
         toBlockModel(BlockRegistry.MAPLE_TRAPDOOR.get(), "maple_trapdoor_bottom");
+
+         */
     }
 
     private void toBlock(Block b) {

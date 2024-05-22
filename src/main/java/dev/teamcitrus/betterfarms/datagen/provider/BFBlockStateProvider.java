@@ -16,6 +16,7 @@ public class BFBlockStateProvider extends BlockStateProvider {
         axisBlock(BlockRegistry.MAPLE_WOOD.get(), models().cubeAll("maple_wood", modLoc("block/maple_log")), models().cubeAll("maple_wood", modLoc("block/maple_log")));
         logBlock(BlockRegistry.STRIPPED_MAPLE_LOG.get());
         axisBlock(BlockRegistry.STRIPPED_MAPLE_WOOD.get(), models().cubeAll("stripped_maple_wood", modLoc("block/stripped_maple_log")), models().cubeAll("stripped_maple_wood", modLoc("block/stripped_maple_log")));
+        /*
         simpleBlock(BlockRegistry.MAPLE_PLANKS.get());
         stairsBlock(BlockRegistry.MAPLE_STAIRS.get(), blockTexture(BlockRegistry.MAPLE_PLANKS.get()));
         slabBlock(BlockRegistry.MAPLE_SLAB.get(), blockTexture(BlockRegistry.MAPLE_PLANKS.get()), blockTexture(BlockRegistry.MAPLE_PLANKS.get()));
@@ -25,6 +26,7 @@ public class BFBlockStateProvider extends BlockStateProvider {
         trapdoorBlockWithRenderType(BlockRegistry.MAPLE_TRAPDOOR.get(), modLoc("block/maple_trapdoor"), true, "cutout");
         pressurePlateBlock(BlockRegistry.MAPLE_PRESSURE_PLATE.get(), blockTexture(BlockRegistry.MAPLE_PLANKS.get()));
         buttonBlock(BlockRegistry.MAPLE_BUTTON.get(), blockTexture(BlockRegistry.MAPLE_PLANKS.get()));
+         */
         simpleBlock(BlockRegistry.MAPLE_LEAVES.get(), models().cubeAll("maple_leaves", BetterFarms.id("block/maple_leaves")).renderType("cutout"));
     }
 }

@@ -28,9 +28,9 @@ public class BFLootProvider {
         @Override
         protected void generate() {
             dropSelf(BlockRegistry.MAPLE_LOG.get());
-            dropSelf(BlockRegistry.MAPLE_PLANKS.get());
-            add(BlockRegistry.MAPLE_DOOR.get(), createDoorTable(BlockRegistry.MAPLE_DOOR.get()));
-            dropSelf(BlockRegistry.MAPLE_TRAPDOOR.get());
+            //dropSelf(BlockRegistry.MAPLE_PLANKS.get());
+            //add(BlockRegistry.MAPLE_DOOR.get(), createDoorTable(BlockRegistry.MAPLE_DOOR.get()));
+            //dropSelf(BlockRegistry.MAPLE_TRAPDOOR.get());
         }
 
         @Override
