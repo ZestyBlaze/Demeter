@@ -3,19 +3,16 @@ package dev.teamcitrus.betterfarms.registry;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.block.MapleLogBlock;
 import dev.teamcitrus.betterfarms.block.MilkCauldronBlock;
+import dev.teamcitrus.citruslib.block.WoodSet;
 import dev.teamcitrus.citruslib.registry.WoodSetRegistry;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.WoodType;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BetterFarms.MODID);
-    public static final BlockSetType MAPLE = BlockSetType.register(new BlockSetType("maple"));
-    public static final WoodType MAPLE_WOOD_TYPE = WoodType.register(new WoodType("maple", MAPLE));
+    public static final WoodSet MAPLE = WoodSetRegistry.registerWoodSet(BLOCKS, "maple");
 
     public static final DeferredBlock<RotatedPillarBlock> MAPLE_LOG = BLOCKS.register("maple_log", MapleLogBlock::new);
     public static final DeferredBlock<RotatedPillarBlock> MAPLE_WOOD = BLOCKS.register("maple_wood", MapleLogBlock::new);
@@ -34,9 +31,4 @@ public class BlockRegistry {
 
     public static final DeferredBlock<MilkCauldronBlock> MILK_CAULDRON_BLOCK = BLOCKS.register("milk_cauldron", () -> new MilkCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER_CAULDRON)));
     public static final DeferredBlock<LiquidBlock> MILK_BLOCK = BLOCKS.register("milk_block", () -> new LiquidBlock(FluidRegistry.MILK, BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-
-    public static void init(IEventBus bus) {
-        WoodSetRegistry.registerWoodSet(BLOCKS, "maple");
-        BLOCKS.register(bus);
-    }
 }
