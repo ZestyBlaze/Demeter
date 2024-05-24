@@ -3,6 +3,7 @@ package dev.teamcitrus.betterfarms.datagen;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.datagen.provider.*;
 import dev.teamcitrus.betterfarms.datagen.provider.lang.EnUsProvider;
+import dev.teamcitrus.citruslib.util.DatagenUtils;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -44,10 +45,6 @@ public class BFDatagen {
 
         gen.addProvider(event.includeClient(), new EnUsProvider(output));
 
-        gen.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(
-                Component.literal("Resources for BetterFarms"),
-                DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA),
-                Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE))
-        )));
+        gen.addProvider(true, DatagenUtils.makeMetadataFile(output, BetterFarms.MODID));
     }
 }
