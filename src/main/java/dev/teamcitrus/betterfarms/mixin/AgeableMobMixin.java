@@ -13,7 +13,8 @@ public class AgeableMobMixin {
             method = "aiStep",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/AgeableMob;setAge(I)V"
+                    target = "Lnet/minecraft/world/entity/AgeableMob;setAge(I)V",
+                    ordinal = 0
             )
     )
     private void betterFarms$aiStep(AgeableMob instance, int pAge) {
