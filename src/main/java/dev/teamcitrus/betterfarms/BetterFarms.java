@@ -44,7 +44,6 @@ public class BetterFarms {
             NamesLoader.load();
         } catch (IOException e) {
             LOGGER.error(Component.translatable("error.betterfarms.namesloadfail").getString());
-            e.printStackTrace();
         }
     }
 
