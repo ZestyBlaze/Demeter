@@ -1,7 +1,0 @@
-// 1.20.4	2024-04-01T16:24:10.5255846	Global Loot Modifiers : betterfarms
-6d8afa050c5b1549af395682d1d4f8027ae6277b data/betterfarms/loot_modifiers/quality_beetroots.json
-a174df0b17fa9cacfa508fe8c68d4d13ca57baa2 data/betterfarms/loot_modifiers/quality_carrots.json
-97b158e6537974ea8ff5e5d73c35173b3d6f49eb data/betterfarms/loot_modifiers/quality_melon.json
-093d3cb107e966038c8f8bcc2adee5d72f29fa48 data/betterfarms/loot_modifiers/quality_potato.json
-4bcd5f32567c506355445795cecf487acff39db7 data/betterfarms/loot_modifiers/quality_wheat.json
-18e5d57bbcda496a14b2c0f1d207c2ae9d3fc13d data/neoforge/loot_modifiers/global_loot_modifiers.json

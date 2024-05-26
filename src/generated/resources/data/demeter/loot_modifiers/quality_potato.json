@@ -1,0 +1,9 @@
+{
+  "type": "demeter:quality_drops",
+  "conditions": [
+    {
+      "block": "minecraft:potatoes",
+      "condition": "minecraft:block_state_property"
+    }
+  ]
+}

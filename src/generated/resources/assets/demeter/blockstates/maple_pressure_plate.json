@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "demeter:block/maple_pressure_plate"
+    },
+    "powered=true": {
+      "model": "demeter:block/maple_pressure_plate_down"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "dev.teamcitrus.demeter.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AgeableMobMixin",
+    "AnimalMixin",
+    "BreedGoalMixin",
+    "ChickenMixin",
+    "CowGoatMixin",
+    "IShearableMixin",
+    "TemptGoalMixin",
+    "ThrownEggMixin"
+  ],
+  "client": [
+    "client.GuiGraphicsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
