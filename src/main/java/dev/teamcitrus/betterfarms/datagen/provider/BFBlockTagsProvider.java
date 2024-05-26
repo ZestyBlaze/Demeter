@@ -3,7 +3,7 @@ package dev.teamcitrus.betterfarms.datagen.provider;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.WoodSetRegistry;
-import dev.teamcitrus.citruslib.datagen.CitrusBlockTagProvider;
+import dev.teamcitrus.citruslib.datagen.CitrusBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -14,10 +14,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BFBlockTagProvider extends CitrusBlockTagProvider {
+public class BFBlockTagsProvider extends CitrusBlockTagsProvider {
     public static final TagKey<Block> MAPLE_LOGS = BlockTags.create(BetterFarms.id("maple_logs"));
 
-    public BFBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+    public BFBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, BetterFarms.MODID, existingFileHelper);
     }
 

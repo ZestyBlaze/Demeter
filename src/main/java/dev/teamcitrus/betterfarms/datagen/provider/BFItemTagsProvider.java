@@ -3,7 +3,7 @@ package dev.teamcitrus.betterfarms.datagen.provider;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.WoodSetRegistry;
-import dev.teamcitrus.citruslib.datagen.CitrusItemTagProvider;
+import dev.teamcitrus.citruslib.datagen.CitrusItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
@@ -15,11 +15,11 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BFItemTagProvider extends CitrusItemTagProvider {
+public class BFItemTagsProvider extends CitrusItemTagsProvider {
     public static final TagKey<Item> QUALITY_PRODUCTS = ItemTags.create(BetterFarms.id("quality_products"));
     public static final TagKey<Item> MAPLE_LOGS = ItemTags.create(BetterFarms.id("maple_logs"));
 
-    public BFItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> holder, CompletableFuture<TagLookup<Block>> blockTag, ExistingFileHelper existingFileHelper) {
+    public BFItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> holder, CompletableFuture<TagLookup<Block>> blockTag, ExistingFileHelper existingFileHelper) {
         super(output, holder, blockTag, BetterFarms.MODID, existingFileHelper);
     }
 

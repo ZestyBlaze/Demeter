@@ -30,9 +30,9 @@ public class BFDatagen {
         gen.addProvider(event.includeServer(), new BFAdvancementProvider(output, provider, helper));
         gen.addProvider(event.includeServer(), BFLootProvider.create(output));
 
-        BFBlockTagProvider blockTags = new BFBlockTagProvider(output, provider, helper);
+        BFBlockTagsProvider blockTags = new BFBlockTagsProvider(output, provider, helper);
         gen.addProvider(event.includeServer(), blockTags);
-        gen.addProvider(event.includeServer(), new BFItemTagProvider(output, provider, blockTags.contentsGetter(), helper));
+        gen.addProvider(event.includeServer(), new BFItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
         gen.addProvider(event.includeServer(), new BFRecipeProvider(output));
         gen.addProvider(event.includeServer(), new BFLootModifierProvider(output));
 

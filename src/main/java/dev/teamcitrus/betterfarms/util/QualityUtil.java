@@ -2,7 +2,7 @@ package dev.teamcitrus.betterfarms.util;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.config.BetterFarmsConfig;
-import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagProvider;
+import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagsProvider;
 import dev.teamcitrus.betterfarms.quality.Quality;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +13,7 @@ public class QualityUtil {
     private static final Random random = new Random();
 
     public static void randomiseQuality(ItemStack stack) {
-        if (!stack.is(BFItemTagProvider.QUALITY_PRODUCTS)) return;
+        if (!stack.is(BFItemTagsProvider.QUALITY_PRODUCTS)) return;
         int value = random.nextInt(100);
         if (value <= BetterFarmsConfig.netheriteQualityChance.get()) {
             writeQualityToTag(stack, Quality.NETHERITE);
