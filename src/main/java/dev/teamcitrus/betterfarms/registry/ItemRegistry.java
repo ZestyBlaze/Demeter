@@ -46,14 +46,5 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);
     public static final DeferredItem<BlockItem> STRIPPED_MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG);
     public static final DeferredItem<BlockItem> STRIPPED_MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_WOOD);
-    public static final DeferredItem<BlockItem> MAPLE_PLANKS = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_PLANKS);
-    public static final DeferredItem<BlockItem> MAPLE_STAIRS = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_STAIRS);
-    public static final DeferredItem<BlockItem> MAPLE_SLAB = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SLAB);
-    public static final DeferredItem<BlockItem> MAPLE_FENCE = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_FENCE);
-    public static final DeferredItem<BlockItem> MAPLE_FENCE_GATE = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_FENCE_GATE);
-    public static final DeferredItem<BlockItem> MAPLE_DOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_DOOR);
-    public static final DeferredItem<BlockItem> MAPLE_TRAPDOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_TRAPDOOR);
-    public static final DeferredItem<BlockItem> MAPLE_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_PRESSURE_PLATE);
-    public static final DeferredItem<BlockItem> MAPLE_BUTTON = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_BUTTON);
     public static final DeferredItem<BlockItem> MAPLE_LEAVES = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LEAVES);
 }

@@ -1,7 +1,7 @@
 package dev.teamcitrus.betterfarms.event;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
-import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagProvider;
+import dev.teamcitrus.betterfarms.datagen.provider.BFItemTagsProvider;
 import dev.teamcitrus.betterfarms.quality.Quality;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.FluidRegistry;
@@ -122,7 +122,7 @@ public class ItemEvents {
 
     @SubscribeEvent
     public static void changeTooltipEvent(ItemTooltipEvent event) {
-        if (event.getItemStack().is(BFItemTagProvider.QUALITY_PRODUCTS)) {
+        if (event.getItemStack().is(BFItemTagsProvider.QUALITY_PRODUCTS)) {
             ItemStack itemStack = event.getItemStack();
             if (QualityUtil.getQualityNumber(itemStack) == 0) return;
             Quality quality = QualityUtil.getQuality(itemStack);

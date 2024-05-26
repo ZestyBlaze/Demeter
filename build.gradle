@@ -60,7 +60,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation "com.github.TeamCitrusMods:CitrusLib:1.0.1"
+    implementation "com.github.TeamCitrusMods:CitrusLib:${citrus_lib_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {

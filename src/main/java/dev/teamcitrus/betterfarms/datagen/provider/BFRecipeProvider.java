@@ -2,15 +2,16 @@ package dev.teamcitrus.betterfarms.datagen.provider;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.registry.ItemRegistry;
+import dev.teamcitrus.betterfarms.registry.WoodSetRegistry;
+import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class BFRecipeProvider extends RecipeProvider {
+public class BFRecipeProvider extends CitrusRecipeProvider {
     public BFRecipeProvider(PackOutput pOutput) {
         super(pOutput);
     }
@@ -25,8 +26,12 @@ public class BFRecipeProvider extends RecipeProvider {
                 .save(pRecipeOutput, BetterFarms.id("bf_bucket_to_bottles"));
 
         ShapelessRecipeBuilder.shapeless(
-                RecipeCategory.BUILDING_BLOCKS,
-                ItemRegistry.MAPLE_PLANKS, 4
-        ).requires(Ingredient.of(ItemRegistry.MAPLE_LOG)).unlockedBy("has_item", has(ItemRegistry.MAPLE_LOG)).save(pRecipeOutput);
+                RecipeCategory.BUILDING_BLOCKS, WoodSetRegistry.MAPLE.getPlanks(), 4
+        ).requires(ItemRegistry.MAPLE_LOG)
+                .group("planks")
+                .unlockedBy("has_item", has(ItemRegistry.MAPLE_LOG))
+                .save(pRecipeOutput);
+
+        generateWoodSetRecipes(pRecipeOutput, WoodSetRegistry.MAPLE);
     }
 }

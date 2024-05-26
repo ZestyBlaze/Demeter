@@ -3,21 +3,15 @@ package dev.teamcitrus.betterfarms.datagen;
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.datagen.provider.*;
 import dev.teamcitrus.betterfarms.datagen.provider.lang.EnUsProvider;
-import net.minecraft.DetectedVersion;
+import dev.teamcitrus.citruslib.util.DatagenUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.metadata.PackMetadataGenerator;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraft.util.InclusiveRange;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = BetterFarms.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -36,18 +30,14 @@ public class BFDatagen {
         gen.addProvider(event.includeServer(), new BFAdvancementProvider(output, provider, helper));
         gen.addProvider(event.includeServer(), BFLootProvider.create(output));
 
-        BFBlockTagProvider blockTags = new BFBlockTagProvider(output, provider, helper);
+        BFBlockTagsProvider blockTags = new BFBlockTagsProvider(output, provider, helper);
         gen.addProvider(event.includeServer(), blockTags);
-        gen.addProvider(event.includeServer(), new BFItemTagProvider(output, provider, blockTags.contentsGetter(), helper));
+        gen.addProvider(event.includeServer(), new BFItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
         gen.addProvider(event.includeServer(), new BFRecipeProvider(output));
         gen.addProvider(event.includeServer(), new BFLootModifierProvider(output));
 
         gen.addProvider(event.includeClient(), new EnUsProvider(output));
 
-        gen.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(
-                Component.literal("Resources for BetterFarms"),
-                DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA),
-                Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE))
-        )));
+        gen.addProvider(true, DatagenUtils.makeMetadataFile(output, BetterFarms.MODID));
     }
 }
