@@ -1,9 +1,0 @@
-{
-  "type": "betterfarms:quality_drops",
-  "conditions": [
-    {
-      "block": "minecraft:wheat",
-      "condition": "minecraft:block_state_property"
-    }
-  ]
-}

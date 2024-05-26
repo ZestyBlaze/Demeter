@@ -1,0 +1,26 @@
+// 1.20.4	2024-05-26T18:48:36.316263	Tags for minecraft:block mod id demeter
+de60222834d329d100d0303ece8b17a0f31f05f4 data/demeter/tags/blocks/maple_logs.json
+ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/forge/tags/blocks/fence_gates/wooden.json
+e531adfb3f84edf4cf80e7b452929446960b5b40 data/minecraft/tags/blocks/buttons.json
+796a959b6265e6cdbb0433009b01543558525cdf data/minecraft/tags/blocks/completes_find_tree_tutorial.json
+b1ac3a8bf5cd14ce8aa0dd524d316eaf2611b02a data/minecraft/tags/blocks/doors.json
+a149eefd2ea6ed82e35b58fcd04f8df6214797bb data/minecraft/tags/blocks/fences.json
+ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/minecraft/tags/blocks/fence_gates.json
+d742d01b1fa66c8ecc03d106fa006dc362dc2460 data/minecraft/tags/blocks/leaves.json
+de60222834d329d100d0303ece8b17a0f31f05f4 data/minecraft/tags/blocks/logs.json
+de60222834d329d100d0303ece8b17a0f31f05f4 data/minecraft/tags/blocks/logs_that_burn.json
+4fafd93909305e76b94ad205a07138266650918d data/minecraft/tags/blocks/mineable/axe.json
+d742d01b1fa66c8ecc03d106fa006dc362dc2460 data/minecraft/tags/blocks/mineable/hoe.json
+796a959b6265e6cdbb0433009b01543558525cdf data/minecraft/tags/blocks/overworld_natural_logs.json
+1434f4bd366f5b1ef9002139fdfe58bbdf7d820b data/minecraft/tags/blocks/planks.json
+1d13ca738340dd301d6a2f7c767853b9a130581f data/minecraft/tags/blocks/pressure_plates.json
+72438a42782112ca961e5a6676285a9a7ed42679 data/minecraft/tags/blocks/slabs.json
+42693b0a38bc02170b7660869989ee87e8d85907 data/minecraft/tags/blocks/stairs.json
+9fcf705814b292c1581df9b754f8192438042d88 data/minecraft/tags/blocks/trapdoors.json
+e531adfb3f84edf4cf80e7b452929446960b5b40 data/minecraft/tags/blocks/wooden_buttons.json
+b1ac3a8bf5cd14ce8aa0dd524d316eaf2611b02a data/minecraft/tags/blocks/wooden_doors.json
+a149eefd2ea6ed82e35b58fcd04f8df6214797bb data/minecraft/tags/blocks/wooden_fences.json
+1d13ca738340dd301d6a2f7c767853b9a130581f data/minecraft/tags/blocks/wooden_pressure_plates.json
+72438a42782112ca961e5a6676285a9a7ed42679 data/minecraft/tags/blocks/wooden_slabs.json
+42693b0a38bc02170b7660869989ee87e8d85907 data/minecraft/tags/blocks/wooden_stairs.json
+9fcf705814b292c1581df9b754f8192438042d88 data/minecraft/tags/blocks/wooden_trapdoors.json

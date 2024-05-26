@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "betterfarms:block/maple_log_top",
-    "side": "betterfarms:block/maple_log_syrup"
-  }
-}

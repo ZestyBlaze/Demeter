@@ -1,9 +1,0 @@
-{
-  "type": "betterfarms:quality_drops",
-  "conditions": [
-    {
-      "block": "minecraft:carrots",
-      "condition": "minecraft:block_state_property"
-    }
-  ]
-}

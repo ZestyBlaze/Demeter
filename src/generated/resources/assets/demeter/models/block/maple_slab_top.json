@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "demeter:block/maple_planks",
+    "side": "demeter:block/maple_planks",
+    "top": "demeter:block/maple_planks"
+  }
+}
