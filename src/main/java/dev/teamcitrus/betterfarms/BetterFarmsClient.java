@@ -4,9 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
 import dev.teamcitrus.betterfarms.registry.ItemRegistry;
 import dev.teamcitrus.betterfarms.util.QualityUtil;
-import net.minecraft.client.Minecraft;
+import dev.teamcitrus.citruslib.util.ScreenUtil;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -26,15 +25,11 @@ public class BetterFarmsClient {
     }
 
     public static void renderIcon(GuiGraphics guiGraphics, ItemStack stack, int xOffset, int yOffset) {
-        if (!isItemMouseCarried(stack)) {
+        if (!ScreenUtil.isItemInHand(stack)) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
             guiGraphics.blit(BetterFarms.id("textures/item/quality/" + QualityUtil.getQuality(stack).getName() + ".png"), xOffset, yOffset, 200, 0, 0, 16, 16, 16, 16);
             poseStack.popPose();
         }
-    }
-
-    private static boolean isItemMouseCarried(ItemStack stack) {
-        return Minecraft.getInstance().screen instanceof AbstractContainerScreen<?> containerScreen && containerScreen.getMenu().getCarried() == stack;
     }
 }

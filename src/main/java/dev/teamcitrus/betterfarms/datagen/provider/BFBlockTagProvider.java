@@ -2,6 +2,7 @@ package dev.teamcitrus.betterfarms.datagen.provider;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
+import dev.teamcitrus.betterfarms.registry.WoodSetRegistry;
 import dev.teamcitrus.citruslib.datagen.CitrusBlockTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -34,6 +35,6 @@ public class BFBlockTagProvider extends CitrusBlockTagProvider {
         tag(BlockTags.MINEABLE_WITH_AXE).add(BlockRegistry.MAPLE_LOG.get(), BlockRegistry.MAPLE_WOOD.get(),
                 BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.STRIPPED_MAPLE_WOOD.get());
         tag(BlockTags.MINEABLE_WITH_HOE).add(BlockRegistry.MAPLE_LEAVES.get());
-        generateWoodTags(BlockRegistry.MAPLE);
+        generateSetTags(WoodSetRegistry.MAPLE);
     }
 }

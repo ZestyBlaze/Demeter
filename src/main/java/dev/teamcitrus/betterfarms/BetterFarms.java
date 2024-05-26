@@ -24,15 +24,16 @@ public class BetterFarms {
     public static final Logger LOGGER = LogManager.getLogger("BetterFarms");
 
     public BetterFarms(IEventBus bus) {
+        BlockRegistry.BLOCKS.register(bus);
         ItemRegistry.ITEMS.register(bus);
         ItemRegistry.CREATIVE_MODE_TABS.register(bus);
-        BlockRegistry.BLOCKS.register(bus);
         FluidRegistry.FLUIDS.register(bus);
         FluidTypeRegistry.FLUID_TYPES.register(bus);
         LootModifierRegistry.LOOT_MODIFIERS.register(bus);
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, BetterFarmsConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BetterFarmsConfig.GENERAL_SPEC);
+        WoodSetRegistry.init();
         bus.register(this);
 
         if (ModUtils.isDevelopmentEnvironment()) {

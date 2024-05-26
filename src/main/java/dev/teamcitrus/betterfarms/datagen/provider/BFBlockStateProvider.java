@@ -2,11 +2,12 @@ package dev.teamcitrus.betterfarms.datagen.provider;
 
 import dev.teamcitrus.betterfarms.BetterFarms;
 import dev.teamcitrus.betterfarms.registry.BlockRegistry;
+import dev.teamcitrus.betterfarms.registry.WoodSetRegistry;
+import dev.teamcitrus.citruslib.datagen.CitrusBlockModelProvider;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-public class BFBlockStateProvider extends BlockStateProvider {
+public class BFBlockStateProvider extends CitrusBlockModelProvider {
     public BFBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, BetterFarms.MODID, exFileHelper);
     }
@@ -27,6 +28,7 @@ public class BFBlockStateProvider extends BlockStateProvider {
         pressurePlateBlock(BlockRegistry.MAPLE_PRESSURE_PLATE.get(), blockTexture(BlockRegistry.MAPLE_PLANKS.get()));
         buttonBlock(BlockRegistry.MAPLE_BUTTON.get(), blockTexture(BlockRegistry.MAPLE_PLANKS.get()));
          */
+        generateSetModels(WoodSetRegistry.MAPLE);
         simpleBlock(BlockRegistry.MAPLE_LEAVES.get(), models().cubeAll("maple_leaves", BetterFarms.id("block/maple_leaves")).renderType("cutout"));
     }
 }
