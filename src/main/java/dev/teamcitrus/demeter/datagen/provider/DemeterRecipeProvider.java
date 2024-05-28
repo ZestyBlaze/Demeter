@@ -11,7 +11,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public class DemeterRecipeProvider extends CitrusRecipeProvider {
     public DemeterRecipeProvider(PackOutput pOutput) {
@@ -23,7 +22,7 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
         ShapelessRecipeBuilder.shapeless(
                 RecipeCategory.FOOD,
                 ItemRegistry.MILK_BOTTLE, 3
-        ).requires(Ingredient.of(Items.MILK_BUCKET)).requires(Ingredient.of(Items.GLASS_BOTTLE), 3)
+        ).requires(Items.MILK_BUCKET).requires(Items.GLASS_BOTTLE, 3)
                 .unlockedBy("has_item", has(Items.MILK_BUCKET))
                 .save(pRecipeOutput, Demeter.id("bf_bucket_to_bottles"));
 
@@ -50,6 +49,12 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                 .pattern("##")
                 .group("bark")
                 .unlockedBy("has_item", has(BlockRegistry.STRIPPED_MAPLE_LOG))
+                .save(pRecipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(
+                RecipeCategory.MISC, ItemRegistry.ANIMAL_TAG
+        ).requires(Items.PAPER).requires(Items.INK_SAC)
+                .unlockedBy("has_item", has(Items.PAPER))
                 .save(pRecipeOutput);
 
         generateWoodSetRecipes(pRecipeOutput, WoodSetRegistry.MAPLE);
