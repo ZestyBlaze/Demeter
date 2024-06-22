@@ -1,4 +1,5 @@
 {
   "entity": "minecraft:cat",
+  "activity": "nocturnal",
   "daysPregnant": 5
 }

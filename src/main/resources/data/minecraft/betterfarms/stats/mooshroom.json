@@ -1,4 +1,5 @@
 {
   "entity": "minecraft:mooshroom",
+  "activity": "diurnal",
   "daysPregnant": 11
 }

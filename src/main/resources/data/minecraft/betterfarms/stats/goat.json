@@ -1,4 +1,5 @@
 {
   "entity": "minecraft:goat",
+  "activity": "diurnal",
   "daysPregnant": 7
 }

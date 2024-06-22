@@ -1,4 +1,5 @@
 {
   "entity": "minecraft:panda",
+  "activity": "diurnal",
   "daysPregnant": 12
 }

@@ -9,12 +9,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.List;
 import java.util.Optional;
 
-public record AnimalStats(EntityType<?> entity,
+public record AnimalStats(EntityType<?> entity, Activity activity,
         int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth,
         Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking
 ) implements IStats {
     public static final Codec<AnimalStats> CODEC = RecordCodecBuilder.create(func -> func.group(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(AnimalStats::entity),
+            Activity.CODEC.fieldOf("activity").forGetter(AnimalStats::activity),
             Codec.INT.optionalFieldOf("daysPregnant", 0).forGetter(AnimalStats::daysPregnant),
             Codec.INT.optionalFieldOf("daysToGrowUp", 0).forGetter(AnimalStats::daysToGrowUp),
             Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(AnimalStats::minChildrenPerBirth),

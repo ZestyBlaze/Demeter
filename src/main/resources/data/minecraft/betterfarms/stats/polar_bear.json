@@ -1,4 +1,5 @@
 {
   "entity": "minecraft:polar_bear",
+  "activity": "diurnal",
   "daysPregnant": 14
 }
