@@ -42,6 +42,7 @@ public class AnimalUtil {
             DynamicHolder<AnimalStats> stats = getStats(self);
             int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.get().minChildrenPerBirth(), stats.get().maxChildrenPerBirth());
             birth(self, serverLevel, otherEntity, numberOfTimes);
+            getAnimalData(self).setLove(100);
         } catch (IllegalArgumentException e) {
             Demeter.LOGGER.error(Component.translatable("error.demeter.maxhighermin").getString());
         }
