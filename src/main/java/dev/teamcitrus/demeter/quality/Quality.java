@@ -28,6 +28,6 @@ public enum Quality {
     }
 
     public Component getQualityTooltip() {
-        return Component.translatable("item.betterfarms.quality_tooltip." + getName()).withStyle(getRarity().getStyleModifier());
+        return Component.translatable("item.demeter.quality_tooltip." + getName()).withStyle(getRarity().getStyleModifier());
     }
 }
