@@ -21,6 +21,7 @@
   "block.demeter.stripped_maple_wood": "Stripped Maple Wood",
   "error.demeter.maxhighermin": "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' resulting in the birth failing!",
   "error.demeter.namesloadfail": "Error while loading names",
+  "fluid_type.demeter.milk_fluid": "Milk Fluid",
   "item.demeter.animal_tag": "Animal Tag",
   "item.demeter.brush": "Brush",
   "item.demeter.gender_test": "Gender Test",

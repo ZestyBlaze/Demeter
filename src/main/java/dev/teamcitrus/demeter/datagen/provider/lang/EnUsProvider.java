@@ -4,12 +4,14 @@ import dev.teamcitrus.citruslib.util.DatagenUtils;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.quality.Quality;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
+import dev.teamcitrus.demeter.registry.FluidTypeRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,6 +28,7 @@ public class EnUsProvider extends LanguageProvider {
     protected void addTranslations() {
         Set<DeferredHolder<Block, ? extends Block>> blocks = new HashSet<>(BlockRegistry.BLOCKS.getEntries());
         Set<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ItemRegistry.ITEMS.getEntries());
+        Set<DeferredHolder<FluidType, ? extends FluidType>> fluidTypes = new HashSet<>(FluidTypeRegistry.FLUID_TYPES.getEntries());
         Quality[] qualities = Quality.values();
 
         DatagenUtils.takeAll(items, i -> i.get() instanceof BlockItem);
@@ -53,6 +56,11 @@ public class EnUsProvider extends LanguageProvider {
         });
         items.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("item\\.demeter\\.", "");
+            name = DatagenUtils.toTitleCase(name, "_");
+            add(i.get().getDescriptionId(), name);
+        });
+        fluidTypes.forEach(i -> {
+            String name = i .get().getDescriptionId().replaceFirst("fluid_type\\.demeter\\.", "");
             name = DatagenUtils.toTitleCase(name, "_");
             add(i.get().getDescriptionId(), name);
         });
