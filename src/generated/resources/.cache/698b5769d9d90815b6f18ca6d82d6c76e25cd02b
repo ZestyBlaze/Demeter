@@ -1,6 +1,6 @@
-// 1.20.4	2024-05-26T18:48:36.3152644	Tags for minecraft:item mod id demeter
+// 1.20.4	2024-06-22T13:45:11.8459484	Tags for minecraft:item mod id demeter
 de60222834d329d100d0303ece8b17a0f31f05f4 data/demeter/tags/items/maple_logs.json
-235a8233602fe0b69634ba269bd05711b4f264a1 data/demeter/tags/items/quality_products.json
+80a3e4d8167a6dc0848c0de5209b430ab41aad0b data/demeter/tags/items/quality_products.json
 ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/forge/tags/items/fence_gates/wooden.json
 e531adfb3f84edf4cf80e7b452929446960b5b40 data/minecraft/tags/items/buttons.json
 796a959b6265e6cdbb0433009b01543558525cdf data/minecraft/tags/items/completes_find_tree_tutorial.json

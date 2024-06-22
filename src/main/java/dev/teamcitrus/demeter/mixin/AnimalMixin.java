@@ -11,6 +11,7 @@ import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.IStats;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
+import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -81,7 +82,8 @@ public class AnimalMixin {
             return;
         }
 
-        ItemStack result = ItemUtils.createFilledResult(stack, pPlayer, milking.output().getDefaultInstance());
+        ItemStack output = QualityUtil.randomiseQuality(milking.output().getDefaultInstance());
+        ItemStack result = ItemUtils.createFilledResult(stack, pPlayer, output);
         ServerPlayer serverPlayer = (ServerPlayer)pPlayer;
         serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.COW_MILK), SoundSource.PLAYERS, better_Fauna$animal.getX(), better_Fauna$animal.getY(), better_Fauna$animal.getZ(), 1.0f, 1.0f, 0));
         pPlayer.setItemInHand(pHand, result);
