@@ -1,20 +1,19 @@
 package dev.teamcitrus.demeter.event;
 
+import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.data.AnimalStats;
+import dev.teamcitrus.demeter.data.IStats;
+import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
@@ -26,18 +25,22 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.SleepingTimeCheckEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 @Mod.EventBusSubscriber(modid = Demeter.MODID)
 public class EntityEvents {
     @SubscribeEvent
     public static void onEntityAdded(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Animal animal)) return;
+        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(animal);
+        if (stats.isBound() && stats.get().activity().equals(IStats.Activity.DIURNAL)) {
+        }
         if (!event.loadedFromDisk()) {
             animal.getData(AttachmentRegistry.ANIMAL).setGender(
                     AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)]
             );
             if (AnimalUtil.statsContains(animal)) {
-                if (AnimalUtil.getStats(animal).get().milking().isPresent()) {
+                if (stats.get().milking().isPresent()) {
                     animal.getData(AttachmentRegistry.MILK);
                 }
             }
@@ -74,10 +77,7 @@ public class EntityEvents {
 
         if (event.getCausedByPlayer() == null) return;
         ServerPlayer player = (ServerPlayer)event.getCausedByPlayer();
-        if (DemeterConfig.animalBirthAlert.get()) {
-            player.sendSystemMessage(Component.translatable("message.demeter.baby_spawned").withStyle(ChatFormatting.GREEN), true);
-            player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.AMETHYST_BLOCK_CHIME), SoundSource.AMBIENT, player.getX(), player.getY(), player.getZ(), 1.0f, 1.0f, 0));
-        }
+        PacketDistributor.PLAYER.with(player).send(new BirthNotificationPacket());
     }
 
     @SubscribeEvent

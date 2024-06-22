@@ -1,10 +1,12 @@
 package dev.teamcitrus.demeter;
 
+import dev.teamcitrus.citruslib.network.PayloadHelper;
+import dev.teamcitrus.citruslib.util.ModUtils;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.NamesLoader;
 import dev.teamcitrus.demeter.data.StatsRegistry;
+import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.*;
-import dev.teamcitrus.citruslib.util.ModUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -51,6 +53,7 @@ public class Demeter {
     @SubscribeEvent
     public void setup(FMLCommonSetupEvent event) {
         StatsRegistry.INSTANCE.registerToBus();
+        PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
     }
 
     public static ResourceLocation id(String name) {
