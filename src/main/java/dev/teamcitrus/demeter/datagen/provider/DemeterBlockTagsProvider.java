@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.datagen.provider;
 
+import dev.teamcitrus.citruslib.datagen.CitrusBlockTagsProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.WoodSetRegistry;
-import dev.teamcitrus.citruslib.datagen.CitrusBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;

@@ -1,10 +1,10 @@
 package dev.teamcitrus.demeter.datagen.provider.lang;
 
+import dev.teamcitrus.citruslib.util.DatagenUtils;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.quality.Quality;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
-import dev.teamcitrus.citruslib.util.DatagenUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

@@ -2,9 +2,9 @@ package dev.teamcitrus.demeter.attachment;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.util.AnimalUtil;
-import dev.teamcitrus.citruslib.event.NewDayEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
 import org.jetbrains.annotations.Nullable;

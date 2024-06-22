@@ -1,10 +1,10 @@
 package dev.teamcitrus.demeter;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.teamcitrus.citruslib.util.ScreenUtil;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;
-import dev.teamcitrus.citruslib.util.ScreenUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;

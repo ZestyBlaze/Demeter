@@ -1,8 +1,8 @@
 package dev.teamcitrus.demeter.item.dev;
 
+import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.StatsRegistry;
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

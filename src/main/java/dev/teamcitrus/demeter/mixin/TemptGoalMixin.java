@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.util.AnimalUtil;
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.TemptGoal;

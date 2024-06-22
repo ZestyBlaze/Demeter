@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.registry;
 
-import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.citruslib.fluid.CommonFluidType;
+import dev.teamcitrus.demeter.Demeter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.common.SoundActions;

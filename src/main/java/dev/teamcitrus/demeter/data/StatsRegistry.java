@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.data;
 
-import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.citruslib.reload.DynamicRegistry;
+import dev.teamcitrus.demeter.Demeter;
 
 public class StatsRegistry extends DynamicRegistry<IStats> {
     public static final StatsRegistry INSTANCE = new StatsRegistry();

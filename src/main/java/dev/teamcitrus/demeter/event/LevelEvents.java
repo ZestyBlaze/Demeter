@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.event;
 
+import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
-import dev.teamcitrus.citruslib.event.NewDayEvent;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;

@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.datagen;
 
+import dev.teamcitrus.citruslib.util.DatagenUtils;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.datagen.provider.*;
 import dev.teamcitrus.demeter.datagen.provider.lang.EnUsProvider;
-import dev.teamcitrus.citruslib.util.DatagenUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;

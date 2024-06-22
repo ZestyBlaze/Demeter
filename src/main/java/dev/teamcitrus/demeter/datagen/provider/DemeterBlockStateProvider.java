@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.datagen.provider;
 
+import dev.teamcitrus.citruslib.datagen.CitrusBlockStateProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.WoodSetRegistry;
-import dev.teamcitrus.citruslib.datagen.CitrusBlockStateProvider;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 

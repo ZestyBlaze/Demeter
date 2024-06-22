@@ -1,10 +1,10 @@
 package dev.teamcitrus.demeter.datagen.provider;
 
+import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import dev.teamcitrus.demeter.registry.WoodSetRegistry;
-import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;

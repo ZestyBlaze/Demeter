@@ -1,11 +1,11 @@
 package dev.teamcitrus.demeter.util;
 
+import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.StatsRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
