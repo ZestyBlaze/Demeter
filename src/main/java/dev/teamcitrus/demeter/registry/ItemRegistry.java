@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.registry;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.item.AnimalTagItem;
+import dev.teamcitrus.demeter.item.BrushItem;
 import dev.teamcitrus.demeter.item.MilkBottleItem;
 import dev.teamcitrus.demeter.item.dev.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -41,6 +42,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> REGISTRY_ITEM = DEV_ITEMS.register("registry_test", RegistryTestItem::new);
 
     public static final DeferredItem<Item> ANIMAL_TAG = ITEMS.register("animal_tag", AnimalTagItem::new);
+    public static final DeferredItem<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);

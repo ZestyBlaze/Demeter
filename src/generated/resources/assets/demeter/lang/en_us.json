@@ -22,6 +22,7 @@
   "error.demeter.maxhighermin": "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' resulting in the birth failing!",
   "error.demeter.namesloadfail": "Error while loading names",
   "item.demeter.animal_tag": "Animal Tag",
+  "item.demeter.brush": "Brush",
   "item.demeter.gender_test": "Gender Test",
   "item.demeter.love_checker": "Love Checker",
   "item.demeter.milk_bottle": "Milk Bottle",
