@@ -29,3 +29,10 @@ config="${mod_id}.mixins.json"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="citruslib"
+    type="required"
+    versionRange="[1.2.0,2.0.0)"
+    ordering="NONE"
+    side="BOTH"

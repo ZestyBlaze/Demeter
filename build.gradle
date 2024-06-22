@@ -26,6 +26,8 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+jarJar.enable()
+
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 
 runs {
@@ -60,7 +62,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation "com.github.TeamCitrusMods:CitrusLib:${citrus_lib_version}"
+    implementation jarJar ("com.github.TeamCitrusMods:CitrusLib:${citrus_lib_version}")
 }
 
 tasks.withType(ProcessResources).configureEach {
