@@ -41,13 +41,13 @@ public class AnimalUtil {
         try {
             DynamicHolder<AnimalStats> stats = getStats(self);
             int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.get().minChildrenPerBirth(), stats.get().maxChildrenPerBirth());
-            breedMultiple(self, serverLevel, otherEntity, numberOfTimes);
+            birth(self, serverLevel, otherEntity, numberOfTimes);
         } catch (IllegalArgumentException e) {
             Demeter.LOGGER.error(Component.translatable("error.demeter.maxhighermin").getString());
         }
     }
 
-    public static void breedMultiple(Animal self, ServerLevel serverLevel, Animal otherEntity, int maxChildren) {
+    public static void birth(Animal self, ServerLevel serverLevel, Animal otherEntity, int maxChildren) {
         for (int i = 0; i < serverLevel.random.nextInt(maxChildren) + 1; i++) {
             self.spawnChildFromBreeding(serverLevel, otherEntity);
         }

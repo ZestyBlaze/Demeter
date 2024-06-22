@@ -52,7 +52,7 @@ public class AnimalAttachment {
      */
     public void onNewDay(Animal self) {
         if (!hasBeenPetToday || !hasBeenFedToday) {
-            alterLoveForKeeper(-2);
+            alterLove(-2);
         }
 
         if (isPregnant) {
@@ -92,7 +92,7 @@ public class AnimalAttachment {
      * Method will auto-cap at values above 100 or below 0
      * @param value Can be positive to increase or negative to decrease
      */
-    public void alterLoveForKeeper(int value) {
+    public void alterLove(int value) {
         if ((love += value) > 100) {
             this.love = 100;
             return;
