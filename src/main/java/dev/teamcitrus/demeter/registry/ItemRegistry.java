@@ -31,7 +31,7 @@ public class ItemRegistry {
     private static final DeferredHolder<CreativeModeTab, CreativeModeTab> DEV_ITEMS_TAB = DEV_TABS.register("betterfarms_dev", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.demeter.dev"))
             .icon(Items.COMMAND_BLOCK::getDefaultInstance)
-            .displayItems(((pParameters, pOutput) -> ItemRegistry.DEV_ITEMS.getEntries().forEach(item -> pOutput.accept(item.get()))))
+            .displayItems((pParameters, pOutput) -> ItemRegistry.DEV_ITEMS.getEntries().forEach(item -> pOutput.accept(item.get())))
             .build()
     );
 
