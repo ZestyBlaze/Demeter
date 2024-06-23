@@ -2,20 +2,27 @@ package dev.teamcitrus.demeter.attachment;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.util.AnimalUtil;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.Level;
 
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.INT.fieldOf("loveForKeeper").forGetter(o -> o.love),
+            Codec.INT.fieldOf("love").forGetter(o -> o.love),
+            Codec.INT.fieldOf("daysSinceFed").forGetter(o -> o.daysSinceFed),
             Codec.BOOL.fieldOf("hasBeenPetToday").forGetter(o -> o.hasBeenPetToday),
             Codec.BOOL.fieldOf("hasBeenFedToday").forGetter(o -> o.hasBeenFedToday),
-            Codec.STRING.fieldOf("gender").forGetter(o -> o.gender.getId()),
-            Codec.BOOL.fieldOf("isPregnant").forGetter(o -> o.isPregnant)
+            AnimalGenders.CODEC.fieldOf("gender").forGetter(o -> o.gender),
+            Codec.BOOL.fieldOf("isPregnant").forGetter(o -> o.isPregnant),
+            Codec.INT.fieldOf("daysLeftUntilBirth").forGetter(o -> o.daysLeftUntilBirth),
+            BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("otherParent").forGetter(o -> o.otherParent),
+            Codec.INT.fieldOf("daysLeftUntilGrown").forGetter(o -> o.daysLeftUntilGrown)
     ).apply(instance, AnimalAttachment::new));
 
     // Animal Life Variables
@@ -28,21 +35,28 @@ public class AnimalAttachment {
     // Pregnancy Variables
     private boolean isPregnant;
     private int daysLeftUntilBirth;
-    private Animal otherParent;
+    private EntityType<?> otherParent;
 
     // Growing Variables
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this(0, false, false, AnimalGenders.MALE.getId(), false);
+        this(0, 0, false, false, AnimalGenders.MALE,
+                false, 0, EntityType.COW, 0);
     }
 
-    public AnimalAttachment(int love, boolean hasBeenPetToday, boolean hasBeenFedToday, String gender, boolean isPregnant) {
+    public AnimalAttachment(int love, int daysSinceFed, boolean hasBeenPetToday, boolean hasBeenFedToday,
+                            AnimalGenders gender, boolean isPregnant, int daysLeftUntilBirth,
+                            EntityType<?> otherParent, int daysLeftUntilGrown) {
         this.love = love;
+        this.daysSinceFed = daysSinceFed;
         this.hasBeenPetToday = hasBeenPetToday;
         this.hasBeenFedToday = hasBeenFedToday;
-        this.gender = AnimalGenders.getGender(gender);
+        this.gender = gender;
         this.isPregnant = isPregnant;
+        this.daysLeftUntilBirth = daysLeftUntilBirth;
+        this.otherParent = otherParent;
+        this.daysLeftUntilGrown = daysLeftUntilGrown;
     }
 
     /**
@@ -58,9 +72,13 @@ public class AnimalAttachment {
         if (isPregnant) {
             daysLeftUntilBirth--;
             if (daysLeftUntilBirth <= 0) {
-                AnimalUtil.handleBirth(self, (ServerLevel)self.level(), otherParent);
-                this.isPregnant = false;
-                this.otherParent = null;
+                Level level = self.level();
+                Animal parent = (Animal) otherParent.create(level);
+                if (parent != null) {
+                    AnimalUtil.handleBirth(self, (ServerLevel) self.level(), parent);
+                    this.isPregnant = false;
+                    this.otherParent = parent.getType();
+                }
             }
         }
 
@@ -88,7 +106,7 @@ public class AnimalAttachment {
     }
 
     /**
-     * Allows for altering the love value without hard setting the values
+     * Allows for altering the love value without hard setting the values.
      * Method will auto-cap at values above 100 or below 0
      * @param value Can be positive to increase or negative to decrease
      */
@@ -118,6 +136,9 @@ public class AnimalAttachment {
 
     public void setHasBeenFedToday(boolean hasBeenFedToday) {
         this.hasBeenFedToday = hasBeenFedToday;
+        if (hasBeenFedToday) {
+            daysSinceFed = 0;
+        }
     }
 
     public void setDaysLeftUntilGrown(int daysLeftUntilGrown) {
@@ -129,9 +150,9 @@ public class AnimalAttachment {
      * @param value Whether an animal is becoming pregnant or not
      * @param otherParent The other parents other than the self, can be null
      */
-    public void setPregnant(Animal animal, boolean value, @Nullable Animal otherParent) {
+    public void setPregnant(Animal animal, boolean value, Animal otherParent) {
         this.isPregnant = value;
-        this.otherParent = otherParent;
+        this.otherParent = otherParent.getType();
         if (value) {
             this.daysLeftUntilBirth = AnimalUtil.getStats(animal).get().daysPregnant();
         }
@@ -150,24 +171,8 @@ public class AnimalAttachment {
     }
 
     public enum AnimalGenders {
-        MALE("male"), FEMALE("female");
+        MALE, FEMALE;
 
-        private final String id;
-
-        AnimalGenders(String name) {
-            this.id = name;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public static AnimalGenders getGender(String id) {
-            if (id.equals(FEMALE.getId())) {
-                return FEMALE;
-            } else {
-                return MALE;
-            }
-        }
+        public static final Codec<AnimalGenders> CODEC = CitrusCodecs.enumCodec(AnimalGenders.class);
     }
 }
