@@ -49,7 +49,7 @@ public class AnimalUtil {
     }
 
     public static void birth(Animal self, ServerLevel serverLevel, Animal otherEntity, int maxChildren) {
-        for (int i = 0; i < serverLevel.random.nextInt(maxChildren) + 1; i++) {
+        for (int i = 0; i < maxChildren; i++) {
             self.spawnChildFromBreeding(serverLevel, otherEntity);
         }
     }
