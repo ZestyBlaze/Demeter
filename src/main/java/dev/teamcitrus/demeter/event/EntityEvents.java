@@ -47,7 +47,7 @@ public class EntityEvents {
         if (event.getTarget() instanceof Animal animal) {
             if (event.getLevel().isClientSide()) return;
             if (animal.getData(AttachmentRegistry.ANIMAL).hasBeenPetToday()) return;
-            ServerLevel level = (ServerLevel)event.getLevel();
+            ServerLevel level = (ServerLevel) event.getLevel();
             Player player = event.getEntity();
             if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()) return;
             if (!player.isCrouching()) return;
@@ -71,7 +71,7 @@ public class EntityEvents {
         }
 
         if (event.getCausedByPlayer() == null) return;
-        ServerPlayer player = (ServerPlayer)event.getCausedByPlayer();
+        ServerPlayer player = (ServerPlayer) event.getCausedByPlayer();
         PacketDistributor.PLAYER.with(player).send(new BirthNotificationPacket());
     }
 

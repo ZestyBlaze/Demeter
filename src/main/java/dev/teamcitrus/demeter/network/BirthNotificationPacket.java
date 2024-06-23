@@ -22,7 +22,8 @@ public class BirthNotificationPacket implements CustomPacketPayload {
     public static final ResourceLocation ID = Demeter.id("notify_birth");
 
     @Override
-    public void write(FriendlyByteBuf friendlyByteBuf) {}
+    public void write(FriendlyByteBuf friendlyByteBuf) {
+    }
 
     @Override
     public ResourceLocation id() {

@@ -12,7 +12,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
-@Mod.EventBusSubscriber(modid = Demeter.MODID, bus = Mod.EventBusSubscriber.Bus.MOD ,value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Demeter.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
     @SubscribeEvent
     public static void registerColors(RegisterColorHandlersEvent.Block event) {

@@ -15,12 +15,19 @@ import java.util.Optional;
 
 public interface IStats extends CodecProvider<IStats> {
     EntityType<?> entity();
+
     Activity activity();
+
     int daysPregnant();
+
     int daysToGrowUp();
+
     int minChildrenPerBirth();
+
     int maxChildrenPerBirth();
+
     Optional<List<Ingredient>> breedingItems();
+
     Optional<MilkingCodec> milking();
 
     enum Activity {

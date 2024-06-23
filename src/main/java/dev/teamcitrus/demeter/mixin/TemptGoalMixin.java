@@ -16,7 +16,9 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(TemptGoal.class)
 public class TemptGoalMixin {
-    @Shadow @Final protected PathfinderMob mob;
+    @Shadow
+    @Final
+    protected PathfinderMob mob;
 
     @ModifyReturnValue(
             method = "shouldFollow",

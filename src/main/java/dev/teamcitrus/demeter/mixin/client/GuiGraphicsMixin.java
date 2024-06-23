@@ -15,7 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuiGraphics.class)
 public class GuiGraphicsMixin {
-    @Shadow @Final private PoseStack pose;
+    @Shadow
+    @Final
+    private PoseStack pose;
 
     @Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"))
     private void betterFarms$renderItemDecorations(Font pFont, ItemStack pStack, int pX, int pY, String pText, CallbackInfo ci) {
@@ -23,7 +25,7 @@ public class GuiGraphicsMixin {
             return;
         }
         pose.popPose();
-        DemeterClient.renderIcon((GuiGraphics)(Object)this, pStack, pX, pY);
+        DemeterClient.renderIcon((GuiGraphics) (Object) this, pStack, pX, pY);
         pose.pushPose();
     }
 }

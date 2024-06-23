@@ -33,7 +33,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 public class ItemEvents {
     @SubscribeEvent
     public static void onItemUsed(PlayerInteractEvent.RightClickBlock event) {
-        if(event.getItemStack().is(Items.MILK_BUCKET)) {
+        if (event.getItemStack().is(Items.MILK_BUCKET)) {
             Player player = event.getEntity();
             Level level = event.getLevel();
             BlockPos clickPos = event.getPos();
@@ -54,7 +54,7 @@ public class ItemEvents {
                 return;
             }
 
-            if(!player.isSecondaryUseActive()) {
+            if (!player.isSecondaryUseActive()) {
                 InteractionResult blockUseResult = state.use(level, player, event.getHand(), event.getHitVec());
                 if (blockUseResult.consumesAction()) {
                     event.setCanceled(true);
@@ -86,7 +86,7 @@ public class ItemEvents {
             Level level = event.getLevel();
             BlockPos clickPos = event.getPos();
             BlockState state = level.getBlockState(clickPos);
-            if(!player.isSecondaryUseActive()) {
+            if (!player.isSecondaryUseActive()) {
                 InteractionResult blockUseResult = state.use(level, player, event.getHand(), event.getHitVec());
                 if (blockUseResult.consumesAction()) {
                     event.setCanceled(true);

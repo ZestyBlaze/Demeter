@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public record AnimalStats(EntityType<?> entity, Activity activity,
-        int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth,
-        Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking
+                          int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth,
+                          Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking
 ) implements IStats {
     public static final Codec<AnimalStats> CODEC = RecordCodecBuilder.create(func -> func.group(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(AnimalStats::entity),

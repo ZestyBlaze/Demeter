@@ -36,13 +36,13 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                     .addCriterion("join_overworld", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRAFTING_TABLE))
                     .save(saver, "demeter:root");
             AdvancementHolder milkPlaced = Advancement.Builder.advancement().parent(root).display(
-                    Items.MILK_BUCKET,
-                    Component.translatable("advancement.demeter.milk_placed"),
-                    Component.translatable("advancement.demeter.milk_placed.desc"),
-                    null,
-                    AdvancementType.TASK,
-                    true, true, true
-            ).addCriterion("milk_placed", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(BlockRegistry.MILK_BLOCK.get()))
+                            Items.MILK_BUCKET,
+                            Component.translatable("advancement.demeter.milk_placed"),
+                            Component.translatable("advancement.demeter.milk_placed.desc"),
+                            null,
+                            AdvancementType.TASK,
+                            true, true, true
+                    ).addCriterion("milk_placed", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(BlockRegistry.MILK_BLOCK.get()))
                     .save(saver, "demeter:milk_placed");
         }
     }
