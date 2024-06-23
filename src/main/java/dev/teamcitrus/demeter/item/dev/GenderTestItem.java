@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Locale;
 
 public class GenderTestItem extends CitrusItem {
     @Override
@@ -19,7 +20,7 @@ public class GenderTestItem extends CitrusItem {
         if (!interactionTarget.level().isClientSide()) {
             if (interactionTarget instanceof Animal animal) {
                 AnimalGenders gender = AnimalUtil.getAnimalData(animal).getGender();
-                player.displayClientMessage(Component.literal("Animal is: " + StringUtils.capitalize(gender.getId())), true);
+                player.displayClientMessage(Component.literal("Animal is: " + StringUtils.capitalize(gender.name().toLowerCase(Locale.ROOT))), true);
                 return InteractionResult.SUCCESS;
             }
         }
