@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.teamcitrus.citruslib.util.ScreenUtil;
+import dev.teamcitrus.citruslib.util.ScreenUtils;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;
@@ -25,7 +25,7 @@ public class DemeterClient {
     }
 
     public static void renderIcon(GuiGraphics guiGraphics, ItemStack stack, int xOffset, int yOffset) {
-        if (!ScreenUtil.isItemInHand(stack)) {
+        if (!ScreenUtils.isItemInHand(stack)) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
             guiGraphics.blit(Demeter.id("textures/item/quality/" + QualityUtil.getQuality(stack).getName() + ".png"), xOffset, yOffset, 200, 0, 0, 16, 16, 16, 16);

@@ -1,6 +1,6 @@
 package dev.teamcitrus.demeter.datagen.provider.lang;
 
-import dev.teamcitrus.citruslib.util.DatagenUtils;
+import dev.teamcitrus.citruslib.util.CollectionUtils;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.quality.Quality;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
@@ -31,7 +31,7 @@ public class EnUsProvider extends LanguageProvider {
         Set<DeferredHolder<FluidType, ? extends FluidType>> fluidTypes = new HashSet<>(FluidTypeRegistry.FLUID_TYPES.getEntries());
         Quality[] qualities = Quality.values();
 
-        DatagenUtils.takeAll(items, i -> i.get() instanceof BlockItem);
+        CollectionUtils.takeAll(items, i -> i.get() instanceof BlockItem);
 
         items.addAll(ItemRegistry.DEV_ITEMS.getEntries());
 
@@ -51,17 +51,17 @@ public class EnUsProvider extends LanguageProvider {
 
         blocks.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("block\\.demeter\\.", "");
-            name = DatagenUtils.toTitleCase(name, "_");
+            name = dev.teamcitrus.citruslib.util.StringUtils.toTitleCase(name, "_");
             add(i.get().getDescriptionId(), name);
         });
         items.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("item\\.demeter\\.", "");
-            name = DatagenUtils.toTitleCase(name, "_");
+            name = dev.teamcitrus.citruslib.util.StringUtils.toTitleCase(name, "_");
             add(i.get().getDescriptionId(), name);
         });
         fluidTypes.forEach(i -> {
-            String name = i .get().getDescriptionId().replaceFirst("fluid_type\\.demeter\\.", "");
-            name = DatagenUtils.toTitleCase(name, "_");
+            String name = i.get().getDescriptionId().replaceFirst("fluid_type\\.demeter\\.", "");
+            name = dev.teamcitrus.citruslib.util.StringUtils.toTitleCase(name, "_");
             add(i.get().getDescriptionId(), name);
         });
         Arrays.stream(qualities).forEach(quality -> add("item.demeter.quality_tooltip." + quality.getName(), StringUtils.capitalize(quality.getName())));

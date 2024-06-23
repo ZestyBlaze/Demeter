@@ -1,5 +1,6 @@
 package dev.teamcitrus.demeter.item.dev;
 
+import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.StatsRegistry;
@@ -11,14 +12,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class RegistryTestItem extends Item {
-    public RegistryTestItem() {
-        super(new Properties());
-    }
-
+public class RegistryTestItem extends CitrusItem {
     /*
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
