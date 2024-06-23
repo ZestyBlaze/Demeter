@@ -36,7 +36,7 @@ public class EntityEvents {
         if (stats.isBound() && stats.get().activity().equals(IStats.Activity.DIURNAL)) {
         }
         if (!event.loadedFromDisk()) {
-            animal.getData(AttachmentRegistry.ANIMAL).setGender(
+            AnimalUtil.getAnimalData(animal).setGender(
                     AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)]
             );
         }
