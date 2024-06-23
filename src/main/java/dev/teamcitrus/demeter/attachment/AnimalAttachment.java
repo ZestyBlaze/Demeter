@@ -101,10 +101,6 @@ public class AnimalAttachment {
         this.hasBeenFedToday = false;
     }
 
-    public void setLove(int love) {
-        this.love = love;
-    }
-
     /**
      * Allows for altering the love value without hard setting the values.
      * Method will auto-cap at values above 100 or below 0
@@ -125,6 +121,10 @@ public class AnimalAttachment {
 
     public int getLove() {
         return love;
+    }
+
+    public void setLove(int love) {
+        this.love = love;
     }
 
     public void setHasBeenPetToday(boolean hasBeenPetToday) {
@@ -164,12 +164,12 @@ public class AnimalAttachment {
         return isPregnant;
     }
 
-    public void setGender(AnimalGenders gender) {
-        this.gender = gender;
-    }
-
     public AnimalGenders getGender() {
         return gender;
+    }
+
+    public void setGender(AnimalGenders gender) {
+        this.gender = gender;
     }
 
     public enum AnimalGenders {

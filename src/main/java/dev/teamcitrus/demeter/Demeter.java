@@ -50,13 +50,13 @@ public class Demeter {
         }
     }
 
+    public static ResourceLocation id(String name) {
+        return new ResourceLocation(MODID, name);
+    }
+
     @SubscribeEvent
     public void setup(FMLCommonSetupEvent event) {
         StatsRegistry.INSTANCE.registerToBus();
         PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
-    }
-
-    public static ResourceLocation id(String name) {
-        return new ResourceLocation(MODID, name);
     }
 }
