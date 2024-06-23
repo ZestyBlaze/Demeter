@@ -39,11 +39,6 @@ public class EntityEvents {
             animal.getData(AttachmentRegistry.ANIMAL).setGender(
                     AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)]
             );
-            if (AnimalUtil.statsContains(animal)) {
-                if (stats.get().milking().isPresent()) {
-                    animal.getData(AttachmentRegistry.MILK);
-                }
-            }
         }
     }
 
