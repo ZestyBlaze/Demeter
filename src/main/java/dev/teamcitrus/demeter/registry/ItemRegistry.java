@@ -22,13 +22,13 @@ public class ItemRegistry {
     public static final DeferredRegister.Items DEV_ITEMS = DeferredRegister.createItems(Demeter.MODID);
     public static final DeferredRegister<CreativeModeTab> DEV_TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, Demeter.MODID);
 
-    private static final DeferredHolder<CreativeModeTab, CreativeModeTab> BETTER_FARMS_TAB = CREATIVE_MODE_TABS.register("betterfarms", () -> CreativeModeTab.builder()
+    private static final DeferredHolder<CreativeModeTab, CreativeModeTab> BETTER_FARMS_TAB = CREATIVE_MODE_TABS.register("demeter", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.demeter"))
             .icon(ItemRegistry.MAPLE_LOG.get()::getDefaultInstance)
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
             .build());
 
-    private static final DeferredHolder<CreativeModeTab, CreativeModeTab> DEV_ITEMS_TAB = DEV_TABS.register("betterfarms_dev", () -> CreativeModeTab.builder()
+    private static final DeferredHolder<CreativeModeTab, CreativeModeTab> DEV_ITEMS_TAB = DEV_TABS.register("demeter_dev", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.demeter.dev"))
             .icon(Items.COMMAND_BLOCK::getDefaultInstance)
             .displayItems((pParameters, pOutput) -> ItemRegistry.DEV_ITEMS.getEntries().forEach(item -> pOutput.accept(item.get())))
