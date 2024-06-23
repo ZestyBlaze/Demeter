@@ -36,7 +36,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Animal.class)
 public class AnimalMixin {
-    @Unique private final Animal better_Fauna$animal = (Animal)(Object)this;
+    @Unique
+    private final Animal demeter$animal = (Animal) (Object) this;
 
     @WrapOperation(
             method = "isFood",
@@ -46,12 +47,12 @@ public class AnimalMixin {
             )
     )
     private boolean betterFarms$isFood(ItemStack stack, Item item, Operation<Boolean> original) {
-        if (!AnimalUtil.statsContains(better_Fauna$animal)) return original.call(stack, item);
-        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(better_Fauna$animal);
+        if (!AnimalUtil.getStats(demeter$animal).isBound()) return original.call(stack, item);
+        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(demeter$animal);
         if (stats.get().breedingItems().isEmpty()) return original.call(stack, item);
         for (Ingredient ingredient : stats.get().breedingItems().get()) {
             if (ingredient.test(stack)) {
-                AnimalUtil.getAnimalData(better_Fauna$animal).setHasBeenFedToday(true);
+                AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
                 return true;
             }
         }
@@ -65,18 +66,18 @@ public class AnimalMixin {
     )
     private void betterFarms$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (pPlayer.level().isClientSide) return;
-        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(better_Fauna$animal);
-        if (!(AnimalUtil.statsContains(better_Fauna$animal) && stats.get().milking().isPresent())) return;
+        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(demeter$animal);
+        if (!(AnimalUtil.getStats(demeter$animal).isBound() && stats.get().milking().isPresent())) return;
         IStats.MilkingCodec milking = stats.get().milking().get();
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
         if (!stack.is(milking.input())) return;
-        if (!AnimalUtil.getGender(better_Fauna$animal).equals(AnimalGenders.FEMALE)) {
+        if (!AnimalUtil.getGender(demeter$animal).equals(AnimalGenders.FEMALE)) {
             pPlayer.displayClientMessage(Component.translatable("message.demeter.milk.fail_gender").withStyle(ChatFormatting.RED), true);
             return;
         }
 
-        MilkAttachment attachment = better_Fauna$animal.getData(AttachmentRegistry.MILK);
+        MilkAttachment attachment = demeter$animal.getData(AttachmentRegistry.MILK);
         if (attachment.getHasBeenMilked()) {
             pPlayer.displayClientMessage(Component.translatable("message.demeter.milk.fail_daily").withStyle(ChatFormatting.RED), true);
             return;
@@ -84,8 +85,8 @@ public class AnimalMixin {
 
         ItemStack output = QualityUtil.randomiseQuality(milking.output().getDefaultInstance());
         ItemStack result = ItemUtils.createFilledResult(stack, pPlayer, output);
-        ServerPlayer serverPlayer = (ServerPlayer)pPlayer;
-        serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.COW_MILK), SoundSource.PLAYERS, better_Fauna$animal.getX(), better_Fauna$animal.getY(), better_Fauna$animal.getZ(), 1.0f, 1.0f, 0));
+        ServerPlayer serverPlayer = (ServerPlayer) pPlayer;
+        serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.COW_MILK), SoundSource.PLAYERS, demeter$animal.getX(), demeter$animal.getY(), demeter$animal.getZ(), 1.0f, 1.0f, 0));
         pPlayer.setItemInHand(pHand, result);
         attachment.setHasBeenMilked(true);
         cir.setReturnValue(InteractionResult.SUCCESS);
@@ -100,7 +101,7 @@ public class AnimalMixin {
             )
     )
     private void betterFarms$mobInteract(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
-        AnimalUtil.getAnimalData(better_Fauna$animal).setHasBeenFedToday(true);
+        AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
     }
 
     @Inject(
@@ -109,7 +110,7 @@ public class AnimalMixin {
             cancellable = true
     )
     private void betterFarms$setInLove(Player pPlayer, CallbackInfo ci) {
-        if (!AnimalUtil.isAnimalHappy(better_Fauna$animal) && !ModUtils.isDevelopmentEnvironment()) ci.cancel();
+        if (!AnimalUtil.isAnimalHappy(demeter$animal) && !ModUtils.isDevelopmentEnvironment()) ci.cancel();
     }
 
     @ModifyExpressionValue(
@@ -120,6 +121,6 @@ public class AnimalMixin {
             )
     )
     private boolean betterFarms$checkMateGender(boolean original, Animal otherEntity) {
-        return original && AnimalUtil.areOppositeGenders(better_Fauna$animal, otherEntity);
+        return original && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
     }
 }
