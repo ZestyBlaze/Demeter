@@ -24,7 +24,7 @@ public class TemptGoalMixin {
     )
     private boolean betterFarms$shouldFollow(boolean original, LivingEntity entity) {
         if (!(mob instanceof Animal animal)) return original;
-        if (!AnimalUtil.statsContains(animal)) return original;
+        if (!AnimalUtil.getStats(animal).isBound()) return original;
         DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(animal);
         if (stats.get().breedingItems().isEmpty()) return original;
         for (Ingredient ingredient : stats.get().breedingItems().get()) {

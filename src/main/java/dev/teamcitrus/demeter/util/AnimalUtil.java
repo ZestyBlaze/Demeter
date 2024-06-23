@@ -20,10 +20,6 @@ public class AnimalUtil {
         return StatsRegistry.INSTANCE.holder(BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()));
     }
 
-    public static boolean statsContains(Animal animal) {
-        return StatsRegistry.INSTANCE.getKeys().contains(BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()));
-    }
-
     public static boolean isAnimalHappy(Animal animal) {
         //TODO: Will be an equation that calculates health, hunger, warmth and love levels for a "happy" level
         return getAnimalData(animal).getLove() >= 80;

@@ -19,7 +19,7 @@ public class PregnancyTestItem extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         if (!interactionTarget.level().isClientSide()) {
-            if (interactionTarget instanceof Animal animal && AnimalUtil.statsContains(animal)) {
+            if (interactionTarget instanceof Animal animal && AnimalUtil.getStats(animal).isBound()) {
                 boolean value = AnimalUtil.getAnimalData(animal).getPregnant();
                 player.displayClientMessage(Component.literal("Pregnancy is: " + StringUtils.capitalize(String.valueOf(value))), true);
                 return InteractionResult.SUCCESS;

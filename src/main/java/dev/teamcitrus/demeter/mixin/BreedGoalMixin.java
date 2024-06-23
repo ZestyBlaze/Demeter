@@ -18,7 +18,7 @@ public class BreedGoalMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Animal;spawnChildFromBreeding(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/animal/Animal;)V")
     )
     private void betterFarms$handlePregnancy(Animal instance, ServerLevel serverLevel, Animal animal, Operation<Void> original) {
-        if (AnimalUtil.statsContains(instance)) {
+        if (AnimalUtil.getStats(instance).isBound()) {
             if (AnimalUtil.getStats(instance).get().daysPregnant() == 0) {
                 original.call(instance, serverLevel, animal);
             }

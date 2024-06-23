@@ -71,7 +71,7 @@ public class EntityEvents {
     @SubscribeEvent
     public static void onBabySpawned(BabyEntitySpawnEvent event) {
         if (!(event.getChild() instanceof Animal child)) return;
-        if (AnimalUtil.statsContains(child)) {
+        if (AnimalUtil.getStats(child).isBound()) {
             AnimalUtil.getAnimalData(child).setDaysLeftUntilGrown(AnimalUtil.getStats(child).get().daysToGrowUp());
         }
 
