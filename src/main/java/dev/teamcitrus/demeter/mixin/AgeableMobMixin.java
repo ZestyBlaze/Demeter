@@ -18,9 +18,8 @@ public class AgeableMobMixin {
             )
     )
     private void betterFarms$aiStep(AgeableMob instance, int pAge) {
-        // TODO: Entities not in the stats can't grow up
-        if (instance instanceof Animal animal &&
-                AnimalUtil.getStats(animal).isBound() &&
+        if (!(instance instanceof Animal animal) ||
+                !AnimalUtil.getStats((Animal) instance).isBound() ||
                 AnimalUtil.getStats(animal).get().daysToGrowUp() == 0) instance.setAge(++pAge);
     }
 }
