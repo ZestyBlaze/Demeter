@@ -6,7 +6,7 @@ import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.util.AnimalUtil;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
@@ -21,7 +21,7 @@ public class AnimalAttachment {
             AnimalGenders.CODEC.fieldOf("gender").forGetter(o -> o.gender),
             Codec.BOOL.fieldOf("isPregnant").forGetter(o -> o.isPregnant),
             Codec.INT.fieldOf("daysLeftUntilBirth").forGetter(o -> o.daysLeftUntilBirth),
-            BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("otherParent").forGetter(o -> o.otherParent),
+            CompoundTag.CODEC.fieldOf("otherParent").forGetter(o -> o.otherParentData),
             Codec.INT.fieldOf("daysLeftUntilGrown").forGetter(o -> o.daysLeftUntilGrown)
     ).apply(instance, AnimalAttachment::new));
 
@@ -35,19 +35,19 @@ public class AnimalAttachment {
     // Pregnancy Variables
     private boolean isPregnant;
     private int daysLeftUntilBirth;
-    private EntityType<?> otherParent;
+    private CompoundTag otherParentData;
 
     // Growing Variables
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
         this(0, 0, false, false, AnimalGenders.MALE,
-                false, 0, EntityType.COW, 0);
+                false, 0, new CompoundTag(), 0);
     }
 
     public AnimalAttachment(int love, int daysSinceFed, boolean hasBeenPetToday, boolean hasBeenFedToday,
                             AnimalGenders gender, boolean isPregnant, int daysLeftUntilBirth,
-                            EntityType<?> otherParent, int daysLeftUntilGrown) {
+                            CompoundTag otherParentData, int daysLeftUntilGrown) {
         this.love = love;
         this.daysSinceFed = daysSinceFed;
         this.hasBeenPetToday = hasBeenPetToday;
@@ -55,13 +55,14 @@ public class AnimalAttachment {
         this.gender = gender;
         this.isPregnant = isPregnant;
         this.daysLeftUntilBirth = daysLeftUntilBirth;
-        this.otherParent = otherParent;
+        this.otherParentData = otherParentData;
         this.daysLeftUntilGrown = daysLeftUntilGrown;
     }
 
     /**
      * A method that runs at the start of the new day to handle certain factors
      * Fired from {@link NewDayEvent} at the start of each day
+     *
      * @param self The animal this is being fired from
      */
     public void onNewDay(Animal self) {
@@ -73,12 +74,11 @@ public class AnimalAttachment {
             daysLeftUntilBirth--;
             if (daysLeftUntilBirth <= 0) {
                 Level level = self.level();
-                Animal parent = (Animal) otherParent.create(level);
-                if (parent != null) {
-                    AnimalUtil.handleBirth(self, (ServerLevel) self.level(), parent);
+                EntityType.create(otherParentData, level).ifPresent(entity -> {
+                    AnimalUtil.handleBirth(self, (ServerLevel) self.level(), (Animal) entity);
                     this.isPregnant = false;
-                    this.otherParent = parent.getType();
-                }
+                    this.otherParentData = new CompoundTag();
+                });
             }
         }
 
@@ -108,6 +108,7 @@ public class AnimalAttachment {
     /**
      * Allows for altering the love value without hard setting the values.
      * Method will auto-cap at values above 100 or below 0
+     *
      * @param value Can be positive to increase or negative to decrease
      */
     public void alterLove(int value) {
@@ -115,7 +116,7 @@ public class AnimalAttachment {
             this.love = 100;
             return;
         }
-        if ((love-= value) < 0) {
+        if ((love -= value) < 0) {
             this.love = 0;
             return;
         }
@@ -147,12 +148,13 @@ public class AnimalAttachment {
 
     /**
      * A method to set if an animal is pregnant or not
-     * @param value Whether an animal is becoming pregnant or not
+     *
+     * @param value       Whether an animal is becoming pregnant or not
      * @param otherParent The other parents other than the self, can be null
      */
     public void setPregnant(Animal animal, boolean value, Animal otherParent) {
         this.isPregnant = value;
-        this.otherParent = otherParent.getType();
+        this.otherParentData = otherParent.serializeNBT();
         if (value) {
             this.daysLeftUntilBirth = AnimalUtil.getStats(animal).get().daysPregnant();
         }
@@ -161,7 +163,7 @@ public class AnimalAttachment {
     public boolean getPregnant() {
         return isPregnant;
     }
-    
+
     public void setGender(AnimalGenders gender) {
         this.gender = gender;
     }
