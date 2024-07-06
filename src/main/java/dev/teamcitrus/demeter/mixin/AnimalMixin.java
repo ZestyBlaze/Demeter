@@ -94,18 +94,6 @@ public class AnimalMixin {
     }
 
     @Inject(
-            method = "mobInteract",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/animal/Animal;getAge()I",
-                    shift = At.Shift.AFTER
-            )
-    )
-    private void betterFarms$mobInteract(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
-        AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
-    }
-
-    @Inject(
             method = "setInLove",
             at = @At("HEAD"),
             cancellable = true
