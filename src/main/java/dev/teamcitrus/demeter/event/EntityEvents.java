@@ -56,7 +56,7 @@ public class EntityEvents {
                     "message.demeter.animal_petted", value
             ).withStyle(ChatFormatting.GREEN), true);
             level.sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
-            AnimalUtil.getAnimalData(animal).alterLove(10);
+            AnimalUtil.getAnimalData(animal).alterLove(8);
             AnimalUtil.getAnimalData(animal).setHasBeenPetToday(true);
             event.setCancellationResult(InteractionResult.SUCCESS);
             event.setCanceled(true);
