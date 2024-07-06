@@ -46,8 +46,9 @@ public class EnUsProvider extends LanguageProvider {
         add("itemGroup.demeter.dev", "Better Farms - Dev");
         add("message.demeter.baby_spawned", "One of your animals has given birth!");
         add("message.demeter.animal_petted", "You pet your %s for today");
-        add("message.demeter.milk.fail_daily", "This animal has already been milked today");
-        add("message.demeter.milk.fail_gender", "This animal is male and cannot be milked");
+        add("message.demeter.milk.fail_daily", "This animal has already been milked today!");
+        add("message.demeter.milk.fail_gender", "This animal is male and cannot be milked!");
+        add("message.demeter.brush.fail_daily", "This animal has already been brushed today!");
 
         blocks.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("block\\.demeter\\.", "");

@@ -40,6 +40,7 @@
   "itemGroup.demeter.dev": "Better Farms - Dev",
   "message.demeter.animal_petted": "You pet your %s for today",
   "message.demeter.baby_spawned": "One of your animals has given birth!",
-  "message.demeter.milk.fail_daily": "This animal has already been milked today",
-  "message.demeter.milk.fail_gender": "This animal is male and cannot be milked"
+  "message.demeter.brush.fail_daily": "This animal has already been brushed today!",
+  "message.demeter.milk.fail_daily": "This animal has already been milked today!",
+  "message.demeter.milk.fail_gender": "This animal is male and cannot be milked!"
 }

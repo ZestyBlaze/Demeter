@@ -18,6 +18,7 @@ public class AnimalAttachment {
             Codec.INT.fieldOf("daysSinceFed").forGetter(o -> o.daysSinceFed),
             Codec.BOOL.fieldOf("hasBeenPetToday").forGetter(o -> o.hasBeenPetToday),
             Codec.BOOL.fieldOf("hasBeenFedToday").forGetter(o -> o.hasBeenFedToday),
+            Codec.BOOL.fieldOf("hasBeenBrushedToday").forGetter(o -> o.hasBeenBrushedToday),
             AnimalGenders.CODEC.fieldOf("gender").forGetter(o -> o.gender),
             Codec.BOOL.fieldOf("isPregnant").forGetter(o -> o.isPregnant),
             Codec.INT.fieldOf("daysLeftUntilBirth").forGetter(o -> o.daysLeftUntilBirth),
@@ -27,7 +28,7 @@ public class AnimalAttachment {
 
     // Animal Life Variables
     private int love, daysSinceFed;
-    private boolean hasBeenPetToday, hasBeenFedToday;
+    private boolean hasBeenPetToday, hasBeenFedToday, hasBeenBrushedToday;
 
     // Gender Variables
     private AnimalGenders gender;
@@ -41,17 +42,18 @@ public class AnimalAttachment {
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this(20, 0, false, false, AnimalGenders.MALE,
-                false, 0, new CompoundTag(), 0);
+        this(20, 0, false, false, false,
+                AnimalGenders.MALE, false, 0, new CompoundTag(), 0);
     }
 
     public AnimalAttachment(int love, int daysSinceFed, boolean hasBeenPetToday, boolean hasBeenFedToday,
-                            AnimalGenders gender, boolean isPregnant, int daysLeftUntilBirth,
-                            CompoundTag otherParentData, int daysLeftUntilGrown) {
+                            boolean hasBeenBrushedToday, AnimalGenders gender, boolean isPregnant,
+                            int daysLeftUntilBirth, CompoundTag otherParentData, int daysLeftUntilGrown) {
         this.love = love;
         this.daysSinceFed = daysSinceFed;
         this.hasBeenPetToday = hasBeenPetToday;
         this.hasBeenFedToday = hasBeenFedToday;
+        this.hasBeenBrushedToday = hasBeenBrushedToday;
         this.gender = gender;
         this.isPregnant = isPregnant;
         this.daysLeftUntilBirth = daysLeftUntilBirth;
@@ -102,6 +104,7 @@ public class AnimalAttachment {
         //Reset Daily Values
         this.hasBeenPetToday = false;
         this.hasBeenFedToday = false;
+        this.hasBeenBrushedToday = false;
     }
 
     /**
@@ -143,6 +146,18 @@ public class AnimalAttachment {
         if (hasBeenFedToday) {
             daysSinceFed = 0;
         }
+    }
+
+    public boolean hasBeenFedToday() {
+        return hasBeenFedToday;
+    }
+
+    public void setHasBeenBrushedToday(boolean hasBeenBrushedToday) {
+        this.hasBeenBrushedToday = hasBeenBrushedToday;
+    }
+
+    public boolean hasBeenBrushedToday() {
+        return hasBeenBrushedToday;
     }
 
     public void setDaysLeftUntilGrown(int daysLeftUntilGrown) {
