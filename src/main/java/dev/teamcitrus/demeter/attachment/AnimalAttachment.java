@@ -66,8 +66,11 @@ public class AnimalAttachment {
      * @param self The animal this is being fired from
      */
     public void onNewDay(Animal self) {
-        if (!hasBeenPetToday || !hasBeenFedToday) {
-            alterLove(-2);
+        if (!hasBeenPetToday) {
+            alterLove(-5);
+        }
+        if (!hasBeenFedToday) {
+            alterLove(-5);
         }
 
         if (isPregnant) {
