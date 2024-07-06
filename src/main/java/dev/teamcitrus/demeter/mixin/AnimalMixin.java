@@ -52,6 +52,7 @@ public class AnimalMixin {
         if (stats.get().breedingItems().isEmpty()) return original.call(stack, item);
         for (Ingredient ingredient : stats.get().breedingItems().get()) {
             if (ingredient.test(stack)) {
+                AnimalUtil.getAnimalData(demeter$animal).alterLove(8);
                 AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
                 return true;
             }
