@@ -41,7 +41,7 @@ public class AnimalAttachment {
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this(0, 0, false, false, AnimalGenders.MALE,
+        this(20, 0, false, false, AnimalGenders.MALE,
                 false, 0, new CompoundTag(), 0);
     }
 
