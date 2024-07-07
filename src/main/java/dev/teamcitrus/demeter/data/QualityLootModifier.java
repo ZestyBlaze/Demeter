@@ -1,7 +1,6 @@
 package dev.teamcitrus.demeter.data;
 
 import com.google.common.base.Suppliers;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.demeter.util.QualityUtil;
@@ -15,8 +14,8 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 import java.util.function.Supplier;
 
 public class QualityLootModifier extends LootModifier {
-    public static final Supplier<MapCodec<QualityLootModifier>> CODEC = Suppliers.memoize(
-            () -> RecordCodecBuilder.create(instance -> LootModifier.codecStart(instance).apply(instance, QualityLootModifier::new))
+    public static final Supplier<MapCodec<QualityLootModifier>> CODEC = Suppliers.memoize(() ->
+            RecordCodecBuilder.mapCodec(instance -> codecStart(instance).apply(instance, QualityLootModifier::new))
     );
 
     public QualityLootModifier(LootItemCondition[] conditionsIn) {

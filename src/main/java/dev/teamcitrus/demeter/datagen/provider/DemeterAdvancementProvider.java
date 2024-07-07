@@ -30,7 +30,7 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             Items.LEATHER,
                             Component.translatable("advancement.demeter.root"),
                             Component.translatable("advancement.demeter.root.desc"),
-                            new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                            ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png"),
                             AdvancementType.TASK,
                             false, false, false)
                     .addCriterion("join_overworld", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRAFTING_TABLE))

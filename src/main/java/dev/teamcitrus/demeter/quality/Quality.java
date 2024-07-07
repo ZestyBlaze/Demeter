@@ -1,34 +1,40 @@
 package dev.teamcitrus.demeter.quality;
 
+import com.mojang.serialization.Codec;
+import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.Rarity;
 
+import java.util.Locale;
+
 public enum Quality {
-    COPPER("copper", ChatFormatting.getByCode(0xFF8C00)),
-    IRON("iron", ChatFormatting.GRAY),
-    GOLD("gold", ChatFormatting.GOLD),
-    DIAMOND("diamond", ChatFormatting.AQUA),
-    NETHERITE("netherite", ChatFormatting.DARK_GRAY);
+    NONE(Style.EMPTY),
+    COPPER(Style.EMPTY.withColor(0xFF8C00)),
+    IRON(Style.EMPTY.withColor(ChatFormatting.GRAY)),
+    GOLD(Style.EMPTY.withColor(ChatFormatting.GOLD)),
+    DIAMOND(Style.EMPTY.withColor(ChatFormatting.AQUA)),
+    NETHERITE(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY));
 
-    private final String name;
-    private final ChatFormatting formatting;
+    public static final Codec<Quality> CODEC = CitrusCodecs.enumCodec(Quality.class);
 
-    Quality(String name, ChatFormatting rarity) {
-        this.name = name;
-        this.formatting = rarity;
+    private final Style style;
+
+    Quality(Style style) {
+        this.style = style;
     }
 
     public String getName() {
-        return name;
+        return name().toLowerCase(Locale.ROOT);
     }
 
-    public ChatFormatting getFormatting() {
-        return formatting;
+    public Style getStyle() {
+        return style;
     }
 
     public Component getQualityTooltip() {
-        return Component.translatable("item.demeter.quality_tooltip." + getName()).withStyle(getFormatting());
+        return Component.translatable("item.demeter.quality_tooltip." + getName()).withStyle(getStyle());
     }
 }

@@ -2,15 +2,18 @@ package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.data.QualityLootModifier;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 
+import java.util.concurrent.CompletableFuture;
+
 public class DemeterLootModifierProvider extends GlobalLootModifierProvider {
-    public DemeterLootModifierProvider(PackOutput output) {
-        super(output, Demeter.MODID);
+    public DemeterLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries ,Demeter.MODID);
     }
 
     @Override

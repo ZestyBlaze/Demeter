@@ -1,0 +1,10 @@
+{
+  "entries": [
+    "demeter:quality_melon",
+    "demeter:quality_potato",
+    "demeter:quality_beetroots",
+    "demeter:quality_carrots",
+    "demeter:quality_wheat"
+  ],
+  "replace": false
+}

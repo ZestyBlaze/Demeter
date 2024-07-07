@@ -1,58 +1,55 @@
 package dev.teamcitrus.demeter.network;
 
-import dev.teamcitrus.citruslib.network.PayloadHelper;
 import dev.teamcitrus.citruslib.network.PayloadProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.ConnectionProtocol;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.List;
 import java.util.Optional;
 
-public class BirthNotificationPacket implements CustomPacketPayload {
-    public static final ResourceLocation ID = Demeter.id("notify_birth");
+public record BirthNotificationPacket() implements CustomPacketPayload {
+    public static final Type<BirthNotificationPacket> TYPE = new Type<>(Demeter.id("notify_birth"));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, BirthNotificationPacket> STREAM_CODEC = StreamCodec.unit(
+            new BirthNotificationPacket()
+    );
 
     @Override
-    public void write(FriendlyByteBuf friendlyByteBuf) {
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 
-    @Override
-    public ResourceLocation id() {
-        return ID;
-    }
-
-    public static class Provider implements PayloadProvider<BirthNotificationPacket, PlayPayloadContext> {
+    public static class Provider implements PayloadProvider<BirthNotificationPacket> {
         @Override
-        public ResourceLocation id() {
-            return ID;
+        public Type<BirthNotificationPacket> getType() {
+            return TYPE;
         }
 
         @Override
-        public BirthNotificationPacket read(FriendlyByteBuf friendlyByteBuf) {
-            return new BirthNotificationPacket();
+        public StreamCodec<? super RegistryFriendlyByteBuf, BirthNotificationPacket> getCodec() {
+            return STREAM_CODEC;
         }
 
         @Override
-        public void handle(BirthNotificationPacket birthNotificationPacket, PlayPayloadContext playPayloadContext) {
-            PayloadHelper.handle(() -> {
-                if (Minecraft.getInstance().player != null) {
-                    if (DemeterConfig.animalBirthAlert.get()) {
-                        playPayloadContext.player().ifPresent(player -> {
-                            player.displayClientMessage(Component.translatable("message.demeter.baby_spawned").withStyle(ChatFormatting.GREEN), true);
-                            player.playSound(SoundEvents.AMETHYST_BLOCK_CHIME);
-                        });
-                    }
+        public void handle(BirthNotificationPacket birthNotificationPacket, IPayloadContext playPayloadContext) {
+            if (Minecraft.getInstance().player != null) {
+                if (DemeterConfig.animalBirthAlert.get()) {
+                    Player player = playPayloadContext.player();
+                    player.displayClientMessage(Component.translatable("message.demeter.baby_spawned").withStyle(ChatFormatting.GREEN), true);
+                    player.playSound(SoundEvents.AMETHYST_BLOCK_CHIME);
                 }
-            }, playPayloadContext);
+            }
         }
 
         @Override
@@ -63,6 +60,11 @@ public class BirthNotificationPacket implements CustomPacketPayload {
         @Override
         public Optional<PacketFlow> getFlow() {
             return Optional.of(PacketFlow.CLIENTBOUND);
+        }
+
+        @Override
+        public String getVersion() {
+            return "1";
         }
     }
 }

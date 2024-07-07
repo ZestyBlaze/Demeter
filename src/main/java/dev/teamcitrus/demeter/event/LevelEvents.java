@@ -7,9 +7,10 @@ import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Demeter.MODID)
+@EventBusSubscriber(modid = Demeter.MODID)
 public class LevelEvents {
     @SubscribeEvent
     public static void onNewDay(NewDayEvent event) {

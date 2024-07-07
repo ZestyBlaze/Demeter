@@ -1,0 +1,35 @@
+{
+  "parent": "demeter:root",
+  "criteria": {
+    "milk_placed": {
+      "conditions": {
+        "location": [
+          {
+            "block": "demeter:milk_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.demeter.milk_placed.desc"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "minecraft:milk_bucket"
+    },
+    "title": {
+      "translate": "advancement.demeter.milk_placed"
+    }
+  },
+  "requirements": [
+    [
+      "milk_placed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

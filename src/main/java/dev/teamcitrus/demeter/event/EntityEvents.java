@@ -18,16 +18,15 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
+import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.entity.player.SleepingTimeCheckEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-@Mod.EventBusSubscriber(modid = Demeter.MODID)
+@EventBusSubscriber(modid = Demeter.MODID)
 public class EntityEvents {
     @SubscribeEvent
     public static void onEntityAdded(EntityJoinLevelEvent event) {
@@ -72,11 +71,11 @@ public class EntityEvents {
 
         if (event.getCausedByPlayer() == null) return;
         ServerPlayer player = (ServerPlayer) event.getCausedByPlayer();
-        PacketDistributor.PLAYER.with(player).send(new BirthNotificationPacket());
+        PacketDistributor.sendToPlayer(player, new BirthNotificationPacket());
     }
 
     @SubscribeEvent
-    public static void onEntitySleep(SleepingTimeCheckEvent event) {
-        event.setResult(Event.Result.ALLOW);
+    public static void onEntitySleep(CanPlayerSleepEvent event) {
+        event.setProblem(null);
     }
 }

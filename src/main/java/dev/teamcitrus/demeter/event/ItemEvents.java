@@ -24,16 +24,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-@Mod.EventBusSubscriber(modid = Demeter.MODID)
+@EventBusSubscriber(modid = Demeter.MODID)
 public class ItemEvents {
     @SubscribeEvent
     public static void onItemUsed(PlayerInteractEvent.RightClickBlock event) {
         if (event.getItemStack().is(Items.MILK_BUCKET)) {
+            ItemStack stack = event.getItemStack();
             Player player = event.getEntity();
             Level level = event.getLevel();
             BlockPos clickPos = event.getPos();
@@ -55,7 +56,7 @@ public class ItemEvents {
             }
 
             if (!player.isSecondaryUseActive()) {
-                InteractionResult blockUseResult = state.use(level, player, event.getHand(), event.getHitVec());
+                InteractionResult blockUseResult = state.useItemOn(stack, level, player, event.getHand(), event.getHitVec()).result();
                 if (blockUseResult.consumesAction()) {
                     event.setCanceled(true);
                     event.setCancellationResult(blockUseResult);
@@ -86,8 +87,9 @@ public class ItemEvents {
             Level level = event.getLevel();
             BlockPos clickPos = event.getPos();
             BlockState state = level.getBlockState(clickPos);
+            ItemStack stack = event.getItemStack();
             if (!player.isSecondaryUseActive()) {
-                InteractionResult blockUseResult = state.use(level, player, event.getHand(), event.getHitVec());
+                InteractionResult blockUseResult = state.useItemOn(stack, level, player, event.getHand(), event.getHitVec()).result();
                 if (blockUseResult.consumesAction()) {
                     event.setCanceled(true);
                     event.setCancellationResult(blockUseResult);
@@ -124,7 +126,7 @@ public class ItemEvents {
     public static void changeTooltipEvent(ItemTooltipEvent event) {
         if (event.getItemStack().is(DemeterItemTagsProvider.QUALITY_PRODUCTS)) {
             ItemStack itemStack = event.getItemStack();
-            if (QualityUtil.getQualityNumber(itemStack) == 0) return;
+            if (QualityUtil.getQuality(itemStack).equals(Quality.NONE)) return;
             Quality quality = QualityUtil.getQuality(itemStack);
             event.getToolTip().add(Component.translatable("item.demeter.quality_tooltip", quality.getQualityTooltip()).withStyle(ChatFormatting.DARK_GRAY));
         }

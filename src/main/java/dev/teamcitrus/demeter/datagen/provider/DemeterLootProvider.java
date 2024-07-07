@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -12,17 +13,18 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public class DemeterLootProvider {
-    public static LootTableProvider create(PackOutput output) {
-        return new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(BFSubLootProvider::new, LootContextParamSets.BLOCK)));
+    public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+        return new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(BFSubLootProvider::new, LootContextParamSets.BLOCK)), provider);
     }
 
     public static class BFSubLootProvider extends BlockLootSubProvider {
         private final Set<Block> knownBlocks = new ReferenceOpenHashSet<>();
 
-        public BFSubLootProvider() {
-            super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+        public BFSubLootProvider(HolderLookup.Provider provider) {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
         }
 
         @Override

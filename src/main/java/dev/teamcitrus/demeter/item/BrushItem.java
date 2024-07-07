@@ -30,7 +30,7 @@ public class BrushItem extends CitrusItem {
                 serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BRUSH_GENERIC), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
                 AnimalUtil.getAnimalData(animal).setHasBeenBrushedToday(true);
                 AnimalUtil.getAnimalData(animal).alterLove(10);
-                pStack.hurtAndBreak(1, pPlayer, (player) -> player.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+                pStack.hurtAndBreak(1, pPlayer, EquipmentSlot.MAINHAND);
                 return InteractionResult.SUCCESS;
             } else {
                 pPlayer.displayClientMessage(

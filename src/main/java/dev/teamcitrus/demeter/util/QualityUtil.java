@@ -1,11 +1,11 @@
 package dev.teamcitrus.demeter.util;
 
-import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.data.QualityDataComponent;
 import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.quality.Quality;
+import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -33,30 +33,12 @@ public class QualityUtil {
         return stack;
     }
 
-    @Nullable
     public static Quality getQuality(ItemStack stack) {
-        return getQualityFromNumber(getQualityNumber(stack));
-    }
-
-    @Nullable
-    public static Quality getQualityFromNumber(int value) {
-        if (value <= 0 || value >= 6) return null;
-        return switch (value) {
-            case 1 -> Quality.COPPER;
-            case 2 -> Quality.IRON;
-            case 3 -> Quality.GOLD;
-            case 4 -> Quality.DIAMOND;
-            case 5 -> Quality.NETHERITE;
-            default -> throw new IllegalStateException("Unexpected value: " + value);
-        };
-    }
-
-    public static int getQualityNumber(ItemStack stack) {
-        if (stack.getTag() == null) return 0;
-        return stack.getOrCreateTagElement(Demeter.MODID).getInt("quality");
+        if (!stack.has(ComponentRegistry.QUALITY)) return Quality.NONE;
+        return stack.get(ComponentRegistry.QUALITY).quality();
     }
 
     public static void writeQualityToTag(ItemStack stack, Quality quality) {
-        stack.getOrCreateTagElement(Demeter.MODID).putInt("quality", quality.ordinal() + 1);
+        stack.set(ComponentRegistry.QUALITY.get(), new QualityDataComponent(quality));
     }
 }
