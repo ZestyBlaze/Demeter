@@ -1,7 +1,0 @@
-// 1.20.4	2024-05-26T18:48:36.3172634	Global Loot Modifiers : demeter
-de690ea43631033ffdcffef8b25691cc977f0616 data/demeter/loot_modifiers/quality_beetroots.json
-abd2fc583ebfba2708cb64bd68078ce984129b8a data/demeter/loot_modifiers/quality_carrots.json
-def809ac937a039f18c96e64fb282c7fdc2afd95 data/demeter/loot_modifiers/quality_melon.json
-aa56c82971e732b519a3f76851d365451e4283c6 data/demeter/loot_modifiers/quality_potato.json
-8ebd942daaa8ba095ab01ae7be9e348ec340836c data/demeter/loot_modifiers/quality_wheat.json
-7ebac6715fa846ad7cf6147a360d38338683f553 data/neoforge/loot_modifiers/global_loot_modifiers.json

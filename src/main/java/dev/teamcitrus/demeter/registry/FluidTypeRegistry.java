@@ -17,8 +17,8 @@ public class FluidTypeRegistry {
     public static final DeferredHolder<FluidType, CommonFluidType> MILK_FLUID_TYPE = FLUID_TYPES.register(
             "milk_fluid",
             () -> new CommonFluidType(
-                    new ResourceLocation("block/water_still"),
-                    new ResourceLocation("block/water_flow"),
+                    ResourceLocation.withDefaultNamespace("block/water_still"),
+                    ResourceLocation.withDefaultNamespace("block/water_flow"),
                     0xFFFEFCFF,
                     new Vector3f(1.0f, 245.0f / 255.0f, 238.0f / 255.0f),
                     FluidType.Properties.create()

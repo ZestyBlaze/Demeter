@@ -172,7 +172,7 @@ public class AnimalAttachment {
      */
     public void setPregnant(Animal animal, boolean value, Animal otherParent) {
         this.isPregnant = value;
-        this.otherParentData = otherParent.serializeNBT();
+        this.otherParentData = otherParent.serializeNBT(animal.level().registryAccess());
         if (value) {
             this.daysLeftUntilBirth = AnimalUtil.getStats(animal).get().daysPregnant();
         }

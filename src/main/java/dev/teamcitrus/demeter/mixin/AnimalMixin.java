@@ -1,10 +1,8 @@
 package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.teamcitrus.citruslib.reload.DynamicHolder;
-import dev.teamcitrus.citruslib.util.ModUtils;
+import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.demeter.attachment.MilkAttachment;
 import dev.teamcitrus.demeter.data.AnimalStats;
@@ -23,10 +21,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,6 +35,7 @@ public class AnimalMixin {
     @Unique
     private final Animal demeter$animal = (Animal) (Object) this;
 
+    /*
     @WrapOperation(
             method = "isFood",
             at = @At(
@@ -59,6 +56,7 @@ public class AnimalMixin {
         }
         return false;
     }
+     */
 
     @Inject(
             method = "mobInteract",
@@ -99,7 +97,7 @@ public class AnimalMixin {
             cancellable = true
     )
     private void betterFarms$setInLove(Player pPlayer, CallbackInfo ci) {
-        if (!AnimalUtil.isAnimalHappy(demeter$animal) && !ModUtils.isDevelopmentEnvironment()) ci.cancel();
+        if (!AnimalUtil.isAnimalHappy(demeter$animal) && !ModUtil.isDevelopmentEnvironment()) ci.cancel();
     }
 
     @ModifyExpressionValue(

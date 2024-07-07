@@ -1,6 +1,6 @@
 package dev.teamcitrus.demeter.datagen;
 
-import dev.teamcitrus.citruslib.util.DatagenUtils;
+import dev.teamcitrus.citruslib.util.DatagenUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.datagen.provider.*;
 import dev.teamcitrus.demeter.datagen.provider.lang.EnUsProvider;
@@ -8,13 +8,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = Demeter.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DemeterDatagen {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
@@ -38,6 +38,6 @@ public class DemeterDatagen {
 
         gen.addProvider(event.includeClient(), new EnUsProvider(output));
 
-        gen.addProvider(true, DatagenUtils.makeMetadataFile(output, Demeter.MODID));
+        gen.addProvider(true, DatagenUtil.makeMetadataFile(output, Demeter.MODID));
     }
 }

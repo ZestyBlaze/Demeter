@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "DEMETER_COPPER",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "dev/teamcitrus/demeter/quality/RarityRegistry",
+        "field": "COPPER_RARITY"
+      }
+    }
+  ]
+}
