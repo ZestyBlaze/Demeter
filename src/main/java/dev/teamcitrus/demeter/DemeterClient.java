@@ -21,7 +21,7 @@ public class DemeterClient {
 
     @SubscribeEvent
     public static void registerColors(RegisterColorHandlersEvent.Item event) {
-        event.register(((pStack, pTintIndex) -> 0xFEFCFF), ItemRegistry.MILK_BOTTLE.get());
+        event.register(((pStack, pTintIndex) -> 0xFFFEFCFF), ItemRegistry.MILK_BOTTLE.get());
     }
 
     public static void renderIcon(GuiGraphics guiGraphics, ItemStack stack, int xOffset, int yOffset) {
