@@ -5,8 +5,6 @@ import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.world.item.Rarity;
 
 import java.util.Locale;
 
