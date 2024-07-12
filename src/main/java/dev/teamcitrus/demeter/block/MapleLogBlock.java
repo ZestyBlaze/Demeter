@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.neoforge.common.ToolAction;
+import net.neoforged.neoforge.common.ItemAbility;
 
 public class MapleLogBlock extends RotatedPillarBlock {
     public static final BooleanProperty SYRUP = BooleanProperty.create("syrup");
@@ -22,7 +22,7 @@ public class MapleLogBlock extends RotatedPillarBlock {
     }
 
     @Override
-    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility toolAction, boolean simulate) {
         if (context.getItemInHand().getItem() instanceof AxeItem) {
             if (state.is(BlockRegistry.MAPLE_LOG.get())) {
                 return BlockRegistry.STRIPPED_MAPLE_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
