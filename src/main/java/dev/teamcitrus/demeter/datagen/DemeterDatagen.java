@@ -29,10 +29,12 @@ public class DemeterDatagen {
         gen.addProvider(event.includeServer(), new DemeterDataMapGenerator(output, provider));
         gen.addProvider(event.includeServer(), new DemeterAdvancementProvider(output, provider, helper));
         gen.addProvider(event.includeServer(), DemeterLootProvider.create(output, provider));
+        var prov = gen.addProvider(event.includeServer(), new DemeterDatapackProvider(output, provider)).getRegistryProvider();
 
         DemeterBlockTagsProvider blockTags = new DemeterBlockTagsProvider(output, provider, helper);
         gen.addProvider(event.includeServer(), blockTags);
         gen.addProvider(event.includeServer(), new DemeterItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
+        gen.addProvider(event.includeServer(), new DemeterEnchantmentTagsProvider(output, prov, helper));
         gen.addProvider(event.includeServer(), new DemeterRecipeProvider(output, provider));
         gen.addProvider(event.includeServer(), new DemeterLootModifierProvider(output, provider));
 

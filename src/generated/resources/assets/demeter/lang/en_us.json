@@ -19,6 +19,7 @@
   "block.demeter.milk_cauldron": "Milk Cauldron",
   "block.demeter.stripped_maple_log": "Stripped Maple Log",
   "block.demeter.stripped_maple_wood": "Stripped Maple Wood",
+  "enchantment.demeter.barber": "Barber",
   "error.demeter.maxhighermin": "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' resulting in the birth failing!",
   "error.demeter.namesloadfail": "Error while loading names",
   "fluid_type.demeter.milk_fluid": "Milk Fluid",

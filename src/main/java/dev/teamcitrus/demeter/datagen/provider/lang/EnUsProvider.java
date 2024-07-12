@@ -51,6 +51,8 @@ public class EnUsProvider extends LanguageProvider {
         add("message.demeter.milk.fail_gender", "This animal is male and cannot be milked!");
         add("message.demeter.brush.fail_daily", "This animal has already been brushed today!");
 
+        add("enchantment.demeter.barber", "Barber");
+
         blocks.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("block\\.demeter\\.", "");
             name = StringUtil.toTitleCase(name, "_");
