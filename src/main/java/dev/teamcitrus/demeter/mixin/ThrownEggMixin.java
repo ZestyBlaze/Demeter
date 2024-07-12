@@ -16,7 +16,7 @@ public class ThrownEggMixin {
                     ordinal = 0
             )
     )
-    private int betterFarms$noChickenSpawnFromEgg(RandomSource instance, int i) {
+    private int demeter$noChickenSpawnFromEgg(RandomSource instance, int i) {
         return 1;
     }
 }

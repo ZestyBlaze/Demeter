@@ -16,7 +16,7 @@ public class ChickenMixin {
                     target = "Lnet/minecraft/world/entity/animal/Chicken;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/entity/item/ItemEntity;"
             )
     )
-    private ItemEntity betterFarms$handleEggLaying(Chicken instance, ItemLike itemLike) {
+    private ItemEntity demeter$handleEggLaying(Chicken instance, ItemLike itemLike) {
         // TODO: Handle the new proper egg laying
         return null;
     }

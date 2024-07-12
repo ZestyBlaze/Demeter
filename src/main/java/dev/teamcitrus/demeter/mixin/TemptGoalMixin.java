@@ -24,7 +24,7 @@ public class TemptGoalMixin {
             method = "shouldFollow",
             at = @At("RETURN")
     )
-    private boolean betterFarms$shouldFollow(boolean original, LivingEntity entity) {
+    private boolean demeter$shouldFollow(boolean original, LivingEntity entity) {
         if (!(mob instanceof Animal animal)) return original;
         if (!AnimalUtil.getStats(animal).isBound()) return original;
         DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(animal);

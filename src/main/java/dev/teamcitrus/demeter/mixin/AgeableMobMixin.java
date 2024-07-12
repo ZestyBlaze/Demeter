@@ -17,7 +17,7 @@ public class AgeableMobMixin {
                     ordinal = 0
             )
     )
-    private void betterFarms$aiStep(AgeableMob instance, int pAge) {
+    private void demeter$aiStep(AgeableMob instance, int pAge) {
         if (!(instance instanceof Animal animal) ||
                 !AnimalUtil.getStats((Animal) instance).isBound() ||
                 AnimalUtil.getStats(animal).get().daysToGrowUp() == 0) instance.setAge(++pAge);

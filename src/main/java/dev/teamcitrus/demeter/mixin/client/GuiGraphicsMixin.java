@@ -21,7 +21,7 @@ public class GuiGraphicsMixin {
     private PoseStack pose;
 
     @Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"))
-    private void betterFarms$renderItemDecorations(Font pFont, ItemStack pStack, int pX, int pY, String pText, CallbackInfo ci) {
+    private void demeter$renderItemDecorations(Font pFont, ItemStack pStack, int pX, int pY, String pText, CallbackInfo ci) {
         if (pStack.isEmpty() || !pStack.has(ComponentRegistry.QUALITY) || QualityUtil.getQuality(pStack) == null) {
             return;
         }

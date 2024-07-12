@@ -43,7 +43,7 @@ public class AnimalMixin {
                     target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
             )
     )
-    private boolean betterFarms$isFood(ItemStack stack, Item item, Operation<Boolean> original) {
+    private boolean demeter$isFood(ItemStack stack, Item item, Operation<Boolean> original) {
         if (!AnimalUtil.getStats(demeter$animal).isBound()) return original.call(stack, item);
         DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(demeter$animal);
         if (stats.get().breedingItems().isEmpty()) return original.call(stack, item);
@@ -63,7 +63,7 @@ public class AnimalMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void betterFarms$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
+    private void demeter$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (pPlayer.level().isClientSide) return;
         DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(demeter$animal);
         if (!(AnimalUtil.getStats(demeter$animal).isBound() && stats.get().milking().isPresent())) return;
@@ -96,7 +96,7 @@ public class AnimalMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void betterFarms$setInLove(Player pPlayer, CallbackInfo ci) {
+    private void demeter$setInLove(Player pPlayer, CallbackInfo ci) {
         if (!AnimalUtil.isAnimalHappy(demeter$animal) && !ModUtil.isDevelopmentEnvironment()) ci.cancel();
     }
 
@@ -107,7 +107,7 @@ public class AnimalMixin {
                     ordinal = 0
             )
     )
-    private boolean betterFarms$checkMateGender(boolean original, Animal otherEntity) {
+    private boolean demeter$checkMateGender(boolean original, Animal otherEntity) {
         return original && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
     }
 }

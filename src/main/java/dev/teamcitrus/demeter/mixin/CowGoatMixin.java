@@ -15,7 +15,7 @@ public class CowGoatMixin {
                     target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
             )
     )
-    private boolean betterFarms$stopVanillaMilking(boolean original) {
+    private boolean demeter$stopVanillaMilking(boolean original) {
         return false;
     }
 }
