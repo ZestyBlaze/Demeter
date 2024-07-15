@@ -19,7 +19,8 @@ public interface IShearableMixin {
             method = "onSheared",
             at = @At("RETURN")
     )
-    private List<ItemStack> betterFarms$onSheared(List<ItemStack> original, Player player, ItemStack item, Level level, BlockPos pos) {
+    private List<ItemStack> demeter$onSheared(List<ItemStack> original, Player player,
+                                              ItemStack item, Level level, BlockPos pos) {
         List<ItemStack> newList = new ArrayList<>();
         original.forEach(stack -> {
             QualityUtil.randomiseQuality(stack);
