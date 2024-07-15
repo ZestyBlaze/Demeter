@@ -1,4 +1,8 @@
 {
+  "advancement.demeter.animal_brushed": "Who's a good animal?",
+  "advancement.demeter.animal_brushed.desc": "Pet an animal!",
+  "advancement.demeter.animal_pet": "All Brushed",
+  "advancement.demeter.animal_pet.desc": "Brush an animal!",
   "advancement.demeter.milk_placed": "Milky Time",
   "advancement.demeter.milk_placed.desc": "Victorians used to bathe in this stuff",
   "advancement.demeter.root": "BetterFarms",
@@ -20,6 +24,8 @@
   "block.demeter.stripped_maple_log": "Stripped Maple Log",
   "block.demeter.stripped_maple_wood": "Stripped Maple Wood",
   "enchantment.demeter.barber": "Barber",
+  "enchantment.demeter.comfort": "Comfort",
+  "enchantment.demeter.spite": "Curse of Spite",
   "error.demeter.maxhighermin": "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' resulting in the birth failing!",
   "error.demeter.namesloadfail": "Error while loading names",
   "fluid_type.demeter.milk_fluid": "Milk Fluid",

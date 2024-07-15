@@ -6,6 +6,7 @@ import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.IStats;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
+import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -48,6 +49,7 @@ public class EntityEvents {
             if (animal.getData(AttachmentRegistry.ANIMAL).hasBeenPetToday()) return;
             ServerLevel level = (ServerLevel) event.getLevel();
             Player player = event.getEntity();
+            ServerPlayer serverPlayer = (ServerPlayer)player;
             if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()) return;
             if (!player.isCrouching()) return;
             String value = BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()).getPath();
@@ -57,6 +59,7 @@ public class EntityEvents {
             level.sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
             AnimalUtil.getAnimalData(animal).alterLove(8);
             AnimalUtil.getAnimalData(animal).setHasBeenPetToday(true);
+            AdvancementRegistry.PET.get().trigger(serverPlayer);
             event.setCancellationResult(InteractionResult.SUCCESS);
             event.setCanceled(true);
         }

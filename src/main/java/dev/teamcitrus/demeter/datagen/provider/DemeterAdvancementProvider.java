@@ -1,11 +1,13 @@
 package dev.teamcitrus.demeter.datagen.provider;
 
+import dev.teamcitrus.demeter.advancement.AnimalBrushedTrigger;
+import dev.teamcitrus.demeter.advancement.AnimalPetTrigger;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
+import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
@@ -44,6 +46,28 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             true, true, true
                     ).addCriterion("milk_placed", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(BlockRegistry.MILK_BLOCK.get()))
                     .save(saver, "demeter:milk_placed");
+
+
+            AdvancementHolder petAnimal = Advancement.Builder.advancement().parent(root).display(
+                            Items.COW_SPAWN_EGG,
+                            Component.translatable("advancement.demeter.animal_pet"),
+                            Component.translatable("advancement.demeter.animal_pet.desc"),
+                            null,
+                            AdvancementType.TASK,
+                            true, true, false
+                    )
+                    .addCriterion("pet_animal", AnimalPetTrigger.PetTrigger.pet())
+                    .save(saver, "demeter:pet_animal");
+            AdvancementHolder brushedAnimal = Advancement.Builder.advancement().parent(petAnimal).display(
+                            ItemRegistry.BRUSH.asItem(),
+                            Component.translatable("advancement.demeter.animal_brushed"),
+                            Component.translatable("advancement.demeter.animal_brushed.desc"),
+                            null,
+                            AdvancementType.TASK,
+                            true, true, false
+                    )
+                    .addCriterion("brushed_animal", AnimalBrushedTrigger.TriggerInstance.brushed())
+                    .save(saver, "demeter:brushed_animal");
         }
     }
 }

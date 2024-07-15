@@ -1,7 +1,6 @@
 package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.enchant.DemeterEnchantments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EnchantmentTagsProvider;
@@ -11,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+import static dev.teamcitrus.demeter.enchantment.DemeterEnchantments.*;
+
 public class DemeterEnchantmentTagsProvider extends EnchantmentTagsProvider {
     public DemeterEnchantmentTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, Demeter.MODID, existingFileHelper);
@@ -18,6 +19,9 @@ public class DemeterEnchantmentTagsProvider extends EnchantmentTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(EnchantmentTags.NON_TREASURE).add(DemeterEnchantments.BARBER);
+        tag(EnchantmentTags.ON_TRADED_EQUIPMENT).add(BARBER, COMFORT, SPITE);
+        tag(EnchantmentTags.ON_RANDOM_LOOT).add(BARBER, COMFORT, SPITE);
+        tag(EnchantmentTags.CURSE).add(SPITE);
+        tag(EnchantmentTags.TREASURE).add(BARBER, COMFORT);
     }
 }

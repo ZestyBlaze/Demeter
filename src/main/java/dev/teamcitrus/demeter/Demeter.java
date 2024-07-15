@@ -34,6 +34,7 @@ public class Demeter {
         LootModifierRegistry.LOOT_MODIFIERS.register(bus);
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ComponentRegistry.COMPONENTS.register(bus);
+        AdvancementRegistry.CRITERION.register(bus);
         modContainer.registerConfig(ModConfig.Type.CLIENT, DemeterConfig.CLIENT_SPEC);
         modContainer.registerConfig(ModConfig.Type.COMMON, DemeterConfig.GENERAL_SPEC);
         WoodSetRegistry.init();
