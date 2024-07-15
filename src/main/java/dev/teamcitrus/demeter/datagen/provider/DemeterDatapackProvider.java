@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.enchant.DemeterEnchantments;
+import dev.teamcitrus.demeter.enchantment.DemeterEnchantments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

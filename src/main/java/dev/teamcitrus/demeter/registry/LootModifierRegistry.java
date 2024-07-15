@@ -1,9 +1,8 @@
 package dev.teamcitrus.demeter.registry;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.data.QualityLootModifier;
+import dev.teamcitrus.demeter.glm.QualityLootModifier;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

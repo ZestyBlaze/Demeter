@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data;
+package dev.teamcitrus.demeter.glm;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;

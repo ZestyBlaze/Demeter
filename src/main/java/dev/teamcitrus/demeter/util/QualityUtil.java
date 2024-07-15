@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.util;
 
+import dev.teamcitrus.demeter.component.QualityDataComponent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.data.QualityDataComponent;
 import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.quality.Quality;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;

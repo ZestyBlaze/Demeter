@@ -1,9 +1,10 @@
-package dev.teamcitrus.demeter.data;
+package dev.teamcitrus.demeter.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.demeter.quality.Quality;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 public record QualityDataComponent(Quality quality) {
@@ -11,7 +12,8 @@ public record QualityDataComponent(Quality quality) {
             Quality.CODEC.fieldOf("quality").forGetter(o -> o.quality)
     ).apply(instance, QualityDataComponent::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, QualityDataComponent> STREAM_CODEC = StreamCodec.unit(
-            new QualityDataComponent(Quality.NONE)
+    public static final StreamCodec<RegistryFriendlyByteBuf, QualityDataComponent> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.fromCodec(Quality.CODEC), QualityDataComponent::quality,
+            QualityDataComponent::new
     );
 }

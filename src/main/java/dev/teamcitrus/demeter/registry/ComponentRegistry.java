@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.registry;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.data.QualityDataComponent;
+import dev.teamcitrus.demeter.component.QualityDataComponent;
 import net.minecraft.core.component.DataComponentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
