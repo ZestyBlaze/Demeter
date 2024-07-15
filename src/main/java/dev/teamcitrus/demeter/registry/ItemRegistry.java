@@ -22,7 +22,7 @@ public class ItemRegistry {
     public static final DeferredRegister.Items DEV_ITEMS = DeferredRegister.createItems(Demeter.MODID);
     public static final DeferredRegister<CreativeModeTab> DEV_TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, Demeter.MODID);
 
-    private static final DeferredHolder<CreativeModeTab, CreativeModeTab> BETTER_FARMS_TAB = CREATIVE_MODE_TABS.register("demeter", () -> CreativeModeTab.builder()
+    private static final DeferredHolder<CreativeModeTab, CreativeModeTab> DEMETER_TAB = CREATIVE_MODE_TABS.register("demeter", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.demeter"))
             .icon(ItemRegistry.MAPLE_LOG.get()::getDefaultInstance)
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
@@ -40,7 +40,6 @@ public class ItemRegistry {
     public static final DeferredItem<Item> LOVE_ITEM = DEV_ITEMS.register("love_checker", LoveCheckerItem::new);
     public static final DeferredItem<Item> MISC_ITEM = DEV_ITEMS.register("misc_test", MiscTestItem::new);
     public static final DeferredItem<Item> REGISTRY_ITEM = DEV_ITEMS.register("registry_test", RegistryTestItem::new);
-
     public static final DeferredItem<Item> ANIMAL_TAG = ITEMS.register("animal_tag", AnimalTagItem::new);
     public static final DeferredItem<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
