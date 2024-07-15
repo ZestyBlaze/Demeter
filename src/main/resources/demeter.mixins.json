@@ -9,7 +9,6 @@
     "ChickenMixin",
     "CowGoatMixin",
     "IShearableMixin",
-    "TemptGoalMixin",
     "ThrownEggMixin"
   ],
   "client": [

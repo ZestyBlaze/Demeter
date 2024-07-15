@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public record AnimalStats(EntityType<?> entity, Activity activity,
                           int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth,
-                          Optional<List<Ingredient>> breedingItems, Optional<MilkingCodec> milking
+                          Optional<MilkingCodec> milking
 ) implements IStats {
     public static final Codec<AnimalStats> CODEC = RecordCodecBuilder.create(func -> func.group(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(AnimalStats::entity),
@@ -20,7 +20,6 @@ public record AnimalStats(EntityType<?> entity, Activity activity,
             Codec.INT.optionalFieldOf("daysToGrowUp", 0).forGetter(AnimalStats::daysToGrowUp),
             Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(AnimalStats::minChildrenPerBirth),
             Codec.INT.optionalFieldOf("maxChildrenPerBirth", 1).forGetter(AnimalStats::maxChildrenPerBirth),
-            Ingredient.LIST_CODEC.optionalFieldOf("breedingItems").forGetter(AnimalStats::breedingItems),
             MilkingCodec.CODEC.optionalFieldOf("milking").forGetter(AnimalStats::milking)
     ).apply(func, AnimalStats::new));
 

@@ -26,8 +26,6 @@ public interface IStats extends CodecProvider<IStats> {
 
     int maxChildrenPerBirth();
 
-    Optional<List<Ingredient>> breedingItems();
-
     Optional<MilkingCodec> milking();
 
     enum Activity {
