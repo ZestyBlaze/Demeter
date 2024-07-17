@@ -5,8 +5,10 @@ import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -28,7 +30,9 @@ public class BrushItem extends CitrusItem {
         if (!pPlayer.level().isClientSide() && pInteractionTarget instanceof Animal animal) {
             if (!AnimalUtil.getAnimalData(animal).hasBeenBrushedToday()) {
                 ServerPlayer serverPlayer = (ServerPlayer) pPlayer;
+                ServerLevel level = (ServerLevel)serverPlayer.level();
                 serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BRUSH_GENERIC), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
+                level.sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
                 AnimalUtil.getAnimalData(animal).setHasBeenBrushedToday(true);
                 AnimalUtil.getAnimalData(animal).alterLove(10);
                 AdvancementRegistry.BRUSHED.get().trigger(serverPlayer);
