@@ -35,29 +35,6 @@ public class AnimalMixin {
     @Unique
     private final Animal demeter$animal = (Animal) (Object) this;
 
-    /*
-    @WrapOperation(
-            method = "isFood",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
-            )
-    )
-    private boolean demeter$isFood(ItemStack stack, Item item, Operation<Boolean> original) {
-        if (!AnimalUtil.getStats(demeter$animal).isBound()) return original.call(stack, item);
-        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(demeter$animal);
-        if (stats.get().breedingItems().isEmpty()) return original.call(stack, item);
-        for (Ingredient ingredient : stats.get().breedingItems().get()) {
-            if (ingredient.test(stack)) {
-                AnimalUtil.getAnimalData(demeter$animal).alterLove(8);
-                AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
-                return true;
-            }
-        }
-        return false;
-    }
-     */
-
     @Inject(
             method = "mobInteract",
             at = @At("HEAD"),
