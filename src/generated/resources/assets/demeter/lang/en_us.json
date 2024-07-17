@@ -1,8 +1,8 @@
 {
-  "advancement.demeter.animal_brushed": "Who's a good animal?",
-  "advancement.demeter.animal_brushed.desc": "Pet an animal!",
-  "advancement.demeter.animal_pet": "All Brushed",
-  "advancement.demeter.animal_pet.desc": "Brush an animal!",
+  "advancement.demeter.animal_brushed": "All Brushed",
+  "advancement.demeter.animal_brushed.desc": "Brush an animal!",
+  "advancement.demeter.animal_pet": "Who's a good animal?",
+  "advancement.demeter.animal_pet.desc": "Pet an animal!",
   "advancement.demeter.milk_placed": "Milky Time",
   "advancement.demeter.milk_placed.desc": "Victorians used to bathe in this stuff",
   "advancement.demeter.root": "BetterFarms",
