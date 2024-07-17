@@ -92,6 +92,19 @@ public class AnimalMixin {
     }
 
     @Inject(
+            method = "mobInteract",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/animal/Animal;setInLove(Lnet/minecraft/world/entity/player/Player;)V",
+                    shift = At.Shift.AFTER
+            )
+    )
+    private void demeter$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+        AnimalUtil.getAnimalData(demeter$animal).alterLove(8);
+        AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
+    }
+
+    @Inject(
             method = "setInLove",
             at = @At("HEAD"),
             cancellable = true
