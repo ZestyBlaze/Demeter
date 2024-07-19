@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "join_overworld": {
+    "start_game": {
       "conditions": {
         "items": [
           {
@@ -28,7 +28,7 @@
   },
   "requirements": [
     [
-      "join_overworld"
+      "start_game"
     ]
   ],
   "sends_telemetry_event": true

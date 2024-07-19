@@ -1,0 +1,28 @@
+{
+  "parent": "demeter:root",
+  "criteria": {
+    "love_max": {
+      "trigger": "demeter:love_max"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.demeter.animal_love_max.desc"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "minecraft:pink_stained_glass"
+    },
+    "title": {
+      "translate": "advancement.demeter.animal_love_max"
+    }
+  },
+  "requirements": [
+    [
+      "love_max"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

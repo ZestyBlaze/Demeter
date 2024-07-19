@@ -38,12 +38,14 @@ public class EnUsProvider extends LanguageProvider {
 
         add("advancement.demeter.root", "BetterFarms");
         add("advancement.demeter.root.desc", "The Introduction to the Farming Overhaul!");
-        add("advancement.demeter.milk_placed", "Milky Time");
-        add("advancement.demeter.milk_placed.desc", "Victorians used to bathe in this stuff");
-        add("advancement.demeter.animal_brushed", "Neat and tidy");
-        add("advancement.demeter.animal_brushed.desc", "Brush an animal!");
-        add("advancement.demeter.animal_pet", "Easy does it");
-        add("advancement.demeter.animal_pet.desc", "Pet an animal!");
+        add("advancement.demeter.milk_placed", "Splish Splash, Milk Bath");
+        add("advancement.demeter.milk_placed.desc", "Empty out your Milk Bucket!");
+        add("advancement.demeter.animal_brushed", "Neat and Tidy");
+        add("advancement.demeter.animal_brushed.desc", "Brush an Animal!");
+        add("advancement.demeter.animal_pet", "Easy Does It");
+        add("advancement.demeter.animal_pet.desc", "Pet an Animal!");
+        add("advancement.demeter.animal_love_max", "My Favourite Animal");
+        add("advancement.demeter.animal_love_max.desc", "Get an Animal to max love!");
         add("enchantment.demeter.barber", "Barber");
         add("enchantment.demeter.comfort", "Comfort");
         add("enchantment.demeter.spite", "Curse of Spite");

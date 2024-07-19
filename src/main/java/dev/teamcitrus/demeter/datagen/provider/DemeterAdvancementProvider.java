@@ -1,11 +1,13 @@
 package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.demeter.advancement.AnimalBrushedTrigger;
+import dev.teamcitrus.demeter.advancement.AnimalLoveMaxTrigger;
 import dev.teamcitrus.demeter.advancement.AnimalPetTrigger;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
@@ -34,8 +36,8 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             Component.translatable("advancement.demeter.root.desc"),
                             ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png"),
                             AdvancementType.TASK,
-                            false, false, false)
-                    .addCriterion("join_overworld", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRAFTING_TABLE))
+                            false, false, false
+            ).addCriterion("start_game", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRAFTING_TABLE))
                     .save(saver, "demeter:root");
             AdvancementHolder milkPlaced = Advancement.Builder.advancement().parent(root).display(
                             Items.MILK_BUCKET,
@@ -43,8 +45,8 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             Component.translatable("advancement.demeter.milk_placed.desc"),
                             null,
                             AdvancementType.TASK,
-                            true, true, true
-                    ).addCriterion("milk_placed", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(BlockRegistry.MILK_BLOCK.get()))
+                            true, true, false
+            ).addCriterion("milk_placed", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(BlockRegistry.MILK_BLOCK.get()))
                     .save(saver, "demeter:milk_placed");
 
 
@@ -55,8 +57,7 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             null,
                             AdvancementType.TASK,
                             true, true, false
-                    )
-                    .addCriterion("pet_animal", AnimalPetTrigger.PetTrigger.pet())
+            ).addCriterion("pet_animal", AnimalPetTrigger.PetTrigger.pet())
                     .save(saver, "demeter:pet_animal");
             AdvancementHolder brushedAnimal = Advancement.Builder.advancement().parent(petAnimal).display(
                             ItemRegistry.BRUSH.asItem(),
@@ -65,9 +66,18 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             null,
                             AdvancementType.TASK,
                             true, true, false
-                    )
-                    .addCriterion("brushed_animal", AnimalBrushedTrigger.TriggerInstance.brushed())
+            ).addCriterion("brushed_animal", AnimalBrushedTrigger.TriggerInstance.brushed())
                     .save(saver, "demeter:brushed_animal");
+            AdvancementHolder animalLoveMax = Advancement.Builder.advancement().parent(root).display(
+                            Items.PINK_STAINED_GLASS,
+                            Component.translatable("advancement.demeter.animal_love_max"),
+                            Component.translatable("advancement.demeter.animal_love_max.desc"),
+                            null,
+                            AdvancementType.CHALLENGE,
+                            true, true, true
+            ).addCriterion("love_max", AnimalLoveMaxTrigger.TriggerInstance.loveMax())
+                    .rewards(AdvancementRewards.Builder.experience(25))
+                    .save(saver, "demeter:love_max");
         }
     }
 }

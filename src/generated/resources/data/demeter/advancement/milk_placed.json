@@ -17,7 +17,6 @@
     "description": {
       "translate": "advancement.demeter.milk_placed.desc"
     },
-    "hidden": true,
     "icon": {
       "count": 1,
       "id": "minecraft:milk_bucket"
