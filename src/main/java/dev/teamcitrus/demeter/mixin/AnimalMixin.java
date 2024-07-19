@@ -30,6 +30,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Optional;
+
 @Mixin(Animal.class)
 public class AnimalMixin {
     @Unique
@@ -77,7 +79,7 @@ public class AnimalMixin {
             )
     )
     private void demeter$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        AnimalUtil.getAnimalData(demeter$animal).alterLove(8);
+        AnimalUtil.getAnimalData(demeter$animal).alterLove(Optional.of((ServerPlayer)player), 8);
         AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
     }
 

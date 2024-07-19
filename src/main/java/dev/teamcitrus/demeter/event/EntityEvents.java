@@ -27,6 +27,8 @@ import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+import java.util.Optional;
+
 @EventBusSubscriber(modid = Demeter.MODID)
 public class EntityEvents {
     @SubscribeEvent
@@ -57,7 +59,7 @@ public class EntityEvents {
                     "message.demeter.animal_petted", value
             ).withStyle(ChatFormatting.GREEN), true);
             level.sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
-            AnimalUtil.getAnimalData(animal).alterLove(8);
+            AnimalUtil.getAnimalData(animal).alterLove(Optional.of(serverPlayer),8);
             AnimalUtil.getAnimalData(animal).setHasBeenPetToday(true);
             AdvancementRegistry.PET.get().trigger(serverPlayer);
             event.setCancellationResult(InteractionResult.SUCCESS);

@@ -20,6 +20,8 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Optional;
+
 public class BrushItem extends CitrusItem {
     public BrushItem() {
         super(new Properties().stacksTo(1).durability(156));
@@ -34,7 +36,7 @@ public class BrushItem extends CitrusItem {
                 serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BRUSH_GENERIC), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
                 level.sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
                 AnimalUtil.getAnimalData(animal).setHasBeenBrushedToday(true);
-                AnimalUtil.getAnimalData(animal).alterLove(10);
+                AnimalUtil.getAnimalData(animal).alterLove(Optional.of(serverPlayer),10);
                 AdvancementRegistry.BRUSHED.get().trigger(serverPlayer);
                 pStack.hurtAndBreak(1, pPlayer, EquipmentSlot.MAINHAND);
                 return InteractionResult.SUCCESS;

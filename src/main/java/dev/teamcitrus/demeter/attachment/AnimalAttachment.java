@@ -5,12 +5,17 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
+
+import java.util.Optional;
 
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -42,7 +47,7 @@ public class AnimalAttachment {
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this(20, 0, false, false, false,
+        this(0, 0, false, false, false,
                 AnimalGenders.MALE, false, 0, new CompoundTag(), 0);
     }
 
@@ -69,10 +74,10 @@ public class AnimalAttachment {
      */
     public void onNewDay(Animal self) {
         if (!hasBeenPetToday) {
-            alterLove(-5);
+            alterLove(Optional.empty(), -5);
         }
         if (!hasBeenFedToday) {
-            alterLove(-5);
+            alterLove(Optional.empty(),-5);
         }
 
         if (isPregnant) {
@@ -111,18 +116,14 @@ public class AnimalAttachment {
      * Allows for altering the love value without hard setting the values.
      * Method will auto-cap at values above 100 or below 0
      *
+     * @param player An optional player as the reason why the love is increasing
      * @param value Can be positive to increase or negative to decrease
      */
-    public void alterLove(int value) {
-        if ((love += value) > 100) {
-            this.love = 100;
-            return;
+    public void alterLove(Optional<ServerPlayer> player, int value) {
+        this.love = Mth.clamp(this.love + value, 0, 100);
+        if (player.isPresent() && love >= 100) {
+            AdvancementRegistry.LOVE_MAX.get().trigger(player.get());
         }
-        if ((love -= value) < 0) {
-            this.love = 0;
-            return;
-        }
-        this.love += value;
     }
 
     public int getLove() {
