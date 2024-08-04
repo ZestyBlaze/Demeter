@@ -27,7 +27,6 @@ The full list of valid values for the JSON are as follows, with their defaults:
 - "minChildrenPerBirth" (Default = 1): The min size a birth litter can be. Note: Should **never** be bigger than `maxChildrenPerBirth`
 - "maxChildrenPerBirth" (Default = 1): The max size a birth litter can be. Note: Value should **never** be smaller than `minChildrenPerBirth`
 - "milking" (Default = not applied, input = "minecraft:bucket", output = "minecraft:milk_bucket"): If the mod should add support for milking to the animal with custom support for input and output (NOT VALID: NEEDS CHANGING. New Section?)
-- "breedingItems" (Default = null): A new option which allows you to override breeding items for mobs. Not being present causes it to use default values
 
 ### Milking
 Milking is a smaller feature in this that is mainly to allow datapack and modpack makers to specify new animals that can be milked!
@@ -48,22 +47,3 @@ An example of a different set of input and output items can be specified as show
 ```
 
 In this example, whichever mob now had this specified, can now be milked by interacting with it with a dirt item, and it will return a diamond to the player!
-
-### Breeding Items
-It is possible to change what mobs accept what as their valid breeding items by specifying an `Ingredient` within `breedingItems`
-For example, if I wanted to add carrots, beetroots and any flower from the flower tag as the cow's breeding items, you can write the following in `cow.json`
-```json
-{
-  "breedingItems": [
-    {
-      "item": "minecraft:carrot"
-    },
-    {
-      "item": "minecraft:beetroot"
-    },
-    {
-      "tag": "minecraft:flowers"
-    }
-  ]
-}
-```
