@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "start_game": {
+    "acquire_crafting": {
       "conditions": {
         "items": [
           {
@@ -28,7 +28,7 @@
   },
   "requirements": [
     [
-      "start_game"
+      "acquire_crafting"
     ]
   ],
   "sends_telemetry_event": true

@@ -1,6 +1,8 @@
 package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
+import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.enchantment.DemeterEnchantments;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -35,9 +37,27 @@ public class BrushItem extends CitrusItem {
                 ServerLevel level = (ServerLevel)serverPlayer.level();
                 serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BRUSH_GENERIC), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
                 level.sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
+
+                int comfortLevel = pStack.getEnchantmentLevel(pPlayer.level().registryAccess().holderOrThrow(DemeterEnchantments.COMFORT));
+                int spiteLevel = pStack.getEnchantmentLevel(pPlayer.level().registryAccess().holderOrThrow(DemeterEnchantments.SPITE));
+                int love = DemeterConfig.brushingLoveValue.get();
+
+                if (comfortLevel > 0) {
+                    love += (comfortLevel * DemeterConfig.comfortBonusPerLevel.get());
+                    AdvancementRegistry.BRUSHED.get().trigger(serverPlayer);
+                }
+
+                if (spiteLevel > 0) {
+                    switch (DemeterConfig.spiteEffect.get()) {
+                        case HALVE -> love *= (int) getSpiteHalving(spiteLevel);
+                        case INVERT -> love *= -1;
+                        case REDUCE -> love -= (spiteLevel * DemeterConfig.loveLossPerSpiteLevel.get());
+                    }
+                    AdvancementRegistry.SPITEFUL_BRUSHED.get().trigger(serverPlayer);
+                }
+
                 AnimalUtil.getAnimalData(animal).setHasBeenBrushedToday(true);
-                AnimalUtil.getAnimalData(animal).alterLove(Optional.of(serverPlayer),10);
-                AdvancementRegistry.BRUSHED.get().trigger(serverPlayer);
+                AnimalUtil.getAnimalData(animal).alterLove(Optional.of(serverPlayer), love);
                 pStack.hurtAndBreak(1, pPlayer, EquipmentSlot.MAINHAND);
                 return InteractionResult.SUCCESS;
             } else {
@@ -48,5 +68,14 @@ public class BrushItem extends CitrusItem {
             }
         }
         return InteractionResult.FAIL;
+    }
+
+    private float getSpiteHalving(int spiteLevel) {
+        return switch (spiteLevel) {
+            case 1 -> 0.75f;
+            case 2 -> 0.5f;
+            case 3 -> 0.25f;
+            default -> throw new IllegalStateException("Unexpected value: " + spiteLevel);
+        };
     }
 }

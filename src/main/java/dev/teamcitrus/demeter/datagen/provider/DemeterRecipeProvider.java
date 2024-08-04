@@ -9,7 +9,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 
@@ -29,37 +28,16 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                 .unlockedBy("has_item", has(Items.MILK_BUCKET))
                 .save(pRecipeOutput, Demeter.id("bf_bucket_to_bottles"));
 
-        ShapelessRecipeBuilder.shapeless(
-                        RecipeCategory.BUILDING_BLOCKS, WoodSetRegistry.MAPLE.getPlanks(), 4
-                ).requires(ItemRegistry.MAPLE_LOG)
-                .group("planks")
-                .unlockedBy("has_item", has(ItemRegistry.MAPLE_LOG))
-                .save(pRecipeOutput);
+        planksFromLog(pRecipeOutput, WoodSetRegistry.MAPLE.getPlanks(), DemeterItemTagsProvider.MAPLE_LOGS, 4);
+        woodFromLogs(pRecipeOutput, BlockRegistry.MAPLE_WOOD, BlockRegistry.MAPLE_LOG);
+        woodFromLogs(pRecipeOutput, BlockRegistry.STRIPPED_MAPLE_WOOD, BlockRegistry.STRIPPED_MAPLE_LOG);
 
-        ShapedRecipeBuilder.shaped(
-                        RecipeCategory.BUILDING_BLOCKS, BlockRegistry.MAPLE_WOOD, 3
-                ).define('#', BlockRegistry.MAPLE_LOG)
-                .pattern("##")
-                .pattern("##")
-                .group("bark")
-                .unlockedBy("has_item", has(BlockRegistry.MAPLE_LOG))
-                .save(pRecipeOutput);
-
-        ShapedRecipeBuilder.shaped(
-                        RecipeCategory.BUILDING_BLOCKS, BlockRegistry.STRIPPED_MAPLE_WOOD, 3
-                ).define('#', BlockRegistry.MAPLE_LOG)
-                .pattern("##")
-                .pattern("##")
-                .group("bark")
-                .unlockedBy("has_item", has(BlockRegistry.STRIPPED_MAPLE_LOG))
-                .save(pRecipeOutput);
-
-        ShapelessRecipeBuilder.shapeless(
-                        RecipeCategory.MISC, ItemRegistry.ANIMAL_TAG
-                ).requires(Items.PAPER).requires(Items.INK_SAC)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.ANIMAL_TAG)
+                .requires(Items.PAPER).requires(Items.INK_SAC)
                 .unlockedBy("has_item", has(Items.PAPER))
                 .save(pRecipeOutput);
 
+        woodenBoat(pRecipeOutput, ItemRegistry.MAPLE_BOAT, WoodSetRegistry.MAPLE.getPlanks());
         generateWoodSetRecipes(pRecipeOutput, WoodSetRegistry.MAPLE);
     }
 }

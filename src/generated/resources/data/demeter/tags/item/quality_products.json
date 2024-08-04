@@ -5,11 +5,8 @@
     "minecraft:potato",
     "minecraft:melon_slice",
     "minecraft:beetroot",
-    "minecraft:cod",
-    "minecraft:salmon",
-    "minecraft:pufferfish",
-    "minecraft:tropical_fish",
     "minecraft:milk_bucket",
-    "#minecraft:wool"
+    "#minecraft:wool",
+    "#c:foods/raw_fish"
   ]
 }

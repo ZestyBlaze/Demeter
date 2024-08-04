@@ -5,6 +5,7 @@ import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.demeter.attachment.MilkAttachment;
+import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.IStats;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -79,7 +80,7 @@ public class AnimalMixin {
             )
     )
     private void demeter$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        AnimalUtil.getAnimalData(demeter$animal).alterLove(Optional.of((ServerPlayer)player), 8);
+        AnimalUtil.getAnimalData(demeter$animal).alterLove(Optional.of((ServerPlayer)player), DemeterConfig.feedingLoveValue.get());
         AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
     }
 

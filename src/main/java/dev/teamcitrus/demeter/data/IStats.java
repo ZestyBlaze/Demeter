@@ -8,9 +8,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface IStats extends CodecProvider<IStats> {

@@ -1,0 +1,28 @@
+{
+  "parent": "demeter:brushed_animal",
+  "criteria": {
+    "spiteful_brushed_animal": {
+      "trigger": "demeter:spiteful_brushed_animal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.demeter.spiteful_animal_brushed.desc"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "demeter:brush"
+    },
+    "title": {
+      "translate": "advancement.demeter.spiteful_animal_brushed"
+    }
+  },
+  "requirements": [
+    [
+      "spiteful_brushed_animal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

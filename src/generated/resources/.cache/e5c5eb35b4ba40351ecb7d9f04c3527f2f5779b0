@@ -1,6 +1,9 @@
-// 1.21	2024-07-19T19:10:59.8192782	Advancements
+// 1.21	2024-08-03T11:06:47.3335644	Advancements
 3a20c7fb42cf407a832dffd0593ee6d225ee4266 data/demeter/advancement/brushed_animal.json
-7349274c6ade4004315b90b988fafc674df0a5ee data/demeter/advancement/love_max.json
+f7194bdb031a08eb6281b0504c0bdd91dc645c17 data/demeter/advancement/love_max.json
 2ccc9e7810e92a22c8e681c03ceadbb24fa4eafd data/demeter/advancement/milk_placed.json
 404942cb96466c5a32e16475945766e0c1cf537e data/demeter/advancement/pet_animal.json
-b80e9f6d9d4524104da7371b4677c49cfc569267 data/demeter/advancement/root.json
+ee7290aae32803a95faef1f4d0beb3a5f42d8943 data/demeter/advancement/root.json
+0c75ec7a575bdae722961eb470659f031647cc54 data/demeter/advancement/spiteful_brushed_animal.json
+7da7470a3d0cf4d95e589a01b77e7138c3054060 data/demeter/advancement/use_miracle_on_frog.json
+1b2c927c76b49a21f1847fd1490b653b1b19af57 data/demeter/advancement/use_miracle_potion.json

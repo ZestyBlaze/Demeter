@@ -1,2 +1,15 @@
-// 1.21	2024-07-07T21:07:21.9215506	Loot Tables
+// 1.21	2024-07-25T21:10:19.0548236	Loot Tables
+6610bf31756b8f128c410debea2b1ec0d6ab082b data/demeter/loot_table/blocks/maple_button.json
+49eac3b2b6f27b3ea5cb2232163058ff95ee2b8c data/demeter/loot_table/blocks/maple_door.json
+d7cfa5caa8cc317d68c334a03a33386d22ed083a data/demeter/loot_table/blocks/maple_fence.json
+36bc237e1b74f40130474cbcae19dcd69d17def7 data/demeter/loot_table/blocks/maple_fence_gate.json
 0fe44a22966d7494b2f572880002f19f237440ec data/demeter/loot_table/blocks/maple_log.json
+ea61003b06a92a2511715afdfa844d5da5624615 data/demeter/loot_table/blocks/maple_planks.json
+7cb71add2d8e66b5297c5039c08ae2d73c9e4a25 data/demeter/loot_table/blocks/maple_pressure_plate.json
+b4a9ce3d94cc6419464e38e743ad1f47712de338 data/demeter/loot_table/blocks/maple_slab.json
+afb976b1d83e5ced6b0b077d74e8546f8e621900 data/demeter/loot_table/blocks/maple_stairs.json
+d85422b79bfb6ddc0b85f522751a0bea24c032d6 data/demeter/loot_table/blocks/maple_trapdoor.json
+94c5ae47d562a85420d96ae658195388f83d1560 data/demeter/loot_table/blocks/maple_wood.json
+7d2cf1e8b0fc8c094647f30e65f1516d36c97ffb data/demeter/loot_table/blocks/milk_cauldron.json
+f6b97b184aa039f5f91802c340a9a07deb8e1f16 data/demeter/loot_table/blocks/stripped_maple_log.json
+363b70607bb6ae0dd2a85ee305fe7ea957c9504c data/demeter/loot_table/blocks/stripped_maple_wood.json

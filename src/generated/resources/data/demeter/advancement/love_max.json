@@ -13,7 +13,7 @@
     "hidden": true,
     "icon": {
       "count": 1,
-      "id": "minecraft:pink_stained_glass"
+      "id": "demeter:miracle_potion"
     },
     "title": {
       "translate": "advancement.demeter.animal_love_max"
@@ -24,5 +24,8 @@
       "love_max"
     ]
   ],
+  "rewards": {
+    "experience": 25
+  },
   "sends_telemetry_event": true
 }

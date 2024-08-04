@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.event;
 import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
+import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.IStats;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
@@ -59,7 +60,7 @@ public class EntityEvents {
                     "message.demeter.animal_petted", value
             ).withStyle(ChatFormatting.GREEN), true);
             level.sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
-            AnimalUtil.getAnimalData(animal).alterLove(Optional.of(serverPlayer),8);
+            AnimalUtil.getAnimalData(animal).alterLove(Optional.of(serverPlayer), DemeterConfig.pettingLoveValue.get());
             AnimalUtil.getAnimalData(animal).setHasBeenPetToday(true);
             AdvancementRegistry.PET.get().trigger(serverPlayer);
             event.setCancellationResult(InteractionResult.SUCCESS);

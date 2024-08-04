@@ -1,5 +1,6 @@
 package dev.teamcitrus.demeter.config;
 
+import dev.teamcitrus.demeter.config.enums.SpiteEffect;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class DemeterConfig {
@@ -11,6 +12,18 @@ public class DemeterConfig {
     public static ModConfigSpec.BooleanValue animalsDieOfHunger;
     public static ModConfigSpec.IntValue daysBeforeAnimalDie;
 
+    //Love Config
+    public static ModConfigSpec.IntValue spawnLoveValue;
+    public static ModConfigSpec.IntValue pettingLoveValue;
+    public static ModConfigSpec.IntValue brushingLoveValue;
+    public static ModConfigSpec.IntValue feedingLoveValue;
+
+    //Enchantment Config
+    public static ModConfigSpec.IntValue comfortBonusPerLevel;
+    public static ModConfigSpec.EnumValue<SpiteEffect> spiteEffect;
+    public static ModConfigSpec.IntValue loveLossPerSpiteLevel;
+
+    //Quality Config
     public static ModConfigSpec.IntValue copperQualityChance;
     public static ModConfigSpec.IntValue ironQualityChance;
     public static ModConfigSpec.IntValue goldQualityChance;
@@ -38,16 +51,35 @@ public class DemeterConfig {
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
                 .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
         builder.pop();
-        builder.push("Quality Crops");
-        copperQualityChance = builder.comment("The chance for copper quality to appear. Example: 60 = 60% chance. 0 to disable")
+        builder.push("Love");
+        spawnLoveValue = builder.comment("The amount of love that animals will spawn with as default")
+                        .defineInRange("spawnLoveValue", 0, 0, 100);
+        pettingLoveValue = builder.comment("The amount of love that animals will gain from petting them")
+                        .defineInRange("pettingLoveValue", 5, 0, 100);
+        brushingLoveValue = builder.comment("The amount of love that animals will gain from brushing them")
+                        .defineInRange("brushingLoveValue", 8, 0, 100);
+        feedingLoveValue = builder.comment("The amount of love that animals will gain from feeding them")
+                        .defineInRange("feedingLoveValue", 5, 0, 100);
+        builder.pop();
+        builder.push("Enchantments");
+        comfortBonusPerLevel = builder.comment("The bonus amount of love the animal gains per level of the enchantment")
+                        .defineInRange("comfortBonusPerLevel", 4, 0, 100);
+        spiteEffect = builder.comment("Defines which effect the Spite curse will take when on a brush")
+                        .defineEnum("spiteEffect", SpiteEffect.INVERT);
+        loveLossPerSpiteLevel = builder.comment("The amount of total love loss when brushing per level of Spite")
+                        .defineInRange("loveLossPerSpiteLevel", 4, 0, 100);
+        builder.pop();
+        builder.push("Quality");
+        builder.comment("Quality works on a percent chance. Example: 60 = 60% chance. 0 to disable");
+        copperQualityChance = builder.comment("The chance for copper quality items be dropped")
                 .defineInRange("copperQualityChance", 40, 0, 100);
-        ironQualityChance = builder.comment("The chance for iron quality to appear. Example: 60 = 60% chance. 0 to disable")
+        ironQualityChance = builder.comment("The chance for iron quality items be dropped")
                 .defineInRange("ironQualityChance", 20, 0, 100);
-        goldQualityChance = builder.comment("The chance for gold quality to appear. Example: 60 = 60% chance. 0 to disable")
+        goldQualityChance = builder.comment("The chance for gold quality items be dropped")
                 .defineInRange("goldQualityChance", 10, 0, 100);
-        diamondQualityChance = builder.comment("The chance for diamond quality to appear. Example: 60 = 60% chance. 0 to disable")
+        diamondQualityChance = builder.comment("The chance for diamond quality items be dropped")
                 .defineInRange("diamondQualityChance", 5, 0, 100);
-        netheriteQualityChance = builder.comment("The chance for netherite quality to appear. Example: 60 = 60% chance. 0 to disable")
+        netheriteQualityChance = builder.comment("The chance for netherite quality items be dropped")
                 .defineInRange("netheriteQualityChance", 1, 0, 100);
         builder.pop();
     }

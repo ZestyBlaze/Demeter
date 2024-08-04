@@ -17,10 +17,12 @@ public class DemeterItemModelProvider extends CitrusItemModelProvider {
     protected void registerModels() {
         basicItem(ItemRegistry.ANIMAL_TAG.get());
         basicItem(ItemRegistry.BRUSH.get());
+        basicItem(ItemRegistry.MIRACLE_POTION.get());
         toBlock(BlockRegistry.MAPLE_LOG.get());
         toBlock(BlockRegistry.MAPLE_WOOD.get());
         toBlock(BlockRegistry.STRIPPED_MAPLE_LOG.get());
         toBlock(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
+        basicItem(ItemRegistry.MAPLE_BOAT.get());
         toBlock(BlockRegistry.MAPLE_LEAVES.get());
         generateSetModels(WoodSetRegistry.MAPLE);
     }

@@ -1,8 +1,8 @@
 package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.component.Quality;
 import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
-import dev.teamcitrus.demeter.quality.Quality;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.FluidRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;

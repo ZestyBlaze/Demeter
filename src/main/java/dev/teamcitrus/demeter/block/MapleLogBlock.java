@@ -22,7 +22,7 @@ public class MapleLogBlock extends RotatedPillarBlock {
     }
 
     @Override
-    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility toolAction, boolean simulate) {
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
         if (context.getItemInHand().getItem() instanceof AxeItem) {
             if (state.is(BlockRegistry.MAPLE_LOG.get())) {
                 return BlockRegistry.STRIPPED_MAPLE_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
@@ -31,7 +31,7 @@ public class MapleLogBlock extends RotatedPillarBlock {
                 return BlockRegistry.STRIPPED_MAPLE_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
         }
-        return super.getToolModifiedState(state, context, toolAction, simulate);
+        return super.getToolModifiedState(state, context, itemAbility, simulate);
     }
 
     @Override

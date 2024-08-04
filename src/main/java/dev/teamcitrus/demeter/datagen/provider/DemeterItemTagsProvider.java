@@ -38,8 +38,8 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(QUALITY_PRODUCTS).add(Items.WHEAT, Items.CARROT, Items.POTATO, Items.MELON_SLICE, Items.BEETROOT, Items.COD,
-                Items.SALMON, Items.PUFFERFISH, Items.TROPICAL_FISH, Items.MILK_BUCKET).addTag(ItemTags.WOOL);
+        tag(QUALITY_PRODUCTS).add(Items.WHEAT, Items.CARROT, Items.POTATO, Items.MELON_SLICE, Items.BEETROOT,
+                Items.MILK_BUCKET).addTags(ItemTags.WOOL, Tags.Items.FOODS_RAW_FISH);
         tag(MAPLE_LOGS).add(BlockRegistry.MAPLE_LOG.get().asItem(), BlockRegistry.MAPLE_WOOD.get().asItem(),
                 BlockRegistry.STRIPPED_MAPLE_LOG.get().asItem(), BlockRegistry.STRIPPED_MAPLE_WOOD.get().asItem());
         tag(ItemTags.LOGS).add(BlockRegistry.MAPLE_LOG.get().asItem(), BlockRegistry.MAPLE_WOOD.get().asItem(),

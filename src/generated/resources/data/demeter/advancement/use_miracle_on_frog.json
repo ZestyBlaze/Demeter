@@ -1,0 +1,31 @@
+{
+  "parent": "demeter:use_miracle_potion",
+  "criteria": {
+    "use_miracle_on_frog": {
+      "trigger": "demeter:use_miracle_on_frog"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.demeter.use_miracle_on_frog.desc"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "demeter:miracle_potion"
+    },
+    "title": {
+      "translate": "advancement.demeter.use_miracle_on_frog"
+    }
+  },
+  "requirements": [
+    [
+      "use_miracle_on_frog"
+    ]
+  ],
+  "rewards": {
+    "experience": 30
+  },
+  "sends_telemetry_event": true
+}

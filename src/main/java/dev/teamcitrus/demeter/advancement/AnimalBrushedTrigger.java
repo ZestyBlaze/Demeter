@@ -35,5 +35,11 @@ public class AnimalBrushedTrigger extends SimpleCriterionTrigger<AnimalBrushedTr
                     new TriggerInstance(Optional.empty())
             );
         }
+
+        public static Criterion<TriggerInstance> spitefulBrushed() {
+            return AdvancementRegistry.SPITEFUL_BRUSHED.get().createCriterion(
+                    new TriggerInstance(Optional.empty())
+            );
+        }
     }
 }

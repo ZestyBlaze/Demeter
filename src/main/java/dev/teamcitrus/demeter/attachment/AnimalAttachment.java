@@ -47,7 +47,7 @@ public class AnimalAttachment {
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this(0, 0, false, false, false,
+        this(DemeterConfig.spawnLoveValue.get(), 0, false, false, false,
                 AnimalGenders.MALE, false, 0, new CompoundTag(), 0);
     }
 
@@ -147,6 +147,10 @@ public class AnimalAttachment {
         if (hasBeenFedToday) {
             daysSinceFed = 0;
         }
+    }
+
+    public int getDaysSinceFed() {
+        return daysSinceFed;
     }
 
     public boolean hasBeenFedToday() {

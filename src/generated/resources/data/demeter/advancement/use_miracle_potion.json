@@ -1,0 +1,26 @@
+{
+  "parent": "demeter:root",
+  "criteria": {
+    "use_miracle_potion": {
+      "trigger": "demeter:use_miracle_potion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.demeter.use_miracle_potion.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "demeter:miracle_potion"
+    },
+    "title": {
+      "translate": "advancement.demeter.use_miracle_potion"
+    }
+  },
+  "requirements": [
+    [
+      "use_miracle_potion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

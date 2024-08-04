@@ -12,6 +12,7 @@ displayName="${mod_name}"
 credits="Thanks to Goomy for help coming up with animal names!"
 authors="${mod_authors}"
 description='''${mod_description}'''
+enumExtensions="META-INF/enumextensions.json"
 
 [[mixins]]
 config="${mod_id}.mixins.json"

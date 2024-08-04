@@ -3,13 +3,15 @@ package dev.teamcitrus.demeter.datagen.provider;
 import dev.teamcitrus.demeter.advancement.AnimalBrushedTrigger;
 import dev.teamcitrus.demeter.advancement.AnimalLoveMaxTrigger;
 import dev.teamcitrus.demeter.advancement.AnimalPetTrigger;
+import dev.teamcitrus.demeter.advancement.MiraclePotionTrigger;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
@@ -37,7 +39,7 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png"),
                             AdvancementType.TASK,
                             false, false, false
-            ).addCriterion("start_game", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRAFTING_TABLE))
+            ).addCriterion("acquire_crafting", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRAFTING_TABLE))
                     .save(saver, "demeter:root");
             AdvancementHolder milkPlaced = Advancement.Builder.advancement().parent(root).display(
                             Items.MILK_BUCKET,
@@ -49,7 +51,6 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
             ).addCriterion("milk_placed", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(BlockRegistry.MILK_BLOCK.get()))
                     .save(saver, "demeter:milk_placed");
 
-
             AdvancementHolder petAnimal = Advancement.Builder.advancement().parent(root).display(
                             Items.COW_SPAWN_EGG,
                             Component.translatable("advancement.demeter.animal_pet"),
@@ -60,7 +61,7 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
             ).addCriterion("pet_animal", AnimalPetTrigger.PetTrigger.pet())
                     .save(saver, "demeter:pet_animal");
             AdvancementHolder brushedAnimal = Advancement.Builder.advancement().parent(petAnimal).display(
-                            ItemRegistry.BRUSH.asItem(),
+                            ItemRegistry.BRUSH.get(),
                             Component.translatable("advancement.demeter.animal_brushed"),
                             Component.translatable("advancement.demeter.animal_brushed.desc"),
                             null,
@@ -68,8 +69,17 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
                             true, true, false
             ).addCriterion("brushed_animal", AnimalBrushedTrigger.TriggerInstance.brushed())
                     .save(saver, "demeter:brushed_animal");
+            AdvancementHolder spitefulBrushedAnimal = Advancement.Builder.advancement().parent(brushedAnimal).display(
+                    ItemRegistry.BRUSH.get(),
+                    Component.translatable("advancement.demeter.spiteful_animal_brushed"),
+                    Component.translatable("advancement.demeter.spiteful_animal_brushed.desc"),
+                    null,
+                    AdvancementType.CHALLENGE,
+                    true, true, true
+            ).addCriterion("spiteful_brushed_animal", AnimalBrushedTrigger.TriggerInstance.spitefulBrushed())
+                    .save(saver, "demeter:spiteful_brushed_animal");
             AdvancementHolder animalLoveMax = Advancement.Builder.advancement().parent(root).display(
-                            Items.PINK_STAINED_GLASS,
+                            ItemRegistry.MIRACLE_POTION.get(),
                             Component.translatable("advancement.demeter.animal_love_max"),
                             Component.translatable("advancement.demeter.animal_love_max.desc"),
                             null,
@@ -78,6 +88,25 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
             ).addCriterion("love_max", AnimalLoveMaxTrigger.TriggerInstance.loveMax())
                     .rewards(AdvancementRewards.Builder.experience(25))
                     .save(saver, "demeter:love_max");
+            AdvancementHolder useMiraclePotion = Advancement.Builder.advancement().parent(root).display(
+                    ItemRegistry.MIRACLE_POTION.get(),
+                    Component.translatable("advancement.demeter.use_miracle_potion"),
+                    Component.translatable("advancement.demeter.use_miracle_potion.desc"),
+                    null,
+                    AdvancementType.TASK,
+                    true, true, false
+            ).addCriterion("use_miracle_potion", MiraclePotionTrigger.TriggerInstance.usePotion())
+                    .save(saver, "demeter:use_miracle_potion");
+            AdvancementHolder useMiracleOnFrog = Advancement.Builder.advancement().parent(useMiraclePotion).display(
+                    ItemRegistry.MIRACLE_POTION.get(),
+                    Component.translatable("advancement.demeter.use_miracle_on_frog"),
+                    Component.translatable("advancement.demeter.use_miracle_on_frog.desc"),
+                    null,
+                    AdvancementType.CHALLENGE,
+                    true, true, true
+            ).addCriterion("use_miracle_on_frog", MiraclePotionTrigger.TriggerInstance.usePotionOnFrog())
+                    .rewards(AdvancementRewards.Builder.experience(30))
+                    .save(saver, "demeter:use_miracle_on_frog");
         }
     }
 }
