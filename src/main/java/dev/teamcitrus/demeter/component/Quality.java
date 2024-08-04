@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.quality;
+package dev.teamcitrus.demeter.component;
 
 import com.mojang.serialization.Codec;
 import dev.teamcitrus.citruslib.codec.CitrusCodecs;
