@@ -48,7 +48,7 @@ public class EnUsProvider extends LanguageProvider {
         add("advancement.demeter.use_miracle_potion", "It's a Miracle!");
         add("advancement.demeter.use_miracle_potion.desc", "Use a Miracle Potion on an Animal");
         add("advancement.demeter.use_miracle_on_frog", "Chemicals in the Water");
-        add("advancement.demeter.use_miracle_on_frog.desc", "'The Freaking Frogs are Gay'");
+        add("advancement.demeter.use_miracle_on_frog.desc", "'The Freaking Frogs are Gay!'");
         add("enchantment.demeter.barber", "Barber");
         add("enchantment.demeter.comfort", "Comfort");
         add("enchantment.demeter.spite", "Curse of Spite");
