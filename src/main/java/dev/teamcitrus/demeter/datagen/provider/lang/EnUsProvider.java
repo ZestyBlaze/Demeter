@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.datagen.provider.lang;
 import dev.teamcitrus.citruslib.util.JavaUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.component.Quality;
+import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.FluidTypeRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
@@ -65,9 +66,9 @@ public class EnUsProvider extends LanguageProvider {
         add("message.demeter.milk.fail_daily", "This animal has already been milked today!");
         add("message.demeter.milk.fail_gender", "This animal is male and cannot be milked!");
         add("message.demeter.brush.fail_daily", "This animal has already been brushed today!");
-        add("tag.item.c.tools.animal_brush", "Animal Brushes");
-        add("tag.item.demeter.maple_logs", "Maple Logs");
-        add("tag.item.demeter.quality_products", "Quality Products");
+        add(DemeterItemTagsProvider.TOOLS_ANIMAL_BRUSH, "Animal Brushes");
+        add(DemeterItemTagsProvider.MAPLE_LOGS, "Maple Logs");
+        add(DemeterItemTagsProvider.QUALITY_PRODUCTS, "Quality Products");
 
         blocks.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("block\\.demeter\\.", "");
