@@ -33,5 +33,7 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> MAPLE_SAPLING = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SAPLING);
     public static final DeferredItem<Item> MAPLE_SIGN = ITEMS.register("maple_sign", () -> new SignItem(new Item.Properties(), BlockRegistry.MAPLE_SIGN.get(), BlockRegistry.MAPLE_WALL_SIGN.get()));
     public static final DeferredItem<Item> MAPLE_BOAT = ITEMS.register("maple_boat", () -> new BoatItem(false, EnumRegistry.MAPLE_BOAT_TYPE.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAPLE_CHEST_BOAT = ITEMS.register("maple_chest_boat", () -> new BoatItem(true, EnumRegistry.MAPLE_BOAT_TYPE.getValue(), new Item.Properties().stacksTo(1)));
+
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
 }
