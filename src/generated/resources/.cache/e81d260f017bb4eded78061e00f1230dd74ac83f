@@ -3,6 +3,7 @@ c679f7d57669ad853a684c3d1aad5093ef45e083 assets/demeter/models/item/animal_tag.j
 fcea22b9a6ea2e99c3bf6811c8f1b0d34ebf3d08 assets/demeter/models/item/brush.json
 0cd9cb61a16fb0f0f2806b8b72d4a062b25bc17d assets/demeter/models/item/maple_boat.json
 84577c2c196e67881fea17d7d05e7f4148c1d0d8 assets/demeter/models/item/maple_button.json
+cdd6638b6527a025a148edd07751174fa7ff8314 assets/demeter/models/item/maple_chest_boat.json
 56cc72bb012806ee43a4787d259ddfba9b1c53ef assets/demeter/models/item/maple_door.json
 bfdf2d7c6fafa6885c0c32a98bcb8f9f7e3bb49c assets/demeter/models/item/maple_fence.json
 6c4ab378e65ab38291e6a8b6c4b5c1c4d5e63e6d assets/demeter/models/item/maple_fence_gate.json
@@ -10,6 +11,7 @@ a591e7f689c365bed4d5365b0393b813878ff67c assets/demeter/models/item/maple_leaves
 82f2c69f8e96d33e7308a1b08d9117333082d546 assets/demeter/models/item/maple_log.json
 d0ea69c988d37031be5d437e494097ab404bc71e assets/demeter/models/item/maple_planks.json
 af13b5c1cf5d7f7063df0a99049ca32be954eed2 assets/demeter/models/item/maple_pressure_plate.json
+a48d0f0838fca11e5573c174752d3cb87c6f6029 assets/demeter/models/item/maple_sapling.json
 846e71dd394a58b5a2fa839b8ecc9123a1366732 assets/demeter/models/item/maple_sign.json
 4184c06f93157e790445685e24885687d96f34c3 assets/demeter/models/item/maple_slab.json
 ef6e64717f9813a3d3088cee90f10e321983b208 assets/demeter/models/item/maple_stairs.json
