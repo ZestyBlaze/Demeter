@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import dev.teamcitrus.demeter.enchantment.DemeterEnchantments;
 import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +23,12 @@ public interface IShearableMixin {
     private List<ItemStack> demeter$onSheared(List<ItemStack> original, Player player,
                                               ItemStack item, Level level, BlockPos pos) {
         List<ItemStack> newList = new ArrayList<>();
+        int barberLevel = item.getEnchantmentLevel(player.level().registryAccess().holderOrThrow(DemeterEnchantments.BARBER));
+
+        if (barberLevel >= 1) {
+            original.addAll(original);
+        }
+
         original.forEach(stack -> {
             QualityUtil.randomiseQuality(stack);
             newList.add(stack);
