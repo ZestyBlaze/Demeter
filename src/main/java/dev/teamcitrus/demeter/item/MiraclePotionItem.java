@@ -11,9 +11,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +31,11 @@ public class MiraclePotionItem extends CitrusItem {
         if (!player.level().isClientSide() && interactionTarget instanceof Animal animal) {
             if (interactionTarget instanceof Frog frog) {
                 AdvancementRegistry.USE_MIRACLE_ON_FROG.get().trigger((ServerPlayer)player);
+                if (AnimalUtil.getAnimalData(frog).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
+                    ((ServerLevel)(animal.level())).sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
+                    ((ServerPlayer)player).connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BOTTLE_EMPTY), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
+                    frog.getBrain().setMemory(MemoryModuleType.IS_PREGNANT, Unit.INSTANCE);
+                }
                 return InteractionResult.SUCCESS;
             }
 
