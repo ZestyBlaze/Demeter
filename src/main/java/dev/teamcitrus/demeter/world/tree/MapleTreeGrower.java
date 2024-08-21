@@ -1,9 +1,12 @@
 package dev.teamcitrus.demeter.world.tree;
 
+import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.grower.TreeGrower;
@@ -18,7 +21,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 import java.util.Optional;
 
 public class MapleTreeGrower {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MAPLE_TREE = FeatureUtils.createKey("maple");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAPLE_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(Demeter.MODID, "maple"));
     public static final TreeGrower MAPLE = new TreeGrower("maple", Optional.empty(), Optional.of(MapleTreeGrower.MAPLE_TREE), Optional.empty());
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
