@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.enchantment.DemeterEnchantments;
+import dev.teamcitrus.demeter.world.tree.MapleTreeGrower;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -13,6 +14,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class DemeterDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.CONFIGURED_FEATURE, MapleTreeGrower::bootstrap)
             .add(Registries.ENCHANTMENT, DemeterEnchantments::bootstrap);
 
 
