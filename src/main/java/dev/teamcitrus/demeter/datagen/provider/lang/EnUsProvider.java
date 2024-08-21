@@ -10,6 +10,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallHangingSignBlock;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -32,6 +34,8 @@ public class EnUsProvider extends LanguageProvider {
         Quality[] qualities = Quality.values();
 
         JavaUtil.takeAll(items, i -> i.get() instanceof BlockItem);
+        JavaUtil.takeAll(blocks, i -> i.get() instanceof WallSignBlock);
+        JavaUtil.takeAll(blocks, i -> i.get() instanceof WallHangingSignBlock);
 
         add("advancement.demeter.root", "BetterFarms");
         add("advancement.demeter.root.desc", "The Introduction to the Farming Overhaul!");

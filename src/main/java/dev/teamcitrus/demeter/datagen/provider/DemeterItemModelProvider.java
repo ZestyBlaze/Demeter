@@ -24,6 +24,7 @@ public class DemeterItemModelProvider extends CitrusItemModelProvider {
         toBlock(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
         basicItem(ItemRegistry.MAPLE_BOAT.get());
         toBlock(BlockRegistry.MAPLE_LEAVES.get());
+        basicItem(ItemRegistry.MAPLE_SIGN.get());
         generateSetModels(WoodSetRegistry.MAPLE);
     }
 }

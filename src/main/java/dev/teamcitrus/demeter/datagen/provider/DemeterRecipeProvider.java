@@ -38,6 +38,7 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                 .save(pRecipeOutput);
 
         woodenBoat(pRecipeOutput, ItemRegistry.MAPLE_BOAT, WoodSetRegistry.MAPLE.getPlanks());
+        signBuilder(ItemRegistry.MAPLE_SIGN, Ingredient.of(WoodSetRegistry.MAPLE.getPlanks()));
         generateWoodSetRecipes(pRecipeOutput, WoodSetRegistry.MAPLE);
     }
 }

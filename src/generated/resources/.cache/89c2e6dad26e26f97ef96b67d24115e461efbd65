@@ -1,4 +1,4 @@
-// 1.21	2024-07-07T21:07:21.9215506	Block States: demeter
+// 1.21	2024-08-21T11:28:28.4358062	Block States: demeter
 ff2ec3aaab927fb1add70f6ab1851cb74bbf3525 assets/demeter/blockstates/maple_button.json
 dc251cb370599b3321bface91bd1ea7bb99c147a assets/demeter/blockstates/maple_door.json
 068a8f47a0b816b8211da4ee39a926e5560d5bac assets/demeter/blockstates/maple_fence.json
@@ -6,9 +6,12 @@ d6d35a5ae1a08e62be911f762495847559bbeab5 assets/demeter/blockstates/maple_fence_
 85fd4ee23637ced86d9913317609bc4f9b11aa50 assets/demeter/blockstates/maple_leaves.json
 51a78a80b34adec9e365f71b196ef263c3fbc464 assets/demeter/blockstates/maple_planks.json
 d3f1aead0267717fa008491d282e66fb87377a53 assets/demeter/blockstates/maple_pressure_plate.json
+fa61b2830994ddf325f64424ec8b34d19f1fac87 assets/demeter/blockstates/maple_sapling.json
+c9789ffff2211b138c27856ed73ee8f534dd17b4 assets/demeter/blockstates/maple_sign.json
 9cb71a2c78c91cc858c21cf089db1a69f3a2fc33 assets/demeter/blockstates/maple_slab.json
 51aa588819d7a5410575f4007d7939e6277824a9 assets/demeter/blockstates/maple_stairs.json
 3ee59276d9cb368d6a356ff68aa6ef555eec955e assets/demeter/blockstates/maple_trapdoor.json
+c9789ffff2211b138c27856ed73ee8f534dd17b4 assets/demeter/blockstates/maple_wall_sign.json
 ee38f5827f0a43c6fee26e7b852dfa6bb3be619d assets/demeter/blockstates/maple_wood.json
 7c6e7f327b114fa53b28a7e5263fde24a6ff2cf3 assets/demeter/blockstates/stripped_maple_log.json
 bdd72b939eb0bbf7aa78f3c5c7a1fc2bb9b6a548 assets/demeter/blockstates/stripped_maple_wood.json
@@ -32,6 +35,8 @@ c64785a81c7b60b732da4e21e63dac0996b805eb assets/demeter/models/block/maple_leave
 45308b7e16495f2bdd2c608c2e6caf66b9de5a71 assets/demeter/models/block/maple_planks.json
 7a09e34a5afbbb9ee539968f306d66c908530ec4 assets/demeter/models/block/maple_pressure_plate.json
 cb8f9fe15b5ebc36f1bec2a46a1ecebebe4f0097 assets/demeter/models/block/maple_pressure_plate_down.json
+6a9e335d2982376de78e580d5613ed1378e4a937 assets/demeter/models/block/maple_sapling.json
+c1977c746de81d574bbe1b2273c989fc1e234db7 assets/demeter/models/block/maple_sign.json
 f027ed387b846b31c5b97d235c681638ca4d8445 assets/demeter/models/block/maple_slab.json
 a26d0c615518802d1aa325c184092f712a1fae80 assets/demeter/models/block/maple_slab_top.json
 412a0d99be0ed563a017f853fb3851c9b2cba148 assets/demeter/models/block/maple_stairs.json
