@@ -1,10 +1,10 @@
-// 1.21	2024-08-03T11:06:47.3335644	Recipes
+// 1.21	2024-08-10T23:35:43.9804542	Recipes
 0cf5f120560eff2e99f468533791a7dc00d86a60 data/demeter/advancement/recipes/building_blocks/maple_planks.json
 a0dcacb3495c54e89abc4d14773cba0ff0f72c8c data/demeter/advancement/recipes/building_blocks/maple_slab.json
 ca03a490a4d4b37c1e979f8559f881a380fedf24 data/demeter/advancement/recipes/building_blocks/maple_stairs.json
 234f62de52274a4148b7f755f3dcc37d63f2c982 data/demeter/advancement/recipes/building_blocks/maple_wood.json
 2fe5c034eaadc643b267a1b324f25029ba2c7626 data/demeter/advancement/recipes/building_blocks/stripped_maple_wood.json
-2ab53af52a436f1d4554ab7fc7edf3ad6fd8a7ee data/demeter/advancement/recipes/food/bf_bucket_to_bottles.json
+d85476a72f704a76b004e64af7c8bb569457dde3 data/demeter/advancement/recipes/food/bucket_to_bottles.json
 94c01192d5aa359959a807c4153f44a5bf3af2ea data/demeter/advancement/recipes/misc/animal_tag.json
 9ebe2c750908e7993d2ed0d5eec017a3f6c640f4 data/demeter/advancement/recipes/misc/maple_fence.json
 b4669fa5fe1e87a6b75d63248837637b33974df4 data/demeter/advancement/recipes/redstone/maple_button.json
@@ -14,7 +14,7 @@ b4669fa5fe1e87a6b75d63248837637b33974df4 data/demeter/advancement/recipes/redsto
 38e0cf889d0f51f65e7436e4da8bdc71ce7d6df6 data/demeter/advancement/recipes/redstone/maple_trapdoor.json
 86f88feb43dec6a7bff39f75db8753572faf98fb data/demeter/advancement/recipes/transportation/maple_boat.json
 8b3190955bd8ea632b1736f128679cae1df4ae85 data/demeter/recipe/animal_tag.json
-82ec9087c58ef88393bb8052353861d46467b5a3 data/demeter/recipe/bf_bucket_to_bottles.json
+82ec9087c58ef88393bb8052353861d46467b5a3 data/demeter/recipe/bucket_to_bottles.json
 457e1fc9df6a92a0ff2b5d11ebe38d043fb2d72a data/demeter/recipe/maple_boat.json
 8c81e6f0f8e8cba7335435f13e64db45647f8929 data/demeter/recipe/maple_button.json
 b5867b4e9eee7ab70e288d8b09cfd79fcf552a45 data/demeter/recipe/maple_door.json

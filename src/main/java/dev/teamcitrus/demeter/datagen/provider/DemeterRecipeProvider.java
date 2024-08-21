@@ -11,6 +11,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,7 +27,7 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                         ItemRegistry.MILK_BOTTLE, 3
                 ).requires(Items.MILK_BUCKET).requires(Items.GLASS_BOTTLE, 3)
                 .unlockedBy("has_item", has(Items.MILK_BUCKET))
-                .save(pRecipeOutput, Demeter.id("bf_bucket_to_bottles"));
+                .save(pRecipeOutput, Demeter.id("bucket_to_bottles"));
 
         planksFromLog(pRecipeOutput, WoodSetRegistry.MAPLE.getPlanks(), DemeterItemTagsProvider.MAPLE_LOGS, 4);
         woodFromLogs(pRecipeOutput, BlockRegistry.MAPLE_WOOD, BlockRegistry.MAPLE_LOG);
