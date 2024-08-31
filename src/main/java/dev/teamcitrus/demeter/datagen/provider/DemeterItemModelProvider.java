@@ -28,6 +28,7 @@ public class DemeterItemModelProvider extends CitrusItemModelProvider {
         basicItem(ItemRegistry.MAPLE_BOAT.get());
         basicItem(ItemRegistry.MAPLE_CHEST_BOAT.get());
         basicItem(ItemRegistry.BUTTER.get());
+        basicItem(ItemRegistry.WATERING_CAN.get());
         generateSetModels(WoodSetRegistry.MAPLE);
     }
 }

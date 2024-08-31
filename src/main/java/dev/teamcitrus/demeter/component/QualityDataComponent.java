@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 
 public record QualityDataComponent(Quality quality) {
     public static final Codec<QualityDataComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Quality.CODEC.fieldOf("quality").forGetter(o -> o.quality)
+            Quality.CODEC.fieldOf("quality").forGetter(QualityDataComponent::quality)
     ).apply(instance, QualityDataComponent::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, QualityDataComponent> STREAM_CODEC = StreamCodec.composite(

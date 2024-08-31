@@ -1,5 +1,6 @@
 package dev.teamcitrus.demeter.datagen.provider.lang;
 
+import dev.teamcitrus.citruslib.datagen.CitrusLanguageProvider;
 import dev.teamcitrus.citruslib.util.JavaUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.component.Quality;
@@ -20,23 +21,18 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class EnUsProvider extends LanguageProvider {
+public class EnUsProvider extends CitrusLanguageProvider {
     public EnUsProvider(PackOutput output) {
         super(output, Demeter.MODID, "en_us");
     }
 
     @Override
     protected void addTranslations() {
-        Set<DeferredHolder<Block, ? extends Block>> blocks = new HashSet<>(BlockRegistry.BLOCKS.getEntries());
-        Set<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ItemRegistry.ITEMS.getEntries());
         Set<DeferredHolder<FluidType, ? extends FluidType>> fluidTypes = new HashSet<>(FluidTypeRegistry.FLUID_TYPES.getEntries());
         Quality[] qualities = Quality.values();
-
-        JavaUtil.takeAll(items, i -> i.get() instanceof BlockItem);
-        JavaUtil.takeAll(blocks, i -> i.get() instanceof WallSignBlock);
-        JavaUtil.takeAll(blocks, i -> i.get() instanceof WallHangingSignBlock);
 
         add("advancement.demeter.root", "BetterFarms");
         add("advancement.demeter.root.desc", "The Introduction to the Farming Overhaul!");
@@ -66,25 +62,18 @@ public class EnUsProvider extends LanguageProvider {
         add("message.demeter.milk.fail_daily", "This animal has already been milked today!");
         add("message.demeter.milk.fail_gender", "This animal is male and cannot be milked!");
         add("message.demeter.brush.fail_daily", "This animal has already been brushed today!");
+        add("item.demeter.watering_can", "%s Watering Can");
         add(DemeterItemTagsProvider.TOOLS_ANIMAL_BRUSH, "Animal Brushes");
         add(DemeterItemTagsProvider.MAPLE_LOGS, "Maple Logs");
         add(DemeterItemTagsProvider.QUALITY_PRODUCTS, "Quality Products");
 
-        blocks.forEach(i -> {
-            String name = i.get().getDescriptionId().replaceFirst("block\\.demeter\\.", "");
-            name = JavaUtil.toTitleCase(name, "_");
-            add(i.get().getDescriptionId(), name);
-        });
-        items.forEach(i -> {
-            String name = i.get().getDescriptionId().replaceFirst("item\\.demeter\\.", "");
-            name = JavaUtil.toTitleCase(name, "_");
-            add(i.get().getDescriptionId(), name);
-        });
         fluidTypes.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("fluid_type\\.demeter\\.", "");
             name = JavaUtil.toTitleCase(name, "_");
             add(i.get().getDescriptionId(), name);
         });
+        generateBlockLanguageKeys(BlockRegistry.BLOCKS);
+        generateItemLanguageKeys(ItemRegistry.ITEMS, List.of(ItemRegistry.WATERING_CAN.get()));
         Arrays.stream(qualities).forEach(quality -> add("item.demeter.quality_tooltip." + quality.getName(), StringUtils.capitalize(quality.getName())));
     }
 }

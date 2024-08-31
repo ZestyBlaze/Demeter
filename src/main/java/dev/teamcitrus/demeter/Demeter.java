@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter;
 
 import dev.teamcitrus.citruslib.network.PayloadHelper;
+import dev.teamcitrus.citruslib.tab.TabFillingRegistry;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.NamesLoader;
 import dev.teamcitrus.demeter.data.StatsRegistry;
@@ -14,6 +15,9 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -54,5 +58,13 @@ public class Demeter {
     public void setup(FMLCommonSetupEvent event) {
         StatsRegistry.INSTANCE.registerToBus();
         PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
+        TabFillingRegistry.register(ItemRegistry.DEMETER_TAB_KEY, ItemRegistry.WATERING_CAN.get());
+    }
+
+    @SubscribeEvent
+    private void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, context) -> {
+            return new FluidHandlerItemStack(ComponentRegistry.FLUID, itemstack, 1000);
+        }, ItemRegistry.WATERING_CAN);
     }
 }
