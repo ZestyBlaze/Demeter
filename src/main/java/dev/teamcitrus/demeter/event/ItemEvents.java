@@ -4,9 +4,7 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.component.Quality;
 import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
-import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.registry.FluidRegistry;
-import dev.teamcitrus.demeter.registry.ItemRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -25,18 +23,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.SimpleFluidContent;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
-import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 
 @EventBusSubscriber(modid = Demeter.MODID)
 public class ItemEvents {

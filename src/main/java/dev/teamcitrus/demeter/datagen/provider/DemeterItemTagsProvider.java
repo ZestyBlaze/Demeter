@@ -24,7 +24,7 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
 
     public static final TagKey<Item> TOOLS_ANIMAL_BRUSH = commonTag("tools/animal_brush");
 
-    public static final TagKey<Item> CURIOS_RING = curiosTag("ring");
+    public static final TagKey<Item> ACCESSORIES_CHARM = accessoriesTag("charm");
 
     public DemeterItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> holder, CompletableFuture<TagLookup<Block>> blockTag, ExistingFileHelper existingFileHelper) {
         super(output, holder, blockTag, Demeter.MODID, existingFileHelper);
@@ -38,8 +38,8 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
         return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", id));
     }
 
-    private static TagKey<Item> curiosTag(String id) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", id));
+    private static TagKey<Item> accessoriesTag(String id) {
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("accessories", id));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
         tag(ItemTags.LEAVES).add(BlockRegistry.MAPLE_LEAVES.get().asItem());
         tag(TOOLS_ANIMAL_BRUSH).add(ItemRegistry.BRUSH.get());
         tag(Tags.Items.TOOLS).addTag(TOOLS_ANIMAL_BRUSH);
-        tag(CURIOS_RING).add(ItemRegistry.BREEDING_CHARM.get());
+        tag(ACCESSORIES_CHARM).add(ItemRegistry.BREEDING_CHARM.get());
         generateSetTags(WoodSetRegistry.MAPLE);
     }
 }

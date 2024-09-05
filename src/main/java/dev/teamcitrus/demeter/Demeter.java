@@ -38,6 +38,7 @@ public class Demeter {
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ComponentRegistry.COMPONENTS.register(bus);
         AdvancementRegistry.CRITERION.register(bus);
+        PoiTypeRegistry.POI_TYPES.register(bus);
         modContainer.registerConfig(ModConfig.Type.CLIENT, DemeterConfig.CLIENT_SPEC);
         modContainer.registerConfig(ModConfig.Type.COMMON, DemeterConfig.GENERAL_SPEC);
         WoodSetRegistry.init();

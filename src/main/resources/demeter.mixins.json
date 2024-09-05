@@ -8,6 +8,7 @@
     "BreedGoalMixin",
     "ChickenMixin",
     "CowGoatMixin",
+    "CropBlockMixin",
     "FarmBlockMixin",
     "IShearableMixin",
     "ThrownEggMixin"

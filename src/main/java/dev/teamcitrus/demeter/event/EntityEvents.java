@@ -24,6 +24,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
+import net.neoforged.neoforge.event.entity.player.CanContinueSleepingEvent;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -83,5 +84,10 @@ public class EntityEvents {
     @SubscribeEvent
     public static void onEntitySleep(CanPlayerSleepEvent event) {
         event.setProblem(null);
+    }
+
+    @SubscribeEvent
+    public static void onEntitySleep(CanContinueSleepingEvent event) {
+        event.setContinueSleeping(true);
     }
 }

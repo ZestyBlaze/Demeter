@@ -34,7 +34,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", MiraclePotionItem::new);
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
     public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);
-    public static final DeferredItem<Item> BREEDING_CHARM = ITEMS.register("breeding_charm", DemeterCurioItem::new);
+    public static final DeferredItem<Item> BREEDING_CHARM = ITEMS.register("breeding_charm", DemeterAccessoryItem::new);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);
     public static final DeferredItem<BlockItem> STRIPPED_MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG);

@@ -2,8 +2,8 @@ package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.citruslib.tab.ITabFiller;
-import dev.teamcitrus.demeter.component.WateringCanLevel;
-import dev.teamcitrus.demeter.component.WateringCanLevelComponent;
+import dev.teamcitrus.demeter.component.IrrigationLevel;
+import dev.teamcitrus.demeter.component.IrrigationLevelComponent;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.network.chat.Component;
@@ -14,10 +14,12 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
@@ -31,11 +33,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Locale;
+import java.util.*;
 
 public class WateringCanItem extends CitrusItem implements ITabFiller {
+    private static final int WATER_CAN_DRAIN_PER_USE = 20;
+
     public WateringCanItem() {
         super(new Properties().stacksTo(1));
     }
@@ -70,7 +72,12 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
             BlockState state = context.getLevel().getBlockState(context.getClickedPos());
             if (state.is(Blocks.FARMLAND) && getFluidInTankFromStack(context.getItemInHand()) >= 500) {
                 level.setBlockAndUpdate(context.getClickedPos(), state.setValue(BlockStateProperties.MOISTURE, 7));
-                drainContainer(context.getItemInHand(), 500);
+                drainContainer(context.getItemInHand(), WATER_CAN_DRAIN_PER_USE);
+                return InteractionResult.SUCCESS;
+            } else if (state.getBlock() instanceof CropBlock) {
+                BlockState state2 = context.getLevel().getBlockState(context.getClickedPos().below());
+                level.setBlockAndUpdate(context.getClickedPos().below(), state2.setValue(BlockStateProperties.MOISTURE, 7));
+                drainContainer(context.getItemInHand(), WATER_CAN_DRAIN_PER_USE);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -79,13 +86,20 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
 
     @Override
     public Component getName(ItemStack stack) {
-        WateringCanLevelComponent component = stack.get(ComponentRegistry.WATERING_CAN_LEVEL.get());
+        IrrigationLevelComponent component = stack.get(ComponentRegistry.WATERING_CAN_LEVEL.get());
         return Component.translatable(getDescriptionId(stack), StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT)));
     }
 
     @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(
+                Component.translatable("item.demeter.watering_can.uses")
+        );
+    }
+
+    @Override
     public void fillItemCategory(CreativeModeTab tab, BuildCreativeModeTabContentsEvent event) {
-        Arrays.stream(WateringCanLevel.values()).sorted(Comparator.reverseOrder()).forEach(level -> {
+        Arrays.stream(IrrigationLevel.values()).sorted(Comparator.reverseOrder()).forEach(level -> {
             ItemStack stack = new ItemStack(this);
             setLevel(stack, level);
             fillContainer(stack, getTankCapacityFromStack(stack));
@@ -95,8 +109,8 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         });
     }
 
-    public static void setLevel(ItemStack stack, WateringCanLevel level) {
-        stack.set(ComponentRegistry.WATERING_CAN_LEVEL.get(), new WateringCanLevelComponent(level));
+    public static void setLevel(ItemStack stack, IrrigationLevel level) {
+        stack.set(ComponentRegistry.WATERING_CAN_LEVEL.get(), new IrrigationLevelComponent(level));
     }
 
     private boolean attemptToFill(Level level, Player player, ItemStack stack) {
@@ -111,22 +125,22 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         return false;
     }
 
-    public static int getTankCapacityFromStack(ItemStack stack) {
+    private int getTankCapacityFromStack(ItemStack stack) {
         IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         return handler != null ? handler.getTankCapacity(0) : 0;
     }
 
-    public static int getFluidInTankFromStack(ItemStack stack) {
+    private int getFluidInTankFromStack(ItemStack stack) {
         IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         return handler != null ? handler.getFluidInTank(0).getAmount() : 0;
     }
 
-    public static boolean fillContainer(ItemStack stack, int maxWater) {
+    private boolean fillContainer(ItemStack stack, int maxWater) {
         IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         return handler != null && handler.fill(new FluidStack(Fluids.WATER, maxWater), IFluidHandler.FluidAction.EXECUTE) > 0;
     }
 
-    public static void drainContainer(ItemStack stack, int amount) {
+    private void drainContainer(ItemStack stack, int amount) {
         IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         if (handler != null)
             handler.drain(amount, IFluidHandler.FluidAction.EXECUTE);
