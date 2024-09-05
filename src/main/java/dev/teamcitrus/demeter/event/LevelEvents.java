@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
+import dev.teamcitrus.demeter.registry.PoiTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerChunkCache;
@@ -12,14 +13,12 @@ import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @EventBusSubscriber(modid = Demeter.MODID)
@@ -52,7 +51,7 @@ public class LevelEvents {
             if (level.shouldTickBlocksAt(chunkpos.toLong())) {
                 //Demeter.LOGGER.error(2);
                 Stream<PoiRecord> record = level.getPoiManager().getInChunk(
-                        Predicate.isEqual(Blocks.FARMLAND),
+                        holder -> holder.is(PoiTypeRegistry.FARMLAND),
                         chunkpos,
                         PoiManager.Occupancy.ANY
                 );
