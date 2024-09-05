@@ -7,6 +7,7 @@ import dev.teamcitrus.demeter.util.QualityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
@@ -24,7 +25,9 @@ public class QualityLootModifier extends LootModifier {
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        generatedLoot.forEach(QualityUtil::randomiseQuality);
+        if (context.hasParam(LootContextParams.THIS_ENTITY)) {
+            generatedLoot.forEach(QualityUtil::randomiseQuality);
+        }
         return generatedLoot;
     }
 
