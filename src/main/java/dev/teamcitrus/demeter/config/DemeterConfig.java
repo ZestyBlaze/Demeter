@@ -43,7 +43,7 @@ public class DemeterConfig {
     }
 
     private static void setupConfig(ModConfigSpec.Builder builder) {
-        builder.push("All Animals");
+        builder.push("Animals Config");
         animalHappinessMin = builder.comment("The minimum value of happiness required for an animal to be considered 'happy'")
                 .defineInRange("animalHappinessMin", 65, 0, 100);
         animalsDieOfHunger = builder.comment("Will animals die of hunger after a certain number of days of not being fed?")
@@ -51,7 +51,7 @@ public class DemeterConfig {
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
                 .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
         builder.pop();
-        builder.push("Love");
+        builder.push("Love Config");
         spawnLoveValue = builder.comment("The amount of love that animals will spawn with as default")
                         .defineInRange("spawnLoveValue", 0, 0, 100);
         pettingLoveValue = builder.comment("The amount of love that animals will gain from petting them")
@@ -61,7 +61,7 @@ public class DemeterConfig {
         feedingLoveValue = builder.comment("The amount of love that animals will gain from feeding them")
                         .defineInRange("feedingLoveValue", 5, 0, 100);
         builder.pop();
-        builder.push("Enchantments");
+        builder.push("Enchantment Config");
         comfortBonusPerLevel = builder.comment("The bonus amount of love the animal gains per level of the enchantment")
                         .defineInRange("comfortBonusPerLevel", 4, 0, 100);
         spiteEffect = builder.comment("Defines which effect the Spite curse will take when on a brush")
@@ -69,7 +69,7 @@ public class DemeterConfig {
         loveLossPerSpiteLevel = builder.comment("The amount of total love loss when brushing per level of Spite")
                         .defineInRange("loveLossPerSpiteLevel", 4, 0, 100);
         builder.pop();
-        builder.push("Quality");
+        builder.push("Quality Config");
         builder.comment("Quality works on a percent chance. Example: 60 = 60% chance. 0 to disable");
         copperQualityChance = builder.comment("The chance for copper quality items be dropped")
                 .defineInRange("copperQualityChance", 40, 0, 100);
