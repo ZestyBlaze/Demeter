@@ -68,15 +68,20 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         Level level = context.getLevel();
         if (!level.isClientSide()) {
             BlockState state = context.getLevel().getBlockState(context.getClickedPos());
-            if (state.is(Blocks.FARMLAND) && getFluidInTankFromStack(context.getItemInHand()) >= 500) {
-                level.setBlockAndUpdate(context.getClickedPos(), state.setValue(BlockStateProperties.MOISTURE, 7));
-                drainContainer(context.getItemInHand(), WATER_CAN_DRAIN_PER_USE);
-                return InteractionResult.SUCCESS;
-            } else if (state.getBlock() instanceof CropBlock) {
-                BlockState state2 = context.getLevel().getBlockState(context.getClickedPos().below());
-                level.setBlockAndUpdate(context.getClickedPos().below(), state2.setValue(BlockStateProperties.MOISTURE, 7));
-                drainContainer(context.getItemInHand(), WATER_CAN_DRAIN_PER_USE);
-                return InteractionResult.SUCCESS;
+            if (getFluidInTankFromStack(context.getItemInHand()) >= 50) {
+                if (state.is(Blocks.FARMLAND) && state.getValue(BlockStateProperties.MOISTURE) < 7) {
+                    level.setBlockAndUpdate(context.getClickedPos(), state.setValue(BlockStateProperties.MOISTURE, 7));
+                    drainContainer(context.getItemInHand(), 50);
+                    return InteractionResult.SUCCESS;
+                } else if (state.getBlock() instanceof CropBlock
+                        && level.getBlockState(context.getClickedPos().below()).getBlock().equals(Blocks.FARMLAND)
+                        && level.getBlockState(context.getClickedPos().below()).getValue(BlockStateProperties.MOISTURE) < 7
+                ) {
+                    BlockState state2 = context.getLevel().getBlockState(context.getClickedPos().below());
+                    level.setBlockAndUpdate(context.getClickedPos().below(), state2.setValue(BlockStateProperties.MOISTURE, 7));
+                    drainContainer(context.getItemInHand(), 50);
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
         return InteractionResult.FAIL;
