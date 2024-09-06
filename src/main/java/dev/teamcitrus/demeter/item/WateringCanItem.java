@@ -125,14 +125,16 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         return false;
     }
 
-    private int getTankCapacityFromStack(ItemStack stack) {
-        IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
-        return handler != null ? handler.getTankCapacity(0) : 0;
     }
 
     private int getFluidInTankFromStack(ItemStack stack) {
         IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         return handler != null ? handler.getFluidInTank(0).getAmount() : 0;
+    }
+
+    private int getTankCapacityFromStack(ItemStack stack) {
+        IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
+        return handler != null ? handler.getTankCapacity(0) : 0;
     }
 
     private boolean fillContainer(ItemStack stack, int maxWater) {
