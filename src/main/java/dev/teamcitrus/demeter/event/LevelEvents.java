@@ -47,18 +47,13 @@ public class LevelEvents {
         for (ServerChunkCache.ChunkAndHolder serverchunkcache$chunkandholder : list) {
             LevelChunk levelchunk = serverchunkcache$chunkandholder.chunk();
             ChunkPos chunkpos = levelchunk.getPos();
-            //Demeter.LOGGER.error(1);
             if (level.shouldTickBlocksAt(chunkpos.toLong())) {
-                //Demeter.LOGGER.error(2);
                 Stream<PoiRecord> record = level.getPoiManager().getInChunk(
                         holder -> holder.is(PoiTypeRegistry.FARMLAND),
                         chunkpos,
                         PoiManager.Occupancy.ANY
                 );
                 record.forEach(poiRecord -> {
-                    Demeter.LOGGER.error("5");
-                    Demeter.LOGGER.error(poiRecord.getPoiType());
-                    Demeter.LOGGER.error(poiRecord.getPos());
                 });
             }
         }
