@@ -93,7 +93,10 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(
-                Component.translatable("item.demeter.watering_can.uses")
+                Component.translatable("item.demeter.watering_can.uses", Component.literal(
+                        calculateRemainingUses(stack) + "/" + calculateTotalUses(stack))
+                                .withStyle(ChatFormatting.AQUA))
+                        .withStyle(ChatFormatting.DARK_GRAY)
         );
     }
 
