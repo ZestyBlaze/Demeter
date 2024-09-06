@@ -125,6 +125,12 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         return false;
     }
 
+    private int calculateRemainingUses(ItemStack stack) {
+        return getFluidInTankFromStack(stack) / 50;
+    }
+
+    private int calculateTotalUses(ItemStack stack) {
+        return getTankCapacityFromStack(stack) / 50;
     }
 
     private int getFluidInTankFromStack(ItemStack stack) {
