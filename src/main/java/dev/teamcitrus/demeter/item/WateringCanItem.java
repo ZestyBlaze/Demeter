@@ -36,8 +36,6 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 public class WateringCanItem extends CitrusItem implements ITabFiller {
-    private static final int WATER_CAN_DRAIN_PER_USE = 20;
-
     public WateringCanItem() {
         super(new Properties().stacksTo(1));
     }
