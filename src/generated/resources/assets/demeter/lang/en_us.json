@@ -56,6 +56,7 @@
   "item.demeter.quality_tooltip.netherite": "Netherite",
   "item.demeter.quality_tooltip.none": "None",
   "item.demeter.watering_can": "%s Watering Can",
+  "item.demeter.watering_can.fail": "Something has gone wrong, this can has no data!",
   "item.demeter.watering_can.uses": "Uses: %s",
   "itemGroup.demeter": "Demeter",
   "message.demeter.animal_petted": "You pet your %s for today",

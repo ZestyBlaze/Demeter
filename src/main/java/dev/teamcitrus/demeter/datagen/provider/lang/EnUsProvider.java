@@ -51,6 +51,7 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("error.demeter.namesloadfail", "Error while loading names");
         add("item.demeter.quality_tooltip", "Quality: %s");
         add("item.demeter.watering_can", "%s Watering Can");
+        add("item.demeter.watering_can.fail", "Something has gone wrong, this can has no data!");
         add("item.demeter.watering_can.uses", "Uses: %s");
         add("itemGroup.demeter", "Demeter");
         add("message.demeter.animal_petted", "You pet your %s for today");
