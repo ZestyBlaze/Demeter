@@ -64,8 +64,9 @@ public class Demeter {
 
     @SubscribeEvent
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, context) -> {
-            return new FluidHandlerItemStack(ComponentRegistry.FLUID, itemstack, 1000);
-        }, ItemRegistry.WATERING_CAN);
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, context) ->
+                new FluidHandlerItemStack(ComponentRegistry.FLUID_HANDLER, itemstack, 1000),
+                ItemRegistry.WATERING_CAN
+        );
     }
 }
