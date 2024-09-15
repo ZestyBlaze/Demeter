@@ -7,14 +7,13 @@ import dev.teamcitrus.demeter.component.IrrigationLevelComponent;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +36,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 
 public class WateringCanItem extends CitrusItem implements ITabFiller {
     public WateringCanItem() {
@@ -64,7 +66,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
     public InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (attemptToFill(level, player, stack)) return InteractionResultHolder.success(stack);
-        else return InteractionResultHolder.pass(stack);
+        return InteractionResultHolder.pass(stack);
     }
 
     @Override
@@ -72,10 +74,42 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         Level level = context.getLevel();
         if (!level.isClientSide()) {
             BlockState state = context.getLevel().getBlockState(context.getClickedPos());
-            if (getFluidInTankFromStack(context.getItemInHand()) >= 50) {
+            if (getFluidInTankFromStack(context.getItemInHand()) >= 20) {
+                IrrigationLevelComponent component = context.getItemInHand().get(ComponentRegistry.IRRIGATION_LEVEL.get());
                 if (state.is(Blocks.FARMLAND) && state.getValue(BlockStateProperties.MOISTURE) < 7) {
-                    level.setBlockAndUpdate(context.getClickedPos(), state.setValue(BlockStateProperties.MOISTURE, 7));
-                    drainContainer(context.getItemInHand(), 50);
+                    if (component.level().equals(IrrigationLevel.IRON)) {
+                        for (int i = 0; i < 3; i++) {
+                            BlockState newState = level.getBlockState(context.getClickedPos().relative(context.getHorizontalDirection(), i));
+                            if (newState.hasProperty(BlockStateProperties.MOISTURE)) {
+                                level.setBlockAndUpdate(context.getClickedPos().relative(context.getHorizontalDirection(), i),
+                                        newState.setValue(BlockStateProperties.MOISTURE, 7));
+                            }
+                        }
+                    } else if (component.level().equals(IrrigationLevel.NETHERITE)) {
+                        for (int i = 0; i < 3; i++) {
+                            Direction facing = context.getHorizontalDirection();
+                            BlockPos pos = context.getClickedPos().relative(facing, i);
+                            BlockState centreState = level.getBlockState(pos);
+                            BlockState leftState = level.getBlockState(pos.relative(facing.getCounterClockWise()));
+                            BlockState rightState = level.getBlockState(pos.relative(facing.getClockWise()));
+
+                            if (centreState.hasProperty(BlockStateProperties.MOISTURE)) {
+                                level.setBlockAndUpdate(pos,
+                                        centreState.setValue(BlockStateProperties.MOISTURE, 7));
+                            }
+                            if (leftState.hasProperty(BlockStateProperties.MOISTURE)) {
+                                level.setBlockAndUpdate(pos.relative(facing.getCounterClockWise()),
+                                        leftState.setValue(BlockStateProperties.MOISTURE, 7));
+                            }
+                            if (rightState.hasProperty(BlockStateProperties.MOISTURE)) {
+                                level.setBlockAndUpdate(pos.relative(facing.getClockWise()),
+                                        rightState.setValue(BlockStateProperties.MOISTURE, 7));
+                            }
+                        }
+                    } else {
+                        level.setBlockAndUpdate(context.getClickedPos(), state.setValue(BlockStateProperties.MOISTURE, 7));
+                    }
+                    drainContainer(context.getItemInHand(), 20);
                     return InteractionResult.SUCCESS;
                 } else if (state.getBlock() instanceof CropBlock
                         && level.getBlockState(context.getClickedPos().below()).getBlock().equals(Blocks.FARMLAND)
@@ -83,28 +117,38 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
                 ) {
                     BlockState state2 = context.getLevel().getBlockState(context.getClickedPos().below());
                     level.setBlockAndUpdate(context.getClickedPos().below(), state2.setValue(BlockStateProperties.MOISTURE, 7));
-                    drainContainer(context.getItemInHand(), 50);
+                    drainContainer(context.getItemInHand(), 20);
                     return InteractionResult.SUCCESS;
                 }
             }
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.PASS;
     }
 
     @Override
     public Component getName(ItemStack stack) {
-        IrrigationLevelComponent component = stack.get(ComponentRegistry.WATERING_CAN_LEVEL.get());
-        return Component.translatable(getDescriptionId(stack), StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT)));
+        if (stack.has(ComponentRegistry.IRRIGATION_LEVEL.get())) {
+            IrrigationLevelComponent component = stack.get(ComponentRegistry.IRRIGATION_LEVEL.get());
+            return Component.translatable(getDescriptionId(stack), StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT)));
+        }
+        return Component.translatable(getDescriptionId(stack));
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(
-                Component.translatable("item.demeter.watering_can.uses", Component.literal(
-                        calculateRemainingUses(stack) + "/" + calculateTotalUses(stack))
-                                .withStyle(ChatFormatting.AQUA))
-                        .withStyle(ChatFormatting.DARK_GRAY)
-        );
+        if (stack.has(ComponentRegistry.IRRIGATION_LEVEL.get())) {
+            tooltipComponents.add(
+                    Component.translatable("item.demeter.watering_can.uses", Component.literal(
+                                            calculateRemainingUses(stack) + "/" + calculateTotalUses(stack))
+                                    .withStyle(ChatFormatting.AQUA))
+                            .withStyle(ChatFormatting.DARK_GRAY)
+            );
+        } else {
+            tooltipComponents.add(
+                    Component.translatable("item.demeter.watering_can.fail")
+                            .withStyle(ChatFormatting.RED)
+            );
+        }
     }
 
     @Override
@@ -113,22 +157,27 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
             ItemStack stack = new ItemStack(this);
             setLevel(stack, level);
             fillContainer(stack, getTankCapacityFromStack(stack));
-            event.insertAfter(new ItemStack(ItemRegistry.BUTTER.get()), stack,
+            event.insertAfter(ItemRegistry.BUTTER.toStack(), stack,
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
             );
         });
     }
 
     public static void setLevel(ItemStack stack, IrrigationLevel level) {
-        stack.set(ComponentRegistry.WATERING_CAN_LEVEL.get(), new IrrigationLevelComponent(level));
+        stack.set(ComponentRegistry.IRRIGATION_LEVEL.get(), new IrrigationLevelComponent(level));
     }
 
     private boolean attemptToFill(Level level, Player player, ItemStack stack) {
-        BlockHitResult rayTraceResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
-        if (rayTraceResult.getType() == BlockHitResult.Type.BLOCK) {
-            BlockState state = level.getBlockState(rayTraceResult.getBlockPos());
-            if (state.getFluidState().is(FluidTags.WATER)) {
-                return fillContainer(stack, getTankCapacityFromStack(stack));
+        BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
+        BlockPos blockpos = blockHitResult.getBlockPos();
+        Direction direction = blockHitResult.getDirection();
+        BlockPos blockpos1 = blockpos.relative(direction);
+        if (blockHitResult.getType() == BlockHitResult.Type.BLOCK) {
+            if (level.mayInteract(player, blockpos) && player.mayUseItemAt(blockpos1, direction, stack)) {
+                BlockState state = level.getBlockState(blockpos);
+                if (state.getFluidState().is(FluidTags.WATER)) {
+                    return fillContainer(stack, getTankCapacityFromStack(stack));
+                }
             }
         }
 
@@ -136,11 +185,11 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
     }
 
     private int calculateRemainingUses(ItemStack stack) {
-        return getFluidInTankFromStack(stack) / 50;
+        return getFluidInTankFromStack(stack) / 20;
     }
 
     private int calculateTotalUses(ItemStack stack) {
-        return getTankCapacityFromStack(stack) / 50;
+        return getTankCapacityFromStack(stack) / 20;
     }
 
     private int getFluidInTankFromStack(ItemStack stack) {
