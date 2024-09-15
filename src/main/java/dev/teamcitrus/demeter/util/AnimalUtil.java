@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.util;
 import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
+import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.data.AnimalStats;
 import dev.teamcitrus.demeter.data.StatsRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -40,7 +41,7 @@ public class AnimalUtil {
             DynamicHolder<AnimalStats> stats = getStats(self);
             int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.get().minChildrenPerBirth(), stats.get().maxChildrenPerBirth());
             if (self.getLoveCause() != null) {
-                if (AccessoriesCapability.get(self.getLoveCause()).isEquipped(ItemRegistry.BREEDING_CHARM.get())) {
+                if (AccessoriesCapability.get(self.getLoveCause()).isEquipped(AccessoriesCompat.Items.BREEDING_CHARM.get())) {
                     numberOfTimes += 2;
                 }
             }

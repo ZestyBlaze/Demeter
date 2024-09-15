@@ -1,6 +1,8 @@
 package dev.teamcitrus.demeter.registry;
 
+import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.item.BrushItem;
 import dev.teamcitrus.demeter.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,6 +26,8 @@ public class ItemRegistry {
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> {
                 if (!(item.get() instanceof WateringCanItem))
                     output.accept(item.get());
+                if (ModUtil.isModInstalled("accessories"))
+                    AccessoriesCompat.Internal.addItemsToTab(output);
             }))
             .build());
 
@@ -34,7 +38,6 @@ public class ItemRegistry {
     public static final DeferredItem<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", MiraclePotionItem::new);
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
     public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);
-    public static final DeferredItem<Item> BREEDING_CHARM = ITEMS.register("breeding_charm", DemeterAccessoryItem::new);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);
     public static final DeferredItem<BlockItem> STRIPPED_MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG);

@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.datagen.provider.lang;
 import dev.teamcitrus.citruslib.datagen.CitrusLanguageProvider;
 import dev.teamcitrus.citruslib.util.JavaUtil;
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.component.Quality;
 import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
@@ -71,6 +72,7 @@ public class EnUsProvider extends CitrusLanguageProvider {
         });
         generateBlockLanguageKeys(BlockRegistry.BLOCKS);
         generateItemLanguageKeys(ItemRegistry.ITEMS, List.of(ItemRegistry.WATERING_CAN.get()));
+        generateItemLanguageKeys(AccessoriesCompat.Items.ACCESSORIES_ITEMS);
         Arrays.stream(qualities).forEach(quality -> add("item.demeter.quality_tooltip." + quality.getName(), StringUtils.capitalize(quality.getName())));
     }
 }

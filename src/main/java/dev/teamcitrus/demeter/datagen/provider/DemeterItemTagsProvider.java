@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.citruslib.datagen.CitrusItemTagsProvider;
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import dev.teamcitrus.demeter.registry.WoodSetRegistry;
@@ -57,7 +58,7 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
         tag(ItemTags.LEAVES).add(BlockRegistry.MAPLE_LEAVES.get().asItem());
         tag(TOOLS_ANIMAL_BRUSH).add(ItemRegistry.BRUSH.get());
         tag(Tags.Items.TOOLS).addTag(TOOLS_ANIMAL_BRUSH);
-        tag(ACCESSORIES_CHARM).add(ItemRegistry.BREEDING_CHARM.get());
+        tag(ACCESSORIES_CHARM).add(AccessoriesCompat.Items.BREEDING_CHARM.asItem());
         generateSetTags(WoodSetRegistry.MAPLE);
     }
 }

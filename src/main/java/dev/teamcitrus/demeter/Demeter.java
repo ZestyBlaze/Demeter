@@ -2,6 +2,8 @@ package dev.teamcitrus.demeter;
 
 import dev.teamcitrus.citruslib.network.PayloadHelper;
 import dev.teamcitrus.citruslib.tab.TabFillingRegistry;
+import dev.teamcitrus.citruslib.util.ModUtil;
+import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.NamesLoader;
 import dev.teamcitrus.demeter.data.StatsRegistry;
@@ -43,6 +45,10 @@ public class Demeter {
         modContainer.registerConfig(ModConfig.Type.COMMON, DemeterConfig.GENERAL_SPEC);
         WoodSetRegistry.init();
         bus.register(this);
+        
+        if (ModUtil.isModInstalled("accessories")) {
+            AccessoriesCompat.init(bus);
+        }
 
         try {
             NamesLoader.load();
