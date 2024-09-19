@@ -31,7 +31,6 @@ public class DemeterLootProvider {
             dropSelf(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
             dropSelf(BlockRegistry.MAPLE_SIGN.get());
             dropSelf(BlockRegistry.MAPLE_WALL_SIGN.get());
-            dropOther(BlockRegistry.MILK_CAULDRON_BLOCK.get(), Items.CAULDRON);
             generateSetDrops(WoodSetRegistry.MAPLE);
         }
     }

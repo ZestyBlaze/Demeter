@@ -3,7 +3,6 @@ package dev.teamcitrus.demeter.registry;
 import dev.teamcitrus.citruslib.block.CitrusSign;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.block.MapleLogBlock;
-import dev.teamcitrus.demeter.block.MilkCauldronBlock;
 import dev.teamcitrus.demeter.world.tree.MapleTreeGrower;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -25,7 +24,4 @@ public class BlockRegistry {
     public static final DeferredBlock<SaplingBlock> MAPLE_SAPLING = BLOCKS.register("maple_sapling", () -> new SaplingBlock(MapleTreeGrower.MAPLE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
     public static final DeferredBlock<StandingSignBlock> MAPLE_SIGN = BLOCKS.register("maple_sign", () -> new CitrusSign.CitrusStandingSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
     public static final DeferredBlock<WallSignBlock> MAPLE_WALL_SIGN = BLOCKS.register("maple_wall_sign", () -> new CitrusSign.CitrusWallSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
-
-    public static final DeferredBlock<MilkCauldronBlock> MILK_CAULDRON_BLOCK = BLOCKS.register("milk_cauldron", () -> new MilkCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER_CAULDRON)));
-    public static final DeferredBlock<LiquidBlock> MILK_BLOCK = BLOCKS.register("milk_block", () -> new LiquidBlock(FluidRegistry.MILK.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
 }
