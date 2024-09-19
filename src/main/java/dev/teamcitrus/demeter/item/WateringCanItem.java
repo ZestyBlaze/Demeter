@@ -2,14 +2,19 @@ package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.citruslib.tab.ITabFiller;
-import dev.teamcitrus.demeter.component.IrrigationLevel;
-import dev.teamcitrus.demeter.component.IrrigationLevelComponent;
+import dev.teamcitrus.demeter.component.QualityLevel;
+import dev.teamcitrus.demeter.component.QualityLevelComponent;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -75,49 +80,16 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         if (!level.isClientSide()) {
             BlockState state = context.getLevel().getBlockState(context.getClickedPos());
             if (getFluidInTankFromStack(context.getItemInHand()) >= 20) {
-                IrrigationLevelComponent component = context.getItemInHand().get(ComponentRegistry.IRRIGATION_LEVEL.get());
+                QualityLevelComponent component = context.getItemInHand().get(ComponentRegistry.QUALITY_LEVEL.get());
                 if (state.is(Blocks.FARMLAND) && state.getValue(BlockStateProperties.MOISTURE) < 7) {
-                    if (component.level().equals(IrrigationLevel.IRON)) {
-                        for (int i = 0; i < 3; i++) {
-                            BlockState newState = level.getBlockState(context.getClickedPos().relative(context.getHorizontalDirection(), i));
-                            if (newState.hasProperty(BlockStateProperties.MOISTURE)) {
-                                level.setBlockAndUpdate(context.getClickedPos().relative(context.getHorizontalDirection(), i),
-                                        newState.setValue(BlockStateProperties.MOISTURE, 7));
-                            }
-                        }
-                    } else if (component.level().equals(IrrigationLevel.NETHERITE)) {
-                        for (int i = 0; i < 3; i++) {
-                            Direction facing = context.getHorizontalDirection();
-                            BlockPos pos = context.getClickedPos().relative(facing, i);
-                            BlockState centreState = level.getBlockState(pos);
-                            BlockState leftState = level.getBlockState(pos.relative(facing.getCounterClockWise()));
-                            BlockState rightState = level.getBlockState(pos.relative(facing.getClockWise()));
-
-                            if (centreState.hasProperty(BlockStateProperties.MOISTURE)) {
-                                level.setBlockAndUpdate(pos,
-                                        centreState.setValue(BlockStateProperties.MOISTURE, 7));
-                            }
-                            if (leftState.hasProperty(BlockStateProperties.MOISTURE)) {
-                                level.setBlockAndUpdate(pos.relative(facing.getCounterClockWise()),
-                                        leftState.setValue(BlockStateProperties.MOISTURE, 7));
-                            }
-                            if (rightState.hasProperty(BlockStateProperties.MOISTURE)) {
-                                level.setBlockAndUpdate(pos.relative(facing.getClockWise()),
-                                        rightState.setValue(BlockStateProperties.MOISTURE, 7));
-                            }
-                        }
-                    } else {
-                        level.setBlockAndUpdate(context.getClickedPos(), state.setValue(BlockStateProperties.MOISTURE, 7));
-                    }
+                    dispenseWater(context.getItemInHand(), (ServerPlayer) context.getPlayer(), level, context.getClickedPos(), context.getHorizontalDirection(), component.level());
                     drainContainer(context.getItemInHand(), 20);
                     return InteractionResult.SUCCESS;
                 } else if (state.getBlock() instanceof CropBlock
                         && level.getBlockState(context.getClickedPos().below()).getBlock().equals(Blocks.FARMLAND)
                         && level.getBlockState(context.getClickedPos().below()).getValue(BlockStateProperties.MOISTURE) < 7
                 ) {
-                    BlockState state2 = context.getLevel().getBlockState(context.getClickedPos().below());
-                    level.setBlockAndUpdate(context.getClickedPos().below(), state2.setValue(BlockStateProperties.MOISTURE, 7));
-                    drainContainer(context.getItemInHand(), 20);
+                    dispenseWater(context.getItemInHand(), (ServerPlayer) context.getPlayer(), level, context.getClickedPos().below(), context.getHorizontalDirection(), component.level());
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -127,8 +99,8 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
 
     @Override
     public Component getName(ItemStack stack) {
-        if (stack.has(ComponentRegistry.IRRIGATION_LEVEL.get())) {
-            IrrigationLevelComponent component = stack.get(ComponentRegistry.IRRIGATION_LEVEL.get());
+        if (stack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
+            QualityLevelComponent component = stack.get(ComponentRegistry.QUALITY_LEVEL.get());
             return Component.translatable(getDescriptionId(stack), StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT)));
         }
         return Component.translatable(getDescriptionId(stack));
@@ -136,7 +108,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        if (stack.has(ComponentRegistry.IRRIGATION_LEVEL.get())) {
+        if (stack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
             tooltipComponents.add(
                     Component.translatable("item.demeter.watering_can.uses", Component.literal(
                                             calculateRemainingUses(stack) + "/" + calculateTotalUses(stack))
@@ -153,7 +125,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
 
     @Override
     public void fillItemCategory(CreativeModeTab tab, BuildCreativeModeTabContentsEvent event) {
-        Arrays.stream(IrrigationLevel.values()).sorted(Comparator.reverseOrder()).forEach(level -> {
+        Arrays.stream(QualityLevel.values()).sorted(Comparator.reverseOrder()).forEach(level -> {
             ItemStack stack = new ItemStack(this);
             setLevel(stack, level);
             fillContainer(stack, getTankCapacityFromStack(stack));
@@ -163,8 +135,8 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         });
     }
 
-    public static void setLevel(ItemStack stack, IrrigationLevel level) {
-        stack.set(ComponentRegistry.IRRIGATION_LEVEL.get(), new IrrigationLevelComponent(level));
+    public static void setLevel(ItemStack stack, QualityLevel level) {
+        stack.set(ComponentRegistry.QUALITY_LEVEL.get(), new QualityLevelComponent(level));
     }
 
     private boolean attemptToFill(Level level, Player player, ItemStack stack) {
@@ -182,6 +154,42 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         }
 
         return false;
+    }
+
+    private void dispenseWater(ItemStack stack, ServerPlayer player, Level level, BlockPos originalPos, Direction facing, QualityLevel qualityLevel) {
+        if (qualityLevel.equals(QualityLevel.IRON)) {
+            for (int i = 0; i < 3; i++) {
+                BlockState newState = level.getBlockState(originalPos.relative(facing, i));
+                if (newState.hasProperty(BlockStateProperties.MOISTURE)) {
+                    level.setBlockAndUpdate(originalPos.relative(facing, i),
+                            newState.setValue(BlockStateProperties.MOISTURE, 7));
+                }
+            }
+        } else if (qualityLevel.equals(QualityLevel.NETHERITE)) {
+            for (int i = 0; i < 3; i++) {
+                BlockPos pos = originalPos.relative(facing, i);
+                BlockState centreState = level.getBlockState(pos);
+                BlockState leftState = level.getBlockState(pos.relative(facing.getCounterClockWise()));
+                BlockState rightState = level.getBlockState(pos.relative(facing.getClockWise()));
+
+                if (centreState.hasProperty(BlockStateProperties.MOISTURE)) {
+                    level.setBlockAndUpdate(pos,
+                            centreState.setValue(BlockStateProperties.MOISTURE, 7));
+                }
+                if (leftState.hasProperty(BlockStateProperties.MOISTURE)) {
+                    level.setBlockAndUpdate(pos.relative(facing.getCounterClockWise()),
+                            leftState.setValue(BlockStateProperties.MOISTURE, 7));
+                }
+                if (rightState.hasProperty(BlockStateProperties.MOISTURE)) {
+                    level.setBlockAndUpdate(pos.relative(facing.getClockWise()),
+                            rightState.setValue(BlockStateProperties.MOISTURE, 7));
+                }
+            }
+        } else {
+            level.setBlockAndUpdate(originalPos, level.getBlockState(originalPos).setValue(BlockStateProperties.MOISTURE, 7));
+        }
+        drainContainer(stack, 20);
+        player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BUCKET_EMPTY), SoundSource.PLAYERS, originalPos.getX(), originalPos.getY(), originalPos.getZ(), 1.0f, level.random.nextFloat(), 0));
     }
 
     private int calculateRemainingUses(ItemStack stack) {
