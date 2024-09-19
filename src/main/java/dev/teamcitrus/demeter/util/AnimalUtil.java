@@ -1,14 +1,13 @@
 package dev.teamcitrus.demeter.util;
 
 import dev.teamcitrus.citruslib.reload.DynamicHolder;
+import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
-import dev.teamcitrus.demeter.data.AnimalStats;
-import dev.teamcitrus.demeter.data.StatsRegistry;
+import dev.teamcitrus.demeter.data.animals.AnimalStats;
+import dev.teamcitrus.demeter.data.animals.StatsRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
-import dev.teamcitrus.demeter.registry.ItemRegistry;
-import io.wispforest.accessories.api.AccessoriesCapability;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -41,8 +40,10 @@ public class AnimalUtil {
             DynamicHolder<AnimalStats> stats = getStats(self);
             int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.get().minChildrenPerBirth(), stats.get().maxChildrenPerBirth());
             if (self.getLoveCause() != null) {
-                if (AccessoriesCapability.get(self.getLoveCause()).isEquipped(AccessoriesCompat.Items.BREEDING_CHARM.get())) {
-                    numberOfTimes += 2;
+                if (ModUtil.isModInstalled("accessories")) {
+                    if (AccessoriesCompat.isWearing(self.getLoveCause(), AccessoriesCompat.Items.BREEDING_CHARM.get())) {
+                        numberOfTimes += 2;
+                    }
                 }
             }
             birth(self, serverLevel, otherEntity, numberOfTimes);
