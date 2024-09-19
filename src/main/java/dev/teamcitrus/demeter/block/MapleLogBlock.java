@@ -18,7 +18,7 @@ public class MapleLogBlock extends RotatedPillarBlock {
 
     public MapleLogBlock() {
         super(Properties.ofFullCopy(Blocks.OAK_LOG).mapColor(MapColor.COLOR_ORANGE));
-        this.registerDefaultState(this.getStateDefinition().any().setValue(SYRUP, false).setValue(TAPPED, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(SYRUP, false).setValue(TAPPED, false));
     }
 
     @Override
