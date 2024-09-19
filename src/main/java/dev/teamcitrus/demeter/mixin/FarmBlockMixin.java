@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import dev.teamcitrus.demeter.config.DemeterConfig;
 import net.minecraft.world.level.block.FarmBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,6 +33,7 @@ public class FarmBlockMixin {
             at = @At("RETURN")
     )
     private static boolean demeter$isNearWater(boolean original) {
+        if (DemeterConfig.waterIrrigationEnabled.get()) return original;
         return false;
     }
 }

@@ -18,6 +18,10 @@ public class DemeterConfig {
     public static ModConfigSpec.IntValue brushingLoveValue;
     public static ModConfigSpec.IntValue feedingLoveValue;
 
+    //Farmland Config
+    public static ModConfigSpec.IntValue morningDirtChance;
+    public static ModConfigSpec.BooleanValue waterIrrigationEnabled;
+
     //Enchantment Config
     public static ModConfigSpec.IntValue comfortBonusPerLevel;
     public static ModConfigSpec.EnumValue<SpiteEffect> spiteEffect;
@@ -26,8 +30,6 @@ public class DemeterConfig {
     //Quality Config
     public static ModConfigSpec.IntValue copperQualityChance;
     public static ModConfigSpec.IntValue ironQualityChance;
-    public static ModConfigSpec.IntValue goldQualityChance;
-    public static ModConfigSpec.IntValue diamondQualityChance;
     public static ModConfigSpec.IntValue netheriteQualityChance;
 
     //Client Config
@@ -44,16 +46,18 @@ public class DemeterConfig {
 
     private static void setupConfig(ModConfigSpec.Builder builder) {
         builder.push("Animals Config");
-        animalHappinessMin = builder.comment("The minimum value of happiness required for an animal to be considered 'happy'")
-                .defineInRange("animalHappinessMin", 65, 0, 100);
+        builder.comment("Configs that apply to the mod at large or to ALL animals");
         animalsDieOfHunger = builder.comment("Will animals die of hunger after a certain number of days of not being fed?")
                 .define("animalsDieOfHunger", true);
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
                 .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
         builder.pop();
         builder.push("Love Config");
+        builder.comment("Configs that affect how love works with animals");
         spawnLoveValue = builder.comment("The amount of love that animals will spawn with as default")
                         .defineInRange("spawnLoveValue", 0, 0, 100);
+        animalHappinessMin = builder.comment("The minimum value of happiness required for an animal to be considered 'happy'")
+                .defineInRange("animalHappinessMin", 65, 0, 100);
         pettingLoveValue = builder.comment("The amount of love that animals will gain from petting them")
                         .defineInRange("pettingLoveValue", 5, 0, 100);
         brushingLoveValue = builder.comment("The amount of love that animals will gain from brushing them")
@@ -61,7 +65,14 @@ public class DemeterConfig {
         feedingLoveValue = builder.comment("The amount of love that animals will gain from feeding them")
                         .defineInRange("feedingLoveValue", 5, 0, 100);
         builder.pop();
+        builder.push("Farmland Config");
+        morningDirtChance = builder.comment("The percent chance for dry farmland to be turned back to dirt in the morning")
+                        .defineInRange("morningDirtChance", 75, 0, 100);
+        waterIrrigationEnabled = builder.comment("Whether vanillas feature of water hydrating farmland is enabled")
+                        .define("waterIrrigationEnabled", false);
+        builder.pop();
         builder.push("Enchantment Config");
+        builder.comment("Configs that control how enchantments work within Demeter");
         comfortBonusPerLevel = builder.comment("The bonus amount of love the animal gains per level of the enchantment")
                         .defineInRange("comfortBonusPerLevel", 4, 0, 100);
         spiteEffect = builder.comment("Defines which effect the Spite curse will take when on a brush")
@@ -72,13 +83,9 @@ public class DemeterConfig {
         builder.push("Quality Config");
         builder.comment("Quality works on a percent chance. Example: 60 = 60% chance. 0 to disable");
         copperQualityChance = builder.comment("The chance for copper quality items be dropped")
-                .defineInRange("copperQualityChance", 40, 0, 100);
+                .defineInRange("copperQualityChance", 25, 0, 100);
         ironQualityChance = builder.comment("The chance for iron quality items be dropped")
-                .defineInRange("ironQualityChance", 20, 0, 100);
-        goldQualityChance = builder.comment("The chance for gold quality items be dropped")
-                .defineInRange("goldQualityChance", 10, 0, 100);
-        diamondQualityChance = builder.comment("The chance for diamond quality items be dropped")
-                .defineInRange("diamondQualityChance", 5, 0, 100);
+                .defineInRange("ironQualityChance", 10, 0, 100);
         netheriteQualityChance = builder.comment("The chance for netherite quality items be dropped")
                 .defineInRange("netheriteQualityChance", 1, 0, 100);
         builder.pop();
