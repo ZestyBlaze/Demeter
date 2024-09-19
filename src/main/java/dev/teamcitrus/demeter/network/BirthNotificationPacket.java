@@ -43,12 +43,10 @@ public record BirthNotificationPacket() implements CustomPacketPayload {
 
         @Override
         public void handle(BirthNotificationPacket birthNotificationPacket, IPayloadContext playPayloadContext) {
-            if (Minecraft.getInstance().player != null) {
-                if (DemeterConfig.animalBirthAlert.get()) {
-                    Player player = playPayloadContext.player();
-                    player.displayClientMessage(Component.translatable("message.demeter.baby_spawned").withStyle(ChatFormatting.GREEN), true);
-                    player.playSound(SoundEvents.AMETHYST_BLOCK_CHIME);
-                }
+            if (DemeterConfig.animalBirthAlert.get()) {
+                Player player = playPayloadContext.player();
+                player.displayClientMessage(Component.translatable("message.demeter.baby_spawned").withStyle(ChatFormatting.GREEN), true);
+                player.playSound(SoundEvents.AMETHYST_BLOCK_CHIME);
             }
         }
 
