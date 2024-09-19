@@ -15,11 +15,6 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
     @SubscribeEvent
-    public static void registerColors(RegisterColorHandlersEvent.Block event) {
-        event.register(((pState, pLevel, pPos, pTintIndex) -> 0xFFFEFCFF), BlockRegistry.MILK_CAULDRON_BLOCK.get());
-    }
-
-    @SubscribeEvent
     public static void registerColors(RegisterColorHandlersEvent.Item event) {
         event.register((pStack, pTintIndex) -> 0xFFFEFCFF, ItemRegistry.MILK_BOTTLE.get());
         //event.register((itemStack, i) -> 0xFFFF8C00, ItemRegistry.WATERING_CAN.get());

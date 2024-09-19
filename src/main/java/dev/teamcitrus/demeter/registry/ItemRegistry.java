@@ -27,7 +27,7 @@ public class ItemRegistry {
                 if (!(item.get() instanceof WateringCanItem))
                     output.accept(item.get());
                 if (ModUtil.isModInstalled("accessories"))
-                    AccessoriesCompat.Internal.addItemsToTab(output);
+                    AccessoriesCompat.addItemsToTab(output);
             }))
             .build());
 
