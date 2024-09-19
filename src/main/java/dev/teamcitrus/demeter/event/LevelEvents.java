@@ -3,9 +3,11 @@ package dev.teamcitrus.demeter.event;
 import com.google.common.collect.Lists;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.registry.PoiTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
@@ -13,11 +15,15 @@ import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -53,7 +59,17 @@ public class LevelEvents {
                         chunkpos,
                         PoiManager.Occupancy.ANY
                 );
-                record.forEach(poiRecord -> {
+                List<BlockPos> updatePositions = new ArrayList<>();
+                record.forEach(poiRecord -> updatePositions.add(poiRecord.getPos()));
+                updatePositions.forEach(blockPos -> {
+                    BlockState state = level.getBlockState(blockPos);
+                    if (state.getValue(BlockStateProperties.MOISTURE) != 7) {
+                        if (level.random.nextInt(100) < DemeterConfig.morningDirtChance.get()) {
+                            FarmBlock.turnToDirt(null, state, level, blockPos);
+                        }
+                    } else {
+                        level.setBlockAndUpdate(blockPos, state.setValue(BlockStateProperties.MOISTURE, 0));
+                    }
                 });
             }
         }
