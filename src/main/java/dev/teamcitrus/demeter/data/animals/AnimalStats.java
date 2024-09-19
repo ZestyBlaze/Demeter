@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data;
+package dev.teamcitrus.demeter.data.animals;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
