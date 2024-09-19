@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.util;
 
-import dev.teamcitrus.demeter.component.Quality;
-import dev.teamcitrus.demeter.component.QualityDataComponent;
+import dev.teamcitrus.demeter.component.QualityLevel;
+import dev.teamcitrus.demeter.component.QualityLevelComponent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
@@ -16,29 +16,22 @@ public class QualityUtil {
         if (!stack.is(DemeterItemTagsProvider.QUALITY_PRODUCTS)) return stack;
         int value = random.nextInt(100);
         if (value <= DemeterConfig.netheriteQualityChance.get()) {
-            writeQualityToTag(stack, Quality.NETHERITE);
+            writeQualityToTag(stack, QualityLevel.NETHERITE);
         }
-        if (value <= DemeterConfig.diamondQualityChance.get() && value > DemeterConfig.netheriteQualityChance.get()) {
-            writeQualityToTag(stack, Quality.DIAMOND);
-        }
-        if (value <= DemeterConfig.goldQualityChance.get() && value > DemeterConfig.diamondQualityChance.get()) {
-            writeQualityToTag(stack, Quality.GOLD);
-        }
-        if (value <= DemeterConfig.ironQualityChance.get() && value > DemeterConfig.goldQualityChance.get()) {
-            writeQualityToTag(stack, Quality.IRON);
+        if (value <= DemeterConfig.ironQualityChance.get() && value > DemeterConfig.netheriteQualityChance.get()) {
+            writeQualityToTag(stack, QualityLevel.IRON);
         }
         if (value <= DemeterConfig.copperQualityChance.get() && value > DemeterConfig.ironQualityChance.get()) {
-            writeQualityToTag(stack, Quality.COPPER);
+            writeQualityToTag(stack, QualityLevel.COPPER);
         }
         return stack;
     }
 
-    public static Quality getQuality(ItemStack stack) {
-        if (!stack.has(ComponentRegistry.QUALITY)) return Quality.NONE;
-        return stack.get(ComponentRegistry.QUALITY).quality();
+    public static QualityLevel getQuality(ItemStack stack) {
+        return stack.get(ComponentRegistry.QUALITY_LEVEL).level();
     }
 
-    public static void writeQualityToTag(ItemStack stack, Quality quality) {
-        stack.set(ComponentRegistry.QUALITY.get(), new QualityDataComponent(quality));
+    public static void writeQualityToTag(ItemStack stack, QualityLevel quality) {
+        stack.set(ComponentRegistry.QUALITY_LEVEL.get(), new QualityLevelComponent(quality));
     }
 }

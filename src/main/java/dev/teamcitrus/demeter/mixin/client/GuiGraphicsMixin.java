@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.demeter.DemeterClient;
+import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.client.gui.Font;
@@ -22,7 +23,7 @@ public class GuiGraphicsMixin {
 
     @Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"))
     private void demeter$renderItemDecorations(Font pFont, ItemStack pStack, int pX, int pY, String pText, CallbackInfo ci) {
-        if (pStack.isEmpty() || !pStack.has(ComponentRegistry.QUALITY) || QualityUtil.getQuality(pStack) == null) {
+        if (pStack.isEmpty() || !pStack.is(DemeterItemTagsProvider.QUALITY_PRODUCTS) || !pStack.has(ComponentRegistry.QUALITY_LEVEL) || QualityUtil.getQuality(pStack) == null) {
             return;
         }
         pose.popPose();

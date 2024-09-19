@@ -19,13 +19,14 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 @EventBusSubscriber(modid = Demeter.MODID)
 public class ItemEvents {
     @SubscribeEvent
+    public static void onItemUsedEvent(PlayerInteractEvent.RightClickItem event) {
         if (event.getItemStack().getItem() == Items.MILK_BUCKET) {
             event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
-    public static void itemFished(ItemFishedEvent event) {
+    public static void itemFishedEvent(ItemFishedEvent event) {
         if (!event.getEntity().level().isClientSide()) {
             NonNullList<ItemStack> items = event.getDrops();
             items.forEach(QualityUtil::randomiseQuality);
@@ -36,9 +37,10 @@ public class ItemEvents {
     public static void changeTooltipEvent(ItemTooltipEvent event) {
         if (event.getItemStack().is(DemeterItemTagsProvider.QUALITY_PRODUCTS)) {
             ItemStack itemStack = event.getItemStack();
-            if (QualityUtil.getQuality(itemStack).equals(Quality.NONE)) return;
-            Quality quality = QualityUtil.getQuality(itemStack);
-            event.getToolTip().add(Component.translatable("item.demeter.quality_tooltip", quality.getQualityTooltip()).withStyle(ChatFormatting.DARK_GRAY));
+            if (itemStack.has(ComponentRegistry.QUALITY_LEVEL)) {
+                QualityLevel quality = QualityUtil.getQuality(itemStack);
+                event.getToolTip().add(Component.translatable("item.demeter.quality_tooltip", quality.getQualityTooltip()).withStyle(ChatFormatting.DARK_GRAY));
+            }
         }
     }
 }
