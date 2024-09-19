@@ -1,15 +1,21 @@
 package dev.teamcitrus.demeter.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MilkBucketItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.EffectCures;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MilkBottleItem extends MilkBucketItem {
     public MilkBottleItem() {
@@ -17,28 +23,37 @@ public class MilkBottleItem extends MilkBucketItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving) {
-        super.finishUsingItem(pStack, pLevel, pEntityLiving);
-        if (pEntityLiving instanceof ServerPlayer serverplayer) {
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, pStack);
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
+        if (entityLiving instanceof ServerPlayer serverplayer) {
+            CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
             serverplayer.awardStat(Stats.ITEM_USED.get(this));
         }
 
-        if (!pLevel.isClientSide) {
-            pEntityLiving.removeEffectsCuredBy(EffectCures.MILK);
-        }
+        if (!level.isClientSide) {
+            List<Holder<MobEffect>> negativeEffects = new ArrayList<>();
+            entityLiving.getActiveEffects().forEach(mobEffectInstance -> {
+                 if (mobEffectInstance.getEffect().value().getCategory().equals(MobEffectCategory.HARMFUL) && mobEffectInstance.getCures().contains(EffectCures.MILK)) {
+                     negativeEffects.add(mobEffectInstance.getEffect());
+                 }
+            });
 
-        if (pStack.isEmpty()) {
-            return new ItemStack(Items.GLASS_BOTTLE);
-        } else {
-            if (pEntityLiving instanceof Player player && !player.getAbilities().instabuild) {
-                ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
-                if (!player.getInventory().add(itemstack)) {
-                    player.drop(itemstack, false);
-                }
+            if (!negativeEffects.isEmpty()) {
+                Holder<MobEffect> mobEffect = negativeEffects.get(level.random.nextInt(negativeEffects.size()));
+                entityLiving.removeEffect(mobEffect);
+                negativeEffects.clear();
             }
-
-            return pStack;
         }
+
+        if (entityLiving instanceof Player player) {
+            return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE), false);
+        } else {
+            stack.consume(1, entityLiving);
+            return stack;
+        }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(Component.translatable("item.demeter.milk_bottle.desc").withStyle(ChatFormatting.DARK_GRAY));
     }
 }
