@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#demeter:has_maple_trees",
+  "features": "demeter:maple",
+  "step": "vegetal_decoration"
+}
