@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import dev.teamcitrus.citruslib.reload.DynamicHolder;
+import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
 import dev.teamcitrus.demeter.attachment.MilkAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
@@ -27,6 +28,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
@@ -82,7 +84,6 @@ public class AnimalMixin {
         AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
     }
 
-    /*
     @Inject(
             method = "setInLove",
             at = @At("HEAD"),
@@ -91,7 +92,6 @@ public class AnimalMixin {
     private void demeter$setInLove(Player pPlayer, CallbackInfo ci) {
         if (!AnimalUtil.isAnimalHappy(demeter$animal) && !ModUtil.isDevelopmentEnvironment()) ci.cancel();
     }
-     */
 
     @ModifyExpressionValue(
             method = "canMate",
