@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MilkBottleItem extends MilkBucketItem {
     public MilkBottleItem() {
-        super(new Properties().stacksTo(16));
+        super(new Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16));
     }
 
     @Override

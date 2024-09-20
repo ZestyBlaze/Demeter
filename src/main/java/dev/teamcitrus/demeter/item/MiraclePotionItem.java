@@ -20,10 +20,11 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class MiraclePotionItem extends CitrusItem {
     public MiraclePotionItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1));
     }
 
     @Override
