@@ -59,8 +59,10 @@
   "message.demeter.brush.fail_daily": "This animal has already been brushed today!",
   "message.demeter.milk.fail_daily": "This animal has already been milked today!",
   "message.demeter.milk.fail_gender": "This animal is male and cannot be milked!",
+  "tag.block.demeter.maple_logs": "Maple Logs",
   "tag.item.accessories.charm": "Charm",
   "tag.item.c.tools.animal_brush": "Animal Brushes",
   "tag.item.demeter.maple_logs": "Maple Logs",
-  "tag.item.demeter.quality_products": "Quality Products"
+  "tag.item.demeter.quality_products": "Quality Products",
+  "tag.worldgen.biome.demeter.has_maple_trees": "Has Maple Trees"
 }

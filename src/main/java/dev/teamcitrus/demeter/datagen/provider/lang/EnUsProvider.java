@@ -4,6 +4,8 @@ import dev.teamcitrus.citruslib.datagen.CitrusLanguageProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.component.QualityLevel;
+import dev.teamcitrus.demeter.datagen.provider.DemeterBiomeTagProvider;
+import dev.teamcitrus.demeter.datagen.provider.DemeterBlockTagsProvider;
 import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
@@ -58,6 +60,8 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add(DemeterItemTagsProvider.ACCESSORIES_CHARM, "Charm");
         add(DemeterItemTagsProvider.MAPLE_LOGS, "Maple Logs");
         add(DemeterItemTagsProvider.QUALITY_PRODUCTS, "Quality Products");
+        add(DemeterBlockTagsProvider.MAPLE_LOGS, "Maple Logs");
+        add(DemeterBiomeTagProvider.HAS_MAPLE_TREES, "Has Maple Trees");
 
         generateBlockLanguageKeys(BlockRegistry.BLOCKS);
         generateItemLanguageKeys(ItemRegistry.ITEMS, List.of(ItemRegistry.WATERING_CAN.get()));
