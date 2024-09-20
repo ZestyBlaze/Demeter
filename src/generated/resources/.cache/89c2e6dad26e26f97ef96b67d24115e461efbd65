@@ -1,9 +1,10 @@
-// 1.21.1	2024-08-23T23:22:19.0603839	Block States: demeter
+// 1.21.1	2024-09-20T21:46:02.3751898	Block States: demeter
 ff2ec3aaab927fb1add70f6ab1851cb74bbf3525 assets/demeter/blockstates/maple_button.json
 dc251cb370599b3321bface91bd1ea7bb99c147a assets/demeter/blockstates/maple_door.json
 068a8f47a0b816b8211da4ee39a926e5560d5bac assets/demeter/blockstates/maple_fence.json
 d6d35a5ae1a08e62be911f762495847559bbeab5 assets/demeter/blockstates/maple_fence_gate.json
 85fd4ee23637ced86d9913317609bc4f9b11aa50 assets/demeter/blockstates/maple_leaves.json
+cedcae9c019eccb03dccb4b34d4cbcd4afb1c104 assets/demeter/blockstates/maple_log.json
 51a78a80b34adec9e365f71b196ef263c3fbc464 assets/demeter/blockstates/maple_planks.json
 d3f1aead0267717fa008491d282e66fb87377a53 assets/demeter/blockstates/maple_pressure_plate.json
 fa61b2830994ddf325f64424ec8b34d19f1fac87 assets/demeter/blockstates/maple_sapling.json
@@ -32,6 +33,8 @@ e90e848ca11fe39944e098ecbd4378491706ce21 assets/demeter/models/block/maple_fence
 1a7bc709c0436884e2e650684ba3d3957d2d891a assets/demeter/models/block/maple_fence_post.json
 f4b270c84a3fc62d74fd4098ba4f19f0377bbb2d assets/demeter/models/block/maple_fence_side.json
 c64785a81c7b60b732da4e21e63dac0996b805eb assets/demeter/models/block/maple_leaves.json
+ae91d1d66962bf25cd056f33406725fc30ed2c5f assets/demeter/models/block/maple_log.json
+6de521fb8cdcab74cc1fdab05f228329b0ab4a71 assets/demeter/models/block/maple_log_horizontal.json
 45308b7e16495f2bdd2c608c2e6caf66b9de5a71 assets/demeter/models/block/maple_planks.json
 7a09e34a5afbbb9ee539968f306d66c908530ec4 assets/demeter/models/block/maple_pressure_plate.json
 cb8f9fe15b5ebc36f1bec2a46a1ecebebe4f0097 assets/demeter/models/block/maple_pressure_plate_down.json

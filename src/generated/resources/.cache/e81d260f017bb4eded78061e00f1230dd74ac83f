@@ -1,4 +1,4 @@
-// 1.21.1	2024-08-23T23:22:19.0603839	Item Models: demeter
+// 1.21.1	2024-09-20T23:18:59.9639318	Item Models: demeter
 c679f7d57669ad853a684c3d1aad5093ef45e083 assets/demeter/models/item/animal_tag.json
 fcea22b9a6ea2e99c3bf6811c8f1b0d34ebf3d08 assets/demeter/models/item/brush.json
 757ed270a8161e18b65b5d1671ffced247f85d39 assets/demeter/models/item/butter.json
@@ -21,4 +21,7 @@ ef6e64717f9813a3d3088cee90f10e321983b208 assets/demeter/models/item/maple_stairs
 bdec1e3cdba6c899ca233a3cba3e2564e18f0b8b assets/demeter/models/item/miracle_potion.json
 d22bd49a1b1fd83d2aa734bb398358795738e30c assets/demeter/models/item/stripped_maple_log.json
 71219c4eece36eda5d205a9865976f3bc0689914 assets/demeter/models/item/stripped_maple_wood.json
-07027b188863695ff87ab835e9e918df1c856683 assets/demeter/models/item/watering_can.json
+a71181be5cf8ff11a94918c2c20c70fa0aefebb7 assets/demeter/models/item/watering_can.json
+50a48628eb940bb66512b4bb85ee99b6fc4c5244 assets/demeter/models/item/watering_can_copper.json
+c85952271b3d62aabef26bb5a6b1cc344967f360 assets/demeter/models/item/watering_can_iron.json
+b29dbed3ca463c159b844db2a3628a9791a25dac assets/demeter/models/item/watering_can_netherite.json

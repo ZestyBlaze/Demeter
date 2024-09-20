@@ -1,5 +1,7 @@
-// 1.21.1	2024-09-18T16:49:26.7349646	Registries
+// 1.21.1	2024-09-20T21:47:51.7239982	Registries
 6be58b7c3f3fedd1861ffc98df6944ea1ef3f1cd data/demeter/enchantment/barber.json
 88848c04dc8173ef801a0e190432db11544d1ac2 data/demeter/enchantment/comfort.json
 9265aeae87dec0d0a04947432d9f89f73360914d data/demeter/enchantment/spite.json
-e52e812dee0a5afd91cef1ef968110f011d9c57e data/demeter/worldgen/configured_feature/maple.json
+a6a70b98399f99108e3fb95325e801b909052e32 data/demeter/neoforge/biome_modifier/add_maple_trees.json
+5b28beb91220c52ddc8ade3be515775e98e16178 data/demeter/worldgen/configured_feature/maple.json
+87b3498a078c5835012cdf053fd87d25487e7792 data/demeter/worldgen/placed_feature/maple.json
