@@ -15,6 +15,7 @@ public class DemeterBlockStateProvider extends CitrusBlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        logBlock(BlockRegistry.MAPLE_LOG.get());
         axisBlock(BlockRegistry.MAPLE_WOOD.get(), models().cubeAll("maple_wood", modLoc("block/maple_log")), models().cubeAll("maple_wood", modLoc("block/maple_log")));
         logBlock(BlockRegistry.STRIPPED_MAPLE_LOG.get());
         axisBlock(BlockRegistry.STRIPPED_MAPLE_WOOD.get(), models().cubeAll("stripped_maple_wood", modLoc("block/stripped_maple_log")), models().cubeAll("stripped_maple_wood", modLoc("block/stripped_maple_log")));
