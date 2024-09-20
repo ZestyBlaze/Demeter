@@ -35,6 +35,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> ANIMAL_TAG = ITEMS.register("animal_tag", AnimalTagItem::new);
     public static final DeferredItem<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
+    public static final DeferredItem<Item> MAPLE_BOTTLE = ITEMS.register("maple_bottle", MapleBottleItem::new);
     public static final DeferredItem<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", MiraclePotionItem::new);
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
     public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);
@@ -44,6 +45,7 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> STRIPPED_MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_WOOD);
     public static final DeferredItem<BlockItem> MAPLE_LEAVES = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LEAVES);
     public static final DeferredItem<BlockItem> MAPLE_SAPLING = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SAPLING);
+    public static final DeferredItem<BlockItem> MAPLE_SYRUP_BLOCK = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SYRUP_BLOCK);
     public static final DeferredItem<Item> MAPLE_SIGN = ITEMS.register("maple_sign", () -> new SignItem(new Item.Properties(), BlockRegistry.MAPLE_SIGN.get(), BlockRegistry.MAPLE_WALL_SIGN.get()));
     public static final DeferredItem<Item> MAPLE_BOAT = ITEMS.register("maple_boat", () -> new BoatItem(false, EnumRegistry.MAPLE_BOAT_TYPE.getValue(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> MAPLE_CHEST_BOAT = ITEMS.register("maple_chest_boat", () -> new BoatItem(true, EnumRegistry.MAPLE_BOAT_TYPE.getValue(), new Item.Properties().stacksTo(1)));

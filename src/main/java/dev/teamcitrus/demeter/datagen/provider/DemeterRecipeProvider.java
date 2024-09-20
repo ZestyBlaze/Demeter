@@ -38,6 +38,8 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                 .unlockedBy("has_item", has(Items.PAPER))
                 .save(pRecipeOutput);
 
+        twoByTwoPacker(pRecipeOutput, RecipeCategory.REDSTONE, BlockRegistry.MAPLE_SYRUP_BLOCK, ItemRegistry.MAPLE_BOTTLE);
+
         woodenBoat(pRecipeOutput, ItemRegistry.MAPLE_BOAT, WoodSetRegistry.MAPLE.getPlanks());
         signBuilder(ItemRegistry.MAPLE_SIGN, Ingredient.of(WoodSetRegistry.MAPLE.getPlanks()));
         generateWoodSetRecipes(pRecipeOutput, WoodSetRegistry.MAPLE);
