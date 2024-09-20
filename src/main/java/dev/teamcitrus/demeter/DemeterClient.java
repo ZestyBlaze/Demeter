@@ -2,7 +2,6 @@ package dev.teamcitrus.demeter;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.citruslib.util.ScreenUtil;
-import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
