@@ -1,0 +1,6 @@
+{
+  "parent": "demeter:item/watering_can",
+  "textures": {
+    "layer0": "demeter:item/wateringcan/iron_watering_can"
+  }
+}

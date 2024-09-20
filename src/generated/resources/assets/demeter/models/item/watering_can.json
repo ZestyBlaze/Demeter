@@ -1,6 +1,26 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "demeter:item/watering_can_copper",
+      "predicate": {
+        "demeter:level": 1.0
+      }
+    },
+    {
+      "model": "demeter:item/watering_can_iron",
+      "predicate": {
+        "demeter:level": 2.0
+      }
+    },
+    {
+      "model": "demeter:item/watering_can_netherite",
+      "predicate": {
+        "demeter:level": 3.0
+      }
+    }
+  ],
   "textures": {
-    "layer0": "demeter:item/watering_can"
+    "layer0": "demeter:item/wateringcan/watering_can"
   }
 }
