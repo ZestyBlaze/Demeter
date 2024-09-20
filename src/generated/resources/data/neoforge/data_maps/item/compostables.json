@@ -2,6 +2,9 @@
   "values": {
     "demeter:maple_leaves": {
       "chance": 0.3
+    },
+    "demeter:maple_sapling": {
+      "chance": 0.3
     }
   }
 }

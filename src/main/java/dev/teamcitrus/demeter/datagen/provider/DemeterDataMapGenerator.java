@@ -20,5 +20,6 @@ public class DemeterDataMapGenerator extends DataMapProvider {
     protected void gather() {
         Builder<Compostable, Item> compostables = builder(NeoForgeDataMaps.COMPOSTABLES);
         compostables.add(ItemRegistry.MAPLE_LEAVES.get().builtInRegistryHolder(), new Compostable(0.3f), false);
+        compostables.add(ItemRegistry.MAPLE_SAPLING.get().builtInRegistryHolder(), new Compostable(0.3f), false);
     }
 }
