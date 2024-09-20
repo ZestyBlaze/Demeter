@@ -39,9 +39,7 @@
       "state": {
         "Name": "demeter:maple_log",
         "Properties": {
-          "axis": "y",
-          "syrup": "false",
-          "tapped": "false"
+          "axis": "y"
         }
       }
     }
