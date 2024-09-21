@@ -1,4 +1,4 @@
-# Better-Farms
+# Demeter
 
 ## Inspiration
 A lot of the inspiration for this mod comes from multiple parts, a lot of credit goes to the old Harvest Festival mod, which this is very much based off of, while drawing a lot of inspiration from games such as Stardew Valley and Harvest Moon!
