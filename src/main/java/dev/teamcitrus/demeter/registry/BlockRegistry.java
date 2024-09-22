@@ -1,5 +1,6 @@
 package dev.teamcitrus.demeter.registry;
 
+import dev.teamcitrus.citruslib.block.CitrusHangingSign;
 import dev.teamcitrus.citruslib.block.CitrusSign;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.block.MapleLogBlock;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+@SuppressWarnings("deprecation")
 public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Demeter.MODID);
     public static final BlockSetType MAPLE_BLOCK_SET_TYPE = BlockSetType.register(new BlockSetType("maple"));
@@ -26,5 +28,7 @@ public class BlockRegistry {
     public static final DeferredBlock<SaplingBlock> MAPLE_SAPLING = BLOCKS.register("maple_sapling", () -> new SaplingBlock(DemeterTrees.MAPLE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
     public static final DeferredBlock<StandingSignBlock> MAPLE_SIGN = BLOCKS.register("maple_sign", () -> new CitrusSign.CitrusStandingSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
     public static final DeferredBlock<WallSignBlock> MAPLE_WALL_SIGN = BLOCKS.register("maple_wall_sign", () -> new CitrusSign.CitrusWallSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
+    public static final DeferredBlock<CeilingHangingSignBlock> MAPLE_HANGING_SIGN = BLOCKS.register("maple_hanging_sign", () -> new CitrusHangingSign.CitrusCeilingHangingSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
+    public static final DeferredBlock<WallHangingSignBlock> MAPLE_WALL_HANGING_SIGN = BLOCKS.register("maple_wall_hanging_sign", () -> new CitrusHangingSign.CitrusWallHangingSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)));
     public static final DeferredBlock<MapleSyrupBlock> MAPLE_SYRUP_BLOCK = BLOCKS.register("maple_syrup_block", () -> new MapleSyrupBlock(BlockBehaviour.Properties.of().forceSolidOff().noOcclusion().mapColor(MapColor.COLOR_ORANGE).speedFactor(0.6F).jumpFactor(0.6F).sound(SoundType.HONEY_BLOCK)));
 }

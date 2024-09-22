@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -47,6 +48,7 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> MAPLE_SAPLING = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SAPLING);
     public static final DeferredItem<BlockItem> MAPLE_SYRUP_BLOCK = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SYRUP_BLOCK);
     public static final DeferredItem<Item> MAPLE_SIGN = ITEMS.register("maple_sign", () -> new SignItem(new Item.Properties(), BlockRegistry.MAPLE_SIGN.get(), BlockRegistry.MAPLE_WALL_SIGN.get()));
+    public static final DeferredItem<Item> MAPLE_HANGING_SIGN = ITEMS.register("maple_hanging_sign", () -> new HangingSignItem(BlockRegistry.MAPLE_HANGING_SIGN.get(), BlockRegistry.MAPLE_WALL_HANGING_SIGN.get(), new Item.Properties()));
     public static final DeferredItem<Item> MAPLE_BOAT = ITEMS.register("maple_boat", () -> new BoatItem(false, EnumRegistry.MAPLE_BOAT_TYPE.getValue(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> MAPLE_CHEST_BOAT = ITEMS.register("maple_chest_boat", () -> new BoatItem(true, EnumRegistry.MAPLE_BOAT_TYPE.getValue(), new Item.Properties().stacksTo(1)));
 }

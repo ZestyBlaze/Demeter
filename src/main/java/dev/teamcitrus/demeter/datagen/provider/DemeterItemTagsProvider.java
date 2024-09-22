@@ -19,6 +19,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unchecked")
 public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
     public static final TagKey<Item> QUALITY_PRODUCTS = modTag("quality_products");
     public static final TagKey<Item> MAPLE_LOGS = modTag("maple_logs");
@@ -44,7 +45,6 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
     }
 
     @Override
-    @SuppressWarnings("all")
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(QUALITY_PRODUCTS).add(Items.WHEAT, Items.CARROT, Items.POTATO, Items.MELON_SLICE, Items.BEETROOT,
                 Items.MILK_BUCKET).addTags(ItemTags.WOOL, Tags.Items.FOODS_RAW_FISH);
