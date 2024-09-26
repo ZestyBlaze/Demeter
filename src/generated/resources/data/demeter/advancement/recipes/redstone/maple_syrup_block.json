@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_maple_bottle": {
+    "has_maple_syrup_bottle": {
       "conditions": {
         "items": [
           {
-            "items": "demeter:maple_bottle"
+            "items": "demeter:maple_syrup_bottle"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_maple_bottle"
+      "has_maple_syrup_bottle"
     ]
   ],
   "rewards": {

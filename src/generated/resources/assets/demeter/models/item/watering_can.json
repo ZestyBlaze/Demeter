@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "minecraft:item/generated",
   "overrides": [
     {
       "model": "demeter:item/watering_can_copper",

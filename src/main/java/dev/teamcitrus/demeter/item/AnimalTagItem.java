@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
+import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.data.NamesLoader;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.network.chat.Component;
@@ -27,9 +27,9 @@ public class AnimalTagItem extends CitrusItem {
                 }
             }
 
-            AnimalGenders gender = AnimalUtil.getGender(animal);
+            AnimalAttachment.AnimalGenders gender = AnimalUtil.getGender(animal);
             String name;
-            if (gender.equals(AnimalGenders.MALE)) {
+            if (gender.equals(AnimalAttachment.AnimalGenders.MALE)) {
                 name = NamesLoader.MALE_NAMES.get(pPlayer.level().random.nextInt(NamesLoader.MALE_NAMES.size()));
             } else {
                 name = NamesLoader.FEMALE_NAMES.get(pPlayer.level().random.nextInt(NamesLoader.FEMALE_NAMES.size()));

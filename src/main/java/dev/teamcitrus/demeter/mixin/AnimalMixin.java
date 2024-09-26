@@ -3,7 +3,7 @@ package dev.teamcitrus.demeter.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.citruslib.util.ModUtil;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
+import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.attachment.MilkAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.animals.AnimalStats;
@@ -45,13 +45,13 @@ public class AnimalMixin {
     )
     private void demeter$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (pPlayer.level().isClientSide) return;
-        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(demeter$animal);
+        DynamicHolder<IStats> stats = AnimalUtil.getStats(demeter$animal);
         if (!(AnimalUtil.getStats(demeter$animal).isBound() && stats.get().milking().isPresent())) return;
         IStats.MilkingCodec milking = stats.get().milking().get();
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
         if (!stack.is(milking.input())) return;
-        if (!AnimalUtil.getGender(demeter$animal).equals(AnimalGenders.FEMALE)) {
+        if (!AnimalUtil.getGender(demeter$animal).equals(AnimalAttachment.AnimalGenders.FEMALE)) {
             pPlayer.displayClientMessage(Component.translatable("message.demeter.milk.fail_gender").withStyle(ChatFormatting.RED), true);
             return;
         }

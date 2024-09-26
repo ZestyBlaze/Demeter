@@ -12,6 +12,10 @@ public class DemeterConfig {
     public static ModConfigSpec.BooleanValue animalsDieOfHunger;
     public static ModConfigSpec.IntValue daysBeforeAnimalDie;
 
+    // Crop Config
+    public static ModConfigSpec.BooleanValue cropsWilt;
+    public static ModConfigSpec.IntValue daysToWilt;
+
     //Love Config
     public static ModConfigSpec.IntValue spawnLoveValue;
     public static ModConfigSpec.IntValue pettingLoveValue;
@@ -46,11 +50,17 @@ public class DemeterConfig {
 
     private static void setupConfig(ModConfigSpec.Builder builder) {
         builder.push("Animals Config");
-        builder.comment("Configs that apply to the mod at large or to ALL animals");
+        builder.comment("Configs that apply to the mod at large and apply to ALL animals");
         animalsDieOfHunger = builder.comment("Will animals die of hunger after a certain number of days of not being fed?")
                 .define("animalsDieOfHunger", true);
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
-                .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
+                .defineInRange("daysNoFood", 7, 1, Integer.MAX_VALUE);
+        builder.pop();
+        builder.push("Crops Config");
+        cropsWilt = builder.comment("Will crops wilt after a number of days without being harvested")
+                        .define("cropsWilt", true);
+        daysToWilt = builder.comment("How many days it takes for crops to wilt once reaching maturity")
+                        .defineInRange("daysToWilt", 3, 1, Integer.MAX_VALUE);
         builder.pop();
         builder.push("Love Config");
         builder.comment("Configs that affect how love works with animals");

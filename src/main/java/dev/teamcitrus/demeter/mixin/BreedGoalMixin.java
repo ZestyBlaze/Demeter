@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
+import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +23,7 @@ public class BreedGoalMixin {
                 original.call(instance, serverLevel, animal);
             }
 
-            if (AnimalUtil.getGender(instance).equals(AnimalGenders.FEMALE)) {
+            if (AnimalUtil.getGender(instance).equals(AnimalAttachment.AnimalGenders.FEMALE)) {
                 instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
             } else {
                 animal.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);

@@ -18,7 +18,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Demeter.MODID);
     public static final BlockSetType MAPLE_BLOCK_SET_TYPE = BlockSetType.register(new BlockSetType("maple"));
-    public static final WoodType MAPLE_WOOD_TYPE = WoodType.register(new WoodType("maple", MAPLE_BLOCK_SET_TYPE));
+    public static final WoodType MAPLE_WOOD_TYPE = WoodType.register(new WoodType("demeter:maple", MAPLE_BLOCK_SET_TYPE));
 
     public static final DeferredBlock<RotatedPillarBlock> MAPLE_LOG = BLOCKS.register("maple_log", MapleLogBlock::new);
     public static final DeferredBlock<RotatedPillarBlock> MAPLE_WOOD = BLOCKS.register("maple_wood", MapleLogBlock::new);

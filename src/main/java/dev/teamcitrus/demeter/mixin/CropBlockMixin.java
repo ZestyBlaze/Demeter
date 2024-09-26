@@ -19,7 +19,6 @@ public class CropBlockMixin {
             )
     )
     private boolean demeter$randomTick(boolean original, BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        return false; // Removed for now while I work out a new crop system
-        //return original && level.getBlockState(pos.below()).getValue(BlockStateProperties.MOISTURE).equals(7);
+        return false;
     }
 }

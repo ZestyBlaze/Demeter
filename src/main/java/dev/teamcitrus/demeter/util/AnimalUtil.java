@@ -5,7 +5,7 @@ import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
-import dev.teamcitrus.demeter.data.animals.AnimalStats;
+import dev.teamcitrus.demeter.data.animals.IStats;
 import dev.teamcitrus.demeter.data.animals.StatsRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,7 +18,7 @@ public class AnimalUtil {
         return animal.getData(AttachmentRegistry.ANIMAL);
     }
 
-    public static DynamicHolder<AnimalStats> getStats(Animal animal) {
+    public static DynamicHolder<IStats> getStats(Animal animal) {
         return StatsRegistry.INSTANCE.holder(BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()));
     }
 
@@ -37,7 +37,7 @@ public class AnimalUtil {
 
     public static void handleBirth(Animal self, ServerLevel serverLevel, Animal otherEntity) {
         try {
-            DynamicHolder<AnimalStats> stats = getStats(self);
+            DynamicHolder<IStats> stats = getStats(self);
             int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.get().minChildrenPerBirth(), stats.get().maxChildrenPerBirth());
             if (self.getLoveCause() != null) {
                 if (ModUtil.isModInstalled("accessories")) {

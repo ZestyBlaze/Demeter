@@ -44,7 +44,6 @@ public class BrushItem extends CitrusItem {
 
                 if (comfortLevel > 0) {
                     love += (comfortLevel * DemeterConfig.comfortBonusPerLevel.get());
-                    AdvancementRegistry.BRUSHED.get().trigger(serverPlayer);
                 }
 
                 if (spiteLevel > 0) {
@@ -54,6 +53,8 @@ public class BrushItem extends CitrusItem {
                         case REDUCE -> love -= (spiteLevel * DemeterConfig.loveLossPerSpiteLevel.get());
                     }
                     AdvancementRegistry.SPITEFUL_BRUSHED.get().trigger(serverPlayer);
+                } else {
+                    AdvancementRegistry.BRUSHED.get().trigger(serverPlayer);
                 }
 
                 AnimalUtil.getAnimalData(animal).setHasBeenBrushedToday(true);

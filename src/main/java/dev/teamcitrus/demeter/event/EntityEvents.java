@@ -36,7 +36,7 @@ public class EntityEvents {
     @SubscribeEvent
     public static void onEntityAdded(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Animal animal)) return;
-        DynamicHolder<AnimalStats> stats = AnimalUtil.getStats(animal);
+        DynamicHolder<IStats> stats = AnimalUtil.getStats(animal);
         if (stats.isBound() && stats.get().activity().equals(IStats.Activity.DIURNAL)) {
         }
         if (!event.loadedFromDisk()) {

@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.datagen.provider;
 
 import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import dev.teamcitrus.demeter.registry.WoodSetRegistry;
@@ -12,6 +13,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -38,7 +40,12 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                 .unlockedBy("has_item", has(Items.PAPER))
                 .save(pRecipeOutput);
 
-        twoByTwoPacker(pRecipeOutput, RecipeCategory.REDSTONE, BlockRegistry.MAPLE_SYRUP_BLOCK, ItemRegistry.MAPLE_BOTTLE);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AccessoriesCompat.Items.BREEDING_CHARM)
+                        .requires(Items.DIAMOND)
+                        .unlockedBy("has_item", has(Items.DIAMOND))
+                        .save(pRecipeOutput.withConditions(new ModLoadedCondition("accessories")));
+
+        twoByTwoPacker(pRecipeOutput, RecipeCategory.REDSTONE, BlockRegistry.MAPLE_SYRUP_BLOCK, ItemRegistry.MAPLE_SYRUP_BOTTLE);
 
         woodenBoat(pRecipeOutput, ItemRegistry.MAPLE_BOAT, WoodSetRegistry.MAPLE.getPlanks());
         signBuilder(ItemRegistry.MAPLE_SIGN, Ingredient.of(WoodSetRegistry.MAPLE.getPlanks()));

@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -36,7 +35,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> ANIMAL_TAG = ITEMS.register("animal_tag", AnimalTagItem::new);
     public static final DeferredItem<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
-    public static final DeferredItem<Item> MAPLE_BOTTLE = ITEMS.register("maple_bottle", MapleBottleItem::new);
+    public static final DeferredItem<Item> MAPLE_SYRUP_BOTTLE = ITEMS.register("maple_syrup_bottle", MapleBottleItem::new);
     public static final DeferredItem<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", MiraclePotionItem::new);
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
     public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);

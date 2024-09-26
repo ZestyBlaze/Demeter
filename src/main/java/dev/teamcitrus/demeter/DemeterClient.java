@@ -3,28 +3,25 @@ package dev.teamcitrus.demeter;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.citruslib.util.ScreenUtil;
 import dev.teamcitrus.demeter.component.QualityLevel;
+import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
     @SubscribeEvent
-    public static void registerColors(RegisterColorHandlersEvent.Item event) {
-        event.register((pStack, pTintIndex) -> 0xFFFEFCFF, ItemRegistry.MILK_BOTTLE.get());
-        //event.register((itemStack, i) -> 0xFFFF8C00, ItemRegistry.WATERING_CAN.get());
-    }
-
-    @SubscribeEvent
     public static void registerItemProperties(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> Sheets.addWoodType(BlockRegistry.MAPLE_WOOD_TYPE));
+
         ItemProperties.register(ItemRegistry.WATERING_CAN.get(), Demeter.id("level"), ((itemStack, clientLevel, livingEntity, i) -> {
             if (itemStack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
                 QualityLevel level = itemStack.get(ComponentRegistry.QUALITY_LEVEL.get()).level();
