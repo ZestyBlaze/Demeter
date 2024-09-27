@@ -40,7 +40,7 @@ public class MiraclePotionItem extends CitrusItem {
                 return InteractionResult.SUCCESS;
             }
 
-            if (AnimalUtil.getStats(animal).isBound() && AnimalUtil.getAnimalData(animal).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
+            if (AnimalUtil.getStats(animal) != null && AnimalUtil.getAnimalData(animal).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
                 if (!player.isCreative()) {
                     stack.shrink(1);
                 }

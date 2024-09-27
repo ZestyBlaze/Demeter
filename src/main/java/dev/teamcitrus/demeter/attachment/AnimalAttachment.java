@@ -4,7 +4,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
+import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.nbt.CompoundTag;
@@ -81,10 +83,14 @@ public class AnimalAttachment {
         }
 
         if (isPregnant) {
-            daysLeftUntilBirth--;
+            Demeter.LOGGER.error("Pregnant log");
+            --daysLeftUntilBirth;
+            Demeter.LOGGER.error("Days left: {}", daysLeftUntilBirth);
             if (daysLeftUntilBirth <= 0) {
                 Level level = self.level();
+                Demeter.LOGGER.error("Attempt to handle birth");
                 EntityType.create(otherParentData, level).ifPresent(entity -> {
+                    Demeter.LOGGER.error("Parent found, handling birth");
                     AnimalUtil.handleBirth(self, (ServerLevel) self.level(), (Animal) entity);
                     this.isPregnant = false;
                     this.otherParentData = new CompoundTag();
@@ -95,7 +101,7 @@ public class AnimalAttachment {
         if (!hasBeenFedToday && DemeterConfig.animalsDieOfHunger.get()) {
             daysSinceFed++;
             if (daysSinceFed >= DemeterConfig.daysBeforeAnimalDie.get()) {
-                self.die(self.level().damageSources().genericKill());
+                self.discard();
             }
         }
 
@@ -179,7 +185,10 @@ public class AnimalAttachment {
         this.isPregnant = value;
         this.otherParentData = otherParent.serializeNBT(animal.level().registryAccess());
         if (value) {
-            this.daysLeftUntilBirth = AnimalUtil.getStats(animal).get().daysPregnant();
+            AnimalData data = AnimalUtil.getStats(animal);
+            if (data != null) {
+                this.daysLeftUntilBirth = AnimalUtil.getStats(animal).daysPregnant();
+            }
         }
     }
 

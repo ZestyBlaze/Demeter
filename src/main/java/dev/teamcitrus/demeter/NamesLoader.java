@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data;
+package dev.teamcitrus.demeter;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

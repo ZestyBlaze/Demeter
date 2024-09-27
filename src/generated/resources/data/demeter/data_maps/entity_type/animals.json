@@ -1,0 +1,92 @@
+{
+  "values": {
+    "minecraft:camel": {
+      "activity": "diurnal",
+      "daysPregnant": 11,
+      "daysToGrowUp": 1
+    },
+    "minecraft:cat": {
+      "activity": "nocturnal",
+      "daysPregnant": 5,
+      "daysToGrowUp": 1
+    },
+    "minecraft:cow": {
+      "activity": "diurnal",
+      "daysPregnant": 9,
+      "daysToGrowUp": 1,
+      "milking": {}
+    },
+    "minecraft:donkey": {
+      "activity": "diurnal",
+      "daysPregnant": 24,
+      "daysToGrowUp": 1
+    },
+    "minecraft:fox": {
+      "activity": "nocturnal",
+      "daysPregnant": 6,
+      "daysToGrowUp": 1
+    },
+    "minecraft:goat": {
+      "activity": "diurnal",
+      "daysPregnant": 7,
+      "daysToGrowUp": 1
+    },
+    "minecraft:horse": {
+      "activity": "diurnal",
+      "daysPregnant": 24,
+      "daysToGrowUp": 1
+    },
+    "minecraft:llama": {
+      "activity": "diurnal",
+      "daysPregnant": 11,
+      "daysToGrowUp": 1
+    },
+    "minecraft:mooshroom": {
+      "activity": "diurnal",
+      "daysPregnant": 10,
+      "daysToGrowUp": 1
+    },
+    "minecraft:ocelot": {
+      "activity": "nocturnal",
+      "daysPregnant": 6,
+      "daysToGrowUp": 1
+    },
+    "minecraft:panda": {
+      "activity": "diurnal",
+      "daysPregnant": 12,
+      "daysToGrowUp": 1
+    },
+    "minecraft:parrot": {
+      "activity": "diurnal",
+      "daysPregnant": 4,
+      "daysToGrowUp": 1
+    },
+    "minecraft:pig": {
+      "activity": "diurnal",
+      "daysPregnant": 4,
+      "daysToGrowUp": 1,
+      "maxChildrenPerBirth": 7,
+      "minChildrenPerBirth": 4
+    },
+    "minecraft:polar_bear": {
+      "activity": "diurnal",
+      "daysPregnant": 14,
+      "daysToGrowUp": 1
+    },
+    "minecraft:rabbit": {
+      "activity": "diurnal",
+      "daysPregnant": 4,
+      "daysToGrowUp": 1
+    },
+    "minecraft:sheep": {
+      "activity": "diurnal",
+      "daysPregnant": 5,
+      "daysToGrowUp": 1
+    },
+    "minecraft:wolf": {
+      "activity": "nocturnal",
+      "daysPregnant": 5,
+      "daysToGrowUp": 1
+    }
+  }
+}

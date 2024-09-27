@@ -54,7 +54,7 @@ public class DemeterConfig {
         animalsDieOfHunger = builder.comment("Will animals die of hunger after a certain number of days of not being fed?")
                 .define("animalsDieOfHunger", true);
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
-                .defineInRange("daysNoFood", 7, 1, Integer.MAX_VALUE);
+                .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
         builder.pop();
         builder.push("Crops Config");
         cropsWilt = builder.comment("Will crops wilt after a number of days without being harvested")

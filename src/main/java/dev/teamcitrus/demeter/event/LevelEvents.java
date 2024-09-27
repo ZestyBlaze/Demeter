@@ -5,7 +5,7 @@ import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.CropAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.datamaps.crops.CropData;
+import dev.teamcitrus.demeter.datamaps.CropData;
 import dev.teamcitrus.demeter.mixin.CropBlockInvoker;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.registry.PoiTypeRegistry;
@@ -40,10 +40,10 @@ public class LevelEvents {
     public static void onNewDay(NewDayEvent event) {
         ServerLevel level = event.getLevel();
 
-        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal).isBound()).forEach(animal -> {
+        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal) != null).forEach(animal -> {
             animal.getData(AttachmentRegistry.ANIMAL).onNewDay(animal);
         });
-        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal).isBound() && (AnimalUtil.getStats(animal).get().milking().isPresent())).forEach(animal -> {
+        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal) != null && (AnimalUtil.getStats(animal).milking().isPresent())).forEach(animal -> {
             animal.getData(AttachmentRegistry.MILK).setHasBeenMilked(false);
         });
 

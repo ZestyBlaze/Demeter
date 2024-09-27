@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.datamaps.crops;
+package dev.teamcitrus.demeter.datamaps;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

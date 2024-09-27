@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.data.NamesLoader;
+import dev.teamcitrus.demeter.NamesLoader;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

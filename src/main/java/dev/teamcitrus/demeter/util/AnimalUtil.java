@@ -1,25 +1,25 @@
 package dev.teamcitrus.demeter.util;
 
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.DemeterDataMaps;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
-import dev.teamcitrus.demeter.data.animals.IStats;
-import dev.teamcitrus.demeter.data.animals.StatsRegistry;
+import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
 
+@SuppressWarnings("deprecation")
 public class AnimalUtil {
     public static AnimalAttachment getAnimalData(Animal animal) {
         return animal.getData(AttachmentRegistry.ANIMAL);
     }
 
-    public static DynamicHolder<IStats> getStats(Animal animal) {
-        return StatsRegistry.INSTANCE.holder(BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()));
+    public static AnimalData getStats(Animal animal) {
+        return animal.getType().builtInRegistryHolder().getData(DemeterDataMaps.ANIMAL_DATA);
+        //return StatsRegistry.INSTANCE.holder(BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()));
     }
 
     public static boolean isAnimalHappy(Animal animal) {
@@ -37,17 +37,19 @@ public class AnimalUtil {
 
     public static void handleBirth(Animal self, ServerLevel serverLevel, Animal otherEntity) {
         try {
-            DynamicHolder<IStats> stats = getStats(self);
-            int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.get().minChildrenPerBirth(), stats.get().maxChildrenPerBirth());
-            if (self.getLoveCause() != null) {
-                if (ModUtil.isModInstalled("accessories")) {
-                    if (AccessoriesCompat.isWearing(self.getLoveCause(), AccessoriesCompat.Items.BREEDING_CHARM.get())) {
-                        numberOfTimes += 2;
+            AnimalData stats = getStats(self);
+            if (stats != null) {
+                int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.minChildrenPerBirth(), stats.maxChildrenPerBirth());
+                if (self.getLoveCause() != null) {
+                    if (ModUtil.isModInstalled("accessories")) {
+                        if (AccessoriesCompat.isWearing(self.getLoveCause(), AccessoriesCompat.Items.BREEDING_CHARM.get())) {
+                            numberOfTimes += 2;
+                        }
                     }
                 }
+                birth(self, serverLevel, otherEntity, numberOfTimes);
+                getAnimalData(self).setLove(100);
             }
-            birth(self, serverLevel, otherEntity, numberOfTimes);
-            getAnimalData(self).setLove(100);
         } catch (IllegalArgumentException e) {
             Demeter.LOGGER.error(Component.translatable("error.demeter.maxhighermin").getString());
         }

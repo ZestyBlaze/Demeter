@@ -1,11 +1,8 @@
 package dev.teamcitrus.demeter.event;
 
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.data.animals.AnimalStats;
-import dev.teamcitrus.demeter.data.animals.IStats;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -36,9 +33,6 @@ public class EntityEvents {
     @SubscribeEvent
     public static void onEntityAdded(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Animal animal)) return;
-        DynamicHolder<IStats> stats = AnimalUtil.getStats(animal);
-        if (stats.isBound() && stats.get().activity().equals(IStats.Activity.DIURNAL)) {
-        }
         if (!event.loadedFromDisk()) {
             AnimalUtil.getAnimalData(animal).setGender(
                     AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)]
@@ -72,8 +66,8 @@ public class EntityEvents {
     @SubscribeEvent
     public static void onBabySpawned(BabyEntitySpawnEvent event) {
         if (!(event.getChild() instanceof Animal child)) return;
-        if (AnimalUtil.getStats(child).isBound()) {
-            AnimalUtil.getAnimalData(child).setDaysLeftUntilGrown(AnimalUtil.getStats(child).get().daysToGrowUp());
+        if (AnimalUtil.getStats(child) != null) {
+            AnimalUtil.getAnimalData(child).setDaysLeftUntilGrown(AnimalUtil.getStats(child).daysToGrowUp());
         }
 
         if (event.getCausedByPlayer() == null) return;

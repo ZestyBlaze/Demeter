@@ -18,18 +18,17 @@ public class BreedGoalMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Animal;spawnChildFromBreeding(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/animal/Animal;)V")
     )
     private void demeter$handlePregnancy(Animal instance, ServerLevel serverLevel, Animal animal, Operation<Void> original) {
-        if (AnimalUtil.getStats(instance).isBound()) {
-            if (AnimalUtil.getStats(instance).get().daysPregnant() == 0) {
+        if (AnimalUtil.getStats(instance) != null) {
+            if (AnimalUtil.getStats(instance).daysPregnant() == 0) {
                 original.call(instance, serverLevel, animal);
             }
 
-            if (AnimalUtil.getGender(instance).equals(AnimalAttachment.AnimalGenders.FEMALE)) {
-                instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
-            } else {
-                animal.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
+            if (!AnimalUtil.getAnimalData(instance).getPregnant()) {
+                if (AnimalUtil.getGender(instance).equals(AnimalAttachment.AnimalGenders.FEMALE)) {
+                    instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
+                }
+                instance.resetLove();
             }
-            instance.resetLove();
-            animal.resetLove();
         } else {
             original.call(instance, serverLevel, animal);
         }

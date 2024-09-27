@@ -1,13 +1,11 @@
 package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.attachment.MilkAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.data.animals.AnimalStats;
-import dev.teamcitrus.demeter.data.animals.IStats;
+import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import dev.teamcitrus.demeter.util.QualityUtil;
@@ -45,9 +43,9 @@ public class AnimalMixin {
     )
     private void demeter$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (pPlayer.level().isClientSide) return;
-        DynamicHolder<IStats> stats = AnimalUtil.getStats(demeter$animal);
-        if (!(AnimalUtil.getStats(demeter$animal).isBound() && stats.get().milking().isPresent())) return;
-        IStats.MilkingCodec milking = stats.get().milking().get();
+        AnimalData stats = AnimalUtil.getStats(demeter$animal);
+        if (!(AnimalUtil.getStats(demeter$animal) != null && stats.milking().isPresent())) return;
+        AnimalData.MilkingCodec milking = stats.milking().get();
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
         if (!stack.is(milking.input())) return;
@@ -101,6 +99,6 @@ public class AnimalMixin {
             )
     )
     private boolean demeter$checkMateGender(boolean original, Animal otherEntity) {
-        return original && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
+        return original && !AnimalUtil.getAnimalData(demeter$animal).getPregnant() && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
     }
 }
