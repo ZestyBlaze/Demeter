@@ -1,6 +1,0 @@
-{
-  "entity": "minecraft:cow",
-  "activity": "diurnal",
-  "daysPregnant": 9,
-  "milking": {}
-}
