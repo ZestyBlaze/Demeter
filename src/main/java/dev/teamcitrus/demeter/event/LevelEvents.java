@@ -2,12 +2,10 @@ package dev.teamcitrus.demeter.event;
 
 import com.google.common.collect.Lists;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.CropAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.data.crops.CropInfo;
-import dev.teamcitrus.demeter.data.crops.ICrop;
+import dev.teamcitrus.demeter.datamaps.crops.CropData;
 import dev.teamcitrus.demeter.mixin.CropBlockInvoker;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.registry.PoiTypeRegistry;
@@ -85,10 +83,9 @@ public class LevelEvents {
                 CropUtil.getCropsInChunk(levelchunk).forEach((pos, originalDays) -> {
                     BlockState state = level.getBlockState(pos);
                     CropBlock block = (CropBlock) state.getBlock();
-                    DynamicHolder<ICrop> cropInfo = CropUtil.getCropInfo(block);
-                    if (cropInfo.isBound()) {
-                        ICrop info = cropInfo.get();
-                        int days = info.daysToGrow();
+                    CropData cropData = CropUtil.getCropData(block);
+                    if (cropData != null) {
+                        int days = cropData.daysToGrow();
 
                         CropAttachment data = CropUtil.getCropData(levelchunk);
                         data.incrementDays(pos);

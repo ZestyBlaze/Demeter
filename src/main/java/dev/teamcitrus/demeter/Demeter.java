@@ -7,7 +7,6 @@ import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.NamesLoader;
 import dev.teamcitrus.demeter.data.animals.StatsRegistry;
-import dev.teamcitrus.demeter.data.crops.CropRegistry;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.*;
 import net.minecraft.network.chat.Component;
@@ -63,7 +62,6 @@ public class Demeter {
     @SubscribeEvent
     public void setup(FMLCommonSetupEvent event) {
         StatsRegistry.INSTANCE.registerToBus();
-        CropRegistry.INSTANCE.registerToBus();
         PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
         TabFillingRegistry.register(ItemRegistry.DEMETER_TAB_KEY, ItemRegistry.WATERING_CAN.get());
     }
