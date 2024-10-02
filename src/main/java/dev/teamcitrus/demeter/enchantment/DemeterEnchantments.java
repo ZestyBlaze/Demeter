@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.enchantment;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.data.gen.datagen.provider.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.data.gen.provider.DemeterItemTagsProvider;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;

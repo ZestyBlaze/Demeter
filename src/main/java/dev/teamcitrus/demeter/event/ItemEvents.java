@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.component.QualityLevel;
-import dev.teamcitrus.demeter.data.gen.datagen.provider.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.data.gen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.ChatFormatting;

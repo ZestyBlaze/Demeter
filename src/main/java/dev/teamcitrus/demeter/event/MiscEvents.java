@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.data.loaders.NameLoader;
+import dev.teamcitrus.demeter.data.loaders.NamesLoader;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -16,6 +16,8 @@ import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID)
 public class MiscEvents {
+    public static NamesLoader nameLoader = new NamesLoader("demeter/names");
+
     @SubscribeEvent
     public static void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
         PotionBrewing.Builder builder = event.getBuilder();
@@ -29,6 +31,7 @@ public class MiscEvents {
 
     @SubscribeEvent
     public static void registerReloadListeners(AddReloadListenerEvent event) {
-        event.addListener(new NameLoader());
+        //event.addListener(new NameLoader());
+        event.addListener(nameLoader);
     }
 }

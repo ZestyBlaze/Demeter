@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.demeter.DemeterClient;
-import dev.teamcitrus.demeter.data.gen.datagen.provider.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.data.gen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.client.gui.Font;

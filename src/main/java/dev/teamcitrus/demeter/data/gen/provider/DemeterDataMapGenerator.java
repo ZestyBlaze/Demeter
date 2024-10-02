@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data.gen.datagen.provider;
+package dev.teamcitrus.demeter.data.gen.provider;
 
 import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
 import dev.teamcitrus.demeter.datamaps.AnimalData;

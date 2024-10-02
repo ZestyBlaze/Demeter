@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @EventBusSubscriber(modid = Demeter.MODID)
+@SuppressWarnings("deprecation")
 public class LevelEvents {
     @SubscribeEvent
     public static void onNewDay(NewDayEvent event) {

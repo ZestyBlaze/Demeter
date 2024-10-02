@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data.gen.datagen.provider;
+package dev.teamcitrus.demeter.data.gen.provider;
 
 import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
 import dev.teamcitrus.demeter.Demeter;
@@ -10,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -40,10 +41,10 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                 .unlockedBy("has_item", has(Items.PAPER))
                 .save(pRecipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AccessoriesCompat.Items.BREEDING_CHARM)
-                        .requires(Items.DIAMOND)
-                        .unlockedBy("has_item", has(Items.DIAMOND))
-                        .save(pRecipeOutput.withConditions(new ModLoadedCondition("accessories")));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AccessoriesCompat.Items.BREEDING_CHARM)
+                .pattern("").pattern("").pattern("")
+                .unlockedBy("has_item", has(Items.EXPERIENCE_BOTTLE))
+                .save(pRecipeOutput.withConditions(new ModLoadedCondition("accessories")));
 
         twoByTwoPacker(pRecipeOutput, RecipeCategory.REDSTONE, BlockRegistry.MAPLE_SYRUP_BLOCK, ItemRegistry.MAPLE_SYRUP_BOTTLE);
 
