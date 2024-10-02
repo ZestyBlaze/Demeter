@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.datagen.provider;
+package dev.teamcitrus.demeter.data.gen.datagen.provider;
 
 import dev.teamcitrus.citruslib.datagen.CitrusItemTagsProvider;
 import dev.teamcitrus.demeter.Demeter;

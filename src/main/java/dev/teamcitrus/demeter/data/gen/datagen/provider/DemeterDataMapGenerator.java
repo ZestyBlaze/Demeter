@@ -1,6 +1,6 @@
-package dev.teamcitrus.demeter.datagen.provider;
+package dev.teamcitrus.demeter.data.gen.datagen.provider;
 
-import dev.teamcitrus.demeter.DemeterDataMaps;
+import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.datamaps.AnimalData.Activity;
 import dev.teamcitrus.demeter.datamaps.AnimalData.MilkingCodec;

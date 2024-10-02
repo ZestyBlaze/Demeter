@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.datagen.provider;
+package dev.teamcitrus.demeter.data.gen.datagen.provider;
 
 import dev.teamcitrus.citruslib.datagen.CitrusBlockDropProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;

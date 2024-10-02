@@ -3,7 +3,7 @@ package dev.teamcitrus.demeter.util;
 import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.component.QualityLevelComponent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.data.gen.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import net.minecraft.world.item.ItemStack;
 

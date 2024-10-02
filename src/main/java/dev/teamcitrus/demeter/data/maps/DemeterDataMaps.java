@@ -1,5 +1,6 @@
-package dev.teamcitrus.demeter;
+package dev.teamcitrus.demeter.data.maps;
 
+import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.datamaps.CropData;
 import net.minecraft.core.registries.Registries;

@@ -1,12 +1,12 @@
-package dev.teamcitrus.demeter.datagen.provider.lang;
+package dev.teamcitrus.demeter.data.gen.datagen.provider.lang;
 
 import dev.teamcitrus.citruslib.datagen.CitrusLanguageProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.component.QualityLevel;
-import dev.teamcitrus.demeter.datagen.provider.DemeterBiomeTagProvider;
-import dev.teamcitrus.demeter.datagen.provider.DemeterBlockTagsProvider;
-import dev.teamcitrus.demeter.datagen.provider.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.data.gen.datagen.provider.DemeterBiomeTagProvider;
+import dev.teamcitrus.demeter.data.gen.datagen.provider.DemeterBlockTagsProvider;
+import dev.teamcitrus.demeter.data.gen.datagen.provider.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;

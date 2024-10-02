@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.NamesLoader;
+import dev.teamcitrus.demeter.data.loaders.NameLoader;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -11,6 +11,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public class AnimalTagItem extends CitrusItem {
     public AnimalTagItem() {
@@ -28,12 +30,8 @@ public class AnimalTagItem extends CitrusItem {
             }
 
             AnimalAttachment.AnimalGenders gender = AnimalUtil.getGender(animal);
-            String name;
-            if (gender.equals(AnimalAttachment.AnimalGenders.MALE)) {
-                name = NamesLoader.MALE_NAMES.get(pPlayer.level().random.nextInt(NamesLoader.MALE_NAMES.size()));
-            } else {
-                name = NamesLoader.FEMALE_NAMES.get(pPlayer.level().random.nextInt(NamesLoader.FEMALE_NAMES.size()));
-            }
+            List<String> possibleNames = NameLoader.nameList.get(gender);
+            String name = possibleNames.get(pPlayer.level().random.nextInt(possibleNames.size()));
             animal.setCustomName(Component.literal(name));
 
             return InteractionResult.SUCCESS;

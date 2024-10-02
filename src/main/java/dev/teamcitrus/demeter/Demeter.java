@@ -7,7 +7,6 @@ import dev.teamcitrus.demeter.compat.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.*;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,14 +20,14 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-
 @Mod(Demeter.MODID)
 public class Demeter {
     public static final String MODID = "demeter";
     public static final Logger LOGGER = LogManager.getLogger();
 
     public Demeter(IEventBus bus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.CLIENT, DemeterConfig.CLIENT_SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, DemeterConfig.GENERAL_SPEC);
         BlockRegistry.BLOCKS.register(bus);
         ItemRegistry.ITEMS.register(bus);
         ItemRegistry.CREATIVE_MODE_TABS.register(bus);
@@ -37,19 +36,11 @@ public class Demeter {
         ComponentRegistry.COMPONENTS.register(bus);
         AdvancementRegistry.CRITERION.register(bus);
         PoiTypeRegistry.POI_TYPES.register(bus);
-        modContainer.registerConfig(ModConfig.Type.CLIENT, DemeterConfig.CLIENT_SPEC);
-        modContainer.registerConfig(ModConfig.Type.COMMON, DemeterConfig.GENERAL_SPEC);
         WoodSetRegistry.init();
         bus.register(this);
         
         if (ModUtil.isModInstalled("accessories")) {
             AccessoriesCompat.init(bus);
-        }
-
-        try {
-            NamesLoader.load();
-        } catch (IOException e) {
-            LOGGER.error(Component.translatable("error.demeter.namesloadfail").getString());
         }
     }
 
