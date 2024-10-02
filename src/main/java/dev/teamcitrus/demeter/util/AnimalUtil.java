@@ -2,9 +2,9 @@ package dev.teamcitrus.demeter.util;
 
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.DemeterDataMaps;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
+import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import net.minecraft.network.chat.Component;
@@ -19,7 +19,6 @@ public class AnimalUtil {
 
     public static AnimalData getStats(Animal animal) {
         return animal.getType().builtInRegistryHolder().getData(DemeterDataMaps.ANIMAL_DATA);
-        //return StatsRegistry.INSTANCE.holder(BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()));
     }
 
     public static boolean isAnimalHappy(Animal animal) {
