@@ -6,11 +6,12 @@ import dev.teamcitrus.demeter.data.MergeableCodecDataManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
+import org.antlr.v4.runtime.misc.MultiMap;
 
 import java.util.*;
 
 public class NamesLoader extends MergeableCodecDataManager<Names, List<String>> {
-    public static final Map<AnimalGenders, List<String>> nameList = new HashMap<>();
+    public static final MultiMap<AnimalGenders, String> nameList = new MultiMap<>();
 
     public NamesLoader(String folderName) {
         super(folderName, Names.CODEC, Names::merge);
