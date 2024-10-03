@@ -28,8 +28,6 @@ public class NamesLoader extends MergeableCodecDataManager<Names, List<String>> 
                 nameList.put(gender, string);
             }
         });
-
-        Demeter.LOGGER.error(nameList);
     }
 
     private AnimalGenders getGenderFromKey(ResourceLocation key) {
