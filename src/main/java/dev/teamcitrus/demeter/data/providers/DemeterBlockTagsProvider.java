@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data.gen.provider;
+package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.citruslib.datagen.CitrusBlockTagsProvider;
 import dev.teamcitrus.demeter.Demeter;
@@ -14,8 +14,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("all")
 public class DemeterBlockTagsProvider extends CitrusBlockTagsProvider {
     public static final TagKey<Block> MAPLE_LOGS = BlockTags.create(Demeter.id("maple_logs"));
+    public static final TagKey<Block> CAN_HAVE_TRUFFLES = BlockTags.create(Demeter.id("can_have_truffles"));
 
     public DemeterBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, Demeter.MODID, existingFileHelper);
@@ -35,6 +37,7 @@ public class DemeterBlockTagsProvider extends CitrusBlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_AXE).add(BlockRegistry.MAPLE_LOG.get(), BlockRegistry.MAPLE_WOOD.get(),
                 BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.STRIPPED_MAPLE_WOOD.get());
         tag(BlockTags.MINEABLE_WITH_HOE).add(BlockRegistry.MAPLE_LEAVES.get());
+        tag(CAN_HAVE_TRUFFLES).addTags(BlockTags.DIRT);
         generateSetTags(WoodSetRegistry.MAPLE);
     }
 }

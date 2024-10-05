@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data.gen.provider;
+package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.advancement.AnimalBrushedTrigger;
 import dev.teamcitrus.demeter.advancement.AnimalLoveMaxTrigger;

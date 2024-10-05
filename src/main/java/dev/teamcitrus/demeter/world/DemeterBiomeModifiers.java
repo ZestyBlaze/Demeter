@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.world;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.data.gen.provider.DemeterBiomeTagProvider;
+import dev.teamcitrus.demeter.data.providers.DemeterBiomeTagProvider;
 import dev.teamcitrus.demeter.world.tree.DemeterTrees;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;

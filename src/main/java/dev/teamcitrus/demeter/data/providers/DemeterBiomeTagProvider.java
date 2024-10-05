@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data.gen.provider;
+package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
 import net.minecraft.core.HolderLookup;

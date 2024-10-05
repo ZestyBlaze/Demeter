@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data.gen.provider;
+package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
 import dev.teamcitrus.demeter.Demeter;
@@ -42,7 +42,10 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AccessoriesCompat.Items.BREEDING_CHARM)
-                .pattern("").pattern("").pattern("")
+                .define('#', Items.IRON_NUGGET).define('m', ItemRegistry.TRUFFLE)
+                .define('b', Items.BONE_MEAL).define('t', Items.TORCHFLOWER)
+                .define('g', Items.GLASS_BOTTLE)
+                .pattern("#m#").pattern("btb").pattern(" g ")
                 .unlockedBy("has_item", has(Items.EXPERIENCE_BOTTLE))
                 .save(pRecipeOutput.withConditions(new ModLoadedCondition("accessories")));
 
