@@ -129,7 +129,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
             ItemStack stack = new ItemStack(this);
             setLevel(stack, level);
             fillContainer(stack, getTankCapacityFromStack(stack));
-            event.insertAfter(ItemRegistry.BUTTER.toStack(), stack,
+            event.insertAfter(ItemRegistry.TRUFFLE.toStack(), stack,
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
             );
         });

@@ -38,6 +38,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> MAPLE_SYRUP_BOTTLE = ITEMS.register("maple_syrup_bottle", MapleBottleItem::new);
     public static final DeferredItem<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", MiraclePotionItem::new);
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
+    public static final DeferredItem<Item> TRUFFLE = ITEMS.registerSimpleItem("truffle");
     public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);

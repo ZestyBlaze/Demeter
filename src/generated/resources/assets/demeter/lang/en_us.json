@@ -54,6 +54,7 @@
   "item.demeter.quality_tooltip.copper": "Copper",
   "item.demeter.quality_tooltip.iron": "Iron",
   "item.demeter.quality_tooltip.netherite": "Netherite",
+  "item.demeter.truffle": "Truffle",
   "item.demeter.watering_can": "%s Watering Can",
   "item.demeter.watering_can.fail": "Something has gone wrong, this can has no data!",
   "item.demeter.watering_can.uses": "Uses: %s",

@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.event;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.entity.ai.DigTrufflesGoal;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -16,6 +17,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -37,6 +39,9 @@ public class EntityEvents {
             AnimalUtil.getAnimalData(animal).setGender(
                     AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)]
             );
+        }
+        if (!event.getLevel().isClientSide() && event.getEntity() instanceof Pig pig) {
+            pig.goalSelector.addGoal(4, new DigTrufflesGoal(pig, 1));
         }
     }
 
