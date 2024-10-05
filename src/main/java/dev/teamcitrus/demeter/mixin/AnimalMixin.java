@@ -69,6 +69,16 @@ public class AnimalMixin {
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 
+    @ModifyExpressionValue(
+            method = "mobInteract",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/animal/Animal;isFood(Lnet/minecraft/world/item/ItemStack;)Z")
+    )
+    private boolean demeter$mobInteract(boolean original) {
+        return original && !AnimalUtil.getAnimalData(demeter$animal).hasBeenFedToday();
+    }
+
     @Inject(
             method = "mobInteract",
             at = @At(
