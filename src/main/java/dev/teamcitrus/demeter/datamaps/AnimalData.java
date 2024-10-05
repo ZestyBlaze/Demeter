@@ -7,11 +7,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+import java.util.List;
 import java.util.Optional;
 
-public record AnimalData(
-        Activity activity, int daysPregnant, int daysToGrowUp,
-        int minChildrenPerBirth, int maxChildrenPerBirth, Optional<MilkingCodec> milking
+public record AnimalData(Activity activity, int daysPregnant, int daysToGrowUp,
+        int minChildrenPerBirth, int maxChildrenPerBirth, List<Item> favouriteFoods,
+        Optional<MilkingCodec> milking
 ) {
     public static final Codec<AnimalData> CODEC = RecordCodecBuilder.create(func -> func.group(
             Activity.CODEC.fieldOf("activity").forGetter(AnimalData::activity),
@@ -19,19 +20,20 @@ public record AnimalData(
             Codec.INT.optionalFieldOf("daysToGrowUp", 0).forGetter(AnimalData::daysToGrowUp),
             Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(AnimalData::minChildrenPerBirth),
             Codec.INT.optionalFieldOf("maxChildrenPerBirth", 1).forGetter(AnimalData::maxChildrenPerBirth),
+            BuiltInRegistries.ITEM.byNameCodec().listOf().optionalFieldOf("favouriteFoods", List.of()).forGetter(AnimalData::favouriteFoods),
             MilkingCodec.CODEC.optionalFieldOf("milking").forGetter(AnimalData::milking)
     ).apply(func, AnimalData::new));
 
     public AnimalData(Activity activity, int daysPregnant, int daysToGrowUp) {
-        this(activity, daysPregnant, daysToGrowUp, 1, 1, Optional.empty());
+        this(activity, daysPregnant, daysToGrowUp, 1, 1, List.of(), Optional.empty());
     }
 
     public AnimalData(Activity activity, int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth) {
-        this(activity, daysPregnant, daysToGrowUp, minChildrenPerBirth, maxChildrenPerBirth, Optional.empty());
+        this(activity, daysPregnant, daysToGrowUp, minChildrenPerBirth, maxChildrenPerBirth, List.of(), Optional.empty());
     }
 
     public AnimalData(Activity activity, int daysPregnant, int daysToGrowUp, MilkingCodec milking) {
-        this(activity, daysPregnant, daysToGrowUp, 1, 1, Optional.of(milking));
+        this(activity, daysPregnant, daysToGrowUp, 1, 1, List.of(), Optional.of(milking));
     }
 
     public enum Activity {

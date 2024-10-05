@@ -19,7 +19,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mixin(Animal.class)
@@ -88,7 +91,11 @@ public class AnimalMixin {
             )
     )
     private void demeter$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        AnimalUtil.getAnimalData(demeter$animal).alterLove(Optional.of((ServerPlayer)player), DemeterConfig.feedingLoveValue.get());
+        ItemStack stack = player.getItemInHand(hand);
+        List<Item> favouriteFoods = AnimalUtil.getStats(demeter$animal).favouriteFoods();
+        int love = DemeterConfig.feedingLoveValue.get();
+
+        AnimalUtil.getAnimalData(demeter$animal).alterLove(Optional.of((ServerPlayer)player), favouriteFoods.contains(stack.getItem()) ? love * 2 : love);
         AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
     }
 
