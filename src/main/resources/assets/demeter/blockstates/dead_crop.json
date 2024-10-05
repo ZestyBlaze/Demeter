@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "demeter:block/dead_crop1"
+      },
+      {
+        "model": "demeter:block/dead_crop2"
+      },
+      {
+        "model": "demeter:block/dead_crop3"
+      },
+      {
+        "model": "demeter:block/dead_crop4"
+      }
+    ]
+  }
+}

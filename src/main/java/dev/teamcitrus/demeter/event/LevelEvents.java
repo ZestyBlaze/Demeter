@@ -8,6 +8,7 @@ import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.CropData;
 import dev.teamcitrus.demeter.mixin.CropBlockInvoker;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
+import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.PoiTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import dev.teamcitrus.demeter.util.CropUtil;
@@ -99,7 +100,7 @@ public class LevelEvents {
 
                         if (DemeterConfig.cropsWilt.get()) {
                             if (data.getDays(pos) == days + DemeterConfig.daysToWilt.get()) {
-                                level.destroyBlock(pos, false);
+                                level.setBlockAndUpdate(pos, BlockRegistry.DEAD_CROP.get().defaultBlockState());
                                 updatePositions.add(pos);
                             }
                         }
