@@ -1,5 +1,6 @@
-// 1.21.1	2024-08-23T23:22:19.0603839	Tags for minecraft:block mod id demeter
+// 1.21.1	2024-10-04T16:06:04.6357115	Tags for minecraft:block mod id demeter
 ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/c/tags/block/fence_gates/wooden.json
+69c396cb051bbe9a130e6979b67065e5041b179d data/demeter/tags/block/can_have_truffles.json
 de60222834d329d100d0303ece8b17a0f31f05f4 data/demeter/tags/block/maple_logs.json
 e531adfb3f84edf4cf80e7b452929446960b5b40 data/minecraft/tags/block/buttons.json
 796a959b6265e6cdbb0433009b01543558525cdf data/minecraft/tags/block/completes_find_tree_tutorial.json
