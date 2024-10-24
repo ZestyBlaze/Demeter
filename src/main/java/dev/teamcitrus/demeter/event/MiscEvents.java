@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID)
 public class MiscEvents {
-    public static NamesLoader nameLoader = new NamesLoader("demeter/names");
+    public static final NamesLoader NAME_LOADER = new NamesLoader();
 
     @SubscribeEvent
     public static void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
@@ -31,7 +31,6 @@ public class MiscEvents {
 
     @SubscribeEvent
     public static void registerReloadListeners(AddReloadListenerEvent event) {
-        //event.addListener(new NameLoader());
-        event.addListener(nameLoader);
+        event.addListener(NAME_LOADER);
     }
 }

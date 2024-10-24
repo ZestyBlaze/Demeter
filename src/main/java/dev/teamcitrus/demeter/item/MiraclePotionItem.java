@@ -31,7 +31,7 @@ public class MiraclePotionItem extends CitrusItem {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         if (!player.level().isClientSide() && interactionTarget instanceof Animal animal) {
             if (interactionTarget instanceof Frog frog) {
-                AdvancementRegistry.USE_MIRACLE_ON_FROG.get().trigger((ServerPlayer)player);
+                AdvancementRegistry.USE_MIRACLE_ON_FROG.get().trigger(player);
                 if (AnimalUtil.getAnimalData(frog).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
                     ((ServerLevel)(animal.level())).sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
                     ((ServerPlayer)player).connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BOTTLE_EMPTY), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
@@ -46,7 +46,7 @@ public class MiraclePotionItem extends CitrusItem {
                 }
                 ((ServerLevel)(animal.level())).sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
                 ((ServerPlayer)player).connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BOTTLE_EMPTY), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
-                AdvancementRegistry.USE_MIRACLE_POTION.get().trigger((ServerPlayer)player);
+                AdvancementRegistry.USE_MIRACLE_POTION.get().trigger(player);
                 AnimalUtil.getAnimalData(animal).setPregnant(animal, true, animal);
                 return InteractionResult.SUCCESS;
             }

@@ -30,7 +30,7 @@ public class AnimalTagItem extends CitrusItem {
             }
 
             AnimalAttachment.AnimalGenders gender = AnimalUtil.getGender(animal);
-            List<String> possibleNames = NamesLoader.nameList.get(gender);
+            List<String> possibleNames = NamesLoader.NAME_LIST.get(gender);
             String name = possibleNames.get(pPlayer.level().random.nextInt(possibleNames.size()));
 
             animal.setCustomName(Component.literal(name));

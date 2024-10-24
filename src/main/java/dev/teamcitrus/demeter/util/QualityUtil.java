@@ -12,8 +12,8 @@ import java.util.Random;
 public class QualityUtil {
     private static final Random random = new Random();
 
-    public static ItemStack randomiseQuality(ItemStack stack) {
-        if (!stack.is(DemeterItemTagsProvider.QUALITY_PRODUCTS)) return stack;
+    public static void randomiseQuality(ItemStack stack) {
+        if (!stack.is(DemeterItemTagsProvider.QUALITY_PRODUCTS)) return;
         int value = random.nextInt(100);
         if (value <= DemeterConfig.netheriteQualityChance.get()) {
             writeQualityToTag(stack, QualityLevel.NETHERITE);
@@ -24,7 +24,6 @@ public class QualityUtil {
         if (value <= DemeterConfig.copperQualityChance.get() && value > DemeterConfig.ironQualityChance.get()) {
             writeQualityToTag(stack, QualityLevel.COPPER);
         }
-        return stack;
     }
 
     public static QualityLevel getQuality(ItemStack stack) {

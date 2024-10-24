@@ -3,7 +3,6 @@ package dev.teamcitrus.demeter.registry;
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
-import dev.teamcitrus.demeter.item.BrushItem;
 import dev.teamcitrus.demeter.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -33,7 +32,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> DEV_DEBUG_ITEM = ITEMS.register("dev_debug_item", DevDebugItem::new);
     public static final DeferredItem<Item> ANIMAL_TAG = ITEMS.register("animal_tag", AnimalTagItem::new);
-    public static final DeferredItem<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
+    public static final DeferredItem<Item> ANIMAL_BRUSH = ITEMS.register("animal_brush", AnimalBrushItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
     public static final DeferredItem<Item> MAPLE_SYRUP_BOTTLE = ITEMS.register("maple_syrup_bottle", MapleBottleItem::new);
     public static final DeferredItem<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", MiraclePotionItem::new);

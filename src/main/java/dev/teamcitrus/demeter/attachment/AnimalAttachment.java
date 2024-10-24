@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
-import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
@@ -15,9 +14,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-
-import java.util.Optional;
 
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -29,6 +27,7 @@ public class AnimalAttachment {
             AnimalGenders.CODEC.fieldOf("gender").forGetter(o -> o.gender),
             Codec.BOOL.fieldOf("isPregnant").forGetter(o -> o.isPregnant),
             Codec.INT.fieldOf("daysLeftUntilBirth").forGetter(o -> o.daysLeftUntilBirth),
+            Codec.INT.fieldOf("daysSinceBirth").forGetter(o -> o.downPeriod),
             CompoundTag.CODEC.fieldOf("otherParent").forGetter(o -> o.otherParentData),
             Codec.INT.fieldOf("daysLeftUntilGrown").forGetter(o -> o.daysLeftUntilGrown)
     ).apply(instance, AnimalAttachment::new));
@@ -42,7 +41,7 @@ public class AnimalAttachment {
 
     // Pregnancy Variables
     private boolean isPregnant;
-    private int daysLeftUntilBirth;
+    private int daysLeftUntilBirth, downPeriod;
     private CompoundTag otherParentData;
 
     // Growing Variables
@@ -50,12 +49,13 @@ public class AnimalAttachment {
 
     public AnimalAttachment() {
         this(DemeterConfig.spawnLoveValue.get(), 0, false, false, false,
-                AnimalGenders.MALE, false, 0, new CompoundTag(), 0);
+                AnimalGenders.MALE, false, 0, 0, new CompoundTag(), 0);
     }
 
     public AnimalAttachment(int love, int daysSinceFed, boolean hasBeenPetToday, boolean hasBeenFedToday,
                             boolean hasBeenBrushedToday, AnimalGenders gender, boolean isPregnant,
-                            int daysLeftUntilBirth, CompoundTag otherParentData, int daysLeftUntilGrown) {
+                            int daysLeftUntilBirth, int downPeriod, CompoundTag otherParentData,
+                            int daysLeftUntilGrown) {
         this.love = love;
         this.daysSinceFed = daysSinceFed;
         this.hasBeenPetToday = hasBeenPetToday;
@@ -64,6 +64,7 @@ public class AnimalAttachment {
         this.gender = gender;
         this.isPregnant = isPregnant;
         this.daysLeftUntilBirth = daysLeftUntilBirth;
+        this.downPeriod = downPeriod;
         this.otherParentData = otherParentData;
         this.daysLeftUntilGrown = daysLeftUntilGrown;
     }
@@ -76,21 +77,17 @@ public class AnimalAttachment {
      */
     public void onNewDay(Animal self) {
         if (!hasBeenPetToday) {
-            alterLove(Optional.empty(), -5);
+            alterLove(null, -5);
         }
         if (!hasBeenFedToday) {
-            alterLove(Optional.empty(),-5);
+            alterLove(null,-5);
         }
 
         if (isPregnant) {
-            Demeter.LOGGER.error("Pregnant log");
             --daysLeftUntilBirth;
-            Demeter.LOGGER.error("Days left: {}", daysLeftUntilBirth);
             if (daysLeftUntilBirth <= 0) {
                 Level level = self.level();
-                Demeter.LOGGER.error("Attempt to handle birth");
                 EntityType.create(otherParentData, level).ifPresent(entity -> {
-                    Demeter.LOGGER.error("Parent found, handling birth");
                     AnimalUtil.handleBirth(self, (ServerLevel) self.level(), (Animal) entity);
                     this.isPregnant = false;
                     this.otherParentData = new CompoundTag();
@@ -112,6 +109,10 @@ public class AnimalAttachment {
             }
         }
 
+        if (downPeriod > 0) {
+            --downPeriod;
+        }
+
         //Reset Daily Values
         this.hasBeenPetToday = false;
         this.hasBeenFedToday = false;
@@ -125,10 +126,10 @@ public class AnimalAttachment {
      * @param player An optional player as the reason why the love is increasing
      * @param value Can be positive to increase or negative to decrease
      */
-    public void alterLove(Optional<ServerPlayer> player, int value) {
+    public void alterLove(Player player, int value) {
         this.love = Mth.clamp(this.love + value, 0, 100);
-        if (player.isPresent() && love >= 100) {
-            AdvancementRegistry.LOVE_MAX.get().trigger(player.get());
+        if (player instanceof ServerPlayer serverPlayer && love >= 100) {
+            AdvancementRegistry.LOVE_MAX.get().trigger(serverPlayer);
         }
     }
 
@@ -175,12 +176,10 @@ public class AnimalAttachment {
         this.daysLeftUntilGrown = daysLeftUntilGrown;
     }
 
-    /**
-     * A method to set if an animal is pregnant or not
-     *
-     * @param value       Whether an animal is becoming pregnant or not
-     * @param otherParent The other parents other than the self, can be null
-     */
+    public void setDownPeriod(int value) {
+        this.downPeriod = value;
+    }
+
     public void setPregnant(Animal animal, boolean value, Animal otherParent) {
         this.isPregnant = value;
         this.otherParentData = otherParent.serializeNBT(animal.level().registryAccess());

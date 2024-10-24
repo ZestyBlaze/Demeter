@@ -11,6 +11,7 @@ public class DemeterConfig {
     public static ModConfigSpec.IntValue animalHappinessMin;
     public static ModConfigSpec.BooleanValue animalsDieOfHunger;
     public static ModConfigSpec.IntValue daysBeforeAnimalDie;
+    public static ModConfigSpec.IntValue pregnancyDownPeriod;
 
     // Crop Config
     public static ModConfigSpec.BooleanValue cropsWilt;
@@ -55,6 +56,8 @@ public class DemeterConfig {
                 .define("animalsDieOfHunger", true);
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
                 .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
+        pregnancyDownPeriod = builder.comment("The number of days that must pass before an animal can get pregnant again")
+                .defineInRange("pregnancyDownPeriod", 12, 1, Integer.MAX_VALUE);
         builder.pop();
         builder.push("Crops Config");
         cropsWilt = builder.comment("Will crops wilt after a number of days without being harvested")
@@ -65,7 +68,7 @@ public class DemeterConfig {
         builder.push("Love Config");
         builder.comment("Configs that affect how love works with animals");
         spawnLoveValue = builder.comment("The amount of love that animals will spawn with as default")
-                        .defineInRange("spawnLoveValue", 0, 0, 100);
+                        .defineInRange("spawnLoveValue", 90, 0, 100);
         animalHappinessMin = builder.comment("The minimum value of happiness required for an animal to be considered 'happy'")
                 .defineInRange("animalHappinessMin", 65, 0, 100);
         pettingLoveValue = builder.comment("The amount of love that animals will gain from petting them")

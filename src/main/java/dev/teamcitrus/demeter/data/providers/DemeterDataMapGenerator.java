@@ -46,7 +46,7 @@ public class DemeterDataMapGenerator extends DataMapProvider {
                 Activity.NOCTURNAL, 5, 1
         ), false);
         animalData.add(EntityType.COW.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 9, 1, new MilkingCodec()
+                Activity.DIURNAL, 2, 1, new MilkingCodec()
         ), false);
         animalData.add(EntityType.DONKEY.builtInRegistryHolder(), new AnimalData(
                 Activity.DIURNAL, 24, 1

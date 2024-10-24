@@ -12,7 +12,7 @@
     },
     "minecraft:cow": {
       "activity": "diurnal",
-      "daysPregnant": 9,
+      "daysPregnant": 2,
       "daysToGrowUp": 1,
       "milking": {}
     },

@@ -50,7 +50,7 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
             ).addCriterion("pet_animal", AnimalPetTrigger.PetTrigger.pet())
                     .save(saver, "demeter:pet_animal");
             AdvancementHolder brushedAnimal = Advancement.Builder.advancement().parent(petAnimal).display(
-                            ItemRegistry.BRUSH.get(),
+                            ItemRegistry.ANIMAL_BRUSH.get(),
                             Component.translatable("advancement.demeter.animal_brushed"),
                             Component.translatable("advancement.demeter.animal_brushed.desc"),
                             null,
@@ -59,7 +59,7 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
             ).addCriterion("brushed_animal", AnimalBrushedTrigger.TriggerInstance.brushed())
                     .save(saver, "demeter:brushed_animal");
             AdvancementHolder spitefulBrushedAnimal = Advancement.Builder.advancement().parent(brushedAnimal).display(
-                    ItemRegistry.BRUSH.get(),
+                    ItemRegistry.ANIMAL_BRUSH.get(),
                     Component.translatable("advancement.demeter.spiteful_animal_brushed"),
                     Component.translatable("advancement.demeter.spiteful_animal_brushed.desc"),
                     null,

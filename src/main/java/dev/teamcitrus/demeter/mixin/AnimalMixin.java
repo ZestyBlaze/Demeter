@@ -1,44 +1,21 @@
 package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import dev.teamcitrus.citruslib.util.ModUtil;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.attachment.MilkAttachment;
-import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.datamaps.AnimalData;
-import dev.teamcitrus.demeter.registry.AttachmentRegistry;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.teamcitrus.demeter.util.AnimalUtil;
-import dev.teamcitrus.demeter.util.QualityUtil;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.List;
-import java.util.Optional;
-
+@Debug(export = true)
 @Mixin(Animal.class)
 public class AnimalMixin {
     @Unique
     private final Animal demeter$animal = (Animal) (Object) this;
 
+    /*
     @Inject(
             method = "mobInteract",
             at = @At("HEAD"),
@@ -71,41 +48,15 @@ public class AnimalMixin {
         attachment.setHasBeenMilked(true);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
+     */
 
-    @ModifyExpressionValue(
-            method = "mobInteract",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/animal/Animal;isFood(Lnet/minecraft/world/item/ItemStack;)Z")
+    @ModifyReturnValue(
+            method = "canFallInLove",
+            at = @At("RETURN")
     )
-    private boolean demeter$mobInteract(boolean original) {
-        return original && !AnimalUtil.getAnimalData(demeter$animal).hasBeenFedToday();
-    }
-
-    @Inject(
-            method = "mobInteract",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/animal/Animal;setInLove(Lnet/minecraft/world/entity/player/Player;)V",
-                    shift = At.Shift.AFTER
-            )
-    )
-    private void demeter$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        ItemStack stack = player.getItemInHand(hand);
-        List<Item> favouriteFoods = AnimalUtil.getStats(demeter$animal).favouriteFoods();
-        int love = DemeterConfig.feedingLoveValue.get();
-
-        AnimalUtil.getAnimalData(demeter$animal).alterLove(Optional.of((ServerPlayer)player), favouriteFoods.contains(stack.getItem()) ? love * 2 : love);
-        AnimalUtil.getAnimalData(demeter$animal).setHasBeenFedToday(true);
-    }
-
-    @Inject(
-            method = "setInLove",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void demeter$setInLove(Player pPlayer, CallbackInfo ci) {
-        if (!AnimalUtil.isAnimalHappy(demeter$animal) && !ModUtil.isDevelopmentEnvironment()) ci.cancel();
+    private boolean demeter$canFallInLove(boolean original) {
+        return original && AnimalUtil.isAnimalHappy(demeter$animal)
+                && !AnimalUtil.getAnimalData(demeter$animal).getPregnant();
     }
 
     @ModifyExpressionValue(
@@ -116,6 +67,8 @@ public class AnimalMixin {
             )
     )
     private boolean demeter$checkMateGender(boolean original, Animal otherEntity) {
-        return original && !AnimalUtil.getAnimalData(demeter$animal).getPregnant() && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
+        return original && !AnimalUtil.getAnimalData(demeter$animal).getPregnant()
+                //&& !AnimalUtil.getAnimalData(demeter$animal).isOnDownPeriod()
+                && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
     }
 }

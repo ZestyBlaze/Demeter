@@ -4,6 +4,7 @@ import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.compat.AccessoriesCompat;
+import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -22,8 +23,9 @@ public class AnimalUtil {
     }
 
     public static boolean isAnimalHappy(Animal animal) {
-        //TODO: Will be an equation that calculates health, hunger, warmth and love levels for a "happy" level
-        return getAnimalData(animal).getLove() >= 80;
+        //TODO: Will be an equation that calculates hunger, warmth and love levels for a "happy" level
+        return getAnimalData(animal).getLove() >= 80
+                && getAnimalData(animal).hasBeenFedToday();
     }
 
     public static AnimalAttachment.AnimalGenders getGender(Animal animal) {
@@ -48,6 +50,7 @@ public class AnimalUtil {
                 }
                 birth(self, serverLevel, otherEntity, numberOfTimes);
                 getAnimalData(self).setLove(100);
+                getAnimalData(self).setDownPeriod(DemeterConfig.pregnancyDownPeriod.get());
             }
         } catch (IllegalArgumentException e) {
             Demeter.LOGGER.error(Component.translatable("error.demeter.maxhighermin").getString());

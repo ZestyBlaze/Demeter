@@ -56,7 +56,7 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
                 BlockRegistry.STRIPPED_MAPLE_LOG.get().asItem(), BlockRegistry.STRIPPED_MAPLE_WOOD.get().asItem());
         tag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL).add(BlockRegistry.MAPLE_LOG.get().asItem());
         tag(ItemTags.LEAVES).add(BlockRegistry.MAPLE_LEAVES.get().asItem());
-        tag(TOOLS_ANIMAL_BRUSH).add(ItemRegistry.BRUSH.get());
+        tag(TOOLS_ANIMAL_BRUSH).add(ItemRegistry.ANIMAL_BRUSH.get());
         tag(Tags.Items.TOOLS).addTag(TOOLS_ANIMAL_BRUSH);
         tag(ACCESSORIES_CHARM).add(AccessoriesCompat.Items.BREEDING_CHARM.asItem());
         generateSetTags(WoodSetRegistry.MAPLE);

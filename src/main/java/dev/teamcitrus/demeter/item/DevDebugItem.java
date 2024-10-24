@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
+import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -38,6 +39,14 @@ public class DevDebugItem extends CitrusItem {
                     .append("\nFed Today?: " + data.hasBeenFedToday())
                     .append("\nDays Since Fed: " + data.getDaysSinceFed())
                     .withStyle(ChatFormatting.AQUA)
+            );
+        }
+        if (level.isClientSide() && interactionTarget instanceof Animal animal) {
+            AnimalAttachment data = AnimalUtil.getAnimalData(animal);
+
+            Demeter.LOGGER.error(
+                    "UUID: {}\nGender: {}\nPregnant: {}\nLove: {}\nPet Today: {}\nBrushed Today: {}\nFed Today: {}\nDays since Fed: {}",
+                    animal.getUUID(), data.getGender().name(), data.getPregnant(), data.getLove(), data.hasBeenPetToday(), data.hasBeenBrushedToday(), data.hasBeenFedToday(), data.getDaysSinceFed()
             );
         }
         return InteractionResult.FAIL;

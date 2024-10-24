@@ -25,8 +25,7 @@ public class MapleBottleItem extends HoneyBottleItem {
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {
-            if (entityLiving instanceof Player) {
-                Player player = (Player)entityLiving;
+            if (entityLiving instanceof Player player) {
                 if (!player.hasInfiniteMaterials()) {
                     ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
                     if (!player.getInventory().add(itemstack)) {

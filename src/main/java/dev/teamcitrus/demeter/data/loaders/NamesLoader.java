@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.data.loaders;
 
+import dev.teamcitrus.citruslib.reload.MergeableCodecDataManager;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
-import dev.teamcitrus.demeter.data.MergeableCodecDataManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -13,10 +13,10 @@ import java.util.Locale;
 import java.util.Map;
 
 public class NamesLoader extends MergeableCodecDataManager<Names, List<String>> {
-    public static final MultiMap<AnimalGenders, String> nameList = new MultiMap<>();
+    public static final MultiMap<AnimalGenders, String> NAME_LIST = new MultiMap<>();
 
-    public NamesLoader(String folderName) {
-        super(folderName, Names.CODEC, Names::merge);
+    public NamesLoader() {
+        super("demeter/names", Names.CODEC, Names::merge);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class NamesLoader extends MergeableCodecDataManager<Names, List<String>> 
             if (Arrays.stream(AnimalGenders.values()).anyMatch(
                     gender -> gender.name().toLowerCase(Locale.ROOT).equals(id.getPath()))) {
                 AnimalGenders gender = getGenderFromKey(id);
-                nameList.put(gender, string);
+                NAME_LIST.put(gender, string);
             }
         });
     }

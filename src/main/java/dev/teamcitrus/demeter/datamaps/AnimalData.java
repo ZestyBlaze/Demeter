@@ -14,6 +14,7 @@ public record AnimalData(Activity activity, int daysPregnant, int daysToGrowUp,
         int minChildrenPerBirth, int maxChildrenPerBirth, List<Item> favouriteFoods,
         Optional<MilkingCodec> milking
 ) {
+    //TODO: New field for dig products?
     public static final Codec<AnimalData> CODEC = RecordCodecBuilder.create(func -> func.group(
             Activity.CODEC.fieldOf("activity").forGetter(AnimalData::activity),
             Codec.INT.optionalFieldOf("daysPregnant", 0).forGetter(AnimalData::daysPregnant),

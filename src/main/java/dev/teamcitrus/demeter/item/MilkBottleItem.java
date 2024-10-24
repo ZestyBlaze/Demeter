@@ -29,7 +29,7 @@ public class MilkBottleItem extends MilkBucketItem {
             serverplayer.awardStat(Stats.ITEM_USED.get(this));
         }
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             List<Holder<MobEffect>> negativeEffects = new ArrayList<>();
             entityLiving.getActiveEffects().forEach(mobEffectInstance -> {
                  if (mobEffectInstance.getEffect().value().getCategory().equals(MobEffectCategory.HARMFUL) && mobEffectInstance.getCures().contains(EffectCures.MILK)) {
