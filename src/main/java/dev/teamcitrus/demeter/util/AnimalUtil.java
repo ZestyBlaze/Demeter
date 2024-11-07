@@ -8,6 +8,7 @@ import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Animal;
@@ -53,7 +54,10 @@ public class AnimalUtil {
                 getAnimalData(self).setDownPeriod(DemeterConfig.pregnancyDownPeriod.get());
             }
         } catch (IllegalArgumentException e) {
-            Demeter.LOGGER.error(Component.translatable("error.demeter.maxhighermin").getString());
+            Demeter.LOGGER.error(Component.translatable("error.demeter.maxhighermin", BuiltInRegistries.ENTITY_TYPE.getKey(self.getType())).getString());
+            if (self.getLoveCause() != null) {
+                self.getLoveCause().sendSystemMessage(Component.translatable("message.demeter.birth.fail"), true);
+            }
         }
     }
 
