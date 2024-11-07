@@ -19,6 +19,7 @@ public class DemeterItemModelProvider extends CitrusItemModelProvider {
 
     @Override
     protected void registerModels() {
+        basicItem(ItemRegistry.DEV_DEBUG_ITEM.get());
         basicItem(ItemRegistry.ANIMAL_TAG.get());
         basicItem(ItemRegistry.ANIMAL_BRUSH.get());
         basicItem(ItemRegistry.MILK_BOTTLE.get());
