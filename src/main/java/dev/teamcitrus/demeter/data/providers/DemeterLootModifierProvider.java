@@ -46,6 +46,13 @@ public class DemeterLootModifierProvider extends GlobalLootModifierProvider {
                         }
                 )
         );
+        add("quality_pumpkin",
+                new QualityLootModifier(
+                        new LootItemCondition[]{
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PUMPKIN).build()
+                        }
+                )
+        );
         add("quality_beetroots",
                 new QualityLootModifier(
                         new LootItemCondition[]{

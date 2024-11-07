@@ -4,7 +4,8 @@
     "demeter:quality_potato",
     "demeter:quality_beetroots",
     "demeter:quality_carrots",
-    "demeter:quality_wheat"
+    "demeter:quality_wheat",
+    "demeter:quality_pumpkin"
   ],
   "replace": false
 }
