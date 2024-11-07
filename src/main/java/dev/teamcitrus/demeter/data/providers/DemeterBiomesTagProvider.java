@@ -13,15 +13,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DemeterBiomeTagProvider extends TagsProvider<Biome> {
+public class DemeterBiomesTagProvider extends TagsProvider<Biome> {
     public static final TagKey<Biome> HAS_MAPLE_TREES = TagKey.create(Registries.BIOME, Demeter.id("has_maple_trees"));
 
-    public DemeterBiomeTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+    public DemeterBiomesTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, Registries.BIOME, lookupProvider, Demeter.MODID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(HAS_MAPLE_TREES).add(Biomes.FOREST, Biomes.FLOWER_FOREST, Biomes.BIRCH_FOREST);
+        tag(HAS_MAPLE_TREES).add(Biomes.FOREST, Biomes.FLOWER_FOREST, Biomes.BIRCH_FOREST, Biomes.OLD_GROWTH_BIRCH_FOREST);
     }
 }
