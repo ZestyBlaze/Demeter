@@ -12,7 +12,7 @@
     },
     "minecraft:cow": {
       "activity": "diurnal",
-      "daysPregnant": 2,
+      "daysPregnant": 9,
       "daysToGrowUp": 1,
       "milking": {}
     },
@@ -65,6 +65,12 @@
       "activity": "diurnal",
       "daysPregnant": 4,
       "daysToGrowUp": 1,
+      "diggableItems": [
+        {
+          "count": 1,
+          "id": "demeter:truffle"
+        }
+      ],
       "maxChildrenPerBirth": 7,
       "minChildrenPerBirth": 4
     },

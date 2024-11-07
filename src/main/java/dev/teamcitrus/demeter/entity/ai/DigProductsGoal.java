@@ -1,10 +1,10 @@
 package dev.teamcitrus.demeter.entity.ai;
 
 import dev.teamcitrus.demeter.data.providers.DemeterBlockTagsProvider;
-import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class DigTrufflesGoal extends Goal {
+public class DigProductsGoal extends Goal {
     protected final PathfinderMob mob;
     protected double wantedX;
     protected double wantedY;
@@ -24,12 +24,15 @@ public class DigTrufflesGoal extends Goal {
     protected boolean forceTrigger;
     private final boolean checkNoActionTime;
 
-    public DigTrufflesGoal(PathfinderMob mob, double speedModifier) {
+    private final List<ItemStack> products;
+
+    public DigProductsGoal(PathfinderMob mob, double speedModifier, List<ItemStack> products) {
         this.mob = mob;
         this.speedModifier = speedModifier;
         this.interval = 9999;
         this.checkNoActionTime = true;
         this.setFlags(EnumSet.of(Flag.MOVE));
+        this.products = products;
     }
 
     @Override
@@ -110,7 +113,9 @@ public class DigTrufflesGoal extends Goal {
         this.mob.getNavigation().stop();
         if (mob.blockPosition().closerThan(new BlockPos((int) this.wantedX, (int) this.wantedY,
                         (int) this.wantedZ), 2.5)) {
-            mob.spawnAtLocation(ItemRegistry.TRUFFLE);
+            for (ItemStack stack : products) {
+                mob.spawnAtLocation(stack);
+            }
         }
     }
 

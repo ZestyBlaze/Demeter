@@ -16,6 +16,7 @@ import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("deprecation")
@@ -46,7 +47,7 @@ public class DemeterDataMapGenerator extends DataMapProvider {
                 Activity.NOCTURNAL, 5, 1
         ), false);
         animalData.add(EntityType.COW.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 2, 1, new MilkingCodec()
+                Activity.DIURNAL, 9, 1, new MilkingCodec()
         ), false);
         animalData.add(EntityType.DONKEY.builtInRegistryHolder(), new AnimalData(
                 Activity.DIURNAL, 24, 1
@@ -76,7 +77,7 @@ public class DemeterDataMapGenerator extends DataMapProvider {
                 Activity.DIURNAL, 4, 1
         ), false);
         animalData.add(EntityType.PIG.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 4, 1, 4, 7
+                Activity.DIURNAL, 4, 1, 4, 7, List.of(ItemRegistry.TRUFFLE.toStack())
         ), false);
         animalData.add(EntityType.POLAR_BEAR.builtInRegistryHolder(), new AnimalData(
                 Activity.DIURNAL, 14, 1

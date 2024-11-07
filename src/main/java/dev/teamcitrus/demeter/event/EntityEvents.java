@@ -3,7 +3,7 @@ package dev.teamcitrus.demeter.event;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.entity.ai.DigTrufflesGoal;
+import dev.teamcitrus.demeter.entity.ai.DigProductsGoal;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -16,7 +16,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,8 +41,8 @@ public class EntityEvents {
                 AnimalAttachment.AnimalGenders gender = AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)];
                 AnimalUtil.getAnimalData(animal).setGender(gender);
             }
-            if (event.getEntity() instanceof Pig pig) {
-                pig.goalSelector.addGoal(4, new DigTrufflesGoal(pig, 1));
+            if (AnimalUtil.getStats(animal) != null && !AnimalUtil.getStats(animal).diggableItems().isEmpty()) {
+                animal.goalSelector.addGoal(4, new DigProductsGoal(animal, 1, AnimalUtil.getStats(animal).diggableItems()));
             }
         }
     }
