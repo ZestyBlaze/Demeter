@@ -15,6 +15,7 @@ import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -84,6 +85,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
                 if (state.is(Blocks.FARMLAND) && state.getValue(BlockStateProperties.MOISTURE) < 7) {
                     dispenseWater(context.getItemInHand(), (ServerPlayer) context.getPlayer(), level, context.getClickedPos(), context.getHorizontalDirection(), component.level());
                     drainContainer(context.getItemInHand(), 20);
+
                     return InteractionResult.SUCCESS;
                 } else if (state.getBlock() instanceof CropBlock
                         && level.getBlockState(context.getClickedPos().below()).getBlock().equals(Blocks.FARMLAND)
@@ -101,7 +103,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
     public Component getName(ItemStack stack) {
         if (stack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
             QualityLevelComponent component = stack.get(ComponentRegistry.QUALITY_LEVEL.get());
-            return Component.translatable(getDescriptionId(stack), StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT)));
+            return Component.literal(StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT) + " " + Component.translatable(getDescriptionId(stack)).getString()));
         }
         return Component.translatable(getDescriptionId(stack));
     }
