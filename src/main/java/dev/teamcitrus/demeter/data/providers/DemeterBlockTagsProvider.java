@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unchecked")
 public class DemeterBlockTagsProvider extends CitrusBlockTagsProvider {
     public static final TagKey<Block> MAPLE_LOGS = BlockTags.create(Demeter.id("maple_logs"));
     public static final TagKey<Block> CAN_HAVE_TRUFFLES = BlockTags.create(Demeter.id("can_have_truffles"));

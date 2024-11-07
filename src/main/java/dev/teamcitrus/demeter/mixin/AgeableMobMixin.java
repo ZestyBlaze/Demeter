@@ -19,7 +19,7 @@ public class AgeableMobMixin {
     )
     private void demeter$aiStep(AgeableMob instance, int pAge) {
         if (!(instance instanceof Animal animal) ||
-                AnimalUtil.getStats((Animal) instance) == null ||
+                AnimalUtil.getStats(animal) == null ||
                 AnimalUtil.getStats(animal).daysToGrowUp() == 0) instance.setAge(++pAge);
     }
 }
