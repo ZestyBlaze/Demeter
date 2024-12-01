@@ -7,11 +7,13 @@ import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
+import dev.teamcitrus.demeter.registry.DamageTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.Level;
 
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.INT.fieldOf("age").forGetter(o -> o.age),
             Codec.INT.fieldOf("love").forGetter(o -> o.love),
             Codec.INT.fieldOf("daysSinceFed").forGetter(o -> o.daysSinceFed),
             Codec.BOOL.fieldOf("hasBeenPetToday").forGetter(o -> o.hasBeenPetToday),
@@ -33,7 +36,7 @@ public class AnimalAttachment {
     ).apply(instance, AnimalAttachment::new));
 
     // Animal Life Variables
-    private int love, daysSinceFed;
+    private int age, love, daysSinceFed;
     private boolean hasBeenPetToday, hasBeenFedToday, hasBeenBrushedToday;
 
     // Gender Variables
@@ -48,14 +51,15 @@ public class AnimalAttachment {
     private int daysLeftUntilGrown;
 
     public AnimalAttachment() {
-        this(DemeterConfig.spawnLoveValue.get(), 0, false, false, false,
+        this(0, DemeterConfig.spawnLoveValue.get(), 0, false, false, false,
                 AnimalGenders.MALE, false, 0, 0, new CompoundTag(), 0);
     }
 
-    public AnimalAttachment(int love, int daysSinceFed, boolean hasBeenPetToday, boolean hasBeenFedToday,
+    public AnimalAttachment(int age, int love, int daysSinceFed, boolean hasBeenPetToday, boolean hasBeenFedToday,
                             boolean hasBeenBrushedToday, AnimalGenders gender, boolean isPregnant,
                             int daysLeftUntilBirth, int downPeriod, CompoundTag otherParentData,
                             int daysLeftUntilGrown) {
+        this.age = age;
         this.love = love;
         this.daysSinceFed = daysSinceFed;
         this.hasBeenPetToday = hasBeenPetToday;
@@ -76,6 +80,18 @@ public class AnimalAttachment {
      * @param self The animal this is being fired from
      */
     public void onNewDay(Animal self) {
+        if (age >= AnimalUtil.getStats(self).maxLifespan() || (age >= AnimalUtil.getStats(self).minLifespan() &&
+                self.getRandom().nextInt(Math.min(Math.max(360, 1), Short.MAX_VALUE)) == 0)) {
+            self.hurt(new DamageSource(DamageTypeRegistry.OLD_AGE, self), Integer.MAX_VALUE);
+        }
+
+        if (!hasBeenFedToday) {
+            daysSinceFed++;
+            if (DemeterConfig.animalsDieOfHunger.get() && daysSinceFed >= DemeterConfig.daysBeforeAnimalDie.get()) {
+                self.hurt(new DamageSource(self.level().damageSources().starve().typeHolder(), self), Integer.MAX_VALUE);
+            }
+        }
+
         if (!hasBeenPetToday) {
             alterLove(null, -5);
         }
@@ -95,13 +111,6 @@ public class AnimalAttachment {
             }
         }
 
-        if (!hasBeenFedToday && DemeterConfig.animalsDieOfHunger.get()) {
-            daysSinceFed++;
-            if (daysSinceFed >= DemeterConfig.daysBeforeAnimalDie.get()) {
-                self.discard();
-            }
-        }
-
         if (self.isBaby()) {
             --daysLeftUntilGrown;
             if (daysLeftUntilGrown <= 0) {
@@ -117,6 +126,10 @@ public class AnimalAttachment {
         this.hasBeenPetToday = false;
         this.hasBeenFedToday = false;
         this.hasBeenBrushedToday = false;
+    }
+
+    public void onNewYear(Animal self) {
+        this.age += 1;
     }
 
     /**

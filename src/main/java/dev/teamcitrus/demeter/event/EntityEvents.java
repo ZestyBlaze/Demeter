@@ -2,11 +2,15 @@ package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
+import dev.teamcitrus.demeter.block.trough.TroughBlock;
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.data.providers.DemeterEntityTagProvider;
 import dev.teamcitrus.demeter.entity.ai.DigProductsGoal;
+import dev.teamcitrus.demeter.entity.ai.EatFoodGoal;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
+import dev.teamcitrus.demeter.registry.StatsRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
@@ -44,6 +48,11 @@ public class EntityEvents {
             if (AnimalUtil.getStats(animal) != null && !AnimalUtil.getStats(animal).diggableItems().isEmpty()) {
                 animal.goalSelector.addGoal(4, new DigProductsGoal(animal, 1, AnimalUtil.getStats(animal).diggableItems()));
             }
+            if (animal.getType().is(DemeterEntityTagProvider.EATS_HAY)) {
+                animal.goalSelector.addGoal(3, new EatFoodGoal(animal, TroughBlock.FoodType.HAY, 1.0d));
+            } else if (animal.getType().is(DemeterEntityTagProvider.EATS_SLOP)) {
+                animal.goalSelector.addGoal(3, new EatFoodGoal(animal, TroughBlock.FoodType.SLOP, 1.0d));
+            }
         }
     }
 
@@ -69,6 +78,7 @@ public class EntityEvents {
             AnimalUtil.getAnimalData(animal).alterLove(player, DemeterConfig.pettingLoveValue.get());
             AnimalUtil.getAnimalData(animal).setHasBeenPetToday(true);
             AdvancementRegistry.PET.get().trigger(player);
+            player.awardStat(StatsRegistry.TIMES_PET.get());
 
             event.setCancellationResult(InteractionResult.SUCCESS);
             event.setCanceled(true);
@@ -77,7 +87,7 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void animalFoodHandler(PlayerInteractEvent.EntityInteract event) {
-        if (event.getTarget() instanceof Animal animal) {
+        if (event.getTarget() instanceof Animal animal && !event.getLevel().isClientSide()) {
             Player player = event.getEntity();
             InteractionHand hand = event.getHand();
             ItemStack stack = player.getItemInHand(hand);
@@ -86,8 +96,11 @@ public class EntityEvents {
                 int love = DemeterConfig.feedingLoveValue.get();
                 AnimalUtil.getAnimalData(animal).alterLove(player, favouriteFoods.contains(stack.getItem()) ? love * 2 : love);
                 AnimalUtil.getAnimalData(animal).setHasBeenFedToday(true);
+                player.awardStat(StatsRegistry.ANIMALS_FED.get());
                 player.swing(hand);
-                event.getLevel().addParticle(ParticleTypes.HEART, animal.getRandomX(1.0), animal.getRandomY() + 0.5, animal.getRandomZ(1.0), animal.getRandom().nextGaussian() * 0.02, animal.getRandom().nextGaussian() * 0.02, animal.getRandom().nextGaussian() * 0.02);
+                for (int i = 0; i <= 8; i++) {
+                    event.getLevel().addParticle(ParticleTypes.HEART, animal.getRandomX(1.0), animal.getRandomY() + 0.5, animal.getRandomZ(1.0), animal.getRandom().nextGaussian() * 0.02, animal.getRandom().nextGaussian() * 0.02, animal.getRandom().nextGaussian() * 0.02);
+                }
             }
         }
     }

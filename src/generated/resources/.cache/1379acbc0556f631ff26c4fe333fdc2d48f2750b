@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-04T16:06:04.6357115	Tags for minecraft:block mod id demeter
+// 1.21.1	2024-11-20T15:54:56.2043142	Tags for minecraft:block mod id demeter
 ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/c/tags/block/fence_gates/wooden.json
 69c396cb051bbe9a130e6979b67065e5041b179d data/demeter/tags/block/can_have_truffles.json
 de60222834d329d100d0303ece8b17a0f31f05f4 data/demeter/tags/block/maple_logs.json
@@ -10,7 +10,7 @@ ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/minecraft/tags/block/fence_gates.j
 d742d01b1fa66c8ecc03d106fa006dc362dc2460 data/minecraft/tags/block/leaves.json
 de60222834d329d100d0303ece8b17a0f31f05f4 data/minecraft/tags/block/logs.json
 de60222834d329d100d0303ece8b17a0f31f05f4 data/minecraft/tags/block/logs_that_burn.json
-4fafd93909305e76b94ad205a07138266650918d data/minecraft/tags/block/mineable/axe.json
+0a2870442ac59c41d836d592f748611178b18f2a data/minecraft/tags/block/mineable/axe.json
 d742d01b1fa66c8ecc03d106fa006dc362dc2460 data/minecraft/tags/block/mineable/hoe.json
 796a959b6265e6cdbb0433009b01543558525cdf data/minecraft/tags/block/overworld_natural_logs.json
 1434f4bd366f5b1ef9002139fdfe58bbdf7d820b data/minecraft/tags/block/planks.json

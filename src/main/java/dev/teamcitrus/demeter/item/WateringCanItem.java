@@ -192,6 +192,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         }
         drainContainer(stack, 20);
         player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BUCKET_EMPTY), SoundSource.PLAYERS, originalPos.getX(), originalPos.getY(), originalPos.getZ(), 1.0f, level.random.nextFloat(), 0));
+        player.awardStat(Stats.ITEM_USED.get(this));
     }
 
     private int calculateRemainingUses(ItemStack stack) {

@@ -10,13 +10,16 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("deprecation")
@@ -39,57 +42,64 @@ public class DemeterDataMapGenerator extends DataMapProvider {
         cropData.add(Blocks.TORCHFLOWER_CROP.builtInRegistryHolder(), new CropData(2), false);
         cropData.add(Blocks.WHEAT.builtInRegistryHolder(), new CropData(3), false);
 
+        Map<Item, Item> cowMilkIO = new HashMap<>();
+        cowMilkIO.put(Items.BUCKET, Items.MILK_BUCKET);
+
         Builder<AnimalData, EntityType<?>> animalData = builder(DemeterDataMaps.ANIMAL_DATA);
         animalData.add(EntityType.CAMEL.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 11, 1
+                Activity.DIURNAL, 10, 14, 11, 1
         ), false);
         animalData.add(EntityType.CAT.builtInRegistryHolder(), new AnimalData(
-                Activity.NOCTURNAL, 5, 1
+                Activity.NOCTURNAL, 10, 20, 5, 1
         ), false);
         animalData.add(EntityType.COW.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 9, 1, new MilkingCodec()
+                Activity.DIURNAL, 12, 20, 9, 1, new MilkingCodec(cowMilkIO)
         ), false);
         animalData.add(EntityType.DONKEY.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 24, 1
+                Activity.DIURNAL, 25, 30, 24, 1
         ), false);
         animalData.add(EntityType.FOX.builtInRegistryHolder(), new AnimalData(
-                Activity.NOCTURNAL, 6, 1
+                Activity.NOCTURNAL, 3, 8, 6, 1
         ), false);
         animalData.add(EntityType.GOAT.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 7, 1
+                Activity.DIURNAL, 15, 18, 7, 1
         ), false);
         animalData.add(EntityType.HORSE.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 24, 1
+                Activity.DIURNAL, 25, 30, 24, 1
         ), false);
         animalData.add(EntityType.LLAMA.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 11, 1
+                Activity.DIURNAL, 15, 25, 11, 1
         ), false);
         animalData.add(EntityType.MOOSHROOM.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 10, 1
+                Activity.DIURNAL, 13, 21, 10, 1
+        ), false);
+        animalData.add(EntityType.MULE.builtInRegistryHolder(), new AnimalData(
+                Activity.DIURNAL, 25, 30, 24, 1
         ), false);
         animalData.add(EntityType.OCELOT.builtInRegistryHolder(), new AnimalData(
-                Activity.NOCTURNAL, 6, 1
+                Activity.NOCTURNAL, 6, 12, 6, 1
         ), false);
         animalData.add(EntityType.PANDA.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 12, 1
+                Activity.DIURNAL, 15, 25, 12, 1
         ), false);
         animalData.add(EntityType.PARROT.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 4, 1
+                Activity.DIURNAL, 25, 50, 4, 1
         ), false);
         animalData.add(EntityType.PIG.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 4, 1, 4, 7, List.of(ItemRegistry.TRUFFLE.toStack())
+                Activity.DIURNAL, 6, 10,  4, 1, 4, 7,
+                List.of(ItemRegistry.TRUFFLE.toStack())
         ), false);
         animalData.add(EntityType.POLAR_BEAR.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 14, 1
+                Activity.DIURNAL, 12, 16, 14, 1
         ), false);
         animalData.add(EntityType.RABBIT.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 4, 1
+                Activity.DIURNAL, 8, 12, 4, 1
         ), false);
         animalData.add(EntityType.SHEEP.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 5, 1
+                Activity.DIURNAL, 8, 12, 5, 1
         ), false);
         animalData.add(EntityType.WOLF.builtInRegistryHolder(), new AnimalData(
-                Activity.NOCTURNAL, 5, 1
+                Activity.NOCTURNAL, 10, 13, 5, 1
         ), false);
     }
 }

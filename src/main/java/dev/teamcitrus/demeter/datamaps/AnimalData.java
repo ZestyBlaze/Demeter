@@ -6,18 +6,20 @@ import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public record AnimalData(Activity activity, int daysPregnant, int daysToGrowUp,
+public record AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp,
                          int minChildrenPerBirth, int maxChildrenPerBirth, List<Item> favouriteFoods,
                          List<ItemStack> diggableItems, Optional<MilkingCodec> milking
 ) {
     public static final Codec<AnimalData> CODEC = RecordCodecBuilder.create(func -> func.group(
             Activity.CODEC.fieldOf("activity").forGetter(AnimalData::activity),
+            Codec.INT.fieldOf("minLifespan").forGetter(AnimalData::minLifespan),
+            Codec.INT.fieldOf("maxLifespan").forGetter(AnimalData::maxLifespan),
             Codec.INT.optionalFieldOf("daysPregnant", 0).forGetter(AnimalData::daysPregnant),
             Codec.INT.optionalFieldOf("daysToGrowUp", 0).forGetter(AnimalData::daysToGrowUp),
             Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(AnimalData::minChildrenPerBirth),
@@ -27,16 +29,20 @@ public record AnimalData(Activity activity, int daysPregnant, int daysToGrowUp,
             MilkingCodec.CODEC.optionalFieldOf("milking").forGetter(AnimalData::milking)
     ).apply(func, AnimalData::new));
 
-    public AnimalData(Activity activity, int daysPregnant, int daysToGrowUp) {
-        this(activity, daysPregnant, daysToGrowUp, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.empty());
+    public AnimalData(Activity activity, int minLifespan, int maxLifespan) {
+        this(activity, minLifespan, maxLifespan, 0, 0, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.empty());
     }
 
-    public AnimalData(Activity activity, int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth, List<ItemStack> diggableItems) {
-        this(activity, daysPregnant, daysToGrowUp, minChildrenPerBirth, maxChildrenPerBirth, Collections.emptyList(), diggableItems, Optional.empty());
+    public AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp) {
+        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.empty());
     }
 
-    public AnimalData(Activity activity, int daysPregnant, int daysToGrowUp, MilkingCodec milking) {
-        this(activity, daysPregnant, daysToGrowUp, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.of(milking));
+    public AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth, List<ItemStack> diggableItems) {
+        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, minChildrenPerBirth, maxChildrenPerBirth, Collections.emptyList(), diggableItems, Optional.empty());
+    }
+
+    public AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp, MilkingCodec milking) {
+        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.of(milking));
     }
 
     public enum Activity {
@@ -45,14 +51,10 @@ public record AnimalData(Activity activity, int daysPregnant, int daysToGrowUp,
         public static final Codec<Activity> CODEC = CitrusCodecs.enumCodec(Activity.class);
     }
 
-    public record MilkingCodec(Item input, Item output) {
+    public record MilkingCodec(Map<Item, Item> inputOutputMap) {
         public static final Codec<MilkingCodec> CODEC = RecordCodecBuilder.create(func -> func.group(
-                BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("input", Items.BUCKET).forGetter(MilkingCodec::input),
-                BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("output", Items.MILK_BUCKET).forGetter(MilkingCodec::output)
+                Codec.unboundedMap(BuiltInRegistries.ITEM.byNameCodec(), BuiltInRegistries.ITEM.byNameCodec())
+                        .fieldOf("map").forGetter(MilkingCodec::inputOutputMap)
         ).apply(func, MilkingCodec::new));
-
-        public MilkingCodec() {
-            this(Items.BUCKET, Items.MILK_BUCKET);
-        }
     }
 }

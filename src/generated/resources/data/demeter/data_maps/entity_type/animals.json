@@ -3,63 +3,98 @@
     "minecraft:camel": {
       "activity": "diurnal",
       "daysPregnant": 11,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 14,
+      "minLifespan": 10
     },
     "minecraft:cat": {
       "activity": "nocturnal",
       "daysPregnant": 5,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 20,
+      "minLifespan": 10
     },
     "minecraft:cow": {
       "activity": "diurnal",
       "daysPregnant": 9,
       "daysToGrowUp": 1,
-      "milking": {}
+      "maxLifespan": 20,
+      "milking": {
+        "map": {
+          "minecraft:bucket": "minecraft:milk_bucket"
+        }
+      },
+      "minLifespan": 12
     },
     "minecraft:donkey": {
       "activity": "diurnal",
       "daysPregnant": 24,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 30,
+      "minLifespan": 25
     },
     "minecraft:fox": {
       "activity": "nocturnal",
       "daysPregnant": 6,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 8,
+      "minLifespan": 3
     },
     "minecraft:goat": {
       "activity": "diurnal",
       "daysPregnant": 7,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 18,
+      "minLifespan": 15
     },
     "minecraft:horse": {
       "activity": "diurnal",
       "daysPregnant": 24,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 30,
+      "minLifespan": 25
     },
     "minecraft:llama": {
       "activity": "diurnal",
       "daysPregnant": 11,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 25,
+      "minLifespan": 15
     },
     "minecraft:mooshroom": {
       "activity": "diurnal",
       "daysPregnant": 10,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 21,
+      "minLifespan": 13
+    },
+    "minecraft:mule": {
+      "activity": "diurnal",
+      "daysPregnant": 24,
+      "daysToGrowUp": 1,
+      "maxLifespan": 30,
+      "minLifespan": 25
     },
     "minecraft:ocelot": {
       "activity": "nocturnal",
       "daysPregnant": 6,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 12,
+      "minLifespan": 6
     },
     "minecraft:panda": {
       "activity": "diurnal",
       "daysPregnant": 12,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 25,
+      "minLifespan": 15
     },
     "minecraft:parrot": {
       "activity": "diurnal",
       "daysPregnant": 4,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 50,
+      "minLifespan": 25
     },
     "minecraft:pig": {
       "activity": "diurnal",
@@ -72,27 +107,37 @@
         }
       ],
       "maxChildrenPerBirth": 7,
-      "minChildrenPerBirth": 4
+      "maxLifespan": 10,
+      "minChildrenPerBirth": 4,
+      "minLifespan": 6
     },
     "minecraft:polar_bear": {
       "activity": "diurnal",
       "daysPregnant": 14,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 16,
+      "minLifespan": 12
     },
     "minecraft:rabbit": {
       "activity": "diurnal",
       "daysPregnant": 4,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 12,
+      "minLifespan": 8
     },
     "minecraft:sheep": {
       "activity": "diurnal",
       "daysPregnant": 5,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 12,
+      "minLifespan": 8
     },
     "minecraft:wolf": {
       "activity": "nocturnal",
       "daysPregnant": 5,
-      "daysToGrowUp": 1
+      "daysToGrowUp": 1,
+      "maxLifespan": 13,
+      "minLifespan": 10
     }
   }
 }

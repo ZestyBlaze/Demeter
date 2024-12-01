@@ -67,7 +67,7 @@ public class DigProductsGoal extends Goal {
     protected Vec3 getPosition() {
         List<BlockPos> validPositions = allValidBlocksInArea(3, 8);
         if (!validPositions.isEmpty()) {
-            return validPositions.get(mob.level().random.nextInt(validPositions.size() + 1)).getBottomCenter();
+            return validPositions.get(mob.level().random.nextInt(validPositions.size())).getBottomCenter();
         }
         return null;
     }

@@ -24,7 +24,7 @@ public class AnimalBrushItem extends CitrusItem {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-        if (target instanceof Animal animal) {
+        if (target instanceof Animal animal && !animal.level().isClientSide()) {
             if (!AnimalUtil.getAnimalData(animal).hasBeenBrushedToday()) {
                 target.playSound(SoundEvents.BRUSH_GENERIC, 1.0f, 1.0f);
                 for (int i = 0; i <= 8; i++) {

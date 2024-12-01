@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:clock",
+    {
+      "id": "demeter:breeding_charm",
+      "required": false
+    }
+  ]
+}

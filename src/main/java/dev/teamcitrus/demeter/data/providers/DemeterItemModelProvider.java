@@ -25,18 +25,19 @@ public class DemeterItemModelProvider extends CitrusItemModelProvider {
         basicItem(ItemRegistry.MILK_BOTTLE.get());
         basicItem(ItemRegistry.MAPLE_SYRUP_BOTTLE.get());
         basicItem(ItemRegistry.MIRACLE_POTION.get());
-        toBlock(BlockRegistry.MAPLE_LOG.get());
-        toBlock(BlockRegistry.MAPLE_WOOD.get());
-        toBlock(BlockRegistry.STRIPPED_MAPLE_LOG.get());
-        toBlock(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
-        toBlock(BlockRegistry.MAPLE_LEAVES.get());
+        simpleBlockItem(BlockRegistry.MAPLE_LOG.get());
+        simpleBlockItem(BlockRegistry.MAPLE_WOOD.get());
+        simpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG.get());
+        simpleBlockItem(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
+        simpleBlockItem(BlockRegistry.MAPLE_LEAVES.get());
         itemWithBlockTexturePath(ItemRegistry.MAPLE_SAPLING.get());
-        toBlock(BlockRegistry.MAPLE_SYRUP_BLOCK.get());
+        simpleBlockItem(BlockRegistry.MAPLE_SYRUP_BLOCK.get());
         basicItem(ItemRegistry.MAPLE_SIGN.get());
         basicItem(ItemRegistry.MAPLE_HANGING_SIGN.get());
         basicItem(ItemRegistry.MAPLE_BOAT.get());
         basicItem(ItemRegistry.MAPLE_CHEST_BOAT.get());
         basicItem(ItemRegistry.BUTTER.get());
+        simpleBlockItem(BlockRegistry.TROUGH.get());
         wateringCanItem();
         generateSetModels(WoodSetRegistry.MAPLE);
     }

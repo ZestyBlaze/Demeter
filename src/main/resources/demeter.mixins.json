@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "dev.teamcitrus.demeter.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AgeableMobMixin",
     "AnimalMixin",
@@ -12,6 +12,7 @@
     "CropBlockMixin",
     "FarmBlockMixin",
     "IShearableMixin",
+    "SheepMixin",
     "ThrownEggMixin"
   ],
   "client": [

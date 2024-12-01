@@ -2,10 +2,12 @@ package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.citruslib.datagen.CitrusBlockStateProvider;
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.block.trough.TroughBlock;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.WoodSetRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class DemeterBlockStateProvider extends CitrusBlockStateProvider {
@@ -23,6 +25,28 @@ public class DemeterBlockStateProvider extends CitrusBlockStateProvider {
         signBlock(BlockRegistry.MAPLE_SIGN.get(), BlockRegistry.MAPLE_WALL_SIGN.get(), modLoc("block/maple_planks"));
         hangingSignBlock(BlockRegistry.MAPLE_HANGING_SIGN.get(), BlockRegistry.MAPLE_WALL_HANGING_SIGN.get(), modLoc("block/stripped_maple_log"));
         simpleBlock(BlockRegistry.MAPLE_SAPLING.get(), models().cross(BuiltInRegistries.BLOCK.getKey(BlockRegistry.MAPLE_SAPLING.get()).getPath(), blockTexture(BlockRegistry.MAPLE_SAPLING.get())).renderType("cutout"));
+        trough(BlockRegistry.TROUGH.get());
         generateSetModels(WoodSetRegistry.MAPLE);
+    }
+
+    private void trough(Block block) {
+        getMultipartBuilder(block)
+                .part().modelFile(models().getExistingFile(Demeter.id("trough"))).addModel().end()
+                .part().modelFile(models().getExistingFile(Demeter.id("hay_one_quarter")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).condition(TroughBlock.FOOD_LEVEL, 1).end()
+                .part().modelFile(models().getExistingFile(Demeter.id("hay_two_quarters")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).condition(TroughBlock.FOOD_LEVEL, 2).end()
+                .part().modelFile(models().getExistingFile(Demeter.id("hay_three_quarters")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).condition(TroughBlock.FOOD_LEVEL, 3).end()
+                .part().modelFile(models().getExistingFile(Demeter.id("hay_four_quarters")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).condition(TroughBlock.FOOD_LEVEL, 4).end()
+                .part().modelFile(models().getExistingFile(Demeter.id("slop_one_quarter")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).condition(TroughBlock.FOOD_LEVEL, 1).end()
+                .part().modelFile(models().getExistingFile(Demeter.id("slop_two_quarters")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).condition(TroughBlock.FOOD_LEVEL, 2).end()
+                .part().modelFile(models().getExistingFile(Demeter.id("slop_three_quarters")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).condition(TroughBlock.FOOD_LEVEL, 3).end()
+                .part().modelFile(models().getExistingFile(Demeter.id("slop_four_quarters")))
+                .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).condition(TroughBlock.FOOD_LEVEL, 4).end();
     }
 }

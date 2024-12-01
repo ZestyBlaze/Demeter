@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.item;
+package dev.teamcitrus.demeter.compat.accessories;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
 import io.wispforest.accessories.api.Accessory;

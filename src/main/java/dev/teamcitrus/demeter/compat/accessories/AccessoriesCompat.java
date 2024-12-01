@@ -1,7 +1,6 @@
-package dev.teamcitrus.demeter.compat;
+package dev.teamcitrus.demeter.compat.accessories;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.item.DemeterAccessoryItem;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,6 +17,7 @@ public class AccessoriesCompat {
     public static class Items {
         public static final DeferredRegister.Items ACCESSORIES_ITEMS = DeferredRegister.createItems(Demeter.MODID);
         public static final DeferredItem<Item> BREEDING_CHARM = ACCESSORIES_ITEMS.register("breeding_charm", DemeterAccessoryItem::new);
+        public static final DeferredItem<Item> POCKET_WATCH = ACCESSORIES_ITEMS.register("pocket_watch", PocketWatchItem::new);
     }
 
     public static void addItemsToTab(CreativeModeTab.Output out) {

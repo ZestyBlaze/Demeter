@@ -3,11 +3,14 @@ package dev.teamcitrus.demeter;
 import dev.teamcitrus.citruslib.network.PayloadHelper;
 import dev.teamcitrus.citruslib.tab.TabFillingRegistry;
 import dev.teamcitrus.citruslib.util.ModUtil;
-import dev.teamcitrus.demeter.compat.AccessoriesCompat;
+import dev.teamcitrus.demeter.block.trough.TroughBlockEntity;
+import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -28,14 +31,17 @@ public class Demeter {
     public Demeter(IEventBus bus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.CLIENT, DemeterConfig.CLIENT_SPEC);
         modContainer.registerConfig(ModConfig.Type.COMMON, DemeterConfig.GENERAL_SPEC);
+        //modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new); TODO: Needs all the translations
         BlockRegistry.BLOCKS.register(bus);
         ItemRegistry.ITEMS.register(bus);
         ItemRegistry.CREATIVE_MODE_TABS.register(bus);
+        BlockEntityRegistry.BLOCK_ENTITIES.register(bus);
         LootModifierRegistry.LOOT_MODIFIERS.register(bus);
         AttachmentRegistry.ATTACHMENT_TYPES.register(bus);
         ComponentRegistry.COMPONENTS.register(bus);
         AdvancementRegistry.CRITERION.register(bus);
         PoiTypeRegistry.POI_TYPES.register(bus);
+        StatsRegistry.STATS.register(bus);
         WoodSetRegistry.init();
         bus.register(this);
         
@@ -50,8 +56,12 @@ public class Demeter {
 
     @SubscribeEvent
     public void setup(FMLCommonSetupEvent event) {
-        PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
-        TabFillingRegistry.register(ItemRegistry.DEMETER_TAB_KEY, ItemRegistry.WATERING_CAN.get());
+        event.enqueueWork(() -> {
+            PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
+            TabFillingRegistry.register(ItemRegistry.DEMETER_TAB_KEY, ItemRegistry.WATERING_CAN.get());
+            Stats.CUSTOM.get(StatsRegistry.TIMES_PET.get(), StatFormatter.DEFAULT);
+            Stats.CUSTOM.get(StatsRegistry.ANIMALS_FED.get(), StatFormatter.DEFAULT);
+        });
     }
 
     @SubscribeEvent
@@ -60,5 +70,6 @@ public class Demeter {
                 new FluidHandlerItemStack(ComponentRegistry.FLUID_HANDLER, itemstack, 1000),
                 ItemRegistry.WATERING_CAN
         );
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.TROUGH.get(), TroughBlockEntity::getCapability);
     }
 }

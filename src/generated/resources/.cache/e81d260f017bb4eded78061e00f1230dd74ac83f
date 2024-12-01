@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-03T13:39:05.9546717	Item Models: demeter
+// 1.21.1	2024-11-20T15:57:12.6427452	Item Models: demeter
 8e88a0949760e2d598a70345a968f50e4af5964e assets/demeter/models/item/animal_brush.json
 c679f7d57669ad853a684c3d1aad5093ef45e083 assets/demeter/models/item/animal_tag.json
 757ed270a8161e18b65b5d1671ffced247f85d39 assets/demeter/models/item/butter.json
@@ -26,6 +26,7 @@ d9fafddf627c382782b8753e4c8c0196dadc7ae1 assets/demeter/models/item/maple_syrup_
 bdec1e3cdba6c899ca233a3cba3e2564e18f0b8b assets/demeter/models/item/miracle_potion.json
 d22bd49a1b1fd83d2aa734bb398358795738e30c assets/demeter/models/item/stripped_maple_log.json
 71219c4eece36eda5d205a9865976f3bc0689914 assets/demeter/models/item/stripped_maple_wood.json
+574a54ad2084dc3ce05f23f442fa7dc4bef8edd3 assets/demeter/models/item/trough.json
 5e73979d9c3efbd835e52d3710dbb1120ae3b609 assets/demeter/models/item/watering_can.json
 50a48628eb940bb66512b4bb85ee99b6fc4c5244 assets/demeter/models/item/watering_can_copper.json
 c85952271b3d62aabef26bb5a6b1cc344967f360 assets/demeter/models/item/watering_can_iron.json

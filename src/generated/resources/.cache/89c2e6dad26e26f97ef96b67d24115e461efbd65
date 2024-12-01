@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-04T04:19:08.9464708	Block States: demeter
+// 1.21.1	2024-11-20T14:11:56.7388714	Block States: demeter
 ff2ec3aaab927fb1add70f6ab1851cb74bbf3525 assets/demeter/blockstates/maple_button.json
 dc251cb370599b3321bface91bd1ea7bb99c147a assets/demeter/blockstates/maple_door.json
 068a8f47a0b816b8211da4ee39a926e5560d5bac assets/demeter/blockstates/maple_fence.json
@@ -18,6 +18,7 @@ c9789ffff2211b138c27856ed73ee8f534dd17b4 assets/demeter/blockstates/maple_wall_s
 ee38f5827f0a43c6fee26e7b852dfa6bb3be619d assets/demeter/blockstates/maple_wood.json
 7c6e7f327b114fa53b28a7e5263fde24a6ff2cf3 assets/demeter/blockstates/stripped_maple_log.json
 bdd72b939eb0bbf7aa78f3c5c7a1fc2bb9b6a548 assets/demeter/blockstates/stripped_maple_wood.json
+65d15932e27fa72ce828c37e6c76294ce6971b57 assets/demeter/blockstates/trough.json
 53b6d9a023b541e9f117f3e19c618a567c5a802b assets/demeter/models/block/maple_button.json
 e22fd572ef3f002bad7f5c5438fdff58a64180c1 assets/demeter/models/block/maple_button_pressed.json
 496f17d8fd25b96e3fce24b49f626c0ca4c47def assets/demeter/models/block/maple_door_bottom_left.json

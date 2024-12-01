@@ -1,6 +1,5 @@
 package dev.teamcitrus.demeter.config;
 
-import dev.teamcitrus.demeter.config.enums.SpiteEffect;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class DemeterConfig {
@@ -8,6 +7,7 @@ public class DemeterConfig {
     public static final ModConfigSpec CLIENT_SPEC;
 
     //General Config
+    public static ModConfigSpec.BooleanValue animalsDieOfOldAge;
     public static ModConfigSpec.IntValue animalHappinessMin;
     public static ModConfigSpec.BooleanValue animalsDieOfHunger;
     public static ModConfigSpec.IntValue daysBeforeAnimalDie;
@@ -38,6 +38,9 @@ public class DemeterConfig {
     public static ModConfigSpec.IntValue netheriteQualityChance;
 
     //Client Config
+    public static ModConfigSpec.EnumValue<ClockType> clockType;
+    public static ModConfigSpec.BooleanValue displayClockInHUD;
+    public static ModConfigSpec.BooleanValue requireClockItemForTime;
     public static ModConfigSpec.BooleanValue animalBirthAlert;
 
     static {
@@ -51,7 +54,8 @@ public class DemeterConfig {
 
     private static void setupConfig(ModConfigSpec.Builder builder) {
         builder.push("Animals Config");
-        builder.comment("Configs that apply to the mod at large and apply to ALL animals");
+        animalsDieOfOldAge = builder.comment("Controls if animals can die of old age after a few years")
+                .define("animalsDieOfOldAge", false);
         animalsDieOfHunger = builder.comment("Will animals die of hunger after a certain number of days of not being fed?")
                 .define("animalsDieOfHunger", true);
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
@@ -66,7 +70,6 @@ public class DemeterConfig {
                         .defineInRange("daysToWilt", 3, 1, Integer.MAX_VALUE);
         builder.pop();
         builder.push("Love Config");
-        builder.comment("Configs that affect how love works with animals");
         spawnLoveValue = builder.comment("The amount of love that animals will spawn with as default")
                         .defineInRange("spawnLoveValue", 90, 0, 100);
         animalHappinessMin = builder.comment("The minimum value of happiness required for an animal to be considered 'happy'")
@@ -85,7 +88,6 @@ public class DemeterConfig {
                         .define("waterIrrigationEnabled", false);
         builder.pop();
         builder.push("Enchantment Config");
-        builder.comment("Configs that control how enchantments work within Demeter");
         comfortBonusPerLevel = builder.comment("The bonus amount of love the animal gains per level of the enchantment")
                         .defineInRange("comfortBonusPerLevel", 4, 0, 100);
         spiteEffect = builder.comment("Defines which effect the Spite curse will take when on a brush")
@@ -94,7 +96,6 @@ public class DemeterConfig {
                         .defineInRange("loveLossPerSpiteLevel", 4, 0, 100);
         builder.pop();
         builder.push("Quality Config");
-        builder.comment("Quality works on a percent chance. Example: 60 = 60% chance. 0 to disable");
         copperQualityChance = builder.comment("The chance for copper quality items be dropped")
                 .defineInRange("copperQualityChance", 25, 0, 100);
         ironQualityChance = builder.comment("The chance for iron quality items be dropped")
@@ -105,9 +106,25 @@ public class DemeterConfig {
     }
 
     private static void setClientConfig(ModConfigSpec.Builder builder) {
+        builder.push("HUD Clock Options");
+        clockType = builder.comment("Defines what type of clock the HUD will use to display the time")
+                        .defineEnum("clockType", ClockType.TWENTY_FOUR_HOUR);
+        displayClockInHUD = builder.comment("If the time should be shown on the player's HUD (EXPERIMENTAL)")
+                .define("displayTimeInHUD", false);
+        requireClockItemForTime = builder.comment("If a \"#c:clocks\" item is required in hand for the time to be shown (This works well with the Pocket Watch accessory)")
+                .define("requireClockItemForTime", false);
+        builder.pop();
         builder.push("QOL Features");
         animalBirthAlert = builder.comment("Should an alert be displayed when your animals give birth")
                 .define("animalBirthAlert", true);
         builder.pop();
+    }
+
+    public enum ClockType {
+        TWENTY_FOUR_HOUR, TWELVE_HOUR
+    }
+
+    public enum SpiteEffect {
+        INVERT, HALVE, REDUCE
     }
 }

@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.data.providers.lang;
 
 import dev.teamcitrus.citruslib.datagen.CitrusLanguageProvider;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.compat.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.data.providers.DemeterBiomesTagProvider;
 import dev.teamcitrus.demeter.data.providers.DemeterBlockTagsProvider;
@@ -47,6 +47,7 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("error.demeter.namesloadfail", "Error while loading names");
         add("item.demeter.quality_tooltip", "Quality: %s");
         add("item.demeter.milk_bottle.desc", "Removes one random negative potion effect");
+        add("item.demeter.pocket_watch.error", "Since \"requireClockItemForTime\" is currently not true, this item is not required in gameplay");
         add("item.demeter.watering_can", "Watering Can");
         add("item.demeter.watering_can.fail", "Something has gone wrong, this can has no data!");
         add("item.demeter.watering_can.uses", "Uses: %s");
@@ -57,10 +58,15 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("message.demeter.brush.fail_daily", "This animal has already been brushed today!");
         add("message.demeter.milk.fail_daily", "This animal has already been milked today!");
         add("message.demeter.milk.fail_gender", "This animal is male and cannot be milked!");
+        add("stat.demeter.animals_fed", "Times Animals Fed");
+        add("stat.demeter.times_pet", "Times Animals Pet");
         add(DemeterItemTagsProvider.TOOLS_ANIMAL_BRUSH, "Animal Brushes");
-        add(DemeterItemTagsProvider.ACCESSORIES_CHARM, "Charm");
+        add(DemeterItemTagsProvider.CLOCKS, "Clocks");
+        add(DemeterItemTagsProvider.TROUGH_FOODS_HAY, "Hay Trough Foods");
         add(DemeterItemTagsProvider.MAPLE_LOGS, "Maple Logs");
         add(DemeterItemTagsProvider.QUALITY_PRODUCTS, "Quality Products");
+        add(DemeterItemTagsProvider.TROUGH_FOODS_SLOP, "Slop Trough Foods");
+        add(DemeterItemTagsProvider.TROUGH_FOODS, "Trough Foods");
         add(DemeterBlockTagsProvider.MAPLE_LOGS, "Maple Logs");
         add(DemeterBiomesTagProvider.HAS_MAPLE_TREES, "Has Maple Trees");
 

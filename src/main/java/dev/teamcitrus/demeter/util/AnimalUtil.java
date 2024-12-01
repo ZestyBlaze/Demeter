@@ -3,7 +3,7 @@ package dev.teamcitrus.demeter.util;
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.compat.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
 import dev.teamcitrus.demeter.datamaps.AnimalData;

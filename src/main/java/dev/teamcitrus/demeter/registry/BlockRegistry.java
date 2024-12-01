@@ -6,6 +6,7 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.block.DeadCropBlock;
 import dev.teamcitrus.demeter.block.MapleLogBlock;
 import dev.teamcitrus.demeter.block.MapleSyrupBlock;
+import dev.teamcitrus.demeter.block.trough.TroughBlock;
 import dev.teamcitrus.demeter.world.tree.DemeterTrees;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -32,5 +33,6 @@ public class BlockRegistry {
     public static final DeferredBlock<CeilingHangingSignBlock> MAPLE_HANGING_SIGN = BLOCKS.register("maple_hanging_sign", () -> new CitrusHangingSign.CitrusCeilingHangingSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
     public static final DeferredBlock<WallHangingSignBlock> MAPLE_WALL_HANGING_SIGN = BLOCKS.register("maple_wall_hanging_sign", () -> new CitrusHangingSign.CitrusWallHangingSignBlock(MAPLE_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)));
     public static final DeferredBlock<MapleSyrupBlock> MAPLE_SYRUP_BLOCK = BLOCKS.register("maple_syrup_block", () -> new MapleSyrupBlock(BlockBehaviour.Properties.of().forceSolidOff().noOcclusion().mapColor(MapColor.COLOR_ORANGE).speedFactor(0.6F).jumpFactor(0.6F).sound(SoundType.HONEY_BLOCK)));
+    public static final DeferredBlock<TroughBlock> TROUGH = BLOCKS.register("trough", () -> new TroughBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final DeferredBlock<DeadCropBlock> DEAD_CROP = BLOCKS.register("dead_crop", () -> new DeadCropBlock(BlockBehaviour.Properties.of().sound(SoundType.CROP).instabreak().noCollission()));
 }

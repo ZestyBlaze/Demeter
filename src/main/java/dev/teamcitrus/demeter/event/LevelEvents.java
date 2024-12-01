@@ -6,12 +6,14 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.CropAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.CropData;
+import dev.teamcitrus.demeter.event.internal.NewYearEvent;
 import dev.teamcitrus.demeter.mixin.CropBlockInvoker;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.PoiTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import dev.teamcitrus.demeter.util.CropUtil;
+import dev.teamcitrus.demeter.util.TimeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerChunkCache;
@@ -30,6 +32,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,5 +113,21 @@ public class LevelEvents {
                 updatePositions.clear();
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void newYearTrigger(NewDayEvent event) {
+        if (TimeUtil.getElapsedDays(event.getLevel().getDayTime()) % TimeUtil.YEAR_DAYS == 0) {
+            NeoForge.EVENT_BUS.post(new NewYearEvent(event.getLevel()));
+        }
+    }
+
+    @SubscribeEvent
+    public static void newYearEvent(NewYearEvent event) {
+        ServerLevel level = event.getLevel();
+
+        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal) != null).forEach(animal -> {
+            animal.getData(AttachmentRegistry.ANIMAL).onNewYear(animal);
+        });
     }
 }
