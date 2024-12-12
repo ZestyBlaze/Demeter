@@ -41,14 +41,6 @@ public class DevDebugItem extends CitrusItem {
                     .withStyle(ChatFormatting.AQUA)
             );
         }
-        if (level.isClientSide() && interactionTarget instanceof Animal animal) {
-            AnimalAttachment data = AnimalUtil.getAnimalData(animal);
-
-            Demeter.LOGGER.error(
-                    "UUID: {}\nGender: {}\nPregnant: {}\nLove: {}\nPet Today: {}\nBrushed Today: {}\nFed Today: {}\nDays since Fed: {}",
-                    animal.getUUID(), data.getGender().name(), data.getPregnant(), data.getLove(), data.hasBeenPetToday(), data.hasBeenBrushedToday(), data.hasBeenFedToday(), data.getDaysSinceFed()
-            );
-        }
         return InteractionResult.FAIL;
     }
 }
