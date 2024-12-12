@@ -75,13 +75,11 @@ public class EatFoodGoal extends Goal {
 
     @Override
     public void start() {
-        Demeter.LOGGER.error("started");
         this.mob.getNavigation().moveTo(this.wantedX, this.wantedY, this.wantedZ, this.speedModifier);
     }
 
     @Override
     public void tick() {
-        //Demeter.LOGGER.error("ticking");
         mob.getLookControl().setLookAt(this.wantedX + 0.5, this.wantedY + 1, this.wantedZ + 0.5,
                 10, mob.getMaxHeadXRot());
     }
@@ -89,11 +87,9 @@ public class EatFoodGoal extends Goal {
     @Override
     public void stop() {
         this.mob.getNavigation().stop();
-        Demeter.LOGGER.error("stopped");
         BlockPos pos = new BlockPos((int) this.wantedX, (int) this.wantedY, (int) this.wantedZ);
         Demeter.LOGGER.error(mob.level().getBlockState(pos));
         if (mob.blockPosition().closerThan(new BlockPos((int) this.wantedX, (int) this.wantedY, (int) this.wantedZ), 1.5)) {
-            Demeter.LOGGER.error("Checked");
             mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 1200));
         }
     }
