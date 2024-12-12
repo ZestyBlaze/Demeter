@@ -1,6 +1,6 @@
 package dev.teamcitrus.demeter.data.providers;
 
-import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
+import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.datamaps.AnimalData.Activity;
 import dev.teamcitrus.demeter.datamaps.AnimalData.MilkingCodec;
@@ -34,7 +34,7 @@ public class DemeterDataMapGenerator extends DataMapProvider {
         compostables.add(ItemRegistry.MAPLE_LEAVES.get().builtInRegistryHolder(), new Compostable(0.3f), false);
         compostables.add(ItemRegistry.MAPLE_SAPLING.get().builtInRegistryHolder(), new Compostable(0.3f), false);
 
-        Builder<CropData, Block> cropData = builder(DemeterDataMaps.CROP_DATA);
+        Builder<CropData, Block> cropData = builder(DataMapRegistry.CROP_DATA);
         cropData.add(Blocks.BEETROOTS.builtInRegistryHolder(), new CropData(3), false);
         cropData.add(Blocks.CARROTS.builtInRegistryHolder(), new CropData(4), false);
         cropData.add(Blocks.PITCHER_CROP.builtInRegistryHolder(), new CropData(2), false);
@@ -45,7 +45,7 @@ public class DemeterDataMapGenerator extends DataMapProvider {
         Map<Item, Item> cowMilkIO = new HashMap<>();
         cowMilkIO.put(Items.BUCKET, Items.MILK_BUCKET);
 
-        Builder<AnimalData, EntityType<?>> animalData = builder(DemeterDataMaps.ANIMAL_DATA);
+        Builder<AnimalData, EntityType<?>> animalData = builder(DataMapRegistry.ANIMAL_DATA);
         animalData.add(EntityType.CAMEL.builtInRegistryHolder(), new AnimalData(
                 Activity.DIURNAL, 10, 14, 11, 1
         ), false);

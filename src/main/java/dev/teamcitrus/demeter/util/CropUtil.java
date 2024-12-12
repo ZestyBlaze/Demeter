@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.util;
 
 import dev.teamcitrus.demeter.attachment.CropAttachment;
-import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
+import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import dev.teamcitrus.demeter.datamaps.CropData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import net.minecraft.core.BlockPos;
@@ -23,6 +23,6 @@ public class CropUtil {
 
     @Nullable
     public static CropData getCropData(CropBlock block) {
-        return block.builtInRegistryHolder().getData(DemeterDataMaps.CROP_DATA);
+        return block.builtInRegistryHolder().getData(DataMapRegistry.CROP_DATA);
     }
 }

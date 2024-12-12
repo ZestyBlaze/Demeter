@@ -5,7 +5,7 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.data.maps.DemeterDataMaps;
+import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,7 +20,7 @@ public class AnimalUtil {
     }
 
     public static AnimalData getStats(Animal animal) {
-        return animal.getType().builtInRegistryHolder().getData(DemeterDataMaps.ANIMAL_DATA);
+        return animal.getType().builtInRegistryHolder().getData(DataMapRegistry.ANIMAL_DATA);
     }
 
     public static boolean isAnimalHappy(Animal animal) {

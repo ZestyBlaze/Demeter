@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.world;
+package dev.teamcitrus.demeter.potion;
 
 import dev.teamcitrus.citruslib.CitrusLibRegistries;
 import dev.teamcitrus.citruslib.brewing.BrewingRecipe;

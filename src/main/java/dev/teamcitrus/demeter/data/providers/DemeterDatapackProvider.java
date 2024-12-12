@@ -4,7 +4,7 @@ import dev.teamcitrus.citruslib.CitrusLibRegistries;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.enchantment.DemeterEnchantments;
 import dev.teamcitrus.demeter.world.DemeterBiomeModifiers;
-import dev.teamcitrus.demeter.world.DemeterMixes;
+import dev.teamcitrus.demeter.potion.DemeterMixes;
 import dev.teamcitrus.demeter.world.tree.DemeterTrees;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;

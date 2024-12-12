@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.data.maps;
+package dev.teamcitrus.demeter.registry;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class DemeterDataMaps {
+public class DataMapRegistry {
     public static final DataMapType<EntityType<?>, AnimalData> ANIMAL_DATA = DataMapType.builder(
             Demeter.id("animals"), Registries.ENTITY_TYPE, AnimalData.CODEC).synced(AnimalData.CODEC, false).build();
     public static final DataMapType<Block, CropData> CROP_DATA = DataMapType.builder(
