@@ -6,13 +6,14 @@ public class DemeterConfig {
     public static final ModConfigSpec GENERAL_SPEC;
     public static final ModConfigSpec CLIENT_SPEC;
 
-    //General Config
+    //Animal Config
     public static ModConfigSpec.BooleanValue animalsDieOfOldAge;
     public static ModConfigSpec.IntValue animalHappinessMin;
     public static ModConfigSpec.BooleanValue animalsDieOfHunger;
     public static ModConfigSpec.IntValue daysBeforeAnimalDie;
     public static ModConfigSpec.IntValue daysBeforeProductsStop;
     public static ModConfigSpec.IntValue pregnancyDownPeriod;
+    public static ModConfigSpec.IntValue woolGrowthDays;
 
     // Crop Config
     public static ModConfigSpec.BooleanValue cropsWilt;
@@ -65,6 +66,8 @@ public class DemeterConfig {
                 .defineInRange("noProductsNoFood", 3, 1, Integer.MAX_VALUE);
         pregnancyDownPeriod = builder.comment("The number of days that must pass before an animal can get pregnant again")
                 .defineInRange("pregnancyDownPeriod", 12, 1, Integer.MAX_VALUE);
+        woolGrowthDays = builder.comment("The number of days it takes for Sheep to grow their wool back")
+                .defineInRange("woolGrowthDays", 7, 1, Integer.MAX_VALUE);
         builder.pop();
         builder.push("Crops Config");
         cropsWilt = builder.comment("Will crops wilt after a number of days without being harvested")

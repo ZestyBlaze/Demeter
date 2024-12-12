@@ -2,6 +2,7 @@ package dev.teamcitrus.demeter.attachment;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.teamcitrus.demeter.config.DemeterConfig;
 import net.minecraft.world.entity.animal.Sheep;
 
 public class SheepAttachment {
@@ -21,7 +22,7 @@ public class SheepAttachment {
 
     public void onNewDay(Sheep self) {
         daysSinceSheared += 1;
-        if (daysSinceSheared >= 7) {
+        if (daysSinceSheared >= DemeterConfig.woolGrowthDays.get()) {
             self.setSheared(false);
             daysSinceSheared = 0;
         }
