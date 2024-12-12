@@ -1,7 +1,3 @@
 TODO
-- Sheep take 7 days to grow back wool
 - Animals produce products with higher happiness
 - Feeding Tray for Chickens
-- Stop products if animal has not been fed in more then x amount of days
-- Food via automation does not increase love / much lower amount
-- Add time, day and DOW tracker to screen -> Switch animals lifespans to a year basis not day - DONE
