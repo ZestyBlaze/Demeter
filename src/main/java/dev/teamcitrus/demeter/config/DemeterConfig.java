@@ -11,6 +11,7 @@ public class DemeterConfig {
     public static ModConfigSpec.IntValue animalHappinessMin;
     public static ModConfigSpec.BooleanValue animalsDieOfHunger;
     public static ModConfigSpec.IntValue daysBeforeAnimalDie;
+    public static ModConfigSpec.IntValue daysBeforeProductsStop;
     public static ModConfigSpec.IntValue pregnancyDownPeriod;
 
     // Crop Config
@@ -60,6 +61,8 @@ public class DemeterConfig {
                 .define("animalsDieOfHunger", true);
         daysBeforeAnimalDie = builder.comment("The number of days that have to pass without feeding an animal before they die")
                 .defineInRange("daysNoFood", 14, 1, Integer.MAX_VALUE);
+        daysBeforeProductsStop = builder.comment("The number of days before animals will stop producing products without being fed")
+                .defineInRange("noProductsNoFood", 3, 1, Integer.MAX_VALUE);
         pregnancyDownPeriod = builder.comment("The number of days that must pass before an animal can get pregnant again")
                 .defineInRange("pregnancyDownPeriod", 12, 1, Integer.MAX_VALUE);
         builder.pop();

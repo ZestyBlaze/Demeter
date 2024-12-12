@@ -1,9 +1,11 @@
 package dev.teamcitrus.demeter.entity.ai;
 
+import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterBlockTagsProvider;
+import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +17,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class DigProductsGoal extends Goal {
-    protected final PathfinderMob mob;
+    protected final Animal mob;
     protected double wantedX;
     protected double wantedY;
     protected double wantedZ;
@@ -26,7 +28,7 @@ public class DigProductsGoal extends Goal {
 
     private final List<ItemStack> products;
 
-    public DigProductsGoal(PathfinderMob mob, double speedModifier, List<ItemStack> products) {
+    public DigProductsGoal(Animal mob, double speedModifier, List<ItemStack> products) {
         this.mob = mob;
         this.speedModifier = speedModifier;
         this.interval = 9999;
@@ -37,6 +39,9 @@ public class DigProductsGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        if (AnimalUtil.getAnimalData(mob).getDaysSinceFed() >= DemeterConfig.daysBeforeProductsStop.get()) {
+            return false;
+        }
         if (this.mob.hasControllingPassenger()) {
             return false;
         } else {
