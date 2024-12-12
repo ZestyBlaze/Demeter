@@ -22,6 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.FarmBlock;
@@ -49,6 +50,9 @@ public class LevelEvents {
             animal.getData(AttachmentRegistry.ANIMAL).onNewDay(animal);
             if (AnimalUtil.getStats(animal).milking().isPresent()) {
                 animal.getData(AttachmentRegistry.MILK).setHasBeenMilked(false);
+            }
+            if (animal instanceof Sheep sheep) {
+                sheep.getData(AttachmentRegistry.SHEEP).onNewDay(sheep);
             }
         });
 

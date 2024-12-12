@@ -4,6 +4,7 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.attachment.CropAttachment;
 import dev.teamcitrus.demeter.attachment.MilkAttachment;
+import dev.teamcitrus.demeter.attachment.SheepAttachment;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,5 +15,6 @@ public class AttachmentRegistry {
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalAttachment>> ANIMAL = ATTACHMENT_TYPES.register("animal", () -> AttachmentType.builder(AnimalAttachment::new).serialize(AnimalAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<MilkAttachment>> MILK = ATTACHMENT_TYPES.register("milk", () -> AttachmentType.builder(() -> new MilkAttachment()).serialize(MilkAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<SheepAttachment>> SHEEP = ATTACHMENT_TYPES.register("sheep", () -> AttachmentType.builder(() -> new SheepAttachment()).serialize(SheepAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<CropAttachment>> CROP = ATTACHMENT_TYPES.register("crop", () -> AttachmentType.builder(() -> new CropAttachment()).serialize(CropAttachment.CODEC).build());
 }
