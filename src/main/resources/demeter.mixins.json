@@ -11,6 +11,7 @@
     "CropBlockInvoker",
     "CropBlockMixin",
     "FarmBlockMixin",
+    "IItemStackExtensionMixin",
     "IShearableMixin",
     "SheepMixin",
     "ThrownEggMixin"

@@ -5,6 +5,7 @@ import dev.teamcitrus.demeter.component.QualityLevelComponent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Random;
@@ -32,5 +33,21 @@ public class QualityUtil {
 
     public static void writeQualityToTag(ItemStack stack, QualityLevel quality) {
         stack.set(ComponentRegistry.QUALITY_LEVEL.get(), new QualityLevelComponent(quality));
+    }
+
+    public static FoodProperties getFoodProperties(QualityLevel level, FoodProperties originalProperties) {
+        float originalSat = calculateOriginalModifier(originalProperties.saturation(), originalProperties.nutrition());
+        return switch (level) {
+            case COPPER -> new FoodProperties.Builder().nutrition(originalProperties.nutrition() + 1)
+                    .saturationModifier(originalSat + 0.1f).build();
+            case IRON -> new FoodProperties.Builder().nutrition(originalProperties.nutrition() + 2)
+                    .saturationModifier(originalSat + 0.2f).build();
+            case NETHERITE -> new FoodProperties.Builder().nutrition(originalProperties.nutrition() + 3)
+                    .saturationModifier(originalSat + 0.4f).build();
+        };
+    }
+
+    public static float calculateOriginalModifier(float saturation, int foodLevel) {
+        return saturation / 2.0f / foodLevel;
     }
 }
