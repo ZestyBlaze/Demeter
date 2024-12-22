@@ -81,7 +81,7 @@ public class AnimalAttachment {
      */
     public void onNewDay(Animal self) {
         if (age >= AnimalUtil.getStats(self).maxLifespan() || (age >= AnimalUtil.getStats(self).minLifespan() &&
-                self.getRandom().nextInt(Math.min(Math.max(360, 1), Short.MAX_VALUE)) == 0)) {
+                self.getRandom().nextInt(360) == 0)) {
             self.hurt(new DamageSource(DamageTypeRegistry.OLD_AGE, self), Integer.MAX_VALUE);
         }
 
@@ -189,6 +189,10 @@ public class AnimalAttachment {
         this.daysLeftUntilGrown = daysLeftUntilGrown;
     }
 
+    public boolean isOnDownPeriod() {
+        return this.downPeriod > 0;
+    }
+
     public void setDownPeriod(int value) {
         this.downPeriod = value;
     }
@@ -204,7 +208,7 @@ public class AnimalAttachment {
         }
     }
 
-    public boolean getPregnant() {
+    public boolean isPregnant() {
         return isPregnant;
     }
 

@@ -1,7 +1,6 @@
 package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
-import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -32,7 +31,7 @@ public class DevDebugItem extends CitrusItem {
                     "Animal's Data")
                     .append("\nUUID: " + animal.getUUID())
                     .append("\nGender: " + StringUtils.capitalize(data.getGender().name().toLowerCase(Locale.ROOT)))
-                    .append("\nPregnant: " + data.getPregnant())
+                    .append("\nPregnant: " + data.isPregnant())
                     .append("\nLove: " + data.getLove())
                     .append("\nPet Today?: " + data.hasBeenPetToday())
                     .append("\nBrushed Today?: " + data.hasBeenBrushedToday())

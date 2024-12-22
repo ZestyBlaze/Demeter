@@ -23,7 +23,7 @@ public class BreedGoalMixin {
                 original.call(instance, serverLevel, animal);
             }
 
-            if (!AnimalUtil.getAnimalData(instance).getPregnant()) {
+            if (!AnimalUtil.getAnimalData(instance).isPregnant()) {
                 if (AnimalUtil.getGender(instance).equals(AnimalAttachment.AnimalGenders.FEMALE)) {
                     instance.getData(AttachmentRegistry.ANIMAL).setPregnant(instance, true, animal);
                 }

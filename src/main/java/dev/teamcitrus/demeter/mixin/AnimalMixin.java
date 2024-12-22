@@ -4,12 +4,10 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.world.entity.animal.Animal;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-
-@Debug(export = true)
+ 
 @Mixin(Animal.class)
 public class AnimalMixin {
     @Unique
@@ -21,30 +19,31 @@ public class AnimalMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void demeter$handleNewMilking(Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (pPlayer.level().isClientSide) return;
+    private void demeter$handleNewMilking(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+        if (player.level().isClientSide) return;
         AnimalData stats = AnimalUtil.getStats(demeter$animal);
         if (!(AnimalUtil.getStats(demeter$animal) != null && stats.milking().isPresent())) return;
         AnimalData.MilkingCodec milking = stats.milking().get();
-        ItemStack stack = pPlayer.getItemInHand(pHand);
+        ItemStack stack = player.getItemInHand(hand);
 
-        if (!stack.is(milking.input())) return;
+        if (!milking.inputOutputMap().containsKey(stack.getItem())) return;
         if (!AnimalUtil.getGender(demeter$animal).equals(AnimalAttachment.AnimalGenders.FEMALE)) {
-            pPlayer.displayClientMessage(Component.translatable("message.demeter.milk.fail_gender").withStyle(ChatFormatting.RED), true);
+            player.displayClientMessage(Component.translatable("message.demeter.milk.fail_gender").withStyle(ChatFormatting.RED), true);
             return;
         }
 
         MilkAttachment attachment = demeter$animal.getData(AttachmentRegistry.MILK);
         if (attachment.getHasBeenMilked()) {
-            pPlayer.displayClientMessage(Component.translatable("message.demeter.milk.fail_daily").withStyle(ChatFormatting.RED), true);
+            player.displayClientMessage(Component.translatable("message.demeter.milk.fail_daily").withStyle(ChatFormatting.RED), true);
             return;
         }
 
-        ItemStack output = QualityUtil.randomiseQuality(milking.output().getDefaultInstance());
-        ItemStack result = ItemUtils.createFilledResult(stack, pPlayer, output);
-        ServerPlayer serverPlayer = (ServerPlayer) pPlayer;
+        ItemStack output = milking.inputOutputMap().get(stack.getItem()).getDefaultInstance();
+        QualityUtil.randomiseQuality(output);
+        ItemStack result = ItemUtils.createFilledResult(stack, player, output);
+        ServerPlayer serverPlayer = (ServerPlayer) player;
         serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.COW_MILK), SoundSource.PLAYERS, demeter$animal.getX(), demeter$animal.getY(), demeter$animal.getZ(), 1.0f, 1.0f, 0));
-        pPlayer.setItemInHand(pHand, result);
+        player.setItemInHand(hand, result);
         attachment.setHasBeenMilked(true);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
@@ -56,7 +55,8 @@ public class AnimalMixin {
     )
     private boolean demeter$canFallInLove(boolean original) {
         return original && AnimalUtil.isAnimalHappy(demeter$animal)
-                && !AnimalUtil.getAnimalData(demeter$animal).getPregnant();
+                && !AnimalUtil.getAnimalData(demeter$animal).isOnDownPeriod()
+                && !AnimalUtil.getAnimalData(demeter$animal).isPregnant();
     }
 
     @ModifyExpressionValue(
@@ -67,7 +67,7 @@ public class AnimalMixin {
             )
     )
     private boolean demeter$checkMateGender(boolean original, Animal otherEntity) {
-        return original && !AnimalUtil.getAnimalData(demeter$animal).getPregnant()
+        return original && !AnimalUtil.getAnimalData(demeter$animal).isPregnant()
                 //&& !AnimalUtil.getAnimalData(demeter$animal).isOnDownPeriod()
                 && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
     }
