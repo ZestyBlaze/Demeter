@@ -1,5 +1,6 @@
 {
   "values": [
+    "minecraft:apple",
     "minecraft:wheat",
     "minecraft:carrot",
     "minecraft:potato",
@@ -7,6 +8,7 @@
     "minecraft:pumpkin",
     "minecraft:beetroot",
     "minecraft:milk_bucket",
+    "demeter:milk_bottle",
     "#minecraft:wool",
     "#c:foods/raw_fish"
   ]

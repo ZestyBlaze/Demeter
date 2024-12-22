@@ -2,8 +2,10 @@
   "entries": [
     "demeter:quality_melon",
     "demeter:quality_potato",
+    "demeter:quality_dark_oak_leaves",
     "demeter:quality_beetroots",
     "demeter:quality_carrots",
+    "demeter:quality_oak_leaves",
     "demeter:quality_wheat",
     "demeter:quality_pumpkin"
   ],

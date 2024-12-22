@@ -60,5 +60,19 @@ public class DemeterLootModifierProvider extends GlobalLootModifierProvider {
                         }
                 )
         );
+        add("quality_oak_leaves",
+                new QualityLootModifier(
+                        new LootItemCondition[]{
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.OAK_LEAVES).build()
+                        }
+                )
+        );
+        add("quality_dark_oak_leaves",
+                new QualityLootModifier(
+                        new LootItemCondition[]{
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.DARK_OAK_LEAVES).build()
+                        }
+                )
+        );
     }
 }
