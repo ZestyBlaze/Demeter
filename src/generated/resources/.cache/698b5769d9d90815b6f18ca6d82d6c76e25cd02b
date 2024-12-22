@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-25T13:57:04.4198799	Tags for minecraft:item mod id demeter
+// 1.21.1	2024-12-20T20:06:29.8961872	Tags for minecraft:item mod id demeter
 b30a5c9a22b98ee1a9d5a93bbc5aa006f57631c6 data/accessories/tags/item/charm.json
 4ac46848a530edf43c2e88e55002c9dbecb54608 data/accessories/tags/item/necklace.json
 3e2e1d0b4acb9bca66e7fbf1819f23be90c4aebc data/c/tags/item/clocks.json
@@ -6,7 +6,7 @@ ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/c/tags/item/fence_gates/wooden.jso
 910ab090ce955b42535d052afefec31c8eff5440 data/c/tags/item/tools.json
 f0d4a8965b60099a975fc37504ab1bff25dcdad4 data/c/tags/item/tools/animal_brush.json
 de60222834d329d100d0303ece8b17a0f31f05f4 data/demeter/tags/item/maple_logs.json
-0c9493256dbf32877709e7d713d9732e47c557e1 data/demeter/tags/item/quality_products.json
+95327eb559e715f01f49fd486ca0d423c622de4b data/demeter/tags/item/quality_products.json
 d2bed09b1a9bb32574b3d051ac3f497466413dbb data/demeter/tags/item/trough_foods.json
 ff143c0b1a5aa15d86203c38716839e3fbd77d45 data/demeter/tags/item/trough_foods/hay.json
 0afc4b22f147c071c2642b34ba270feadb7649e1 data/demeter/tags/item/trough_foods/slop.json
