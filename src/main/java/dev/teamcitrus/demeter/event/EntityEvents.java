@@ -2,11 +2,8 @@ package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.block.trough.TroughBlock;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.data.providers.DemeterEntityTagProvider;
 import dev.teamcitrus.demeter.entity.ai.DigProductsGoal;
-import dev.teamcitrus.demeter.entity.ai.EatFoodGoal;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -48,11 +45,6 @@ public class EntityEvents {
             if (AnimalUtil.getStats(animal) != null && !AnimalUtil.getStats(animal).diggableItems().isEmpty()) {
                 animal.goalSelector.addGoal(4, new DigProductsGoal(animal, 1, AnimalUtil.getStats(animal).diggableItems()));
             }
-            if (animal.getType().is(DemeterEntityTagProvider.EATS_HAY)) {
-                animal.goalSelector.addGoal(3, new EatFoodGoal(animal, TroughBlock.FoodType.HAY, 1.0d));
-            } else if (animal.getType().is(DemeterEntityTagProvider.EATS_SLOP)) {
-                animal.goalSelector.addGoal(3, new EatFoodGoal(animal, TroughBlock.FoodType.SLOP, 1.0d));
-            }
         }
     }
 
@@ -87,7 +79,7 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void animalFoodHandler(PlayerInteractEvent.EntityInteract event) {
-        if (event.getTarget() instanceof Animal animal && !event.getLevel().isClientSide()) {
+        if (event.getTarget() instanceof Animal animal) {
             Player player = event.getEntity();
             InteractionHand hand = event.getHand();
             ItemStack stack = player.getItemInHand(hand);
@@ -96,6 +88,9 @@ public class EntityEvents {
                 int love = DemeterConfig.feedingLoveValue.get();
                 AnimalUtil.getAnimalData(animal).alterLove(player, favouriteFoods.contains(stack.getItem()) ? love * 2 : love);
                 AnimalUtil.getAnimalData(animal).setHasBeenFedToday(true);
+                if (!player.getAbilities().instabuild) {
+                    stack.shrink(1);
+                }
                 player.awardStat(StatsRegistry.ANIMALS_FED.get());
                 player.swing(hand);
                 for (int i = 0; i <= 8; i++) {
