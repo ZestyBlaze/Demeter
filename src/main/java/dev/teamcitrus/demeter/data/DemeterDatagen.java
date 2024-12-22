@@ -1,6 +1,5 @@
 package dev.teamcitrus.demeter.data;
 
-import dev.teamcitrus.citruslib.util.DatagenUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.data.providers.*;
 import dev.teamcitrus.demeter.data.providers.lang.EnUsProvider;
@@ -41,7 +40,5 @@ public class DemeterDatagen {
         gen.addProvider(event.includeServer(), new DemeterLootModifierProvider(output, provider));
 
         gen.addProvider(event.includeClient(), new EnUsProvider(output));
-
-        gen.addProvider(true, DatagenUtil.makeMetadataFile(output, Demeter.MODID));
     }
 }

@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.util;
 
 import dev.teamcitrus.demeter.attachment.CropAttachment;
-import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import dev.teamcitrus.demeter.datamaps.CropData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
+import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.chunk.ChunkAccess;
