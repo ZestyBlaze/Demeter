@@ -5,6 +5,7 @@ import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,10 +25,10 @@ public class DevDebugItem extends CitrusItem {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         Level level = player.level();
-        if (!level.isClientSide() && interactionTarget instanceof Animal animal) {
+        if (!level.isClientSide() && interactionTarget instanceof Animal animal && player instanceof ServerPlayer serverPlayer) {
             AnimalAttachment data = AnimalUtil.getAnimalData(animal);
 
-            player.sendSystemMessage(Component.literal(
+            serverPlayer.sendSystemMessage(Component.literal(
                     "Animal's Data")
                     .append("\nUUID: " + animal.getUUID())
                     .append("\nGender: " + StringUtils.capitalize(data.getGender().name().toLowerCase(Locale.ROOT)))

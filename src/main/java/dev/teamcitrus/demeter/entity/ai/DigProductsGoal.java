@@ -4,6 +4,7 @@ import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterBlockTagsProvider;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
@@ -119,7 +120,7 @@ public class DigProductsGoal extends Goal {
         if (mob.blockPosition().closerThan(new BlockPos((int) this.wantedX, (int) this.wantedY,
                         (int) this.wantedZ), 2.5)) {
             for (ItemStack stack : products) {
-                mob.spawnAtLocation(stack);
+                mob.spawnAtLocation((ServerLevel) mob.level(), stack);
             }
         }
     }

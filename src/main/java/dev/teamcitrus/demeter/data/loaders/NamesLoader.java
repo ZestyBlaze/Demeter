@@ -5,15 +5,11 @@ import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
-import org.antlr.v4.runtime.misc.MultiMap;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class NamesLoader extends MergeableCodecDataManager<Names, List<String>> {
-    public static final MultiMap<AnimalGenders, String> NAME_LIST = new MultiMap<>();
+    public static final Map<AnimalGenders, List<String>> NAME_LIST = new HashMap<>();
 
     public NamesLoader() {
         super("demeter/names", Names.CODEC, Names::merge);

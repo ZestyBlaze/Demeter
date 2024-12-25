@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.citruslib.util.ScreenUtil;
 import dev.teamcitrus.demeter.client.DemeterHud;
 import dev.teamcitrus.demeter.client.HUDRenderData;
+import dev.teamcitrus.demeter.client.property.QualityProperty;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.config.DemeterConfig;
@@ -18,8 +19,10 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.renderer.item.ItemModels;
+import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperty;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +33,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
@@ -39,24 +43,14 @@ public class DemeterClient {
     public static void registerItemProperties(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             Sheets.addWoodType(BlockRegistry.MAPLE_WOOD_TYPE);
-            ItemProperties.register(ItemRegistry.WATERING_CAN.get(), Demeter.id("level"), ((itemStack, clientLevel, livingEntity, i) -> {
-                if (itemStack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
-                    QualityLevel level = itemStack.get(ComponentRegistry.QUALITY_LEVEL.get()).level();
-                    if (level.equals(QualityLevel.COPPER)) {
-                        return 1;
-                    }
-                    if (level.equals(QualityLevel.IRON)) {
-                        return 2;
-                    }
-                    if (level.equals(QualityLevel.NETHERITE)) {
-                        return 3;
-                    }
-                }
-                return 0;
-            }));
-            
+
             RENDERERS.put(Level.OVERWORLD, new DemeterHud());
         });
+    }
+
+    @SubscribeEvent
+    public static void registerSelectItemModels(RegisterSelectItemModelPropertyEvent event) {
+        event.register(QualityProperty.QUALITY, QualityProperty.TYPE);
     }
 
     @SubscribeEvent
@@ -84,7 +78,8 @@ public class DemeterClient {
                 if (texture != null) {
                     RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
                     //mc.getTextureManager().bindForSetup(texture);//inMine ? MINE_HUD : season.HUD);
-                    graphics.blit(texture, x - 44, y - 35, 0, 0, 256, 110);
+                    //graphics.blit(resourceLocation -> RenderType.gui(), texture, x - 44, y - 35, 0, 0, 256, 110);
+                    graphics.blit(resourceLocation -> RenderType.gui(), texture, x - 44, y - 35, 0, 0, 256, 110, 1, 1);
                 }
 
                 //Enlarge the Day
@@ -109,7 +104,7 @@ public class DemeterClient {
         if (!ScreenUtil.isItemInHand(stack)) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
-            guiGraphics.blit(Demeter.id("textures/item/quality/" + QualityUtil.getQuality(stack).getName() + ".png"), xOffset, yOffset, 200, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(resourceLocation -> RenderType.gui(), Demeter.id("textures/item/quality/" + QualityUtil.getQuality(stack).getName() + ".png"), xOffset, yOffset, 200, 0, 0, 16, 16, 16, 16);
             poseStack.popPose();
         }
     }

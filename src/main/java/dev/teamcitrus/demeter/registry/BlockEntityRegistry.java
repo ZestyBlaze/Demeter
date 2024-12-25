@@ -11,6 +11,6 @@ public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Demeter.MODID);
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TroughBlockEntity>> TROUGH = BLOCK_ENTITIES.register(
             "trough",
-            () -> BlockEntityType.Builder.of(TroughBlockEntity::new, BlockRegistry.TROUGH.get()).build(null)
+            () -> new BlockEntityType<>(TroughBlockEntity::new, BlockRegistry.TROUGH.get())
     );
 }

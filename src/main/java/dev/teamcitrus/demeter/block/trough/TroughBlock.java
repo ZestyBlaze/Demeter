@@ -6,7 +6,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -36,7 +36,7 @@ public class TroughBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
             if (!(level.getBlockState(pos).getValue(FOOD_LEVEL) == 4)) {
                 TroughBlockEntity entity = (TroughBlockEntity) level.getBlockEntity(pos);
@@ -62,7 +62,7 @@ public class TroughBlock extends Block implements EntityBlock {
                 }
             }
         }
-        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.PASS;
     }
 
     @Override

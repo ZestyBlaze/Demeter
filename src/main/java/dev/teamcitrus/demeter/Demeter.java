@@ -44,6 +44,8 @@ public class Demeter {
         AdvancementRegistry.CRITERION.register(bus);
         PoiTypeRegistry.POI_TYPES.register(bus);
         StatsRegistry.STATS.register(bus);
+        ConsumeEffectRegistry.TYPE.register(bus);
+        EntityTypeRegistry.ENTITY_TYPES.register(bus);
         WoodSetRegistry.init();
         bus.register(this);
         

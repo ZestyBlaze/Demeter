@@ -19,7 +19,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -69,10 +68,10 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
 
     @Nonnull
     @Override
-    public InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
+    public InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (attemptToFill(level, player, stack)) return InteractionResultHolder.success(stack);
-        return InteractionResultHolder.pass(stack);
+        if (attemptToFill(level, player, stack)) return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -103,9 +102,9 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
     public Component getName(ItemStack stack) {
         if (stack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
             QualityLevelComponent component = stack.get(ComponentRegistry.QUALITY_LEVEL.get());
-            return Component.literal(StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT) + " " + Component.translatable(getDescriptionId(stack)).getString()));
+            return Component.literal(StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT) + " " + Component.translatable(getDescriptionId()).getString()));
         }
-        return Component.translatable(getDescriptionId(stack));
+        return Component.translatable(getDescriptionId());
     }
 
     @Override

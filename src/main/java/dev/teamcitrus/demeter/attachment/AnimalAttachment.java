@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
@@ -103,7 +104,7 @@ public class AnimalAttachment {
             --daysLeftUntilBirth;
             if (daysLeftUntilBirth <= 0) {
                 Level level = self.level();
-                EntityType.create(otherParentData, level).ifPresent(entity -> {
+                EntityType.create(otherParentData, level, EntitySpawnReason.BREEDING).ifPresent(entity -> {
                     AnimalUtil.handleBirth(self, (ServerLevel) self.level(), (Animal) entity);
                     this.isPregnant = false;
                     this.otherParentData = new CompoundTag();

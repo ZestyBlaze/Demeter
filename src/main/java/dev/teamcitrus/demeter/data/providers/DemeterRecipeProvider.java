@@ -18,13 +18,14 @@ import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
 import java.util.concurrent.CompletableFuture;
 
+/*
 public class DemeterRecipeProvider extends CitrusRecipeProvider {
     public DemeterRecipeProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pRegistries) {
         super(pOutput, pRegistries);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput pRecipeOutput) {
+    protected void buildRecipes() {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ItemRegistry.MILK_BOTTLE, 3)
                 .requires(Items.MILK_BUCKET).requires(Items.GLASS_BOTTLE, 3)
                 .unlockedBy("has_item", has(Items.MILK_BUCKET))
@@ -90,3 +91,5 @@ public class DemeterRecipeProvider extends CitrusRecipeProvider {
         generateWoodSetRecipes(pRecipeOutput, WoodSetRegistry.MAPLE);
     }
 }
+
+ */

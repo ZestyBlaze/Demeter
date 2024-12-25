@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.component;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
