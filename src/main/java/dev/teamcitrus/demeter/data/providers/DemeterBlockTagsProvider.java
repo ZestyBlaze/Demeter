@@ -1,21 +1,20 @@
 package dev.teamcitrus.demeter.data.providers;
 
-import dev.teamcitrus.citruslib.datagen.CitrusBlockTagsProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
-import dev.teamcitrus.demeter.registry.WoodSetRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unchecked")
-public class DemeterBlockTagsProvider extends CitrusBlockTagsProvider {
+public class DemeterBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> MAPLE_LOGS = BlockTags.create(Demeter.id("maple_logs"));
     public static final TagKey<Block> CAN_HAVE_TRUFFLES = BlockTags.create(Demeter.id("can_have_truffles"));
 
@@ -38,6 +37,6 @@ public class DemeterBlockTagsProvider extends CitrusBlockTagsProvider {
                 BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.STRIPPED_MAPLE_WOOD.get(), BlockRegistry.TROUGH.get());
         tag(BlockTags.MINEABLE_WITH_HOE).add(BlockRegistry.MAPLE_LEAVES.get());
         tag(CAN_HAVE_TRUFFLES).addTags(BlockTags.DIRT);
-        generateSetTags(WoodSetRegistry.MAPLE);
+        //generateSetTags(WoodSetRegistry.MAPLE);
     }
 }

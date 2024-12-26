@@ -23,8 +23,7 @@ public class DemeterDatagen {
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        event.addProvider(new DemeterBlockStateProvider(output, helper));
-        event.addProvider(new DemeterItemModelProvider(output, helper));
+        event.addProvider(new DemeterModelProvider(output));
 
         event.addProvider(new DemeterDataMapGenerator(output, provider));
         event.addProvider(new DemeterAdvancementProvider(output, provider, helper));

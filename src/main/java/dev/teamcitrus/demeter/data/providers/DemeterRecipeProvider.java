@@ -1,23 +1,5 @@
 package dev.teamcitrus.demeter.data.providers;
 
-import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
-import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
-import dev.teamcitrus.demeter.registry.BlockRegistry;
-import dev.teamcitrus.demeter.registry.ItemRegistry;
-import dev.teamcitrus.demeter.registry.WoodSetRegistry;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-
-import java.util.concurrent.CompletableFuture;
-
 /*
 public class DemeterRecipeProvider extends CitrusRecipeProvider {
     public DemeterRecipeProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pRegistries) {

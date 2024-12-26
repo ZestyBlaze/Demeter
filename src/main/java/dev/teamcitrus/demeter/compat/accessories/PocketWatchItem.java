@@ -9,6 +9,10 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class PocketWatchItem extends DemeterAccessoryItem {
+    public PocketWatchItem() {
+        super("pocket_watch");
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (!DemeterConfig.requireClockItemForTime.get()) tooltipComponents.add(Component.translatable("item.demeter.pocket_watch.error").withStyle(ChatFormatting.RED));

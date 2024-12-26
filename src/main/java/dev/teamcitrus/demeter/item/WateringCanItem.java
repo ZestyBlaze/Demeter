@@ -46,9 +46,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class WateringCanItem extends CitrusItem implements ITabFiller {
     public WateringCanItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).setId(createID("watering_can")));
     }
 
     @Override

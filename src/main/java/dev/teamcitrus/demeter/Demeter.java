@@ -34,6 +34,7 @@ public class Demeter {
         modContainer.registerConfig(ModConfig.Type.CLIENT, DemeterConfig.CLIENT_SPEC);
         modContainer.registerConfig(ModConfig.Type.COMMON, DemeterConfig.GENERAL_SPEC);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        EntityTypeRegistry.ENTITY_TYPES.register(bus);
         BlockRegistry.BLOCKS.register(bus);
         ItemRegistry.ITEMS.register(bus);
         ItemRegistry.CREATIVE_MODE_TABS.register(bus);
@@ -45,8 +46,7 @@ public class Demeter {
         PoiTypeRegistry.POI_TYPES.register(bus);
         StatsRegistry.STATS.register(bus);
         ConsumeEffectRegistry.TYPE.register(bus);
-        EntityTypeRegistry.ENTITY_TYPES.register(bus);
-        WoodSetRegistry.init();
+        //WoodSetRegistry.init();
         bus.register(this);
         
         if (ModUtil.isModInstalled("accessories")) {

@@ -17,9 +17,11 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class AnimalBrushItem extends CitrusItem {
     public AnimalBrushItem() {
-        super(new Properties().stacksTo(1).durability(156));
+        super(new Properties().stacksTo(1).durability(156).setId(createID("animal_brush")));
     }
 
     @Override

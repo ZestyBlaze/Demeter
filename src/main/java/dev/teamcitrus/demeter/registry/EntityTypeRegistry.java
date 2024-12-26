@@ -2,6 +2,8 @@ package dev.teamcitrus.demeter.registry;
 
 import dev.teamcitrus.demeter.Demeter;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -16,9 +18,11 @@ public class EntityTypeRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Demeter.MODID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<Boat>> MAPLE_BOAT = ENTITY_TYPES.register(
-            "maple_boat", () -> EntityType.Builder.of(boatFactory(ItemRegistry.MAPLE_BOAT), MobCategory.MISC).noLootTable().sized(1.375F, 0.5625F).eyeHeight(0.5625F).clientTrackingRange(10).build(null));
+            "maple_boat", () -> EntityType.Builder.of(boatFactory(ItemRegistry.MAPLE_BOAT), MobCategory.MISC).noLootTable()
+                    .sized(1.375F, 0.5625F).eyeHeight(0.5625F).clientTrackingRange(10).build(createKey("maple_boat")));
     public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> MAPLE_CHEST_BOAT = ENTITY_TYPES.register(
-            "maple_chest_boat", () -> EntityType.Builder.of(chestBoatFactory(ItemRegistry.MAPLE_CHEST_BOAT), MobCategory.MISC).noLootTable().sized(1.375F, 0.5625F).eyeHeight(0.5625F).clientTrackingRange(10).build(null));
+            "maple_chest_boat", () -> EntityType.Builder.of(chestBoatFactory(ItemRegistry.MAPLE_CHEST_BOAT), MobCategory.MISC)
+                    .noLootTable().sized(1.375F, 0.5625F).eyeHeight(0.5625F).clientTrackingRange(10).build(createKey("maple_chest_boat")));
 
     private static EntityType.EntityFactory<Boat> boatFactory(Supplier<Item> boatItemGetter) {
         return (p_375558_, p_375559_) -> new Boat(p_375558_, p_375559_, boatItemGetter);
@@ -26,5 +30,9 @@ public class EntityTypeRegistry {
 
     private static EntityType.EntityFactory<ChestBoat> chestBoatFactory(Supplier<Item> boatItemGetter) {
         return (p_375555_, p_375556_) -> new ChestBoat(p_375555_, p_375556_, boatItemGetter);
+    }
+
+    private static ResourceKey<EntityType<?>> createKey(String id) {
+        return ResourceKey.create(Registries.ENTITY_TYPE, Demeter.id(id));
     }
 }

@@ -1,6 +1,0 @@
-{
-  "parent": "demeter:item/watering_can",
-  "textures": {
-    "layer0": "demeter:item/wateringcan/netherite_watering_can"
-  }
-}

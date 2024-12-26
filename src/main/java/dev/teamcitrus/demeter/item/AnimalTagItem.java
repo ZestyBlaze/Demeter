@@ -14,9 +14,11 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class AnimalTagItem extends CitrusItem {
     public AnimalTagItem() {
-        super(new Properties().stacksTo(16));
+        super(new Properties().stacksTo(16).setId(createID("animal_tag")));
     }
 
     @Override

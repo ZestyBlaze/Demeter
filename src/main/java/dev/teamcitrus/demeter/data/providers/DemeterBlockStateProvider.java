@@ -1,15 +1,6 @@
 package dev.teamcitrus.demeter.data.providers;
 
-import dev.teamcitrus.citruslib.datagen.CitrusBlockStateProvider;
-import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.block.trough.TroughBlock;
-import dev.teamcitrus.demeter.registry.BlockRegistry;
-import dev.teamcitrus.demeter.registry.WoodSetRegistry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-
+/*
 public class DemeterBlockStateProvider extends CitrusBlockStateProvider {
     public DemeterBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, Demeter.MODID, exFileHelper);
@@ -50,3 +41,4 @@ public class DemeterBlockStateProvider extends CitrusBlockStateProvider {
                 .addModel().condition(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).condition(TroughBlock.FOOD_LEVEL, 4).end();
     }
 }
+ */

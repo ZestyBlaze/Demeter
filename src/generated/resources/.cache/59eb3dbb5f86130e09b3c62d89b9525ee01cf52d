@@ -1,8 +1,11 @@
-// 1.21.1	2024-11-20T15:57:12.6407451	Loot Tables
+// 1.21.4	2024-12-25T19:55:51.8074697	Loot Tables
+f7111f029eec7f8ecf9a20ba4c05d67074e58bab data/demeter/loot_table/blocks/dead_crop.json
 6610bf31756b8f128c410debea2b1ec0d6ab082b data/demeter/loot_table/blocks/maple_button.json
-49eac3b2b6f27b3ea5cb2232163058ff95ee2b8c data/demeter/loot_table/blocks/maple_door.json
+56b133e7cc26094e809eb7edb02278fbbbb36d9a data/demeter/loot_table/blocks/maple_door.json
 d7cfa5caa8cc317d68c334a03a33386d22ed083a data/demeter/loot_table/blocks/maple_fence.json
 36bc237e1b74f40130474cbcae19dcd69d17def7 data/demeter/loot_table/blocks/maple_fence_gate.json
+02f73434c3b1c4587cda93cddc2b7c14ad1d1305 data/demeter/loot_table/blocks/maple_hanging_sign.json
+f8e9352a1fd1aa3e569fa61db34aa7a802f2ea99 data/demeter/loot_table/blocks/maple_leaves.json
 0fe44a22966d7494b2f572880002f19f237440ec data/demeter/loot_table/blocks/maple_log.json
 ea61003b06a92a2511715afdfa844d5da5624615 data/demeter/loot_table/blocks/maple_planks.json
 7cb71add2d8e66b5297c5039c08ae2d73c9e4a25 data/demeter/loot_table/blocks/maple_pressure_plate.json
@@ -14,6 +17,8 @@ afb976b1d83e5ced6b0b077d74e8546f8e621900 data/demeter/loot_table/blocks/maple_st
 d85422b79bfb6ddc0b85f522751a0bea24c032d6 data/demeter/loot_table/blocks/maple_trapdoor.json
 d77718939dafccc0c7247b3a13893960aa6d96ce data/demeter/loot_table/blocks/maple_wall_sign.json
 94c5ae47d562a85420d96ae658195388f83d1560 data/demeter/loot_table/blocks/maple_wood.json
+ace3b8220a3eec7d298fd6bf43d752490524e6b4 data/demeter/loot_table/blocks/potted_maple_sapling.json
 f6b97b184aa039f5f91802c340a9a07deb8e1f16 data/demeter/loot_table/blocks/stripped_maple_log.json
 363b70607bb6ae0dd2a85ee305fe7ea957c9504c data/demeter/loot_table/blocks/stripped_maple_wood.json
 fd72ee833331b77ce1d73562094bda9fba7e353b data/demeter/loot_table/blocks/trough.json
+59cd169df8b88286f373ae3933fcca7dc3ac65f5 data/minecraft/loot_table/blocks/oak_hanging_sign.json

@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "demeter:block/maple_log"
+    "end": "demeter:block/maple_log",
+    "side": "demeter:block/maple_log"
   }
 }

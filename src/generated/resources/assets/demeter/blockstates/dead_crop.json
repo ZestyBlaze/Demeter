@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "demeter:block/dead_crop"
+    }
+  }
+}

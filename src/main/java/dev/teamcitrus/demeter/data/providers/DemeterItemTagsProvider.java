@@ -1,14 +1,13 @@
 package dev.teamcitrus.demeter.data.providers;
 
-import dev.teamcitrus.citruslib.datagen.CitrusItemTagsProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
-import dev.teamcitrus.demeter.registry.WoodSetRegistry;
 import io.wispforest.accessories.api.data.AccessoriesTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -21,7 +20,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unchecked")
-public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
+public class DemeterItemTagsProvider extends ItemTagsProvider {
     public static final TagKey<Item> QUALITY_PRODUCTS = modTag("quality_products");
     public static final TagKey<Item> MAPLE_LOGS = modTag("maple_logs");
 
@@ -64,6 +63,6 @@ public class DemeterItemTagsProvider extends CitrusItemTagsProvider {
         tag(TROUGH_FOODS_SLOP).add(Items.CARROT, Items.POTATO);
         tag(AccessoriesTags.CHARM_TAG).add(AccessoriesCompat.Items.BREEDING_CHARM.get());
         tag(AccessoriesTags.NECKLACE_TAG).add(AccessoriesCompat.Items.POCKET_WATCH.get());
-        generateSetTags(WoodSetRegistry.MAPLE);
+        //generateSetTags(WoodSetRegistry.MAPLE);
     }
 }

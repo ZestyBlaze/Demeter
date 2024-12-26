@@ -17,9 +17,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class DevDebugItem extends CitrusItem {
     public DevDebugItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).setId(createID("dev_debug_item")));
     }
 
     @Override

@@ -16,7 +16,7 @@ public class AccessoriesCompat {
 
     public static class Items {
         public static final DeferredRegister.Items ACCESSORIES_ITEMS = DeferredRegister.createItems(Demeter.MODID);
-        public static final DeferredItem<Item> BREEDING_CHARM = ACCESSORIES_ITEMS.register("breeding_charm", DemeterAccessoryItem::new);
+        public static final DeferredItem<Item> BREEDING_CHARM = ACCESSORIES_ITEMS.register("breeding_charm", () -> new DemeterAccessoryItem("breeding_charm"));
         public static final DeferredItem<Item> POCKET_WATCH = ACCESSORIES_ITEMS.register("pocket_watch", PocketWatchItem::new);
     }
 

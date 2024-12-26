@@ -22,9 +22,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class MiraclePotionItem extends CitrusItem {
     public MiraclePotionItem() {
-        super(new Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1));
+        super(new Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1).setId(createID("miracle_potion")));
     }
 
     @Override
