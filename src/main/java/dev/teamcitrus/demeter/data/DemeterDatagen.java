@@ -6,6 +6,9 @@ import dev.teamcitrus.demeter.data.providers.lang.EnUsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.metadata.PackMetadataGenerator;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -38,5 +41,11 @@ public class DemeterDatagen {
         event.addProvider(new DemeterLootModifierProvider(output, provider));
 
         event.addProvider(new EnUsProvider(output));
+
+        DataGenerator.PackGenerator featurePack = gen.getBuiltinDatapack(true, Demeter.MODID, "experimental");
+        featurePack.addProvider(out -> PackMetadataGenerator.forFeaturePack(
+                out, Component.literal("Enable experimental features for Demeter"),
+                FeatureFlagSet.of(Demeter.EXPERIMENTAL)
+        ));
     }
 }

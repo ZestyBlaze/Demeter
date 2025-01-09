@@ -7,7 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID)
-public class MiscEvents {
+public class ReloadListenerEvents {
     public static final NamesLoader NAME_LOADER = new NamesLoader();
 
     @SubscribeEvent

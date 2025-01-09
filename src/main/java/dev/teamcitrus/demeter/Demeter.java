@@ -11,6 +11,8 @@ import dev.teamcitrus.demeter.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.flag.FeatureFlags;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -29,6 +31,7 @@ import org.apache.logging.log4j.Logger;
 public class Demeter {
     public static final String MODID = "demeter";
     public static final Logger LOGGER = LogManager.getLogger();
+    public static final FeatureFlag EXPERIMENTAL = FeatureFlags.REGISTRY.getFlag(id("experimental"));
 
     public Demeter(IEventBus bus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.CLIENT, DemeterConfig.CLIENT_SPEC);
