@@ -2,17 +2,18 @@ package dev.teamcitrus.demeter.event;
 
 import com.google.common.collect.Lists;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
-import dev.teamcitrus.citruslib.reload.DynamicHolder;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.CropAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import dev.teamcitrus.demeter.data.crops.CropInfo;
-import dev.teamcitrus.demeter.data.crops.ICrop;
+import dev.teamcitrus.demeter.datamaps.CropData;
+import dev.teamcitrus.demeter.event.internal.NewYearEvent;
 import dev.teamcitrus.demeter.mixin.CropBlockInvoker;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
+import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.PoiTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import dev.teamcitrus.demeter.util.CropUtil;
+import dev.teamcitrus.demeter.util.TimeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerChunkCache;
@@ -21,6 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.FarmBlock;
@@ -31,22 +33,27 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 @EventBusSubscriber(modid = Demeter.MODID)
+@SuppressWarnings("deprecation")
 public class LevelEvents {
     @SubscribeEvent
     public static void onNewDay(NewDayEvent event) {
         ServerLevel level = event.getLevel();
 
-        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal).isBound()).forEach(animal -> {
+        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal) != null).forEach(animal -> {
             animal.getData(AttachmentRegistry.ANIMAL).onNewDay(animal);
-        });
-        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal).isBound() && (AnimalUtil.getStats(animal).get().milking().isPresent())).forEach(animal -> {
-            animal.getData(AttachmentRegistry.MILK).setHasBeenMilked(false);
+            if (AnimalUtil.getStats(animal).milking().isPresent()) {
+                animal.getData(AttachmentRegistry.MILK).setHasBeenMilked(false);
+            }
+            if (animal instanceof Sheep sheep) {
+                sheep.getData(AttachmentRegistry.SHEEP).onNewDay(sheep);
+            }
         });
 
         ServerChunkCache chunkSource = level.getChunkSource();
@@ -85,10 +92,9 @@ public class LevelEvents {
                 CropUtil.getCropsInChunk(levelchunk).forEach((pos, originalDays) -> {
                     BlockState state = level.getBlockState(pos);
                     CropBlock block = (CropBlock) state.getBlock();
-                    DynamicHolder<ICrop> cropInfo = CropUtil.getCropInfo(block);
-                    if (cropInfo.isBound()) {
-                        ICrop info = cropInfo.get();
-                        int days = info.daysToGrow();
+                    CropData cropData = CropUtil.getCropData(block);
+                    if (cropData != null) {
+                        int days = cropData.daysToGrow();
 
                         CropAttachment data = CropUtil.getCropData(levelchunk);
                         data.incrementDays(pos);
@@ -101,7 +107,7 @@ public class LevelEvents {
 
                         if (DemeterConfig.cropsWilt.get()) {
                             if (data.getDays(pos) == days + DemeterConfig.daysToWilt.get()) {
-                                level.destroyBlock(pos, false);
+                                level.setBlockAndUpdate(pos, BlockRegistry.DEAD_CROP.get().defaultBlockState());
                                 updatePositions.add(pos);
                             }
                         }
@@ -111,5 +117,21 @@ public class LevelEvents {
                 updatePositions.clear();
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void newYearTrigger(NewDayEvent event) {
+        if (TimeUtil.getElapsedDays(event.getLevel().getDayTime()) % TimeUtil.YEAR_DAYS == 0) {
+            NeoForge.EVENT_BUS.post(new NewYearEvent(event.getLevel()));
+        }
+    }
+
+    @SubscribeEvent
+    public static void newYearEvent(NewYearEvent event) {
+        ServerLevel level = event.getLevel();
+
+        level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal) != null).forEach(animal -> {
+            animal.getData(AttachmentRegistry.ANIMAL).onNewYear(animal);
+        });
     }
 }

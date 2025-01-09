@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(CropBlock.class)
 public interface CropBlockInvoker {
     @Invoker("getAgeProperty")
-    public IntegerProperty invokeGetAgeProperty();
+    IntegerProperty invokeGetAgeProperty();
 }

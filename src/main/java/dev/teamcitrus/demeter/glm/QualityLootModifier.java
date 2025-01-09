@@ -25,7 +25,7 @@ public class QualityLootModifier extends LootModifier {
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        if (context.hasParam(LootContextParams.THIS_ENTITY)) {
+        if (context.hasParameter(LootContextParams.THIS_ENTITY)) {
             generatedLoot.forEach(QualityUtil::randomiseQuality);
         }
         return generatedLoot;

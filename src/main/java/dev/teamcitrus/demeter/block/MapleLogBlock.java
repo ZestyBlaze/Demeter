@@ -9,9 +9,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.common.ItemAbility;
 
+import static dev.teamcitrus.demeter.registry.BlockRegistry.createID;
+
 public class MapleLogBlock extends RotatedPillarBlock {
-    public MapleLogBlock() {
-        super(Properties.ofFullCopy(Blocks.OAK_LOG).mapColor(MapColor.COLOR_ORANGE));
+    public MapleLogBlock(String id) {
+        super(Properties.ofFullCopy(Blocks.OAK_LOG).mapColor(MapColor.COLOR_ORANGE).setId(createID(id)));
     }
 
     @Override

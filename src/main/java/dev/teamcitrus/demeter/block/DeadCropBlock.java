@@ -1,10 +1,15 @@
 package dev.teamcitrus.demeter.block;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.level.block.BushBlock;
 
-public class DeadCropBlock extends Block {
-    public DeadCropBlock() {
-        super(Properties.of().sound(SoundType.CROP).instabreak().noCollission());
+public class DeadCropBlock extends BushBlock {
+    public DeadCropBlock(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return simpleCodec(DeadCropBlock::new);
     }
 }

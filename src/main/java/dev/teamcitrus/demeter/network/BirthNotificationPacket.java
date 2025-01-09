@@ -5,6 +5,7 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.ConnectionProtocol;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public record BirthNotificationPacket() implements CustomPacketPayload {
     public static final Type<BirthNotificationPacket> TYPE = new Type<>(Demeter.id("notify_birth"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, BirthNotificationPacket> STREAM_CODEC = StreamCodec.unit(
+    public static final StreamCodec<FriendlyByteBuf, BirthNotificationPacket> STREAM_CODEC = StreamCodec.unit(
             new BirthNotificationPacket()
     );
 

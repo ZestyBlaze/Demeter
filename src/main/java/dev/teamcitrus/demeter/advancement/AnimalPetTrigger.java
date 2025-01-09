@@ -8,6 +8,7 @@ import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Optional;
 
@@ -17,8 +18,10 @@ public class AnimalPetTrigger extends SimpleCriterionTrigger<AnimalPetTrigger.Pe
         return PetTrigger.CODEC;
     }
 
-    public void trigger(ServerPlayer player) {
-        this.trigger(player, triggerInstance -> true);
+    public void trigger(Player player) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            this.trigger(serverPlayer, triggerInstance -> true);
+        }
     }
 
     public record PetTrigger(

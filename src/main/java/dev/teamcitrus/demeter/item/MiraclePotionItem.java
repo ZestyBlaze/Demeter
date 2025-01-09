@@ -22,16 +22,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class MiraclePotionItem extends CitrusItem {
     public MiraclePotionItem() {
-        super(new Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1));
+        super(new Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1).setId(createID("miracle_potion")));
     }
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         if (!player.level().isClientSide() && interactionTarget instanceof Animal animal) {
             if (interactionTarget instanceof Frog frog) {
-                AdvancementRegistry.USE_MIRACLE_ON_FROG.get().trigger((ServerPlayer)player);
+                AdvancementRegistry.USE_MIRACLE_ON_FROG.get().trigger(player);
                 if (AnimalUtil.getAnimalData(frog).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
                     ((ServerLevel)(animal.level())).sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
                     ((ServerPlayer)player).connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BOTTLE_EMPTY), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
@@ -40,13 +42,13 @@ public class MiraclePotionItem extends CitrusItem {
                 return InteractionResult.SUCCESS;
             }
 
-            if (AnimalUtil.getStats(animal).isBound() && AnimalUtil.getAnimalData(animal).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
+            if (AnimalUtil.getStats(animal) != null && AnimalUtil.getAnimalData(animal).getGender().equals(AnimalAttachment.AnimalGenders.FEMALE)) {
                 if (!player.isCreative()) {
                     stack.shrink(1);
                 }
                 ((ServerLevel)(animal.level())).sendParticles(ParticleTypes.HEART, animal.getX(), animal.getY() + 0.7, animal.getZ(), 4, 0.5, 0, 0.5, animal.getRandom().nextGaussian() * 0.02);
                 ((ServerPlayer)player).connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BOTTLE_EMPTY), SoundSource.PLAYERS, animal.getX(), animal.getY(), animal.getZ(), 1.0f, 1.0f, 0));
-                AdvancementRegistry.USE_MIRACLE_POTION.get().trigger((ServerPlayer)player);
+                AdvancementRegistry.USE_MIRACLE_POTION.get().trigger(player);
                 AnimalUtil.getAnimalData(animal).setPregnant(animal, true, animal);
                 return InteractionResult.SUCCESS;
             }

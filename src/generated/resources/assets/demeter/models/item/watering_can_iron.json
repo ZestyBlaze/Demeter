@@ -1,6 +1,6 @@
 {
-  "parent": "demeter:item/watering_can",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "demeter:item/wateringcan/iron_watering_can"
+    "layer0": "demeter:item/watering_can_iron"
   }
 }

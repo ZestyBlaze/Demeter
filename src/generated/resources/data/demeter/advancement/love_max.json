@@ -1,5 +1,5 @@
 {
-  "parent": "demeter:root",
+  "parent": "demeter:pet_animal",
   "criteria": {
     "love_max": {
       "trigger": "demeter:love_max"

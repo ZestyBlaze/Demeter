@@ -15,10 +15,10 @@ import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -46,9 +46,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class WateringCanItem extends CitrusItem implements ITabFiller {
     public WateringCanItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).setId(createID("watering_can")));
     }
 
     @Override
@@ -68,10 +70,10 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
 
     @Nonnull
     @Override
-    public InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
+    public InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (attemptToFill(level, player, stack)) return InteractionResultHolder.success(stack);
-        return InteractionResultHolder.pass(stack);
+        if (attemptToFill(level, player, stack)) return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -84,6 +86,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
                 if (state.is(Blocks.FARMLAND) && state.getValue(BlockStateProperties.MOISTURE) < 7) {
                     dispenseWater(context.getItemInHand(), (ServerPlayer) context.getPlayer(), level, context.getClickedPos(), context.getHorizontalDirection(), component.level());
                     drainContainer(context.getItemInHand(), 20);
+
                     return InteractionResult.SUCCESS;
                 } else if (state.getBlock() instanceof CropBlock
                         && level.getBlockState(context.getClickedPos().below()).getBlock().equals(Blocks.FARMLAND)
@@ -101,9 +104,9 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
     public Component getName(ItemStack stack) {
         if (stack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
             QualityLevelComponent component = stack.get(ComponentRegistry.QUALITY_LEVEL.get());
-            return Component.translatable(getDescriptionId(stack), StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT)));
+            return Component.literal(StringUtils.capitalize(component.level().name().toLowerCase(Locale.ROOT) + " " + Component.translatable(getDescriptionId()).getString()));
         }
-        return Component.translatable(getDescriptionId(stack));
+        return Component.translatable(getDescriptionId());
     }
 
     @Override
@@ -129,7 +132,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
             ItemStack stack = new ItemStack(this);
             setLevel(stack, level);
             fillContainer(stack, getTankCapacityFromStack(stack));
-            event.insertAfter(ItemRegistry.BUTTER.toStack(), stack,
+            event.insertAfter(ItemRegistry.TRUFFLE.toStack(), stack,
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
             );
         });
@@ -190,6 +193,7 @@ public class WateringCanItem extends CitrusItem implements ITabFiller {
         }
         drainContainer(stack, 20);
         player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BUCKET_EMPTY), SoundSource.PLAYERS, originalPos.getX(), originalPos.getY(), originalPos.getZ(), 1.0f, level.random.nextFloat(), 0));
+        player.awardStat(Stats.ITEM_USED.get(this));
     }
 
     private int calculateRemainingUses(ItemStack stack) {

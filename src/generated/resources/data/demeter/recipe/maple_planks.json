@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "demeter:maple_logs"
-    }
+    "#demeter:maple_logs"
   ],
   "result": {
     "count": 4,

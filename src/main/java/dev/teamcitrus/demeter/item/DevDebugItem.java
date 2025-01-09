@@ -5,6 +5,7 @@ import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,22 +17,24 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
 
+import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
+
 public class DevDebugItem extends CitrusItem {
     public DevDebugItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).setId(createID("dev_debug_item")));
     }
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         Level level = player.level();
-        if (!level.isClientSide() && interactionTarget instanceof Animal animal) {
+        if (!level.isClientSide() && interactionTarget instanceof Animal animal && player instanceof ServerPlayer serverPlayer) {
             AnimalAttachment data = AnimalUtil.getAnimalData(animal);
 
-            player.sendSystemMessage(Component.literal(
+            serverPlayer.sendSystemMessage(Component.literal(
                     "Animal's Data")
                     .append("\nUUID: " + animal.getUUID())
                     .append("\nGender: " + StringUtils.capitalize(data.getGender().name().toLowerCase(Locale.ROOT)))
-                    .append("\nPregnant: " + data.getPregnant())
+                    .append("\nPregnant: " + data.isPregnant())
                     .append("\nLove: " + data.getLove())
                     .append("\nPet Today?: " + data.hasBeenPetToday())
                     .append("\nBrushed Today?: " + data.hasBeenBrushedToday())

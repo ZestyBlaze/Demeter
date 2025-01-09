@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "accessories"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#c:clocks",
+    "C": "minecraft:chain",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "C ",
+    "#R"
+  ],
+  "result": {
+    "count": 1,
+    "id": "demeter:pocket_watch"
+  }
+}

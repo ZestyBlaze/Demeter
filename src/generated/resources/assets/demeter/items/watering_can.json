@@ -1,0 +1,33 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "demeter:item/watering_can_copper"
+        },
+        "when": "copper"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "demeter:item/watering_can_iron"
+        },
+        "when": "iron"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "demeter:item/watering_can_netherite"
+        },
+        "when": "netherite"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "demeter:item/watering_can"
+    },
+    "property": "demeter:quality_property"
+  }
+}

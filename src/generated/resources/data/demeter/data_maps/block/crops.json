@@ -1,0 +1,22 @@
+{
+  "values": {
+    "minecraft:beetroots": {
+      "daysToGrow": 3
+    },
+    "minecraft:carrots": {
+      "daysToGrow": 4
+    },
+    "minecraft:pitcher_crop": {
+      "daysToGrow": 2
+    },
+    "minecraft:potatoes": {
+      "daysToGrow": 5
+    },
+    "minecraft:torchflower_crop": {
+      "daysToGrow": 2
+    },
+    "minecraft:wheat": {
+      "daysToGrow": 3
+    }
+  }
+}

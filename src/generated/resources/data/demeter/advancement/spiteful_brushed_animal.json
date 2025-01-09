@@ -13,7 +13,7 @@
     "hidden": true,
     "icon": {
       "count": 1,
-      "id": "demeter:brush"
+      "id": "demeter:animal_brush"
     },
     "title": {
       "translate": "advancement.demeter.spiteful_animal_brushed"
