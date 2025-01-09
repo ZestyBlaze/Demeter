@@ -2,22 +2,25 @@ package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.block.trough.TroughBlock;
+import dev.teamcitrus.demeter.client.property.QualityProperty;
+import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.registry.BlockFamilyRegistry;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.blockstates.*;
+import net.minecraft.client.data.models.blockstates.Condition;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.core.Holder;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -43,18 +46,21 @@ public class DemeterModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ItemRegistry.BUTTER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.MAPLE_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.MAPLE_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ItemRegistry.MAPLE_SAPLING.get(), ModelTemplates.FLAT_ITEM);
+        createWateringCanItem(itemModels, ItemRegistry.WATERING_CAN.get());
 
         BlockFamilyRegistry.getAllFamilies()
                 .filter(BlockFamily::shouldGenerateModel)
                 .forEach(p_386718_ -> blockModels.family(p_386718_.getBaseBlock()).generateFor(p_386718_));
         blockModels.woodProvider(BlockRegistry.MAPLE_LOG.get()).logWithHorizontal(BlockRegistry.MAPLE_LOG.get()).wood(BlockRegistry.MAPLE_WOOD.get());
         blockModels.woodProvider(BlockRegistry.STRIPPED_MAPLE_LOG.get()).logWithHorizontal(BlockRegistry.STRIPPED_MAPLE_LOG.get()).wood(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
-        blockModels.createTrivialBlock(BlockRegistry.MAPLE_LEAVES.get(), TexturedModel.LEAVES);
+        //createBlockCutout(blockModels, BlockRegistry.MAPLE_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createHangingSign(BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.MAPLE_HANGING_SIGN.get(), BlockRegistry.MAPLE_WALL_HANGING_SIGN.get());
-        blockModels.createPlantWithDefaultItem(BlockRegistry.MAPLE_SAPLING.get(), BlockRegistry.POTTED_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         troughBlock(blockModels);
 
         createCrossBlock(blockModels, BlockRegistry.DEAD_CROP.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
+        //createCrossBlock(blockModels, BlockRegistry.MAPLE_LEAVES.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
+        createCrossBlock(blockModels, BlockRegistry.MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
     }
 
     private void troughBlock(BlockModelGenerators blockModels) {
@@ -68,6 +74,7 @@ public class DemeterModelProvider extends ModelProvider {
         Collection<DeferredHolder<Block, ? extends Block>> BLOCKS = BlockRegistry.BLOCKS.getEntries();
         Set<DeferredHolder<Block, ? extends Block>> COPY = new HashSet<>(BLOCKS);
         COPY.remove(BlockRegistry.MAPLE_SYRUP_BLOCK);
+        COPY.remove(BlockRegistry.MAPLE_LEAVES);
         return COPY.stream();
     }
 
@@ -75,7 +82,6 @@ public class DemeterModelProvider extends ModelProvider {
     protected Stream<? extends Holder<Item>> getKnownItems() {
         Collection<DeferredHolder<Item, ? extends Item>> ITEMS = ItemRegistry.ITEMS.getEntries();
         Set<DeferredHolder<Item, ? extends Item>> COPY = new HashSet<>(ITEMS);
-        COPY.remove(ItemRegistry.WATERING_CAN);
         COPY.remove(ItemRegistry.TRUFFLE);
         return COPY.stream();
     }
@@ -89,6 +95,23 @@ public class DemeterModelProvider extends ModelProvider {
         TextureMapping texturemapping = plantType.getTextureMapping(block);
         ResourceLocation resourcelocation = plantType.getCross().extend().renderType(renderType).build().create(block, texturemapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourcelocation));
+    }
+
+    private void createWateringCanItem(ItemModelGenerators itemModels, Item wateringCanItem) {
+        ItemModel.Unbaked model$plain = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(wateringCanItem));
+        ItemModel.Unbaked model$copper = ItemModelUtils.plainModel(itemModels.createFlatItemModel(wateringCanItem, "_copper", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked model$iron = ItemModelUtils.plainModel(itemModels.createFlatItemModel(wateringCanItem, "_iron", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked model$netherite = ItemModelUtils.plainModel(itemModels.createFlatItemModel(wateringCanItem, "_netherite", ModelTemplates.FLAT_ITEM));
+
+        itemModels.itemModelOutput.accept(
+                wateringCanItem,
+                ItemModelUtils.select(new QualityProperty(),
+                        model$plain,
+                        ItemModelUtils.when(QualityLevel.COPPER, model$copper),
+                        ItemModelUtils.when(QualityLevel.IRON, model$iron),
+                        ItemModelUtils.when(QualityLevel.NETHERITE, model$netherite)
+                )
+        );
     }
 
     /*

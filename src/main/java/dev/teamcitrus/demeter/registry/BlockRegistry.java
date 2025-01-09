@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -45,7 +44,6 @@ public class BlockRegistry {
     public static final DeferredBlock<MapleSyrupBlock> MAPLE_SYRUP_BLOCK = BLOCKS.register("maple_syrup_block", () -> new MapleSyrupBlock(BlockBehaviour.Properties.of().forceSolidOff().noOcclusion().mapColor(MapColor.COLOR_ORANGE).speedFactor(0.6F).jumpFactor(0.6F).sound(SoundType.HONEY_BLOCK).setId(createID("maple_syrup_block"))));
     public static final DeferredBlock<TroughBlock> TROUGH = BLOCKS.register("trough", () -> new TroughBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion().setId(createID("trough"))));
     public static final DeferredBlock<DeadCropBlock> DEAD_CROP = BLOCKS.register("dead_crop", () -> new DeadCropBlock(BlockBehaviour.Properties.of().sound(SoundType.CROP).instabreak().noCollission().setId(createID("dead_crop"))));
-    public static final DeferredBlock<FlowerPotBlock> POTTED_MAPLE_SAPLING = BLOCKS.register("potted_maple_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BlockRegistry.MAPLE_SAPLING, BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).setId(createID("potted_maple_sapling"))));
 
     public static ResourceKey<Block> createID(String id) {
         return ResourceKey.create(Registries.BLOCK, Demeter.id(id));

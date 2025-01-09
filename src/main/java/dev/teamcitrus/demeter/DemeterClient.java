@@ -27,9 +27,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.ItemDecoratorHandler;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -76,7 +74,7 @@ public class DemeterClient {
                     RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
                     //mc.getTextureManager().bindForSetup(texture);//inMine ? MINE_HUD : season.HUD);
                     //graphics.blit(resourceLocation -> RenderType.gui(), texture, x - 44, y - 35, 0, 0, 256, 110);
-                    graphics.blit(resourceLocation -> RenderType.gui(), texture, x - 44, y - 35, 0, 0, 256, 110, 1, 1);
+                    graphics.blit(RenderType::guiTextured, texture, x - 44, y - 35, 0, 0, 256, 110, 16, 16);
                 }
 
                 //Enlarge the Day

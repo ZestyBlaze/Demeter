@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": "#minecraft:logs",
+    "P": "#minecraft:planks"
+  },
+  "pattern": [
+    "P P",
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 1,
+    "id": "demeter:trough"
+  }
+}

@@ -8,16 +8,14 @@ import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class DemeterBiomesTagProvider extends TagsProvider<Biome> {
     public static final TagKey<Biome> HAS_MAPLE_TREES = modTag("has_maple_trees");
 
-    public DemeterBiomesTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.BIOME, lookupProvider, Demeter.MODID, existingFileHelper);
+    public DemeterBiomesTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, Registries.BIOME, lookupProvider, Demeter.MODID);
     }
 
     @Override

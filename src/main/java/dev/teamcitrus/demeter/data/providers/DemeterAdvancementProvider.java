@@ -13,24 +13,24 @@ import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.advancements.AdvancementProvider;
+import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.data.AdvancementProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class DemeterAdvancementProvider extends AdvancementProvider {
-    public DemeterAdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, ExistingFileHelper existingFileHelper) {
-        super(output, registries, existingFileHelper, List.of(new BFAdvancementGenerator()));
+    public DemeterAdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, List.of(new BFAdvancementGenerator()));
     }
 
-    private static class BFAdvancementGenerator implements AdvancementProvider.AdvancementGenerator {
+    private static class BFAdvancementGenerator implements AdvancementSubProvider {
         @Override
-        public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
+        public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver) {
             AdvancementHolder root = Advancement.Builder.advancement().display(
                             Items.LEATHER,
                             Component.translatable("advancement.demeter.root"),

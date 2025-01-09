@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "accessories"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:iron_nugget",
+    "b": "minecraft:bone_meal",
+    "g": "minecraft:glass_bottle",
+    "m": "demeter:truffle",
+    "t": "minecraft:torchflower"
+  },
+  "pattern": [
+    "#m#",
+    "btb",
+    " g "
+  ],
+  "result": {
+    "count": 1,
+    "id": "demeter:breeding_charm"
+  }
+}

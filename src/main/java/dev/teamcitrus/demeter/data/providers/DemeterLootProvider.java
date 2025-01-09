@@ -1,8 +1,6 @@
 package dev.teamcitrus.demeter.data.providers;
 
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
-import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -51,7 +49,6 @@ public class DemeterLootProvider {
             dropSelf(BlockRegistry.MAPLE_SYRUP_BLOCK.get());
             dropSelf(BlockRegistry.TROUGH.get());
             dropOther(BlockRegistry.DEAD_CROP.get(), Items.DEAD_BUSH);
-            dropPottedContents(BlockRegistry.POTTED_MAPLE_SAPLING.get());
         }
 
         @Override

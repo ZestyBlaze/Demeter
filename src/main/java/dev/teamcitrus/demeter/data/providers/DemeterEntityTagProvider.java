@@ -7,8 +7,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -16,8 +14,8 @@ public class DemeterEntityTagProvider extends EntityTypeTagsProvider {
     public static final TagKey<EntityType<?>> EATS_HAY = modTag("eats_hay");
     public static final TagKey<EntityType<?>> EATS_SLOP = modTag("eats_slop");
 
-    public DemeterEntityTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, provider, Demeter.MODID, existingFileHelper);
+    public DemeterEntityTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+        super(output, provider, Demeter.MODID);
     }
 
     @Override

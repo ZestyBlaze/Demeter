@@ -8,8 +8,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,8 +16,8 @@ public class DemeterBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> MAPLE_LOGS = BlockTags.create(Demeter.id("maple_logs"));
     public static final TagKey<Block> CAN_HAVE_TRUFFLES = BlockTags.create(Demeter.id("can_have_truffles"));
 
-    public DemeterBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Demeter.MODID, existingFileHelper);
+    public DemeterBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, Demeter.MODID);
     }
 
     @Override

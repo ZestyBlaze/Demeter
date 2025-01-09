@@ -15,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -31,8 +30,8 @@ public class DemeterItemTagsProvider extends ItemTagsProvider {
     public static final TagKey<Item> CLOCKS = commonTag("clocks");
     public static final TagKey<Item> TOOLS_ANIMAL_BRUSH = commonTag("tools/animal_brush");
 
-    public DemeterItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> holder, CompletableFuture<TagLookup<Block>> blockTag, ExistingFileHelper existingFileHelper) {
-        super(output, holder, blockTag, Demeter.MODID, existingFileHelper);
+    public DemeterItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> holder, CompletableFuture<TagLookup<Block>> blockTag) {
+        super(output, holder, blockTag, Demeter.MODID);
     }
 
     private static TagKey<Item> modTag(String id) {
