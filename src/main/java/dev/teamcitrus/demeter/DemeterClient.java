@@ -101,10 +101,10 @@ public class DemeterClient {
         if (!ScreenUtil.isItemInHand(stack)) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
+            poseStack.translate(0.0f, 0.0f, 200.0f);
             guiGraphics.blit(RenderType::guiTextured,
                     Demeter.id("textures/item/quality/" + QualityUtil.getQuality(stack).getName() + ".png"),
                     xOffset, yOffset, 0, 0, 16, 16, 16, 16, 0xFFFFFFFF);
-            RenderSystem.disableDepthTest();
             poseStack.popPose();
         }
     }
