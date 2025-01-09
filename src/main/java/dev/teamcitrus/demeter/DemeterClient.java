@@ -27,6 +27,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.ItemDecoratorHandler;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
@@ -100,7 +101,10 @@ public class DemeterClient {
         if (!ScreenUtil.isItemInHand(stack)) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
-            guiGraphics.blit(resourceLocation -> RenderType.gui(), Demeter.id("textures/item/quality/" + QualityUtil.getQuality(stack).getName() + ".png"), xOffset, yOffset, 200, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(RenderType::guiTextured,
+                    Demeter.id("textures/item/quality/" + QualityUtil.getQuality(stack).getName() + ".png"),
+                    xOffset, yOffset, 0, 0, 16, 16, 16, 16, 0xFFFFFFFF);
+            RenderSystem.disableDepthTest();
             poseStack.popPose();
         }
     }

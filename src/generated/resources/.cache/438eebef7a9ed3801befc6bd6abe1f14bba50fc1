@@ -1,4 +1,4 @@
-// 1.21.4	2024-12-25T19:55:51.8054691	Model Definitions - demeter
+// 1.21.4	2025-01-03T16:19:25.8998417	Model Definitions - demeter
 93bb4e10dac57e0efaf8d5d3bb5fc528f3fb04bd assets/demeter/blockstates/dead_crop.json
 ff2ec3aaab927fb1add70f6ab1851cb74bbf3525 assets/demeter/blockstates/maple_button.json
 dc251cb370599b3321bface91bd1ea7bb99c147a assets/demeter/blockstates/maple_door.json
@@ -49,7 +49,7 @@ a3e9df8884b83229772ebdd0e7a5e61baac141ca assets/demeter/items/miracle_potion.jso
 05d6228b6e6f93dd16731d6b06dcced743c6c0f0 assets/demeter/items/stripped_maple_log.json
 355fc5ac8ad5c3179fde40860641138aedb143d5 assets/demeter/items/stripped_maple_wood.json
 200ff02882caf0788b20b1cb58ed16e7797819c8 assets/demeter/items/trough.json
-e4090a60c13560e3fc60e1323d45abcb539f4b81 assets/demeter/models/block/dead_crop.json
+bd322cd3ce60cc5d4cce906308e56fcbd57ab820 assets/demeter/models/block/dead_crop.json
 53b6d9a023b541e9f117f3e19c618a567c5a802b assets/demeter/models/block/maple_button.json
 84577c2c196e67881fea17d7d05e7f4148c1d0d8 assets/demeter/models/block/maple_button_inventory.json
 e22fd572ef3f002bad7f5c5438fdff58a64180c1 assets/demeter/models/block/maple_button_pressed.json

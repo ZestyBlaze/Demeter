@@ -5,6 +5,7 @@ import dev.teamcitrus.demeter.component.QualityLevelComponent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,13 +18,13 @@ public class QualityUtil {
         if (!stack.is(DemeterItemTagsProvider.QUALITY_PRODUCTS)) return;
         int value = random.nextInt(100);
         if (value <= DemeterConfig.netheriteQualityChance.get()) {
-            writeQualityToTag(stack, QualityLevel.NETHERITE);
+            writeQuality(stack, QualityLevel.NETHERITE);
         }
         if (value <= DemeterConfig.ironQualityChance.get() && value > DemeterConfig.netheriteQualityChance.get()) {
-            writeQualityToTag(stack, QualityLevel.IRON);
+            writeQuality(stack, QualityLevel.IRON);
         }
         if (value <= DemeterConfig.copperQualityChance.get() && value > DemeterConfig.ironQualityChance.get()) {
-            writeQualityToTag(stack, QualityLevel.COPPER);
+            writeQuality(stack, QualityLevel.COPPER);
         }
     }
 
@@ -31,8 +32,17 @@ public class QualityUtil {
         return stack.get(ComponentRegistry.QUALITY_LEVEL).level();
     }
 
-    public static void writeQualityToTag(ItemStack stack, QualityLevel quality) {
+    public static void writeQuality(ItemStack stack, QualityLevel quality) {
         stack.set(ComponentRegistry.QUALITY_LEVEL.get(), new QualityLevelComponent(quality));
+        overwriteFoodProperties(stack, quality);
+    }
+
+    public static void overwriteFoodProperties(ItemStack stack, QualityLevel qualityLevel) {
+        if (stack.has(DataComponents.FOOD)) {
+            FoodProperties originalProperties = stack.get(DataComponents.FOOD);
+            FoodProperties newProperties = getFoodProperties(qualityLevel, originalProperties);
+            stack.set(DataComponents.FOOD, newProperties);
+        }
     }
 
     public static FoodProperties getFoodProperties(QualityLevel level, FoodProperties originalProperties) {
@@ -44,6 +54,18 @@ public class QualityUtil {
                     .saturationModifier(originalSat + 0.2f).build();
             case NETHERITE -> new FoodProperties.Builder().nutrition(originalProperties.nutrition() + 3)
                     .saturationModifier(originalSat + 0.4f).build();
+        };
+    }
+
+    public static int getNutrition(QualityLevel level, int original) {
+        return original;
+    }
+
+    public static float getSaturation(QualityLevel level, float original) {
+        return switch (level) {
+            case COPPER -> original + 0.1f;
+            case IRON -> original + 0.2f;
+            case NETHERITE -> original + 0.4f;
         };
     }
 

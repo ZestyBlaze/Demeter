@@ -26,8 +26,6 @@ public class GuiGraphicsMixin {
         if (pStack.isEmpty() || pStack.is(ItemRegistry.WATERING_CAN) || !pStack.has(ComponentRegistry.QUALITY_LEVEL) || QualityUtil.getQuality(pStack) == null) {
             return;
         }
-        pose.popPose();
         DemeterClient.renderIcon((GuiGraphics) (Object) this, pStack, pX, pY);
-        pose.pushPose();
     }
 }

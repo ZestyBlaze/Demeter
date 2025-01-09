@@ -10,10 +10,14 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.blockstates.*;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.core.Holder;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -49,7 +53,8 @@ public class DemeterModelProvider extends ModelProvider {
         blockModels.createHangingSign(BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.MAPLE_HANGING_SIGN.get(), BlockRegistry.MAPLE_WALL_HANGING_SIGN.get());
         blockModels.createPlantWithDefaultItem(BlockRegistry.MAPLE_SAPLING.get(), BlockRegistry.POTTED_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         troughBlock(blockModels);
-        blockModels.createCrossBlock(BlockRegistry.DEAD_CROP.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+
+        createCrossBlock(blockModels, BlockRegistry.DEAD_CROP.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
     }
 
     private void troughBlock(BlockModelGenerators blockModels) {
@@ -73,6 +78,17 @@ public class DemeterModelProvider extends ModelProvider {
         COPY.remove(ItemRegistry.WATERING_CAN);
         COPY.remove(ItemRegistry.TRUFFLE);
         return COPY.stream();
+    }
+
+    private void createCrossBlockWithDefaultItem(BlockModelGenerators blockModels, Block block, BlockModelGenerators.PlantType plantType, String renderType) {
+        blockModels.registerSimpleFlatItemModel(block);
+        this.createCrossBlock(blockModels, block, plantType, renderType);
+    }
+
+    private void createCrossBlock(BlockModelGenerators blockModels, Block block, BlockModelGenerators.PlantType plantType, String renderType) {
+        TextureMapping texturemapping = plantType.getTextureMapping(block);
+        ResourceLocation resourcelocation = plantType.getCross().extend().renderType(renderType).build().create(block, texturemapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourcelocation));
     }
 
     /*
