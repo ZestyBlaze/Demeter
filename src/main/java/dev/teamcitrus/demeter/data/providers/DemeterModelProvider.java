@@ -122,7 +122,7 @@ public class DemeterModelProvider extends ModelProvider {
     }
 
     private void createWateringCanItem(ItemModelGenerators itemModels, Item wateringCanItem) {
-        ItemModel.Unbaked model$plain = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(wateringCanItem));
+        ItemModel.Unbaked model$plain = ItemModelUtils.plainModel(itemModels.createFlatItemModel(wateringCanItem, ModelTemplates.FLAT_ITEM));
         ItemModel.Unbaked model$copper = ItemModelUtils.plainModel(itemModels.createFlatItemModel(wateringCanItem, "_copper", ModelTemplates.FLAT_ITEM));
         ItemModel.Unbaked model$iron = ItemModelUtils.plainModel(itemModels.createFlatItemModel(wateringCanItem, "_iron", ModelTemplates.FLAT_ITEM));
         ItemModel.Unbaked model$netherite = ItemModelUtils.plainModel(itemModels.createFlatItemModel(wateringCanItem, "_netherite", ModelTemplates.FLAT_ITEM));

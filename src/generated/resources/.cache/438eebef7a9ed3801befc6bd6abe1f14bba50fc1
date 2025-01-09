@@ -1,4 +1,4 @@
-// 1.21.4	2025-01-09T22:13:17.444751	Model Definitions - demeter
+// 1.21.4	2025-01-09T22:39:12.0522441	Model Definitions - demeter
 ff2ec3aaab927fb1add70f6ab1851cb74bbf3525 assets/demeter/blockstates/maple_button.json
 dc251cb370599b3321bface91bd1ea7bb99c147a assets/demeter/blockstates/maple_door.json
 ec7804a789123ef646b777d9e93d063fc5fb30c9 assets/demeter/blockstates/maple_fence.json
@@ -102,6 +102,7 @@ a30bb8a2cae051a897f1108082e453e148cc74d5 assets/demeter/models/item/maple_saplin
 1bca9addbae9f20e8e517711b02a5fc375fe2d46 assets/demeter/models/item/maple_syrup_bottle.json
 5b9d48f10c95ed6db2b493e7ca53ef92002a55a0 assets/demeter/models/item/milk_bottle.json
 bdec1e3cdba6c899ca233a3cba3e2564e18f0b8b assets/demeter/models/item/miracle_potion.json
+07027b188863695ff87ab835e9e918df1c856683 assets/demeter/models/item/watering_can.json
 953f47169878b6e63eff0311c6881b4ce9642e0d assets/demeter/models/item/watering_can_copper.json
 b02444a291e8a1b27cd3750b6a4fafcaa0704ca5 assets/demeter/models/item/watering_can_iron.json
 15ce465bdd0bec11133803e25895ef4a6e113eff assets/demeter/models/item/watering_can_netherite.json
