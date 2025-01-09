@@ -12,10 +12,9 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.blockstates.Condition;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
-import net.minecraft.client.data.models.model.ItemModelUtils;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.blockstates.Variant;
+import net.minecraft.client.data.models.blockstates.VariantProperties;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.core.Holder;
 import net.minecraft.data.BlockFamily;
@@ -46,7 +45,6 @@ public class DemeterModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ItemRegistry.BUTTER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.MAPLE_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.MAPLE_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ItemRegistry.MAPLE_SAPLING.get(), ModelTemplates.FLAT_ITEM);
         createWateringCanItem(itemModels, ItemRegistry.WATERING_CAN.get());
 
         BlockFamilyRegistry.getAllFamilies()
@@ -54,19 +52,11 @@ public class DemeterModelProvider extends ModelProvider {
                 .forEach(p_386718_ -> blockModels.family(p_386718_.getBaseBlock()).generateFor(p_386718_));
         blockModels.woodProvider(BlockRegistry.MAPLE_LOG.get()).logWithHorizontal(BlockRegistry.MAPLE_LOG.get()).wood(BlockRegistry.MAPLE_WOOD.get());
         blockModels.woodProvider(BlockRegistry.STRIPPED_MAPLE_LOG.get()).logWithHorizontal(BlockRegistry.STRIPPED_MAPLE_LOG.get()).wood(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
-        //createBlockCutout(blockModels, BlockRegistry.MAPLE_LEAVES.get(), TexturedModel.LEAVES);
+        createBlockWithRenderType(blockModels, BlockRegistry.MAPLE_LEAVES.get(), TexturedModel.LEAVES, "cutout");
         blockModels.createHangingSign(BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.MAPLE_HANGING_SIGN.get(), BlockRegistry.MAPLE_WALL_HANGING_SIGN.get());
         troughBlock(blockModels);
 
-        createCrossBlock(blockModels, BlockRegistry.DEAD_CROP.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
-        //createCrossBlock(blockModels, BlockRegistry.MAPLE_LEAVES.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
-        createCrossBlock(blockModels, BlockRegistry.MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
-    }
-
-    private void troughBlock(BlockModelGenerators blockModels) {
-        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(BlockRegistry.TROUGH.get())
-                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY))
-        );
+        createPlantWithDefaultItem(blockModels, BlockRegistry.MAPLE_SAPLING.get(), BlockRegistry.POTTED_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
     }
 
     @Override
@@ -74,7 +64,7 @@ public class DemeterModelProvider extends ModelProvider {
         Collection<DeferredHolder<Block, ? extends Block>> BLOCKS = BlockRegistry.BLOCKS.getEntries();
         Set<DeferredHolder<Block, ? extends Block>> COPY = new HashSet<>(BLOCKS);
         COPY.remove(BlockRegistry.MAPLE_SYRUP_BLOCK);
-        COPY.remove(BlockRegistry.MAPLE_LEAVES);
+        COPY.remove(BlockRegistry.DEAD_CROP);
         return COPY.stream();
     }
 
@@ -86,15 +76,49 @@ public class DemeterModelProvider extends ModelProvider {
         return COPY.stream();
     }
 
-    private void createCrossBlockWithDefaultItem(BlockModelGenerators blockModels, Block block, BlockModelGenerators.PlantType plantType, String renderType) {
-        blockModels.registerSimpleFlatItemModel(block);
-        this.createCrossBlock(blockModels, block, plantType, renderType);
-    }
-
     private void createCrossBlock(BlockModelGenerators blockModels, Block block, BlockModelGenerators.PlantType plantType, String renderType) {
         TextureMapping texturemapping = plantType.getTextureMapping(block);
         ResourceLocation resourcelocation = plantType.getCross().extend().renderType(renderType).build().create(block, texturemapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourcelocation));
+    }
+
+    private void createBlockWithRenderType(BlockModelGenerators blockModelGenerators, Block block, TexturedModel.Provider provider, String renderType) {
+        ResourceLocation resourceLocation = provider.get(block).getTemplate().extend().renderType(renderType).build().create(block, TextureMapping.cube(block), blockModelGenerators.modelOutput);
+        blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
+    }
+
+    public void createPlantWithDefaultItem(BlockModelGenerators blockModels, Block block, Block pottedBlock, BlockModelGenerators.PlantType plantType, String renderType) {
+        blockModels.registerSimpleItemModel(block.asItem(), plantType.createItemModel(blockModels, block));
+        this.createPlant(blockModels, block, pottedBlock, plantType, renderType);
+    }
+
+    public void createPlant(BlockModelGenerators blockModels, Block block, Block pottedBlock, BlockModelGenerators.PlantType plantType, String renderType) {
+        this.createCrossBlock(blockModels, block, plantType, renderType);
+        TextureMapping texturemapping = plantType.getPlantTextureMapping(block);
+        ResourceLocation resourcelocation = plantType.getCrossPot().extend().renderType(renderType).build().create(pottedBlock, texturemapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pottedBlock, resourcelocation));
+    }
+
+    private void troughBlock(BlockModelGenerators blockModels) {
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(BlockRegistry.TROUGH.get())
+                .with(Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/trough")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).term(TroughBlock.FOOD_LEVEL, 1),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/hay_one_quarter")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).term(TroughBlock.FOOD_LEVEL, 2),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/hay_two_quarters")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).term(TroughBlock.FOOD_LEVEL, 3),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/hay_three_quarters")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.HAY).term(TroughBlock.FOOD_LEVEL, 4),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/hay_four_quarters")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).term(TroughBlock.FOOD_LEVEL, 1),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/slop_one_quarter")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).term(TroughBlock.FOOD_LEVEL, 2),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/slop_two_quarters")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).term(TroughBlock.FOOD_LEVEL, 3),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/slop_three_quarters")))
+                .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).term(TroughBlock.FOOD_LEVEL, 4),
+                        Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/slop_four_quarters")))
+        );
     }
 
     private void createWateringCanItem(ItemModelGenerators itemModels, Item wateringCanItem) {
@@ -113,59 +137,4 @@ public class DemeterModelProvider extends ModelProvider {
                 )
         );
     }
-
-    /*
-    @Override
-    protected void registerModels() {
-
-
-        basicItem(ItemRegistry.DEV_DEBUG_ITEM.get());
-        basicItem(ItemRegistry.ANIMAL_TAG.get());
-        basicItem(ItemRegistry.ANIMAL_BRUSH.get());
-        basicItem(ItemRegistry.MILK_BOTTLE.get());
-        basicItem(ItemRegistry.MAPLE_SYRUP_BOTTLE.get());
-        basicItem(ItemRegistry.MIRACLE_POTION.get());
-        simpleBlockItem(BlockRegistry.MAPLE_LOG.get());
-        simpleBlockItem(BlockRegistry.MAPLE_WOOD.get());
-        simpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG.get());
-        simpleBlockItem(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
-        simpleBlockItem(BlockRegistry.MAPLE_LEAVES.get());
-        itemWithBlockTexturePath(ItemRegistry.MAPLE_SAPLING.get());
-        simpleBlockItem(BlockRegistry.MAPLE_SYRUP_BLOCK.get());
-        basicItem(ItemRegistry.MAPLE_SIGN.get());
-        basicItem(ItemRegistry.MAPLE_HANGING_SIGN.get());
-        basicItem(ItemRegistry.MAPLE_BOAT.get());
-        basicItem(ItemRegistry.MAPLE_CHEST_BOAT.get());
-        basicItem(ItemRegistry.BUTTER.get());
-        simpleBlockItem(BlockRegistry.TROUGH.get());
-        wateringCanItem();
-        generateSetModels(WoodSetRegistry.MAPLE);
-    }
-
-    public void wateringCanItem() {
-        getBuilder("watering_can")
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", Demeter.id("item/wateringcan/watering_can"))
-                .override().predicate(Demeter.id("level"), 1).model(new ModelFile.UncheckedModelFile("demeter:item/watering_can_copper")).end()
-                .override().predicate(Demeter.id("level"), 2).model(new ModelFile.UncheckedModelFile("demeter:item/watering_can_iron")).end()
-                .override().predicate(Demeter.id("level"), 3).model(new ModelFile.UncheckedModelFile("demeter:item/watering_can_netherite")).end();
-        getBuilder("watering_can_copper")
-                .parent(new ModelFile.UncheckedModelFile("demeter:item/watering_can"))
-                .texture("layer0", Demeter.id("item/wateringcan/copper_watering_can"));
-        getBuilder("watering_can_iron")
-                .parent(new ModelFile.UncheckedModelFile("demeter:item/watering_can"))
-                .texture("layer0", Demeter.id("item/wateringcan/iron_watering_can"));
-        getBuilder("watering_can_netherite")
-                .parent(new ModelFile.UncheckedModelFile("demeter:item/watering_can"))
-                .texture("layer0", Demeter.id("item/wateringcan/netherite_watering_can"));
-    }
-
-    public void itemWithBlockTexturePath(BlockItem block) {
-        ResourceLocation rl = BuiltInRegistries.BLOCK.getKey(block.getBlock());
-        getBuilder(block.toString())
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(rl.getNamespace(),
-                        "block/" + rl.getPath()));
-    }
-     */
 }
