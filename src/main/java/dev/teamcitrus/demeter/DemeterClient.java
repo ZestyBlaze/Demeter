@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.citruslib.util.ScreenUtil;
 import dev.teamcitrus.demeter.client.DemeterHud;
 import dev.teamcitrus.demeter.client.HUDRenderData;
+import dev.teamcitrus.demeter.client.models.render.MalePigRenderer;
 import dev.teamcitrus.demeter.client.property.QualityProperty;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
@@ -16,28 +17,34 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
+    public static final ModelLayerLocation MALE_PIG = new ModelLayerLocation(Demeter.id("male_pig"), "male_pig");
     public static Object2ObjectMap<ResourceKey<Level>, HUDRenderData> RENDERERS = new Object2ObjectOpenHashMap<>();
 
     @SubscribeEvent
-    public static void registerItemProperties(FMLClientSetupEvent event) {
+    public static void clientCommonSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             Sheets.addWoodType(BlockRegistry.MAPLE_WOOD_TYPE);
+            EntityRenderers.register(EntityType.PIG, MalePigRenderer::new);
 
             RENDERERS.put(Level.OVERWORLD, new DemeterHud());
         });
@@ -58,6 +65,11 @@ public class DemeterClient {
                 guiGraphics.pose().popPose();
             }
         });
+    }
+
+    @SubscribeEvent
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+
     }
 
     private static void renderHUD(Minecraft mc, GuiGraphics graphics) {

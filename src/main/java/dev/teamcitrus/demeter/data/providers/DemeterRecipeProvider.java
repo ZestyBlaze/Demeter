@@ -1,6 +1,5 @@
 package dev.teamcitrus.demeter.data.providers;
 
-import dev.teamcitrus.citruslib.datagen.CitrusRecipeProvider;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
@@ -89,7 +88,69 @@ public class DemeterRecipeProvider extends RecipeProvider {
         woodenBoat(ItemRegistry.MAPLE_BOAT, BlockRegistry.MAPLE_PLANKS);
         chestBoat(ItemRegistry.MAPLE_CHEST_BOAT, ItemRegistry.MAPLE_BOAT);
         hangingSign(ItemRegistry.MAPLE_HANGING_SIGN, BlockRegistry.STRIPPED_MAPLE_LOG);
-        //generateWoodSetRecipes(pRecipeOutput, WoodSetRegistry.MAPLE);
+
+        ShapedRecipeBuilder.shaped(items,
+                        RecipeCategory.BUILDING_BLOCKS, BlockRegistry.MAPLE_STAIRS, 4
+                ).define('#', BlockRegistry.MAPLE_PLANKS)
+                .pattern("#  ")
+                .pattern("## ")
+                .pattern("###")
+                .group("wooden_stairs")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
+        ShapedRecipeBuilder.shaped(items,
+                        RecipeCategory.BUILDING_BLOCKS, BlockRegistry.MAPLE_SLAB, 6
+                ).define('#', BlockRegistry.MAPLE_PLANKS)
+                .pattern("###")
+                .group("wooden_slab")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
+        ShapedRecipeBuilder.shaped(items,
+                        RecipeCategory.MISC, BlockRegistry.MAPLE_FENCE, 4
+                ).define('#', Items.STICK).define('W', BlockRegistry.MAPLE_PLANKS)
+                .pattern("W#W")
+                .pattern("W#W")
+                .group("wooden_fence")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
+        ShapedRecipeBuilder.shaped(items,
+                        RecipeCategory.REDSTONE, BlockRegistry.MAPLE_FENCE_GATE
+                ).define('#', Items.STICK).define('W', BlockRegistry.MAPLE_PLANKS)
+                .pattern("#W#")
+                .pattern("#W#")
+                .group("wooden_fence_gate")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
+        ShapedRecipeBuilder.shaped(items,
+                        RecipeCategory.REDSTONE, BlockRegistry.MAPLE_DOOR, 3
+                ).define('#', BlockRegistry.MAPLE_PLANKS)
+                .pattern("##")
+                .pattern("##")
+                .pattern("##")
+                .group("wooden_door")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
+        ShapedRecipeBuilder.shaped(items,
+                        RecipeCategory.REDSTONE, BlockRegistry.MAPLE_TRAPDOOR, 2
+                ).define('#', BlockRegistry.MAPLE_PLANKS)
+                .pattern("###")
+                .pattern("###")
+                .group("wooden_trapdoor")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
+        ShapedRecipeBuilder.shaped(items,
+                        RecipeCategory.REDSTONE, BlockRegistry.MAPLE_PRESSURE_PLATE
+                ).define('#', BlockRegistry.MAPLE_PLANKS)
+                .pattern("##")
+                .group("wooden_pressure_plate")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
+        ShapelessRecipeBuilder.shapeless(items,
+                        RecipeCategory.REDSTONE, BlockRegistry.MAPLE_BUTTON
+                ).requires(BlockRegistry.MAPLE_PLANKS)
+                .group("wooden_button")
+                .unlockedBy("has_item", has(BlockRegistry.MAPLE_PLANKS))
+                .save(output);
     }
 
     private ResourceKey<Recipe<?>> key(String id) {
