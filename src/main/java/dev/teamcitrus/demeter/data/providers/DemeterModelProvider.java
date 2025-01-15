@@ -1,25 +1,13 @@
 package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.block.trough.TroughBlock;
-import dev.teamcitrus.demeter.client.property.QualityProperty;
-import dev.teamcitrus.demeter.component.QualityLevel;
-import dev.teamcitrus.demeter.registry.BlockFamilyRegistry;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.blockstates.Condition;
-import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
-import net.minecraft.client.data.models.blockstates.Variant;
-import net.minecraft.client.data.models.blockstates.VariantProperties;
-import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.core.Holder;
-import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
