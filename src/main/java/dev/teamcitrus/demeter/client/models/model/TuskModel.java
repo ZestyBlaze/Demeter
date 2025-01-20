@@ -18,9 +18,9 @@ public class TuskModel extends Model {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
 
-        PartDefinition tusks = root.addOrReplaceChild("tusks", CubeListBuilder.create()
-                .texOffs(1, 0).addBox(-4.0f, 3.0f, -10.0f, 1.0f, 1.0f, 2.0f, new CubeDeformation(0.0f))
-                .texOffs(1, 0).addBox(3.0f, 3.0f, -10.0f, 1.0f, 1.0f, 2.0f, new CubeDeformation(0.0f)), PartPose.offset(0.0f, 12.0f, -6.0f));
+        root.addOrReplaceChild("tusks", CubeListBuilder.create()
+                .texOffs(1, 0).addBox(-3.0f, 2.0f, -10.0f, 1.0f, 1.0f, 2.0f, new CubeDeformation(0.0f))
+                .texOffs(1, 0).addBox(2.0f, 2.0f, -10.0f, 1.0f, 1.0f, 2.0f, new CubeDeformation(0.0f)), PartPose.offset(0.0f, 12.0f, -6.0f));
         return LayerDefinition.create(mesh, 6, 3);
     }
 }

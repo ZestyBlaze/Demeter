@@ -42,7 +42,7 @@ import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEve
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
-    public static final ContextKey<AnimalAttachment.AnimalGenders> KEY = new ContextKey<>(Demeter.id("gender"));
+    public static final ContextKey<AnimalAttachment.AnimalGenders> GENDER_KEY = new ContextKey<>(Demeter.id("gender"));
     public static final ModelLayerLocation TUSKS = new ModelLayerLocation(Demeter.id("tusks"), "tusks");
     public static Object2ObjectMap<ResourceKey<Level>, HUDRenderData> RENDERERS = new Object2ObjectOpenHashMap<>();
 
@@ -69,7 +69,7 @@ public class DemeterClient {
     @SubscribeEvent
     public static void registerStateModifiers(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(PigRenderer.class, (pig, pigRenderState) ->
-                pigRenderState.setRenderData(KEY, AnimalUtil.getAnimalData(pig).getGender()));
+                pigRenderState.setRenderData(GENDER_KEY, AnimalUtil.getAnimalData(pig).getGender()));
     }
 
     @SubscribeEvent
@@ -101,12 +101,9 @@ public class DemeterClient {
                 ResourceLocation texture = hud.getTexture(mc);
                 if (texture != null) {
                     RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-                    //mc.getTextureManager().bindForSetup(texture);//inMine ? MINE_HUD : season.HUD);
-                    //graphics.blit(resourceLocation -> RenderType.gui(), texture, x - 44, y - 35, 0, 0, 256, 110);
                     graphics.blit(RenderType::guiTextured, texture, x - 44, y - 35, 0, 0, 256, 110, 16, 16);
                 }
 
-                //Enlarge the Day
                 matrix.pushPose();
                 matrix.scale(1.4F, 1.4F, 1.4F);
                 Component header = hud.getHeader(mc);
@@ -114,7 +111,6 @@ public class DemeterClient {
                 matrix.popPose();
             }
 
-            //Draw the time
             if (DemeterConfig.displayClockInHUD.get()) {
                 if (!DemeterConfig.requireClockItemForTime.get() || (DemeterConfig.requireClockItemForTime.get() &&
                         (PlayerUtil.hasInHand(mc.player, DemeterItemTagsProvider.CLOCKS) || AccessoriesCompat.isWearing(mc.player, AccessoriesCompat.Items.POCKET_WATCH.get()))))

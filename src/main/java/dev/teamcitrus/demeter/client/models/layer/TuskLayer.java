@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.PigRenderState;
 
+@SuppressWarnings("deprecation")
 public class TuskLayer extends RenderLayer<PigRenderState, PigModel> {
     private final TuskModel model;
 
@@ -27,7 +28,7 @@ public class TuskLayer extends RenderLayer<PigRenderState, PigModel> {
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, PigRenderState pigrenderState, float v, float v1) {
         if (!pigrenderState.isInvisible && !pigrenderState.isBaby) {
-            if (pigrenderState.getRenderData(DemeterClient.KEY).equals(AnimalAttachment.AnimalGenders.MALE)) {
+            if (pigrenderState.getRenderData(DemeterClient.GENDER_KEY).equals(AnimalAttachment.AnimalGenders.MALE)) {
                 VertexConsumer consumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(Demeter.id("textures/entity/layer/tusks.png")));
                 ModelPart head = this.getParentModel().root().getChild("head");
                 ModelPart tusks = this.model.tusks;
