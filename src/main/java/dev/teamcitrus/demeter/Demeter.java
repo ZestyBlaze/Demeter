@@ -65,7 +65,7 @@ public class Demeter {
     public void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
-            TabFillingRegistry.register(ItemRegistry.DEMETER_TAB_KEY, ItemRegistry.WATERING_CAN.get());
+            TabFillingRegistry.register(ItemRegistry.DEMETER_TAB.getKey(), ItemRegistry.WATERING_CAN.get());
             Stats.CUSTOM.get(StatsRegistry.TIMES_PET.get(), StatFormatter.DEFAULT);
             Stats.CUSTOM.get(StatsRegistry.ANIMALS_FED.get(), StatFormatter.DEFAULT);
         });
