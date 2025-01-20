@@ -23,7 +23,7 @@ public class DemeterEnchantments {
                 Enchantment.definition(
                         itemGetter.getOrThrow(Tags.Items.TOOLS_SHEAR),
                         2, 1,
-                        Enchantment.dynamicCost(15, 9),
+                        Enchantment.dynamicCost(20, 9),
                         Enchantment.dynamicCost(65, 9), 4,
                         EquipmentSlotGroup.MAINHAND
                 )
@@ -31,9 +31,9 @@ public class DemeterEnchantments {
         register(context, COMFORT, Enchantment.enchantment(
                 Enchantment.definition(
                         itemGetter.getOrThrow(DemeterItemTagsProvider.TOOLS_ANIMAL_BRUSH),
-                        2, 3,
-                        Enchantment.dynamicCost(15, 9),
-                        Enchantment.dynamicCost(65, 9), 4,
+                        3, 3,
+                        Enchantment.dynamicCost(12, 7),
+                        Enchantment.dynamicCost(65, 7), 4,
                         EquipmentSlotGroup.MAINHAND
                 )
         ));
@@ -41,7 +41,7 @@ public class DemeterEnchantments {
                 Enchantment.definition(
                         itemGetter.getOrThrow(DemeterItemTagsProvider.TOOLS_ANIMAL_BRUSH),
                         2, 3,
-                        Enchantment.dynamicCost(15, 9),
+                        Enchantment.dynamicCost(12, 9),
                         Enchantment.dynamicCost(65, 9), 4,
                         EquipmentSlotGroup.MAINHAND
                 )

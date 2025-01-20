@@ -5,16 +5,16 @@
   },
   "max_cost": {
     "base": 65,
-    "per_level_above_first": 9
+    "per_level_above_first": 7
   },
   "max_level": 3,
   "min_cost": {
-    "base": 15,
-    "per_level_above_first": 9
+    "base": 12,
+    "per_level_above_first": 7
   },
   "slots": [
     "mainhand"
   ],
   "supported_items": "#c:tools/animal_brush",
-  "weight": 2
+  "weight": 3
 }
