@@ -90,7 +90,7 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("message.demeter.birth.fail", "An issue occurred with a birth, please check the logs for more information");
         add("message.demeter.brush.fail_daily", "This animal has already been brushed today!");
         add("message.demeter.milk.fail_daily", "This animal has already been milked today!");
-        add("message.demeter.milk.fail_gender", "This animal is male and cannot be milked!");
+        add("message.demeter.milk.fail_sex", "This animal is male and cannot be milked!");
         add("stat.demeter.animals_fed", "Times Animals Fed");
         add("stat.demeter.times_pet", "Times Animals Pet");
         add(DemeterItemTagsProvider.TOOLS_ANIMAL_BRUSH, "Animal Brushes");

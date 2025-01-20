@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.DemeterClient;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.client.models.model.TuskModel;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import net.minecraft.client.model.PigModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
@@ -28,7 +28,7 @@ public class TuskLayer extends RenderLayer<PigRenderState, PigModel> {
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, PigRenderState pigrenderState, float v, float v1) {
         if (!pigrenderState.isInvisible && !pigrenderState.isBaby) {
-            if (pigrenderState.getRenderData(DemeterClient.GENDER_KEY).equals(AnimalAttachment.AnimalGenders.MALE)) {
+            if (pigrenderState.getRenderData(DemeterClient.SEX_KEY).equals(AnimalSexes.MALE)) {
                 VertexConsumer consumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(Demeter.id("textures/entity/layer/tusks.png")));
                 ModelPart head = this.getParentModel().root().getChild("head");
                 ModelPart tusks = this.model.tusks;

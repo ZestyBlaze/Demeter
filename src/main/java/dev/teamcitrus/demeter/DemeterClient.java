@@ -3,7 +3,6 @@ package dev.teamcitrus.demeter;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.teamcitrus.citruslib.util.ScreenUtil;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.client.DemeterHud;
 import dev.teamcitrus.demeter.client.HUDRenderData;
 import dev.teamcitrus.demeter.client.models.layer.TuskLayer;
@@ -12,6 +11,7 @@ import dev.teamcitrus.demeter.client.property.QualityProperty;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import dev.teamcitrus.demeter.util.PlayerUtil;
@@ -42,9 +42,9 @@ import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEve
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
-    public static final ContextKey<AnimalAttachment.AnimalGenders> GENDER_KEY = new ContextKey<>(Demeter.id("gender"));
+    public static final ContextKey<AnimalSexes> SEX_KEY = new ContextKey<>(Demeter.id("sex"));
     public static final ModelLayerLocation TUSKS = new ModelLayerLocation(Demeter.id("tusks"), "tusks");
-    public static Object2ObjectMap<ResourceKey<Level>, HUDRenderData> RENDERERS = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<ResourceKey<Level>, HUDRenderData> RENDERERS = new Object2ObjectOpenHashMap<>();
 
     @SubscribeEvent
     public static void clientCommonSetup(FMLClientSetupEvent event) {
@@ -69,7 +69,7 @@ public class DemeterClient {
     @SubscribeEvent
     public static void registerStateModifiers(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(PigRenderer.class, (pig, pigRenderState) ->
-                pigRenderState.setRenderData(GENDER_KEY, AnimalUtil.getAnimalData(pig).getGender()));
+                pigRenderState.setRenderData(SEX_KEY, AnimalUtil.getAnimalData(pig).getSex()));
     }
 
     @SubscribeEvent

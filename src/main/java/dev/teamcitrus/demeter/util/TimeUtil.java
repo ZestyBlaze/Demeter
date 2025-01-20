@@ -1,15 +1,16 @@
 package dev.teamcitrus.demeter.util;
 
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.duck.ClockType;
 
 import java.time.DayOfWeek;
 
 public class TimeUtil {
-    public static long TICKS_PER_DAY = 24000L;
-    public static double SCALE = TICKS_PER_DAY / 24000D;
-    public static long SIX_AM = (long) (SCALE * 6000D);
-    public static int MONTH_DAYS = 28;
-    public static int YEAR_DAYS = MONTH_DAYS * 4;
+    public static final long TICKS_PER_DAY = 24000L;
+    public static final double SCALE = TICKS_PER_DAY / 24000D;
+    public static final long SIX_AM = (long) (SCALE * 6000D);
+    public static final int MONTH_DAYS = 28;
+    public static final int YEAR_DAYS = MONTH_DAYS * 4;
     public static final DayOfWeek[] DAYS = DayOfWeek.values();
 
     public static int getElapsedDays(long time) {
@@ -38,7 +39,7 @@ public class TimeUtil {
     public static String formatTime(int time) {
         int hour = time / 1000;
         int minute = (int) ((double) (time % 1000) / 20 * 1.2);
-        if (DemeterConfig.clockType.get() == DemeterConfig.ClockType.TWENTY_FOUR_HOUR) {
+        if (DemeterConfig.clockType.get() == ClockType.TWENTY_FOUR_HOUR) {
             return (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute);
         } else {
             boolean pm = false;

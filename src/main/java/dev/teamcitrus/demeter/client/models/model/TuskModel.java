@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 
 public class TuskModel extends Model {
-    public ModelPart tusks;
+    public final ModelPart tusks;
 
     public TuskModel(ModelPart root) {
         super(root, RenderType::entityCutoutNoCull);

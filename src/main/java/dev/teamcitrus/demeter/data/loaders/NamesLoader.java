@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.data.loaders;
 
 import dev.teamcitrus.citruslib.reload.MergeableCodecDataManager;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment.AnimalGenders;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -9,7 +9,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import java.util.*;
 
 public class NamesLoader extends MergeableCodecDataManager<Names, List<String>> {
-    public static final Map<AnimalGenders, List<String>> NAME_LIST = new HashMap<>();
+    public static final Map<AnimalSexes, List<String>> NAME_LIST = new HashMap<>();
 
     public NamesLoader() {
         super("demeter/names", Names.CODEC, Names::merge);
@@ -20,15 +20,15 @@ public class NamesLoader extends MergeableCodecDataManager<Names, List<String>> 
         super.apply(processedData, resourceManager, profiler);
 
         this.data.forEach((id, string) -> {
-            if (Arrays.stream(AnimalGenders.values()).anyMatch(
-                    gender -> gender.name().toLowerCase(Locale.ROOT).equals(id.getPath()))) {
-                AnimalGenders gender = getGenderFromKey(id);
-                NAME_LIST.put(gender, string);
+            if (Arrays.stream(AnimalSexes.values()).anyMatch(
+                    sex -> sex.name().toLowerCase(Locale.ROOT).equals(id.getPath()))) {
+                AnimalSexes sex = getSexFromKey(id);
+                NAME_LIST.put(sex, string);
             }
         });
     }
 
-    private AnimalGenders getGenderFromKey(ResourceLocation key) {
-        return AnimalGenders.valueOf(key.getPath().toUpperCase(Locale.ROOT));
+    private AnimalSexes getSexFromKey(ResourceLocation key) {
+        return AnimalSexes.valueOf(key.getPath().toUpperCase(Locale.ROOT));
     }
 }

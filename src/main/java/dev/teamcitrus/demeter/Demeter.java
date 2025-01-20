@@ -7,7 +7,7 @@ import dev.teamcitrus.demeter.block.trough.TroughBlockEntity;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
-import dev.teamcitrus.demeter.network.SyncGenderPacket;
+import dev.teamcitrus.demeter.network.SyncSexPacket;
 import dev.teamcitrus.demeter.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
@@ -65,7 +65,7 @@ public class Demeter {
     public void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
-            PayloadHelper.registerPayload(new SyncGenderPacket.Provider());
+            PayloadHelper.registerPayload(new SyncSexPacket.Provider());
             TabFillingRegistry.register(ItemRegistry.DEMETER_TAB.getKey(), ItemRegistry.WATERING_CAN.get());
             Stats.CUSTOM.get(StatsRegistry.TIMES_PET.get(), StatFormatter.DEFAULT);
             Stats.CUSTOM.get(StatsRegistry.ANIMALS_FED.get(), StatFormatter.DEFAULT);

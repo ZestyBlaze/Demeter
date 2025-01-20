@@ -1,5 +1,7 @@
 package dev.teamcitrus.demeter.config;
 
+import dev.teamcitrus.demeter.duck.ClockType;
+import dev.teamcitrus.demeter.duck.SpiteEffect;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class DemeterConfig {
@@ -88,7 +90,7 @@ public class DemeterConfig {
         builder.translation("config.demeter.love_config").push("Love Config");
         spawnLoveValue = builder.translation("config.demeter.love_config.spawn_love_value")
                 .comment("The amount of love that animals will spawn with as default")
-                .defineInRange("spawnLoveValue", 90, 0, 100);
+                .defineInRange("spawnLoveValue", 0, 0, 100);
         animalHappinessMin = builder.translation("config.demeter.love_config.min_happiness")
                 .comment("The minimum value of happiness required for an animal to be considered 'happy'")
                 .defineInRange("animalHappinessMin", 65, 0, 100);
@@ -155,13 +157,5 @@ public class DemeterConfig {
                 .comment("Should an alert be displayed when your animals give birth")
                 .define("animalBirthAlert", true);
         builder.pop();
-    }
-
-    public enum ClockType {
-        TWENTY_FOUR_HOUR, TWELVE_HOUR
-    }
-
-    public enum SpiteEffect {
-        INVERT, HALVE, REDUCE
     }
 }

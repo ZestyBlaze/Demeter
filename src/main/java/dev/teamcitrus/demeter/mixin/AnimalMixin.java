@@ -27,8 +27,8 @@ public class AnimalMixin {
         ItemStack stack = player.getItemInHand(hand);
 
         if (!milking.inputOutputMap().containsKey(stack.getItem())) return;
-        if (!AnimalUtil.getGender(demeter$animal).equals(AnimalAttachment.AnimalGenders.FEMALE)) {
-            player.displayClientMessage(Component.translatable("message.demeter.milk.fail_gender").withStyle(ChatFormatting.RED), true);
+        if (!AnimalUtil.getSex(demeter$animal).equals(AnimalSexes.FEMALE)) {
+            player.displayClientMessage(Component.translatable("message.demeter.milk.fail_sex").withStyle(ChatFormatting.RED), true);
             return;
         }
 
@@ -66,9 +66,9 @@ public class AnimalMixin {
                     ordinal = 0
             )
     )
-    private boolean demeter$checkMateGender(boolean original, Animal otherEntity) {
+    private boolean demeter$checkMateSex(boolean original, Animal otherEntity) {
         return original && !AnimalUtil.getAnimalData(demeter$animal).isPregnant()
                 //&& !AnimalUtil.getAnimalData(demeter$animal).isOnDownPeriod()
-                && AnimalUtil.areOppositeGenders(demeter$animal, otherEntity);
+                && AnimalUtil.areOppositeSexes(demeter$animal, otherEntity);
     }
 }

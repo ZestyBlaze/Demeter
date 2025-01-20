@@ -5,25 +5,20 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.DamageTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
-
-import java.util.Locale;
 
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -33,7 +28,7 @@ public class AnimalAttachment {
             Codec.BOOL.fieldOf("hasBeenPetToday").forGetter(o -> o.hasBeenPetToday),
             Codec.BOOL.fieldOf("hasBeenFedToday").forGetter(o -> o.hasBeenFedToday),
             Codec.BOOL.fieldOf("hasBeenBrushedToday").forGetter(o -> o.hasBeenBrushedToday),
-            AnimalGenders.CODEC.fieldOf("gender").forGetter(o -> o.gender),
+            AnimalSexes.CODEC.fieldOf("sex").forGetter(o -> o.sex),
             Codec.BOOL.fieldOf("isPregnant").forGetter(o -> o.isPregnant),
             Codec.INT.fieldOf("daysLeftUntilBirth").forGetter(o -> o.daysLeftUntilBirth),
             Codec.INT.fieldOf("daysSinceBirth").forGetter(o -> o.downPeriod),
@@ -45,8 +40,8 @@ public class AnimalAttachment {
     private int age, love, daysSinceFed;
     private boolean hasBeenPetToday, hasBeenFedToday, hasBeenBrushedToday;
 
-    // Gender Variables
-    private AnimalGenders gender;
+    // Sex Variables
+    private AnimalSexes sex;
 
     // Pregnancy Variables
     private boolean isPregnant;
@@ -58,11 +53,11 @@ public class AnimalAttachment {
 
     public AnimalAttachment() {
         this(0, DemeterConfig.spawnLoveValue.get(), 0, false, false, false,
-                AnimalGenders.MALE, false, 0, 0, new CompoundTag(), 0);
+                AnimalSexes.MALE, false, 0, 0, new CompoundTag(), 0);
     }
 
     public AnimalAttachment(int age, int love, int daysSinceFed, boolean hasBeenPetToday, boolean hasBeenFedToday,
-                            boolean hasBeenBrushedToday, AnimalGenders gender, boolean isPregnant,
+                            boolean hasBeenBrushedToday, AnimalSexes sex, boolean isPregnant,
                             int daysLeftUntilBirth, int downPeriod, CompoundTag otherParentData,
                             int daysLeftUntilGrown) {
         this.age = age;
@@ -71,7 +66,7 @@ public class AnimalAttachment {
         this.hasBeenPetToday = hasBeenPetToday;
         this.hasBeenFedToday = hasBeenFedToday;
         this.hasBeenBrushedToday = hasBeenBrushedToday;
-        this.gender = gender;
+        this.sex = sex;
         this.isPregnant = isPregnant;
         this.daysLeftUntilBirth = daysLeftUntilBirth;
         this.downPeriod = downPeriod;
@@ -218,23 +213,11 @@ public class AnimalAttachment {
         return isPregnant;
     }
 
-    public AnimalGenders getGender() {
-        return gender;
+    public AnimalSexes getSex() {
+        return sex;
     }
 
-    public void setGender(AnimalGenders gender) {
-        this.gender = gender;
-    }
-
-    public enum AnimalGenders implements StringRepresentable {
-        MALE, FEMALE;
-
-        public static final Codec<AnimalGenders> CODEC = StringRepresentable.fromValues(AnimalGenders::values);
-        public static final StreamCodec<FriendlyByteBuf, AnimalGenders> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(AnimalGenders.class);
-
-        @Override
-        public String getSerializedName() {
-            return name().toLowerCase(Locale.ROOT);
-        }
+    public void setSex(AnimalSexes sex) {
+        this.sex = sex;
     }
 }

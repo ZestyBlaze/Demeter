@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.event;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.entity.ai.DigProductsGoal;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
@@ -39,8 +40,8 @@ public class EntityEvents {
         if (!(event.getEntity() instanceof Animal animal)) return;
         if (!event.getLevel().isClientSide()) {
             if (!animal.hasData(AttachmentRegistry.ANIMAL)) {
-                AnimalAttachment.AnimalGenders gender = AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)];
-                AnimalUtil.getAnimalData(animal).setGender(gender);
+                AnimalSexes sex = AnimalSexes.values()[event.getEntity().level().random.nextInt(AnimalSexes.values().length)];
+                AnimalUtil.getAnimalData(animal).setSex(sex);
             }
             if (AnimalUtil.getStats(animal) != null && !AnimalUtil.getStats(animal).diggableItems().isEmpty()) {
                 animal.goalSelector.addGoal(4, new DigProductsGoal(animal, 1, AnimalUtil.getStats(animal).diggableItems()));

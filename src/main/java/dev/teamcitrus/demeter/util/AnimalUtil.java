@@ -6,6 +6,7 @@ import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -29,12 +30,12 @@ public class AnimalUtil {
                 && getAnimalData(animal).hasBeenFedToday();
     }
 
-    public static AnimalAttachment.AnimalGenders getGender(Animal animal) {
-        return getAnimalData(animal).getGender();
+    public static AnimalSexes getSex(Animal animal) {
+        return getAnimalData(animal).getSex();
     }
 
-    public static boolean areOppositeGenders(Animal animal1, Animal animal2) {
-        return getGender(animal1) != getGender(animal2);
+    public static boolean areOppositeSexes(Animal animal1, Animal animal2) {
+        return getSex(animal1) != getSex(animal2);
     }
 
     public static void handleBirth(Animal self, ServerLevel serverLevel, Animal otherEntity) {

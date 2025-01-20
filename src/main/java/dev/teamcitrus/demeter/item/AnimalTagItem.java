@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.item;
 import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.data.loaders.NamesLoader;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -31,8 +32,8 @@ public class AnimalTagItem extends CitrusItem {
                 }
             }
 
-            AnimalAttachment.AnimalGenders gender = AnimalUtil.getGender(animal);
-            List<String> possibleNames = NamesLoader.NAME_LIST.get(gender);
+            AnimalSexes sex = AnimalUtil.getSex(animal);
+            List<String> possibleNames = NamesLoader.NAME_LIST.get(sex);
             String name = possibleNames.get(pPlayer.level().random.nextInt(possibleNames.size()));
 
             animal.setCustomName(Component.literal(name));

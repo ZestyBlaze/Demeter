@@ -23,7 +23,7 @@ public class DigProductsGoal extends Goal {
     protected double wantedY;
     protected double wantedZ;
     protected final double speedModifier;
-    protected int interval;
+    protected final int interval;
     protected boolean forceTrigger;
     private final boolean checkNoActionTime;
 

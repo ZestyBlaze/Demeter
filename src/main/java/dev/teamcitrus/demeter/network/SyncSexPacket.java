@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.network;
 
 import dev.teamcitrus.citruslib.network.PayloadProvider;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment;
+import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.network.ConnectionProtocol;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,13 +17,13 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.List;
 import java.util.Optional;
 
-public record SyncGenderPacket(int id, AnimalAttachment.AnimalGenders gender) implements CustomPacketPayload {
-    public static final Type<SyncGenderPacket> TYPE = new Type<>(Demeter.id("sync_gender_packet"));
+public record SyncSexPacket(int id, AnimalSexes sex) implements CustomPacketPayload {
+    public static final Type<SyncSexPacket> TYPE = new Type<>(Demeter.id("sync_sex_packet"));
 
-    public static final StreamCodec<FriendlyByteBuf, SyncGenderPacket> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT, SyncGenderPacket::id,
-            AnimalAttachment.AnimalGenders.STREAM_CODEC, SyncGenderPacket::gender,
-            SyncGenderPacket::new
+    public static final StreamCodec<FriendlyByteBuf, SyncSexPacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT, SyncSexPacket::id,
+            AnimalSexes.STREAM_CODEC, SyncSexPacket::sex,
+            SyncSexPacket::new
     );
 
     @Override
@@ -31,22 +31,22 @@ public record SyncGenderPacket(int id, AnimalAttachment.AnimalGenders gender) im
         return TYPE;
     }
 
-    public static class Provider implements PayloadProvider<SyncGenderPacket> {
+    public static class Provider implements PayloadProvider<SyncSexPacket> {
 
         @Override
-        public Type<SyncGenderPacket> getType() {
+        public Type<SyncSexPacket> getType() {
             return TYPE;
         }
 
         @Override
-        public StreamCodec<? super RegistryFriendlyByteBuf, SyncGenderPacket> getCodec() {
+        public StreamCodec<? super RegistryFriendlyByteBuf, SyncSexPacket> getCodec() {
             return STREAM_CODEC;
         }
 
         @Override
-        public void handle(SyncGenderPacket msg, IPayloadContext ctx) {
+        public void handle(SyncSexPacket msg, IPayloadContext ctx) {
             Animal animal = (Animal) ctx.player().level().getEntity(msg.id);
-            AnimalUtil.getAnimalData(animal).setGender(msg.gender);
+            AnimalUtil.getAnimalData(animal).setSex(msg.sex);
         }
 
         @Override

@@ -34,7 +34,7 @@ public class DevDebugItem extends CitrusItem {
             serverPlayer.sendSystemMessage(Component.literal(
                     "Animal's Data")
                     .append("\nUUID: " + animal.getUUID())
-                    .append("\nGender: " + StringUtils.capitalize(data.getGender().name().toLowerCase(Locale.ROOT)))
+                    .append("\nSex: " + StringUtils.capitalize(data.getSex().name().toLowerCase(Locale.ROOT)))
                     .append("\nPregnant: " + data.isPregnant())
                     .append("\nLove: " + data.getLove())
                     .append("\nPet Today?: " + data.hasBeenPetToday())
@@ -45,7 +45,7 @@ public class DevDebugItem extends CitrusItem {
             );
         }
         if (level.isClientSide()) {
-            Demeter.LOGGER.error("Gender: {}", StringUtils.capitalize(AnimalUtil.getAnimalData((Animal) interactionTarget).getGender().name().toLowerCase(Locale.ROOT)));
+            Demeter.LOGGER.error("Sex: {}", StringUtils.capitalize(AnimalUtil.getAnimalData((Animal) interactionTarget).getSex().name().toLowerCase(Locale.ROOT)));
         }
         return InteractionResult.FAIL;
     }
