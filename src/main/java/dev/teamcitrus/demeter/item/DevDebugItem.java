@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.item;
 
 import dev.teamcitrus.citruslib.item.CitrusItem;
+import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -42,6 +43,9 @@ public class DevDebugItem extends CitrusItem {
                     .append("\nDays Since Fed: " + data.getDaysSinceFed())
                     .withStyle(ChatFormatting.AQUA)
             );
+        }
+        if (level.isClientSide()) {
+            Demeter.LOGGER.error("Gender: {}", StringUtils.capitalize(AnimalUtil.getAnimalData((Animal) interactionTarget).getGender().name().toLowerCase(Locale.ROOT)));
         }
         return InteractionResult.FAIL;
     }

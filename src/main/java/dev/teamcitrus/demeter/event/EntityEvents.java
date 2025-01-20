@@ -38,7 +38,7 @@ public class EntityEvents {
     public static void onEntityAdded(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Animal animal)) return;
         if (!event.getLevel().isClientSide()) {
-            if (!event.loadedFromDisk()) {
+            if (!animal.hasData(AttachmentRegistry.ANIMAL)) {
                 AnimalAttachment.AnimalGenders gender = AnimalAttachment.AnimalGenders.values()[event.getEntity().level().random.nextInt(AnimalAttachment.AnimalGenders.values().length)];
                 AnimalUtil.getAnimalData(animal).setGender(gender);
             }

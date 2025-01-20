@@ -2,7 +2,6 @@ package dev.teamcitrus.demeter.attachment;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.teamcitrus.citruslib.codec.CitrusCodecs;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
@@ -10,15 +9,21 @@ import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.DamageTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
+
+import java.util.Locale;
 
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -221,9 +226,15 @@ public class AnimalAttachment {
         this.gender = gender;
     }
 
-    public enum AnimalGenders {
+    public enum AnimalGenders implements StringRepresentable {
         MALE, FEMALE;
 
-        public static final Codec<AnimalGenders> CODEC = CitrusCodecs.enumCodec(AnimalGenders.class);
+        public static final Codec<AnimalGenders> CODEC = StringRepresentable.fromValues(AnimalGenders::values);
+        public static final StreamCodec<FriendlyByteBuf, AnimalGenders> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(AnimalGenders.class);
+
+        @Override
+        public String getSerializedName() {
+            return name().toLowerCase(Locale.ROOT);
+        }
     }
 }
