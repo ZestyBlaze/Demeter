@@ -25,11 +25,11 @@ public class EntityTypeRegistry {
                     .noLootTable().sized(1.375F, 0.5625F).eyeHeight(0.5625F).clientTrackingRange(10).build(createKey("maple_chest_boat")));
 
     private static EntityType.EntityFactory<Boat> boatFactory(Supplier<Item> boatItemGetter) {
-        return (p_375558_, p_375559_) -> new Boat(p_375558_, p_375559_, boatItemGetter);
+        return (type, level) -> new Boat(type, level, boatItemGetter);
     }
 
     private static EntityType.EntityFactory<ChestBoat> chestBoatFactory(Supplier<Item> boatItemGetter) {
-        return (p_375555_, p_375556_) -> new ChestBoat(p_375555_, p_375556_, boatItemGetter);
+        return (type, level) -> new ChestBoat(type, level, boatItemGetter);
     }
 
     private static ResourceKey<EntityType<?>> createKey(String id) {

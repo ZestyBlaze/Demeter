@@ -4,6 +4,19 @@
     "demeter:maple_wood",
     "demeter:stripped_maple_log",
     "demeter:stripped_maple_wood",
+    "demeter:maple_planks",
+    "demeter:maple_stairs",
+    "demeter:maple_slab",
+    "demeter:maple_fence",
+    "demeter:maple_fence_gate",
+    "demeter:maple_door",
+    "demeter:maple_trapdoor",
+    "demeter:maple_pressure_plate",
+    "demeter:maple_button",
+    "demeter:maple_sign",
+    "demeter:maple_wall_sign",
+    "demeter:maple_hanging_sign",
+    "demeter:maple_wall_hanging_sign",
     "demeter:trough"
   ]
 }

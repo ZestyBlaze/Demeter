@@ -16,10 +16,7 @@ import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class DemeterBiomeModifiers {
-    public static final ResourceKey<BiomeModifier> MAPLE_TREE = ResourceKey.create(
-            NeoForgeRegistries.Keys.BIOME_MODIFIERS,
-            Demeter.id("add_maple_trees")
-    );
+    public static final ResourceKey<BiomeModifier> MAPLE_TREE = key("add_maple_trees");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
@@ -30,5 +27,9 @@ public class DemeterBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(DemeterTrees.MAPLE_TREE_PF)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
+    }
+
+    private static ResourceKey<BiomeModifier> key(String id) {
+        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Demeter.id(id));
     }
 }

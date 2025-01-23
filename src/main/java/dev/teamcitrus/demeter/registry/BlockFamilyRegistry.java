@@ -27,7 +27,7 @@ public class BlockFamilyRegistry {
         BlockFamily.Builder blockfamily$builder = new BlockFamily.Builder(baseBlock);
         BlockFamily blockfamily = MAP.put(baseBlock, blockfamily$builder.getFamily());
         if (blockfamily != null) {
-            throw new IllegalStateException("Duplicate family definition for " + String.valueOf(BuiltInRegistries.BLOCK.getKey(baseBlock)));
+            throw new IllegalStateException("Duplicate family definition for " + BuiltInRegistries.BLOCK.getKey(baseBlock));
         } else {
             return blockfamily$builder;
         }
