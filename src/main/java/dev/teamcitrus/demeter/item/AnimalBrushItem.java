@@ -1,6 +1,5 @@
 package dev.teamcitrus.demeter.item;
 
-import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.enchantment.DemeterEnchantments;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
@@ -15,11 +14,12 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
 
-public class AnimalBrushItem extends CitrusItem {
+public class AnimalBrushItem extends Item {
     public AnimalBrushItem() {
         super(new Properties().stacksTo(1).durability(156).setId(createID("animal_brush")));
     }

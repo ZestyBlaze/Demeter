@@ -1,7 +1,9 @@
 package dev.teamcitrus.demeter.data.providers;
 
+import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.client.property.QualityProperty;
 import dev.teamcitrus.demeter.component.QualityLevel;
+import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
@@ -30,7 +32,9 @@ public class DemeterItemModelGenerator extends ItemModelGenerators {
         generateFlatItem(ItemRegistry.BUTTER.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(ItemRegistry.MAPLE_BOAT.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(ItemRegistry.MAPLE_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
+        generateFlatItem(ItemRegistry.FOOD_POUCH.get(), ModelTemplates.FLAT_ITEM);
         createWateringCanItem(ItemRegistry.WATERING_CAN.get());
+        itemModelOutput.accept(BlockRegistry.COUNTER.asItem(), ItemModelUtils.plainModel(getPath("counter_straight")));
     }
 
     private void createWateringCanItem(Item wateringCanItem) {
@@ -48,5 +52,9 @@ public class DemeterItemModelGenerator extends ItemModelGenerators {
                         ItemModelUtils.when(QualityLevel.NETHERITE, model$netherite)
                 )
         );
+    }
+
+    private ResourceLocation getPath(String id) {
+        return Demeter.id("block/" + id);
     }
 }

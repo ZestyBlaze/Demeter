@@ -1,4 +1,6 @@
-// 1.21.4	2025-01-09T22:39:12.0522441	Model Definitions - demeter
+// 1.21.4	2025-02-12T01:13:07.8084088	Model Definitions - demeter
+8267223360d1461107d3a8868fad12030782b38e assets/demeter/blockstates/bamboo_shoots.json
+8e2f9acf55145c9a41b939435e4d1f5af5ab7c00 assets/demeter/blockstates/counter.json
 ff2ec3aaab927fb1add70f6ab1851cb74bbf3525 assets/demeter/blockstates/maple_button.json
 dc251cb370599b3321bface91bd1ea7bb99c147a assets/demeter/blockstates/maple_door.json
 ec7804a789123ef646b777d9e93d063fc5fb30c9 assets/demeter/blockstates/maple_fence.json
@@ -20,10 +22,14 @@ ee38f5827f0a43c6fee26e7b852dfa6bb3be619d assets/demeter/blockstates/maple_wood.j
 7c6e7f327b114fa53b28a7e5263fde24a6ff2cf3 assets/demeter/blockstates/stripped_maple_log.json
 bdd72b939eb0bbf7aa78f3c5c7a1fc2bb9b6a548 assets/demeter/blockstates/stripped_maple_wood.json
 65d15932e27fa72ce828c37e6c76294ce6971b57 assets/demeter/blockstates/trough.json
+e8551c1182c4a9873f6dc3a99b65d81569af07f6 assets/demeter/blockstates/wine.json
 6e86bd8ae5c25a40ec3d2711bf0af828429f3e37 assets/demeter/items/animal_brush.json
 3bf867fb3bdc25d8b3ba722c86cc1258b5ca5b67 assets/demeter/items/animal_tag.json
+401a0ac8ac1bd96e71e8e76994b9f2404eb349de assets/demeter/items/bamboo_shoots.json
 9360a66bcad39ca5b2a1da558fa7fca317e0d910 assets/demeter/items/butter.json
+c8b0d15532d4676f028d7596ee09936139a4349b assets/demeter/items/counter.json
 25da82e831f58084bc96bbf99463fb5ef79a887c assets/demeter/items/dev_debug_item.json
+66a4a14307243f070ec7a989b8ba8b06151e072f assets/demeter/items/food_pouch.json
 10e074fac12e55853361d3073fa2d544ac5a64af assets/demeter/items/maple_boat.json
 b2328dc7d2d40403cddda1a68bec81a139326dc5 assets/demeter/items/maple_button.json
 65655f187f92946e5abef5dfb8cf0d505696ebc9 assets/demeter/items/maple_chest_boat.json
@@ -49,6 +55,7 @@ a3e9df8884b83229772ebdd0e7a5e61baac141ca assets/demeter/items/miracle_potion.jso
 355fc5ac8ad5c3179fde40860641138aedb143d5 assets/demeter/items/stripped_maple_wood.json
 200ff02882caf0788b20b1cb58ed16e7797819c8 assets/demeter/items/trough.json
 3b6c3cae87c94dadd989569e7ece1cd5a7e03eb1 assets/demeter/items/watering_can.json
+aed64d4907ad480ce05b1f2fffc759b28fed22ea assets/demeter/models/block/bamboo_shoots.json
 53b6d9a023b541e9f117f3e19c618a567c5a802b assets/demeter/models/block/maple_button.json
 84577c2c196e67881fea17d7d05e7f4148c1d0d8 assets/demeter/models/block/maple_button_inventory.json
 e22fd572ef3f002bad7f5c5438fdff58a64180c1 assets/demeter/models/block/maple_button_pressed.json
@@ -81,9 +88,9 @@ a26d0c615518802d1aa325c184092f712a1fae80 assets/demeter/models/block/maple_slab_
 412a0d99be0ed563a017f853fb3851c9b2cba148 assets/demeter/models/block/maple_stairs.json
 0d0478f0781a13fcdf234cdf9c24439ec20caa59 assets/demeter/models/block/maple_stairs_inner.json
 fc4461519c040056087a28cc8835eeec6d7b2fdc assets/demeter/models/block/maple_stairs_outer.json
-8a3e517e3e22cea2c67ef77a17d8cd13302ef8d3 assets/demeter/models/block/maple_trapdoor_bottom.json
-7a28f1e4cd3fd685c372c711a375b5ca4bc11ff1 assets/demeter/models/block/maple_trapdoor_open.json
-69f566592d7392ee842b0da590d5c532be6e283c assets/demeter/models/block/maple_trapdoor_top.json
+0b7911b8de61b1904e03d2de5713c4a2cfc4086d assets/demeter/models/block/maple_trapdoor_bottom.json
+98936967d500d007be7bece4e660735b007c5ebd assets/demeter/models/block/maple_trapdoor_open.json
+84c7a75f4c099da8ff421a0c569fdacd7184ea05 assets/demeter/models/block/maple_trapdoor_top.json
 857a6edad7d4d61c5fa33f57f051ea52631c2ac5 assets/demeter/models/block/maple_wood.json
 a79bf62583b3d4662ebe16740063d6a645e5b810 assets/demeter/models/block/potted_maple_sapling.json
 f91b852b2732215be9b9d3b8fce254b4cfd43b13 assets/demeter/models/block/stripped_maple_log.json
@@ -91,8 +98,10 @@ b3003cbff82aceca2848bd65404fbc5a22981096 assets/demeter/models/block/stripped_ma
 b60c87d9cc8c793e0ca421f00aa5db5cf03e1f26 assets/demeter/models/block/stripped_maple_wood.json
 8e88a0949760e2d598a70345a968f50e4af5964e assets/demeter/models/item/animal_brush.json
 c679f7d57669ad853a684c3d1aad5093ef45e083 assets/demeter/models/item/animal_tag.json
+a8101cbab5007f79b12ba7a65e85d147ce1a8149 assets/demeter/models/item/bamboo_shoots.json
 757ed270a8161e18b65b5d1671ffced247f85d39 assets/demeter/models/item/butter.json
 d7f8caed6f5021d67af880a2e777eb865d4d333b assets/demeter/models/item/dev_debug_item.json
+c55b7e640112e4527bccd786f89c5e0ed9e0324e assets/demeter/models/item/food_pouch.json
 0cd9cb61a16fb0f0f2806b8b72d4a062b25bc17d assets/demeter/models/item/maple_boat.json
 cdd6638b6527a025a148edd07751174fa7ff8314 assets/demeter/models/item/maple_chest_boat.json
 56cc72bb012806ee43a4787d259ddfba9b1c53ef assets/demeter/models/item/maple_door.json

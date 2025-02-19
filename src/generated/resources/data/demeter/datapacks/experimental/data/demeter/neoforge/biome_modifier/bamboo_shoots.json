@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#demeter:has_bamboo_shoots",
+  "features": "demeter:bamboo_shoots",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#minecraft:bundles",
+    "#c:animal_foods"
+  ],
+  "result": {
+    "count": 1,
+    "id": "demeter:food_pouch"
+  }
+}

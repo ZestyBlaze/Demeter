@@ -26,6 +26,8 @@ public class EnUsProvider extends CitrusLanguageProvider {
 
         add("advancement.demeter.root", "Demeter");
         add("advancement.demeter.root.desc", "The Introduction to the Farming Overhaul Mod!");
+        add("advancement.demeter.acquire_food_pouch", "Optimal Feeding");
+        add("advancement.demeter.acquire_food_pouch.desc", "Acquire a Food Pouch to store feed for animals!");
         add("advancement.demeter.animal_brushed", "Neat and Tidy");
         add("advancement.demeter.animal_brushed.desc", "Brush an Animal!");
         add("advancement.demeter.animal_pet", "Easy Does It");
@@ -78,6 +80,7 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("enchantment.demeter.spite", "Curse of Spite");
         add("error.demeter.maxhighermin", "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' for entity type `%s` resulting in the birth failing!");
         add("error.demeter.namesloadfail", "Error while loading names");
+        add("item.demeter.food_pouch.tooltip", "Can hold a mix of animal foods");
         add("item.demeter.quality_tooltip", "Quality: %s");
         add("item.demeter.milk_bottle.desc", "Removes one random negative potion effect");
         add("item.demeter.pocket_watch.error", "Since \"requireClockItemForTime\" is currently not true, this item is not required in gameplay");

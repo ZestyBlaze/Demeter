@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '1.0.23'
+    id 'net.neoforged.moddev' version '2.0.77'
     id 'idea'
 }
 
@@ -19,12 +19,6 @@ repositories {
         url "https://jitpack.io"
         content {
             includeGroup "com.github.TeamCitrusMods"
-        }
-    }
-    maven {
-        url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
-        content {
-            includeGroup "com.klikli_dev"
         }
     }
     maven { url 'https://maven.wispforest.io/releases' }
@@ -89,7 +83,6 @@ configurations {
 
 dependencies {
     implementation jarJar ("com.github.TeamCitrusMods:CitrusLib:${citrus_lib_version}")
-    //implementation ("com.klikli_dev:modonomicon-${minecraft_version}-neoforge:${modonomicon_version}"){transitive=false}
     runtimeOnly("io.wispforest:accessories-neoforge:${project.accessories_version}")
     compileOnly("io.wispforest:accessories-neoforge:${project.accessories_version}")
 }

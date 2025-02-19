@@ -4,6 +4,7 @@ import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.item.*;
+import dev.teamcitrus.demeter.item.pouch.FoodPouchItem;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -38,6 +39,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
     public static final DeferredItem<Item> TRUFFLE = ITEMS.registerSimpleItem("truffle");
     public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);
+    public static final DeferredItem<Item> FOOD_POUCH = ITEMS.register("food_pouch", FoodPouchItem::new);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);
     public static final DeferredItem<BlockItem> STRIPPED_MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG);
@@ -59,6 +61,10 @@ public class ItemRegistry {
     public static final DeferredItem<Item> MAPLE_CHEST_BOAT = ITEMS.register("maple_chest_boat", () -> new BoatItem(EntityTypeRegistry.MAPLE_CHEST_BOAT.get(), new Item.Properties().stacksTo(1).setId(createID("maple_chest_boat"))));
     public static final DeferredItem<BlockItem> MAPLE_SYRUP_BLOCK = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SYRUP_BLOCK);
     public static final DeferredItem<BlockItem> TROUGH = ITEMS.registerSimpleBlockItem(BlockRegistry.TROUGH);
+
+    //Experimental Items
+    public static final DeferredItem<BlockItem> BAMBOO_SHOOTS = ITEMS.register("bamboo_shoots", () -> new BlockItem(BlockRegistry.BAMBOO_SHOOTS.get(), new Item.Properties().useBlockDescriptionPrefix().requiredFeatures(Demeter.EXPERIMENTAL).setId(createID("bamboo_shoots"))));
+    public static final DeferredItem<BlockItem> COUNTER = ITEMS.register("counter", () -> new BlockItem(BlockRegistry.COUNTER.get(), new Item.Properties().useBlockDescriptionPrefix().requiredFeatures(Demeter.EXPERIMENTAL).setId(createID("counter"))));
 
     public static ResourceKey<Item> createID(String id) {
         return ResourceKey.create(Registries.ITEM, Demeter.id(id));

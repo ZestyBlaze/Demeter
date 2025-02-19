@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.registry;
 
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.block.experimental.tile.CounterTileEntity;
 import dev.teamcitrus.demeter.block.trough.TroughBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -12,5 +13,9 @@ public class BlockEntityRegistry {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TroughBlockEntity>> TROUGH = BLOCK_ENTITIES.register(
             "trough",
             () -> new BlockEntityType<>(TroughBlockEntity::new, BlockRegistry.TROUGH.get())
+    );
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CounterTileEntity>> COUNTER = BLOCK_ENTITIES.register(
+            "counter",
+            () -> new BlockEntityType<>(CounterTileEntity::new, BlockRegistry.COUNTER.get())
     );
 }

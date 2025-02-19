@@ -70,7 +70,7 @@ public class DemeterItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.BUTTONS).add(BlockRegistry.MAPLE_BUTTON.asItem());
         tag(ItemTags.WOODEN_BUTTONS).add(BlockRegistry.MAPLE_BUTTON.asItem());
         tag(ItemTags.LEAVES).add(BlockRegistry.MAPLE_LEAVES.get().asItem());
-        tag(CLOCKS).add(Items.CLOCK).addOptional(AccessoriesCompat.Items.BREEDING_CHARM.getId());
+        tag(CLOCKS).add(Items.CLOCK).addOptional(AccessoriesCompat.Items.POCKET_WATCH.getId());
         tag(TOOLS_ANIMAL_BRUSH).add(ItemRegistry.ANIMAL_BRUSH.get());
         tag(Tags.Items.TOOLS).addTag(TOOLS_ANIMAL_BRUSH);
         tag(TROUGH_FOODS).addTags(TROUGH_FOODS_HAY, TROUGH_FOODS_SLOP);

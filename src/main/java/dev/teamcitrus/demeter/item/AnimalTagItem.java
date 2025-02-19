@@ -1,6 +1,5 @@
 package dev.teamcitrus.demeter.item;
 
-import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.demeter.data.loaders.NamesLoader;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.util.AnimalUtil;
@@ -10,13 +9,14 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
 
-public class AnimalTagItem extends CitrusItem {
+public class AnimalTagItem extends Item {
     public AnimalTagItem() {
         super(new Properties().stacksTo(16).setId(createID("animal_tag")));
     }

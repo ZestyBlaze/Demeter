@@ -6,6 +6,7 @@ import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.block.trough.TroughBlockEntity;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
+import dev.teamcitrus.demeter.item.pouch.FoodPouchItemHandler;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.network.SyncSexPacket;
 import dev.teamcitrus.demeter.registry.*;
@@ -50,6 +51,8 @@ public class Demeter {
         PoiTypeRegistry.POI_TYPES.register(bus);
         StatsRegistry.STATS.register(bus);
         ConsumeEffectRegistry.TYPE.register(bus);
+        FluidTypeRegistry.FLUIDS.register(bus);
+        FluidRegistry.FLUIDS.register(bus);
         bus.register(this);
         
         if (ModUtil.isModInstalled("accessories")) {
@@ -78,6 +81,13 @@ public class Demeter {
                 new FluidHandlerItemStack(ComponentRegistry.FLUID_HANDLER, itemstack, 1000),
                 ItemRegistry.WATERING_CAN
         );
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.TROUGH.get(), TroughBlockEntity::getCapability);
+        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) ->
+                new FoodPouchItemHandler(stack),
+                ItemRegistry.FOOD_POUCH
+        );
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK,
+                BlockEntityRegistry.TROUGH.get(),
+                TroughBlockEntity::getCapability
+        );
     }
 }

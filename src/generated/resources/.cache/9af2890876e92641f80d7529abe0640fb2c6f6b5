@@ -1,4 +1,4 @@
-// 1.21.4	2025-01-10T23:31:49.6986099	Demeter Recipes
+// 1.21.4	2025-02-09T18:23:07.5605356	Demeter Recipes
 0cf5f120560eff2e99f468533791a7dc00d86a60 data/demeter/advancement/recipes/building_blocks/maple_planks.json
 a0dcacb3495c54e89abc4d14773cba0ff0f72c8c data/demeter/advancement/recipes/building_blocks/maple_slab.json
 ca03a490a4d4b37c1e979f8559f881a380fedf24 data/demeter/advancement/recipes/building_blocks/maple_stairs.json
@@ -11,6 +11,7 @@ f9cda2c74d6d64aac7213cf53f81de1a362649d8 data/demeter/advancement/recipes/food/b
 1bfff275c22a14d39f6859fc7e0be433bd21ab61 data/demeter/advancement/recipes/food/butter_from_bucket.json
 94c01192d5aa359959a807c4153f44a5bf3af2ea data/demeter/advancement/recipes/misc/animal_tag.json
 b2a6a51505a1eff5602d07f1c37ed474b2ba18ff data/demeter/advancement/recipes/misc/breeding_charm.json
+5547cc4e46ee0a2e60028617cce101907d35bb93 data/demeter/advancement/recipes/misc/food_pouch.json
 9ebe2c750908e7993d2ed0d5eec017a3f6c640f4 data/demeter/advancement/recipes/misc/maple_fence.json
 04d030b22411a7374b0d5ce2f54a0e77bd698331 data/demeter/advancement/recipes/misc/trough.json
 b4669fa5fe1e87a6b75d63248837637b33974df4 data/demeter/advancement/recipes/redstone/maple_button.json
@@ -20,7 +21,7 @@ b4669fa5fe1e87a6b75d63248837637b33974df4 data/demeter/advancement/recipes/redsto
 e49da65baaca619a50018b544dfac0c5bd7f91af data/demeter/advancement/recipes/redstone/maple_syrup_block.json
 38e0cf889d0f51f65e7436e4da8bdc71ce7d6df6 data/demeter/advancement/recipes/redstone/maple_trapdoor.json
 68aa7dab44d9e9bfbc52912a3e3e91f63fbff9c8 data/demeter/advancement/recipes/tools/animal_brush.json
-e6ffd1cbaf24535178b7b7c0bd3d9f2d867a345b data/demeter/advancement/recipes/tools/pocket_watch.json
+a3b7243bb20722fb62af5a820d1d8ad6cbc0b6c5 data/demeter/advancement/recipes/tools/pocket_watch.json
 86f88feb43dec6a7bff39f75db8753572faf98fb data/demeter/advancement/recipes/transportation/maple_boat.json
 df65cde2b144ed9981db9a5d5b8b5765d30c77e3 data/demeter/advancement/recipes/transportation/maple_chest_boat.json
 cc1bec66454af1443aeb8370cc8bdd2a36588125 data/demeter/recipe/animal_brush.json
@@ -29,6 +30,7 @@ cc1bec66454af1443aeb8370cc8bdd2a36588125 data/demeter/recipe/animal_brush.json
 15d3efc6a854c2f523b483ed9abea7d371b3e909 data/demeter/recipe/bucket_to_bottles.json
 dc59565c93c2471513a60d9696e2b65c7cc69d69 data/demeter/recipe/butter_from_bottles.json
 82aff9d9014adc6ee2d20ae3730b66cd6b190827 data/demeter/recipe/butter_from_bucket.json
+0db946cd0d3a61889b7d0b8e942d18b82d7cdb47 data/demeter/recipe/food_pouch.json
 1dba9fd768b6f09d26fb994c66b6ad739e6732eb data/demeter/recipe/maple_boat.json
 bfce7cde03a7ccee25599b2c97848b3fc7eb10a1 data/demeter/recipe/maple_button.json
 2a45ef3cae43afea19fc0519908de8f849a60960 data/demeter/recipe/maple_chest_boat.json
@@ -44,6 +46,6 @@ cb8ce311fc2365f224c16750d024f62d489cb7eb data/demeter/recipe/maple_fence.json
 6bd903cab6ca8cb5047db68e898b4b2614bee114 data/demeter/recipe/maple_syrup_block.json
 81dd2ed51c98ff2bfdc4acd7ed88de37ff9e1c74 data/demeter/recipe/maple_trapdoor.json
 94c1acd991e522437f86378ce74d31b2f670794d data/demeter/recipe/maple_wood.json
-53d8bfb8d1a6895249a162412fb904035e7e548e data/demeter/recipe/pocket_watch.json
+ac358977e2516b94815a46bfb46cdc3559e2e2fc data/demeter/recipe/pocket_watch.json
 ec2f7c551a176fa52c85302b78ee673763370250 data/demeter/recipe/stripped_maple_wood.json
 1c84a3d3429836d4eeb04ba0c0961ee62594e726 data/demeter/recipe/trough.json

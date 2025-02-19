@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.duck.Section;
 import dev.teamcitrus.demeter.block.trough.TroughBlock;
 import dev.teamcitrus.demeter.registry.BlockFamilyRegistry;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
@@ -8,6 +9,7 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.*;
 import net.minecraft.client.data.models.model.ModelInstance;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
@@ -26,17 +28,20 @@ public class DemeterBlockModelGenerator extends BlockModelGenerators {
     public void run() {
         BlockFamilyRegistry.getAllFamilies()
                 .filter(BlockFamily::shouldGenerateModel)
-                .forEach(p_386718_ -> family(p_386718_.getBaseBlock()).generateFor(p_386718_));
+                .forEach(blockFamily -> family(blockFamily.getBaseBlock()).generateFor(blockFamily));
         woodProvider(BlockRegistry.MAPLE_LOG.get()).logWithHorizontal(BlockRegistry.MAPLE_LOG.get()).wood(BlockRegistry.MAPLE_WOOD.get());
         woodProvider(BlockRegistry.STRIPPED_MAPLE_LOG.get()).logWithHorizontal(BlockRegistry.STRIPPED_MAPLE_LOG.get()).wood(BlockRegistry.STRIPPED_MAPLE_WOOD.get());
+        createTrapdoor(BlockRegistry.MAPLE_TRAPDOOR.get(), "cutout");
         createBlockWithRenderType(BlockRegistry.MAPLE_LEAVES.get(), TexturedModel.LEAVES, "cutout");
         createHangingSign(BlockRegistry.STRIPPED_MAPLE_LOG.get(), BlockRegistry.MAPLE_HANGING_SIGN.get(), BlockRegistry.MAPLE_WALL_HANGING_SIGN.get());
+        createPlantWithDefaultItem(BlockRegistry.MAPLE_SAPLING.get(), BlockRegistry.POTTED_MAPLE_SAPLING.get(), PlantType.NOT_TINTED, "cutout");
+        createNonTemplateModelBlock(BlockRegistry.WINE.get());
         troughBlock();
-
-        createPlantWithDefaultItem(BlockRegistry.MAPLE_SAPLING.get(), BlockRegistry.POTTED_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED, "cutout");
+        createPlantWithDefaultItem(BlockRegistry.BAMBOO_SHOOTS.get(), PlantType.NOT_TINTED, "cutout");
+        createCounter(BlockRegistry.COUNTER.get());
     }
 
-    private void createCrossBlock(Block block, BlockModelGenerators.PlantType plantType, String renderType) {
+    private void createCrossBlock(Block block, PlantType plantType, String renderType) {
         TextureMapping texturemapping = plantType.getTextureMapping(block);
         ResourceLocation resourcelocation = plantType.getCross().extend().renderType(renderType).build().create(block, texturemapping, modelOutput);
         blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourcelocation));
@@ -47,16 +52,45 @@ public class DemeterBlockModelGenerator extends BlockModelGenerators {
         blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
     }
 
-    public void createPlantWithDefaultItem(Block block, Block pottedBlock, BlockModelGenerators.PlantType plantType, String renderType) {
+    public void createPlantWithDefaultItem(Block block, Block pottedBlock, PlantType plantType, String renderType) {
         registerSimpleItemModel(block.asItem(), plantType.createItemModel(this, block));
         this.createPlant(block, pottedBlock, plantType, renderType);
     }
 
-    public void createPlant(Block block, Block pottedBlock, BlockModelGenerators.PlantType plantType, String renderType) {
+    public void createPlant(Block block, Block pottedBlock, PlantType plantType, String renderType) {
         this.createCrossBlock(block, plantType, renderType);
         TextureMapping texturemapping = plantType.getPlantTextureMapping(block);
         ResourceLocation resourcelocation = plantType.getCrossPot().extend().renderType(renderType).build().create(pottedBlock, texturemapping, modelOutput);
         blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pottedBlock, resourcelocation));
+    }
+
+    public void createPlantWithDefaultItem(Block block, PlantType plantType, String renderType) {
+        registerSimpleItemModel(block.asItem(), plantType.createItemModel(this, block));
+        this.createPlant(block, plantType, renderType);
+    }
+
+    public void createPlant(Block block, PlantType plantType, String renderType) {
+        this.createCrossBlock(block, plantType, renderType);
+    }
+
+    public void createTrapdoor(Block trapdoorBlock, String renderType) {
+        TextureMapping texturemapping = TextureMapping.defaultTexture(trapdoorBlock);
+        ResourceLocation resourcelocation = ModelTemplates.TRAPDOOR_TOP.extend().renderType(renderType).build().create(trapdoorBlock, texturemapping, this.modelOutput);
+        ResourceLocation resourcelocation1 = ModelTemplates.TRAPDOOR_BOTTOM.extend().renderType(renderType).build().create(trapdoorBlock, texturemapping, this.modelOutput);
+        ResourceLocation resourcelocation2 = ModelTemplates.TRAPDOOR_OPEN.extend().renderType(renderType).build().create(trapdoorBlock, texturemapping, this.modelOutput);
+        this.blockStateOutput.accept(createOrientableTrapdoor(trapdoorBlock, resourcelocation, resourcelocation1, resourcelocation2));
+        this.registerSimpleItemModel(trapdoorBlock, resourcelocation1);
+    }
+
+    public void createCounter(Block block) {
+        blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
+                .with(createHorizontalFacingDispatch()).with(PropertyDispatch.property(Section.SECTION).generate(section ->
+                        switch (section) {
+                    case STRAIGHT -> Variant.variant().with(VariantProperties.MODEL, getPath("counter_straight"));
+                    case INNER -> Variant.variant().with(VariantProperties.MODEL, getPath("counter_inner"));
+                    case OUTER -> Variant.variant().with(VariantProperties.MODEL, getPath("counter_outer"));
+                })
+        ));
     }
 
     private void troughBlock() {
@@ -79,5 +113,9 @@ public class DemeterBlockModelGenerator extends BlockModelGenerators {
                 .with(Condition.condition().term(TroughBlock.FOOD_TYPE, TroughBlock.FoodType.SLOP).term(TroughBlock.FOOD_LEVEL, 4),
                         Variant.variant().with(VariantProperties.MODEL, Demeter.id("block/slop_four_quarters")))
         );
+    }
+
+    private ResourceLocation getPath(String id) {
+        return Demeter.id("block/" + id);
     }
 }

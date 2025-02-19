@@ -1,6 +1,5 @@
 package dev.teamcitrus.demeter.item;
 
-import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
@@ -19,12 +18,13 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
 
-public class MiraclePotionItem extends CitrusItem {
+public class MiraclePotionItem extends Item {
     public MiraclePotionItem() {
         super(new Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1).setId(createID("miracle_potion")));
     }

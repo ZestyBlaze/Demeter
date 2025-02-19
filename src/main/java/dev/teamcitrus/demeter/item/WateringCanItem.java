@@ -1,6 +1,5 @@
 package dev.teamcitrus.demeter.item;
 
-import dev.teamcitrus.citruslib.item.CitrusItem;
 import dev.teamcitrus.citruslib.tab.ITabFiller;
 import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.component.QualityLevelComponent;
@@ -21,6 +20,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -48,7 +48,7 @@ import java.util.Locale;
 
 import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
 
-public class WateringCanItem extends CitrusItem implements ITabFiller {
+public class WateringCanItem extends Item implements ITabFiller {
     public WateringCanItem() {
         super(new Properties().stacksTo(1).setId(createID("watering_can")));
     }

@@ -20,7 +20,6 @@ public class BlockFamilyRegistry {
             .slab(BlockRegistry.MAPLE_SLAB.get())
             .stairs(BlockRegistry.MAPLE_STAIRS.get())
             .door(BlockRegistry.MAPLE_DOOR.get())
-            .trapdoor(BlockRegistry.MAPLE_TRAPDOOR.get())
             .recipeGroupPrefix("wooden").recipeUnlockedBy("has_planks").getFamily();
 
     private static BlockFamily.Builder familyBuilder(Block baseBlock) {

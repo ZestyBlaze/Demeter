@@ -2,7 +2,6 @@ package dev.teamcitrus.demeter.world;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.data.providers.DemeterBiomesTagProvider;
-import dev.teamcitrus.demeter.world.tree.DemeterTrees;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -24,7 +23,7 @@ public class DemeterBiomeModifiers {
 
         context.register(MAPLE_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(DemeterBiomesTagProvider.HAS_MAPLE_TREES),
-                HolderSet.direct(placedFeatures.getOrThrow(DemeterTrees.MAPLE_TREE_PF)),
+                HolderSet.direct(placedFeatures.getOrThrow(DemeterPlacedFeatures.MAPLE_TREES)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
     }

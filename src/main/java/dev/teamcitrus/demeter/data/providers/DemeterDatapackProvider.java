@@ -5,7 +5,8 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.enchantment.DemeterEnchantments;
 import dev.teamcitrus.demeter.potion.DemeterMixes;
 import dev.teamcitrus.demeter.world.DemeterBiomeModifiers;
-import dev.teamcitrus.demeter.world.tree.DemeterTrees;
+import dev.teamcitrus.demeter.world.DemeterConfiguredFeature;
+import dev.teamcitrus.demeter.world.DemeterPlacedFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -20,8 +21,8 @@ public class DemeterDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(CitrusLibRegistries.BREWING_RECIPE, DemeterMixes::bootstrap)
             .add(Registries.ENCHANTMENT, DemeterEnchantments::bootstrap)
-            .add(Registries.CONFIGURED_FEATURE, DemeterTrees::bootstrapCF)
-            .add(Registries.PLACED_FEATURE, DemeterTrees::bootstrapPF)
+            .add(Registries.CONFIGURED_FEATURE, DemeterConfiguredFeature::bootstrap)
+            .add(Registries.PLACED_FEATURE, DemeterPlacedFeatures::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, DemeterBiomeModifiers::bootstrap);
 
     public DemeterDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

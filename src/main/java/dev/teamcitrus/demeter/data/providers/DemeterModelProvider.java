@@ -36,6 +36,11 @@ public class DemeterModelProvider extends ModelProvider {
         Set<DeferredHolder<Block, ? extends Block>> COPY = new HashSet<>(BLOCKS);
         COPY.remove(BlockRegistry.MAPLE_SYRUP_BLOCK);
         COPY.remove(BlockRegistry.DEAD_CROP);
+
+        COPY.remove(BlockRegistry.WINE);
+        COPY.remove(BlockRegistry.NEST);
+        COPY.remove(BlockRegistry.FEEDING_TRAY);
+        COPY.remove(BlockRegistry.MILK_CAN);
         return COPY.stream();
     }
 

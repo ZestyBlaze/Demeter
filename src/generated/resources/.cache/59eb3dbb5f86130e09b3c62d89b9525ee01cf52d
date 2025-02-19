@@ -1,5 +1,6 @@
-// 1.21.4	2025-01-09T22:11:26.5418528	Loot Tables
+// 1.21.4	2025-01-30T20:19:57.2588082	Loot Tables
 f7111f029eec7f8ecf9a20ba4c05d67074e58bab data/demeter/loot_table/blocks/dead_crop.json
+ea8e2ec7ffd7d6171769c245007eb8f8706ce817 data/demeter/loot_table/blocks/feeding_tray.json
 6610bf31756b8f128c410debea2b1ec0d6ab082b data/demeter/loot_table/blocks/maple_button.json
 56b133e7cc26094e809eb7edb02278fbbbb36d9a data/demeter/loot_table/blocks/maple_door.json
 d7cfa5caa8cc317d68c334a03a33386d22ed083a data/demeter/loot_table/blocks/maple_fence.json
@@ -17,6 +18,8 @@ afb976b1d83e5ced6b0b077d74e8546f8e621900 data/demeter/loot_table/blocks/maple_st
 d85422b79bfb6ddc0b85f522751a0bea24c032d6 data/demeter/loot_table/blocks/maple_trapdoor.json
 d77718939dafccc0c7247b3a13893960aa6d96ce data/demeter/loot_table/blocks/maple_wall_sign.json
 94c5ae47d562a85420d96ae658195388f83d1560 data/demeter/loot_table/blocks/maple_wood.json
+d0eb6c575941115c1af7f4aa74318b7e78b56826 data/demeter/loot_table/blocks/milk_can.json
+409de55e47a5844ce510b4e1066506f4dc6471fc data/demeter/loot_table/blocks/nest.json
 ace3b8220a3eec7d298fd6bf43d752490524e6b4 data/demeter/loot_table/blocks/potted_maple_sapling.json
 f6b97b184aa039f5f91802c340a9a07deb8e1f16 data/demeter/loot_table/blocks/stripped_maple_log.json
 363b70607bb6ae0dd2a85ee305fe7ea957c9504c data/demeter/loot_table/blocks/stripped_maple_wood.json

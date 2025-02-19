@@ -17,12 +17,12 @@ import java.util.concurrent.CompletableFuture;
 
 public class DemeterLootProvider {
     public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-        return new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(BFSubLootProvider::new, LootContextParamSets.BLOCK)), provider);
+        return new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(DemeterSubLootProvider::new, LootContextParamSets.BLOCK)), provider);
     }
 
-    public static class BFSubLootProvider extends BlockLootSubProvider {
-        public BFSubLootProvider(HolderLookup.Provider provider) {
-            super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
+    public static class DemeterSubLootProvider extends BlockLootSubProvider {
+        public DemeterSubLootProvider(HolderLookup.Provider provider) {
+            super(Set.of(), FeatureFlags.VANILLA_SET, provider);
         }
 
         @Override
@@ -50,6 +50,11 @@ public class DemeterLootProvider {
             dropSelf(BlockRegistry.MAPLE_SYRUP_BLOCK.get());
             dropSelf(BlockRegistry.TROUGH.get());
             dropOther(BlockRegistry.DEAD_CROP.get(), Items.DEAD_BUSH);
+
+            //TODO: Temp
+            dropOther(BlockRegistry.MILK_CAN.get(), Items.STICK);
+            dropOther(BlockRegistry.NEST.get(), Items.STICK);
+            dropOther(BlockRegistry.FEEDING_TRAY.get(), Items.STICK);
         }
 
         @Override

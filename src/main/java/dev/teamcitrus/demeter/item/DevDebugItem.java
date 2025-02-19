@@ -1,7 +1,5 @@
 package dev.teamcitrus.demeter.item;
 
-import dev.teamcitrus.citruslib.item.CitrusItem;
-import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
@@ -12,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +19,7 @@ import java.util.Locale;
 
 import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
 
-public class DevDebugItem extends CitrusItem {
+public class DevDebugItem extends Item {
     public DevDebugItem() {
         super(new Properties().stacksTo(1).setId(createID("dev_debug_item")));
     }
@@ -43,9 +42,6 @@ public class DevDebugItem extends CitrusItem {
                     .append("\nDays Since Fed: " + data.getDaysSinceFed())
                     .withStyle(ChatFormatting.AQUA)
             );
-        }
-        if (level.isClientSide()) {
-            Demeter.LOGGER.error("Sex: {}", StringUtils.capitalize(AnimalUtil.getAnimalData((Animal) interactionTarget).getSex().name().toLowerCase(Locale.ROOT)));
         }
         return InteractionResult.FAIL;
     }

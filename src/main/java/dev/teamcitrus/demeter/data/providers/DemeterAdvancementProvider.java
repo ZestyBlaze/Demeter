@@ -112,6 +112,16 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
             ).addCriterion("use_miracle_potion_on_frog", MiraclePotionTrigger.TriggerInstance.usePotionOnFrog())
                     .rewards(AdvancementRewards.Builder.experience(30))
                     .save(saver, id("use_miracle_potion_on_frog"));
+
+            AdvancementHolder acquireFoodPouch = Advancement.Builder.advancement().parent(root).display(
+                    ItemRegistry.FOOD_POUCH.get(),
+                    Component.translatable("advancement.demeter.acquire_food_pouch"),
+                    Component.translatable("advancement.demeter.acquire_food_pouch.desc"),
+                    null,
+                    AdvancementType.TASK,
+                    true, true, false
+            ).addCriterion("acquire_food_pouch", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.FOOD_POUCH.get()))
+                    .save(saver, id("acquire_food_pouch"));
         }
 
         private String id(String value) {

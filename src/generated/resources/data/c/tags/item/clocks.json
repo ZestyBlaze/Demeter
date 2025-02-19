@@ -2,7 +2,7 @@
   "values": [
     "minecraft:clock",
     {
-      "id": "demeter:breeding_charm",
+      "id": "demeter:pocket_watch",
       "required": false
     }
   ]

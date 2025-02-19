@@ -16,7 +16,8 @@ import java.util.function.Supplier;
 
 public class QualityLootModifier extends LootModifier {
     public static final Supplier<MapCodec<QualityLootModifier>> CODEC = Suppliers.memoize(() ->
-            RecordCodecBuilder.mapCodec(instance -> codecStart(instance).apply(instance, QualityLootModifier::new))
+            RecordCodecBuilder.mapCodec(instance -> codecStart(instance)
+                    .apply(instance, QualityLootModifier::new))
     );
 
     public QualityLootModifier(LootItemCondition[] conditionsIn) {

@@ -2,6 +2,9 @@ package dev.teamcitrus.demeter.data;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.data.providers.*;
+import dev.teamcitrus.demeter.data.providers.experimental.DemeterEBiomeProvider;
+import dev.teamcitrus.demeter.data.providers.experimental.DemeterExperimentalDPProvider;
+import dev.teamcitrus.demeter.data.providers.experimental.DemeterExperimentalLootProvider;
 import dev.teamcitrus.demeter.data.providers.lang.EnUsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -47,5 +50,8 @@ public class DemeterDatagen {
                 out, Component.literal("Enable experimental features for Demeter"),
                 FeatureFlagSet.of(Demeter.EXPERIMENTAL)
         ));
+        featurePack.addProvider(out -> DemeterExperimentalLootProvider.create(out, provider));
+        featurePack.addProvider(out -> new DemeterExperimentalDPProvider(out, provider));
+        featurePack.addProvider(out -> new DemeterEBiomeProvider(out, provider));
     }
 }

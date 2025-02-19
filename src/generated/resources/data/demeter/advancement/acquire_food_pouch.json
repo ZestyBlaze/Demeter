@@ -1,0 +1,33 @@
+{
+  "parent": "demeter:root",
+  "criteria": {
+    "acquire_food_pouch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "demeter:food_pouch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.demeter.acquire_food_pouch.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "demeter:food_pouch"
+    },
+    "title": {
+      "translate": "advancement.demeter.acquire_food_pouch"
+    }
+  },
+  "requirements": [
+    [
+      "acquire_food_pouch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -14,6 +14,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
 import java.util.concurrent.CompletableFuture;
@@ -78,10 +79,14 @@ public class DemeterRecipeProvider extends RecipeProvider {
                 .save(output);
 
         ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, AccessoriesCompat.Items.POCKET_WATCH)
-                        .define('#', DemeterItemTagsProvider.CLOCKS).define('R', Items.REDSTONE).define('C', Items.CHAIN)
+                        .define('#', Items.CLOCK).define('R', Items.REDSTONE).define('C', Items.CHAIN)
                         .pattern("C ").pattern("#R")
-                        .unlockedBy("has_item", has(DemeterItemTagsProvider.CLOCKS))
+                        .unlockedBy("has_item", has(Items.CLOCK))
                         .save(output.withConditions(new ModLoadedCondition("accessories")));
+        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, ItemRegistry.FOOD_POUCH)
+                        .requires(ItemTags.BUNDLES).requires(Tags.Items.ANIMAL_FOODS)
+                        .unlockedBy("has_item", has(Items.BUNDLE))
+                        .save(output);
 
         twoByTwoPacker(RecipeCategory.REDSTONE, BlockRegistry.MAPLE_SYRUP_BLOCK, ItemRegistry.MAPLE_SYRUP_BOTTLE);
 

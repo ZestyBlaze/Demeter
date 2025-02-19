@@ -8,7 +8,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#c:clocks",
+    "#": "minecraft:clock",
     "C": "minecraft:chain",
     "R": "minecraft:redstone"
   },

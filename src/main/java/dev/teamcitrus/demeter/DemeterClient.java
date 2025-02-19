@@ -8,11 +8,15 @@ import dev.teamcitrus.demeter.client.HUDRenderData;
 import dev.teamcitrus.demeter.client.models.layer.TuskLayer;
 import dev.teamcitrus.demeter.client.models.model.TuskModel;
 import dev.teamcitrus.demeter.client.property.QualityProperty;
+import dev.teamcitrus.demeter.client.tooltip.ClientFoodPouchTooltip;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
+import dev.teamcitrus.demeter.item.pouch.FoodPouchTooltip;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
+import dev.teamcitrus.demeter.registry.FluidRegistry;
+import dev.teamcitrus.demeter.registry.FluidTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import dev.teamcitrus.demeter.util.PlayerUtil;
 import dev.teamcitrus.demeter.util.QualityUtil;
@@ -21,8 +25,11 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -31,17 +38,23 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 
 @EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DemeterClient {
+    public static final ResourceLocation WINE_TEXTURE = Demeter.id("block/fluids/wine");
+
     public static final ContextKey<AnimalSexes> SEX_KEY = new ContextKey<>(Demeter.id("sex"));
     public static final ModelLayerLocation TUSKS = new ModelLayerLocation(Demeter.id("tusks"), "tusks");
     public static final Object2ObjectMap<ResourceKey<Level>, HUDRenderData> RENDERERS = new Object2ObjectOpenHashMap<>();
@@ -50,8 +63,9 @@ public class DemeterClient {
     public static void clientCommonSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             Sheets.addWoodType(BlockRegistry.MAPLE_WOOD_TYPE);
-
             RENDERERS.put(Level.OVERWORLD, new DemeterHud());
+            ItemBlockRenderTypes.setRenderLayer(FluidRegistry.WINE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidRegistry.WINE_FLOWING.get(), RenderType.translucent());
         });
     }
 
@@ -87,6 +101,31 @@ public class DemeterClient {
                 guiGraphics.pose().popPose();
             }
         });
+    }
+
+    @SubscribeEvent
+    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerFluidType(new IClientFluidTypeExtensions() {
+            @Override
+            public ResourceLocation getStillTexture() {
+                return WINE_TEXTURE;
+            }
+
+            @Override
+            public ResourceLocation getFlowingTexture() {
+                return WINE_TEXTURE;
+            }
+
+            @Override
+            public ResourceLocation getOverlayTexture() {
+                return ResourceLocation.withDefaultNamespace("block/water_overlay");
+            }
+        }, FluidTypeRegistry.WINE);
+    }
+
+    @SubscribeEvent
+    public static void registerClientTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
+        event.register(FoodPouchTooltip.class, foodPouchTooltip -> new ClientFoodPouchTooltip(foodPouchTooltip.contents()));
     }
 
     private static void renderHUD(Minecraft mc, GuiGraphics graphics) {
