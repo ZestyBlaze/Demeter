@@ -15,6 +15,7 @@ import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchTooltip;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
+import dev.teamcitrus.demeter.registry.EntityTypeRegistry;
 import dev.teamcitrus.demeter.registry.FluidRegistry;
 import dev.teamcitrus.demeter.registry.FluidTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
@@ -24,12 +25,15 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.BoatRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -56,7 +60,9 @@ public class DemeterClient {
     public static final ResourceLocation WINE_TEXTURE = Demeter.id("block/fluids/wine");
 
     public static final ContextKey<AnimalSexes> SEX_KEY = new ContextKey<>(Demeter.id("sex"));
-    public static final ModelLayerLocation TUSKS = new ModelLayerLocation(Demeter.id("tusks"), "tusks");
+    public static final ModelLayerLocation MAPLE_BOAT = new ModelLayerLocation(Demeter.id("boat/maple"), "main");
+    public static final ModelLayerLocation MAPLE_CHEST_BOAT = new ModelLayerLocation(Demeter.id("chest_boat/maple"), "main");
+    public static final ModelLayerLocation TUSKS = new ModelLayerLocation(Demeter.id("tusks"), "main");
     public static final Object2ObjectMap<ResourceKey<Level>, HUDRenderData> RENDERERS = new Object2ObjectOpenHashMap<>();
 
     @SubscribeEvent
@@ -70,8 +76,16 @@ public class DemeterClient {
     }
 
     @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(EntityTypeRegistry.MAPLE_BOAT.get(), context -> new BoatRenderer(context, MAPLE_BOAT));
+        event.registerEntityRenderer(EntityTypeRegistry.MAPLE_CHEST_BOAT.get(), context -> new BoatRenderer(context, MAPLE_CHEST_BOAT));
+    }
+
+    @SubscribeEvent
     public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(TUSKS, TuskModel::createModel);
+        event.registerLayerDefinition(MAPLE_BOAT, BoatModel::createBoatModel);
+        event.registerLayerDefinition(MAPLE_CHEST_BOAT, BoatModel::createChestBoatModel);
     }
 
     @SubscribeEvent
