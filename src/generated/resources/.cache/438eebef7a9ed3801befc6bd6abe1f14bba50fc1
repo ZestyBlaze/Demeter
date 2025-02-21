@@ -1,4 +1,4 @@
-// 1.21.4	2025-02-12T01:13:07.8084088	Model Definitions - demeter
+// 1.21.4	2025-02-21T16:52:04.6543459	Model Definitions - demeter
 8267223360d1461107d3a8868fad12030782b38e assets/demeter/blockstates/bamboo_shoots.json
 8e2f9acf55145c9a41b939435e4d1f5af5ab7c00 assets/demeter/blockstates/counter.json
 ff2ec3aaab927fb1add70f6ab1851cb74bbf3525 assets/demeter/blockstates/maple_button.json
@@ -19,6 +19,7 @@ b714f927d16a3791ebf759a5e6922f52a2c924ce assets/demeter/blockstates/maple_trapdo
 c9789ffff2211b138c27856ed73ee8f534dd17b4 assets/demeter/blockstates/maple_wall_sign.json
 ee38f5827f0a43c6fee26e7b852dfa6bb3be619d assets/demeter/blockstates/maple_wood.json
 396f39e1282532d2c93f33d33d0053c49a7baaae assets/demeter/blockstates/potted_maple_sapling.json
+9f19a947089be50f6bad89f0eafd57c715c6c06c assets/demeter/blockstates/strawberry_bush.json
 7c6e7f327b114fa53b28a7e5263fde24a6ff2cf3 assets/demeter/blockstates/stripped_maple_log.json
 bdd72b939eb0bbf7aa78f3c5c7a1fc2bb9b6a548 assets/demeter/blockstates/stripped_maple_wood.json
 65d15932e27fa72ce828c37e6c76294ce6971b57 assets/demeter/blockstates/trough.json
@@ -51,6 +52,7 @@ d8ba24f6356abe7b538a54025fa671aac9bed7f3 assets/demeter/items/maple_syrup_block.
 67688a948f4160eb21bc397c5eabb236c605682d assets/demeter/items/maple_wood.json
 70e6e226c587b35db7a3fc01adfa63cf059dc28e assets/demeter/items/milk_bottle.json
 a3e9df8884b83229772ebdd0e7a5e61baac141ca assets/demeter/items/miracle_potion.json
+c9619a7429d669da9b9cb23416461687d81b69a3 assets/demeter/items/strawberries.json
 05d6228b6e6f93dd16731d6b06dcced743c6c0f0 assets/demeter/items/stripped_maple_log.json
 355fc5ac8ad5c3179fde40860641138aedb143d5 assets/demeter/items/stripped_maple_wood.json
 200ff02882caf0788b20b1cb58ed16e7797819c8 assets/demeter/items/trough.json
@@ -93,6 +95,10 @@ fc4461519c040056087a28cc8835eeec6d7b2fdc assets/demeter/models/block/maple_stair
 84c7a75f4c099da8ff421a0c569fdacd7184ea05 assets/demeter/models/block/maple_trapdoor_top.json
 857a6edad7d4d61c5fa33f57f051ea52631c2ac5 assets/demeter/models/block/maple_wood.json
 a79bf62583b3d4662ebe16740063d6a645e5b810 assets/demeter/models/block/potted_maple_sapling.json
+def1cdc23830d8776ec400af0f59a661af973897 assets/demeter/models/block/strawberry_bush_stage0.json
+ac150af9813c07c3c79fe0f4e640ef601af43ccf assets/demeter/models/block/strawberry_bush_stage1.json
+138c196504195e314d533c7b9132c699d05166b6 assets/demeter/models/block/strawberry_bush_stage2.json
+5adccd37f6fbfa7fbcecdd3f48839069c5b2551b assets/demeter/models/block/strawberry_bush_stage3.json
 f91b852b2732215be9b9d3b8fce254b4cfd43b13 assets/demeter/models/block/stripped_maple_log.json
 b3003cbff82aceca2848bd65404fbc5a22981096 assets/demeter/models/block/stripped_maple_log_horizontal.json
 b60c87d9cc8c793e0ca421f00aa5db5cf03e1f26 assets/demeter/models/block/stripped_maple_wood.json
@@ -111,6 +117,7 @@ a30bb8a2cae051a897f1108082e453e148cc74d5 assets/demeter/models/item/maple_saplin
 1bca9addbae9f20e8e517711b02a5fc375fe2d46 assets/demeter/models/item/maple_syrup_bottle.json
 5b9d48f10c95ed6db2b493e7ca53ef92002a55a0 assets/demeter/models/item/milk_bottle.json
 bdec1e3cdba6c899ca233a3cba3e2564e18f0b8b assets/demeter/models/item/miracle_potion.json
+f0fec215c8488b623555ea664cf54436a219fe9c assets/demeter/models/item/strawberries.json
 07027b188863695ff87ab835e9e918df1c856683 assets/demeter/models/item/watering_can.json
 953f47169878b6e63eff0311c6881b4ce9642e0d assets/demeter/models/item/watering_can_copper.json
 b02444a291e8a1b27cd3750b6a4fafcaa0704ca5 assets/demeter/models/item/watering_can_iron.json
