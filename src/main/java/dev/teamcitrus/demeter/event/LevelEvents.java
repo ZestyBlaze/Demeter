@@ -48,9 +48,6 @@ public class LevelEvents {
 
         level.getEntities(EntityTypeTest.forClass(Animal.class), animal -> AnimalUtil.getStats(animal) != null).forEach(animal -> {
             animal.getData(AttachmentRegistry.ANIMAL).onNewDay(animal);
-            if (AnimalUtil.getStats(animal).milking().isPresent()) {
-                animal.getData(AttachmentRegistry.MILK).setHasBeenMilked(false);
-            }
             if (animal instanceof Sheep sheep) {
                 sheep.getData(AttachmentRegistry.SHEEP).onNewDay(sheep);
             }

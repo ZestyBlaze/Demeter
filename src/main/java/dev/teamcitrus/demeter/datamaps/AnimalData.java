@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public record AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp,
                          int minChildrenPerBirth, int maxChildrenPerBirth, List<Item> favouriteFoods,
-                         List<ItemStack> diggableItems, Optional<MilkingCodec> milking
+                         List<ItemStack> diggableItems
 ) {
     public static final Codec<AnimalData> CODEC = RecordCodecBuilder.create(func -> func.group(
             Activity.CODEC.fieldOf("activity").forGetter(AnimalData::activity),
@@ -25,36 +25,24 @@ public record AnimalData(Activity activity, int minLifespan, int maxLifespan, in
             Codec.INT.optionalFieldOf("minChildrenPerBirth", 1).forGetter(AnimalData::minChildrenPerBirth),
             Codec.INT.optionalFieldOf("maxChildrenPerBirth", 1).forGetter(AnimalData::maxChildrenPerBirth),
             BuiltInRegistries.ITEM.byNameCodec().listOf().optionalFieldOf("favouriteFoods", Collections.emptyList()).forGetter(AnimalData::favouriteFoods),
-            ItemStack.CODEC.listOf().optionalFieldOf("diggableItems", Collections.emptyList()).forGetter(AnimalData::diggableItems),
-            MilkingCodec.CODEC.optionalFieldOf("milking").forGetter(AnimalData::milking)
+            ItemStack.CODEC.listOf().optionalFieldOf("diggableItems", Collections.emptyList()).forGetter(AnimalData::diggableItems)
     ).apply(func, AnimalData::new));
 
     public AnimalData(Activity activity, int minLifespan, int maxLifespan) {
-        this(activity, minLifespan, maxLifespan, 0, 0, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.empty());
+        this(activity, minLifespan, maxLifespan, 0, 0, 1, 1, Collections.emptyList(), Collections.emptyList());
     }
 
     public AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp) {
-        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.empty());
+        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, 1, 1, Collections.emptyList(), Collections.emptyList());
     }
 
     public AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp, int minChildrenPerBirth, int maxChildrenPerBirth, List<ItemStack> diggableItems) {
-        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, minChildrenPerBirth, maxChildrenPerBirth, Collections.emptyList(), diggableItems, Optional.empty());
-    }
-
-    public AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp, MilkingCodec milking) {
-        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, 1, 1, Collections.emptyList(), Collections.emptyList(), Optional.of(milking));
+        this(activity, minLifespan, maxLifespan, daysPregnant, daysToGrowUp, minChildrenPerBirth, maxChildrenPerBirth, Collections.emptyList(), diggableItems);
     }
 
     public enum Activity {
         DIURNAL, NOCTURNAL;
 
         public static final Codec<Activity> CODEC = CitrusCodecs.enumCodec(Activity.class);
-    }
-
-    public record MilkingCodec(Map<Item, Item> inputOutputMap) {
-        public static final Codec<MilkingCodec> CODEC = RecordCodecBuilder.create(func -> func.group(
-                Codec.unboundedMap(BuiltInRegistries.ITEM.byNameCodec(), BuiltInRegistries.ITEM.byNameCodec())
-                        .fieldOf("map").forGetter(MilkingCodec::inputOutputMap)
-        ).apply(func, MilkingCodec::new));
     }
 }

@@ -2,7 +2,6 @@ package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.datamaps.AnimalData.Activity;
-import dev.teamcitrus.demeter.datamaps.AnimalData.MilkingCodec;
 import dev.teamcitrus.demeter.datamaps.CropData;
 import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
@@ -10,16 +9,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("deprecation")
@@ -42,10 +38,6 @@ public class DemeterDataMapGenerator extends DataMapProvider {
         cropData.add(Blocks.TORCHFLOWER_CROP.builtInRegistryHolder(), new CropData(2), false);
         cropData.add(Blocks.WHEAT.builtInRegistryHolder(), new CropData(3), false);
 
-        Map<Item, Item> cowMilkIO = new HashMap<>();
-        cowMilkIO.put(Items.BUCKET, Items.MILK_BUCKET);
-        cowMilkIO.put(Items.GLASS_BOTTLE, ItemRegistry.MILK_BOTTLE.get());
-
         Builder<AnimalData, EntityType<?>> animalData = builder(DataMapRegistry.ANIMAL_DATA);
         animalData.add(EntityType.CAMEL.builtInRegistryHolder(), new AnimalData(
                 Activity.DIURNAL, 10, 14, 11, 13
@@ -54,7 +46,7 @@ public class DemeterDataMapGenerator extends DataMapProvider {
                 Activity.NOCTURNAL, 10, 20, 5, 7
         ), false);
         animalData.add(EntityType.COW.builtInRegistryHolder(), new AnimalData(
-                Activity.DIURNAL, 12, 20, 9, 14, new MilkingCodec(cowMilkIO)
+                Activity.DIURNAL, 12, 20, 9, 14
         ), false);
         animalData.add(EntityType.DONKEY.builtInRegistryHolder(), new AnimalData(
                 Activity.DIURNAL, 25, 30, 24, 12

@@ -13,42 +13,6 @@ public class AnimalMixin {
     @Unique
     private final Animal demeter$animal = (Animal) (Object) this;
 
-    /*
-    @Inject(
-            method = "mobInteract",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void demeter$handleNewMilking(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (player.level().isClientSide) return;
-        AnimalData stats = AnimalUtil.getStats(demeter$animal);
-        if (!(AnimalUtil.getStats(demeter$animal) != null && stats.milking().isPresent())) return;
-        AnimalData.MilkingCodec milking = stats.milking().get();
-        ItemStack stack = player.getItemInHand(hand);
-
-        if (!milking.inputOutputMap().containsKey(stack.getItem())) return;
-        if (!AnimalUtil.getSex(demeter$animal).equals(AnimalSexes.FEMALE)) {
-            player.displayClientMessage(Component.translatable("message.demeter.milk.fail_sex").withStyle(ChatFormatting.RED), true);
-            return;
-        }
-
-        MilkAttachment attachment = demeter$animal.getData(AttachmentRegistry.MILK);
-        if (attachment.getHasBeenMilked()) {
-            player.displayClientMessage(Component.translatable("message.demeter.milk.fail_daily").withStyle(ChatFormatting.RED), true);
-            return;
-        }
-
-        ItemStack output = milking.inputOutputMap().get(stack.getItem()).getDefaultInstance();
-        QualityUtil.randomiseQuality(output);
-        ItemStack result = ItemUtils.createFilledResult(stack, player, output);
-        ServerPlayer serverPlayer = (ServerPlayer) player;
-        serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.COW_MILK), SoundSource.PLAYERS, demeter$animal.getX(), demeter$animal.getY(), demeter$animal.getZ(), 1.0f, 1.0f, 0));
-        player.setItemInHand(hand, result);
-        attachment.setHasBeenMilked(true);
-        cir.setReturnValue(InteractionResult.SUCCESS);
-    }
-     */
-
     @ModifyReturnValue(
             method = "canFallInLove",
             at = @At("RETURN")

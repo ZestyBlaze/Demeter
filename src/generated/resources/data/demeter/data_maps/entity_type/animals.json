@@ -19,12 +19,6 @@
       "daysPregnant": 9,
       "daysToGrowUp": 14,
       "maxLifespan": 20,
-      "milking": {
-        "map": {
-          "minecraft:bucket": "minecraft:milk_bucket",
-          "minecraft:glass_bottle": "demeter:milk_bottle"
-        }
-      },
       "minLifespan": 12
     },
     "minecraft:donkey": {
