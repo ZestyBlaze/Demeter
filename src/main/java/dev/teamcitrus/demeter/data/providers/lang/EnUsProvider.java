@@ -7,6 +7,7 @@ import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.data.providers.DemeterBiomesTagProvider;
 import dev.teamcitrus.demeter.data.providers.DemeterBlockTagsProvider;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.data.providers.experimental.DemeterEBiomeProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;
@@ -81,9 +82,10 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("error.demeter.maxhighermin", "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' for entity type `%s` resulting in the birth failing!");
         add("error.demeter.namesloadfail", "Error while loading names");
         add("item.demeter.food_pouch.tooltip", "Can hold a mix of animal foods");
-        add("item.demeter.quality_tooltip", "Quality: %s");
         add("item.demeter.milk_bottle.desc", "Removes one random negative potion effect");
         add("item.demeter.pocket_watch.error", "Since \"requireClockItemForTime\" is currently not true, this item is not required in gameplay");
+        add("item.demeter.quality_tooltip", "Quality: %s");
+        add("item.demeter.strawberries", "Strawberries");
         add("item.demeter.watering_can", "Watering Can");
         add("item.demeter.watering_can.fail", "Something has gone wrong, this can has no data!");
         add("item.demeter.watering_can.uses", "Uses: %s");
@@ -104,6 +106,7 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add(DemeterItemTagsProvider.TROUGH_FOODS_SLOP, "Slop Trough Foods");
         add(DemeterItemTagsProvider.TROUGH_FOODS, "Trough Foods");
         add(DemeterBlockTagsProvider.MAPLE_LOGS, "Maple Logs");
+        add(DemeterEBiomeProvider.HAS_BAMBOO_SHOOTS, "Has Bamboo Shoots");
         add(DemeterBiomesTagProvider.HAS_MAPLE_TREES, "Has Maple Trees");
 
         generateBlockLanguageKeys(BlockRegistry.BLOCKS);

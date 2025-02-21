@@ -8,11 +8,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -31,18 +29,15 @@ public class DemeterExperimentalLootProvider {
         protected void generate() {
             dropSelf(BlockRegistry.BAMBOO_SHOOTS.get());
             dropSelf(BlockRegistry.COUNTER.get());
+            dropSelf(BlockRegistry.STRAWBERRY_BUSH.get());
         }
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
-            var blocks = BlockRegistry.BLOCKS.getEntries();
-            var copy = new HashSet<>(blocks);
-            blocks.forEach(blockDeferredHolder -> {
-                if (!blockDeferredHolder.get().requiredFeatures().contains(Demeter.EXPERIMENTAL)) {
-                    copy.remove(blockDeferredHolder);
-                }
-            });
-            return copy.stream().map(Holder::value).toList();
+            return BlockRegistry.BLOCKS.getEntries().stream()
+                    .filter(blockDeferredHolder ->
+                            blockDeferredHolder.get().requiredFeatures().contains(Demeter.EXPERIMENTAL)
+                    ).map(Holder::value).toList();
         }
     }
 }

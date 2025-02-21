@@ -5,6 +5,7 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.item.*;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchItem;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -63,6 +64,7 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> TROUGH = ITEMS.registerSimpleBlockItem(BlockRegistry.TROUGH);
 
     //Experimental Items
+    public static final DeferredItem<BlockItem> STRAWBERRIES = ITEMS.register("strawberries", () -> new BlockItem(BlockRegistry.STRAWBERRY_BUSH.get(), new Item.Properties().requiredFeatures(Demeter.EXPERIMENTAL).setId(createID("strawberries"))));
     public static final DeferredItem<BlockItem> BAMBOO_SHOOTS = ITEMS.register("bamboo_shoots", () -> new BlockItem(BlockRegistry.BAMBOO_SHOOTS.get(), new Item.Properties().useBlockDescriptionPrefix().requiredFeatures(Demeter.EXPERIMENTAL).setId(createID("bamboo_shoots"))));
     public static final DeferredItem<BlockItem> COUNTER = ITEMS.register("counter", () -> new BlockItem(BlockRegistry.COUNTER.get(), new Item.Properties().useBlockDescriptionPrefix().requiredFeatures(Demeter.EXPERIMENTAL).setId(createID("counter"))));
 

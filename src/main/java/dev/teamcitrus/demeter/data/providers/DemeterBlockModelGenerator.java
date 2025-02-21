@@ -5,6 +5,9 @@ import dev.teamcitrus.demeter.duck.Section;
 import dev.teamcitrus.demeter.block.trough.TroughBlock;
 import dev.teamcitrus.demeter.registry.BlockFamilyRegistry;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
+import dev.teamcitrus.demeter.registry.ItemRegistry;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.*;
@@ -14,7 +17,12 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -38,6 +46,7 @@ public class DemeterBlockModelGenerator extends BlockModelGenerators {
         createNonTemplateModelBlock(BlockRegistry.WINE.get());
         troughBlock();
         createPlantWithDefaultItem(BlockRegistry.BAMBOO_SHOOTS.get(), PlantType.NOT_TINTED, "cutout");
+        createStrawberryBush();
         createCounter(BlockRegistry.COUNTER.get());
     }
 
@@ -71,6 +80,11 @@ public class DemeterBlockModelGenerator extends BlockModelGenerators {
 
     public void createPlant(Block block, PlantType plantType, String renderType) {
         this.createCrossBlock(block, plantType, renderType);
+    }
+
+    public void createStrawberryBush() {
+        this.registerSimpleFlatItemModel(ItemRegistry.STRAWBERRIES.get());
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(BlockRegistry.STRAWBERRY_BUSH.get()).with(PropertyDispatch.property(BlockStateProperties.AGE_3).generate((p_388136_) -> Variant.variant().with(VariantProperties.MODEL, this.createSuffixedVariant(BlockRegistry.STRAWBERRY_BUSH.get(), "_stage" + p_388136_, ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross)))));
     }
 
     public void createTrapdoor(Block trapdoorBlock, String renderType) {

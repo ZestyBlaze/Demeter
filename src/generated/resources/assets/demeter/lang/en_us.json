@@ -40,6 +40,7 @@
   "block.demeter.milk_can": "Milk Can",
   "block.demeter.nest": "Nest",
   "block.demeter.potted_maple_sapling": "Potted Maple Sapling",
+  "block.demeter.strawberry_bush": "Strawberry Bush",
   "block.demeter.stripped_maple_log": "Stripped Maple Log",
   "block.demeter.stripped_maple_wood": "Stripped Maple Wood",
   "block.demeter.trough": "Trough",
@@ -101,6 +102,7 @@
   "item.demeter.quality_tooltip.copper": "Copper",
   "item.demeter.quality_tooltip.iron": "Iron",
   "item.demeter.quality_tooltip.netherite": "Netherite",
+  "item.demeter.strawberries": "Strawberries",
   "item.demeter.truffle": "Truffle",
   "item.demeter.watering_can": "Watering Can",
   "item.demeter.watering_can.fail": "Something has gone wrong, this can has no data!",
@@ -122,5 +124,6 @@
   "tag.item.demeter.trough_foods": "Trough Foods",
   "tag.item.demeter.trough_foods.hay": "Hay Trough Foods",
   "tag.item.demeter.trough_foods.slop": "Slop Trough Foods",
+  "tag.worldgen.biome.demeter.has_bamboo_shoots": "Has Bamboo Shoots",
   "tag.worldgen.biome.demeter.has_maple_trees": "Has Maple Trees"
 }
