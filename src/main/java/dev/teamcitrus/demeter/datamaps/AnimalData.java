@@ -9,8 +9,6 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public record AnimalData(Activity activity, int minLifespan, int maxLifespan, int daysPregnant, int daysToGrowUp,
                          int minChildrenPerBirth, int maxChildrenPerBirth, List<Item> favouriteFoods,

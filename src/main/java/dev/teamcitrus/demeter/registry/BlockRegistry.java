@@ -1,10 +1,10 @@
 package dev.teamcitrus.demeter.registry;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.block.experimental.BambooShootsBlock;
 import dev.teamcitrus.demeter.block.DeadCropBlock;
 import dev.teamcitrus.demeter.block.MapleLogBlock;
 import dev.teamcitrus.demeter.block.MapleSyrupBlock;
+import dev.teamcitrus.demeter.block.experimental.BambooShootsBlock;
 import dev.teamcitrus.demeter.block.experimental.CounterBlock;
 import dev.teamcitrus.demeter.block.experimental.StrawberryBushBlock;
 import dev.teamcitrus.demeter.block.trough.TroughBlock;

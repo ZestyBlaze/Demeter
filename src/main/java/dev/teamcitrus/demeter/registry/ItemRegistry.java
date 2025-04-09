@@ -5,7 +5,6 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.item.*;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchItem;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

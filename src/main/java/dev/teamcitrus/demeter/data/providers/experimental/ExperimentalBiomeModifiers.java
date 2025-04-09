@@ -1,7 +1,6 @@
 package dev.teamcitrus.demeter.data.providers.experimental;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.data.providers.DemeterBiomesTagProvider;
 import dev.teamcitrus.demeter.world.experimental.ExperimentalPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
