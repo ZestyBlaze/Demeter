@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.data.providers.lang;
 
 import dev.teamcitrus.citruslib.datagen.CitrusLanguageProvider;
+import dev.teamcitrus.citruslib.util.JavaUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
 import dev.teamcitrus.demeter.component.QualityLevel;
@@ -9,6 +10,7 @@ import dev.teamcitrus.demeter.data.providers.DemeterBlockTagsProvider;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.data.providers.experimental.DemeterEBiomeProvider;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
+import dev.teamcitrus.demeter.registry.FluidTypeRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;
 import org.apache.commons.lang3.StringUtils;
@@ -108,6 +110,12 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add(DemeterBlockTagsProvider.MAPLE_LOGS, "Maple Logs");
         add(DemeterEBiomeProvider.HAS_BAMBOO_SHOOTS, "Has Bamboo Shoots");
         add(DemeterBiomesTagProvider.HAS_MAPLE_TREES, "Has Maple Trees");
+
+        FluidTypeRegistry.FLUIDS.getEntries().forEach(i -> {
+            String name = i.get().getDescriptionId().replaceFirst("fluid_type\\.demeter\\.", "");
+            name = JavaUtil.toTitleCase(name, "_");
+            add(i.get().getDescriptionId(), name);
+        });
 
         generateBlockLanguageKeys(BlockRegistry.BLOCKS);
         generateItemLanguageKeys(ItemRegistry.ITEMS, List.of(ItemRegistry.WATERING_CAN.get()));

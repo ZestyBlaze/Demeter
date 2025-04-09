@@ -83,6 +83,7 @@
   "enchantment.demeter.spite": "Curse of Spite",
   "error.demeter.maxhighermin": "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' for entity type `%s` resulting in the birth failing!",
   "error.demeter.namesloadfail": "Error while loading names",
+  "fluid_type.demeter.wine": "Wine",
   "item.demeter.animal_brush": "Animal Brush",
   "item.demeter.animal_tag": "Animal Tag",
   "item.demeter.breeding_charm": "Breeding Charm",
