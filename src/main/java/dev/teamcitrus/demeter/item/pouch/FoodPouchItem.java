@@ -13,13 +13,12 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.Optional;
 
@@ -79,9 +78,25 @@ public class FoodPouchItem extends Item {
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
+        if (other.isEmpty()) {
+            return false;
+        }
         IItemHandler handler = stack.getCapability(Capabilities.ItemHandler.ITEM);
         if (handler != null && action == ClickAction.PRIMARY && !stack.isEmpty()) {
+            int freeSlot = getFreeSlot(handler, other);
+            if (freeSlot >= 0) {
+                ItemStack remaining = handler.insertItem(freeSlot, other.copy(), false);
+                other.setCount(remaining.getCount());
 
+                if (remaining.getCount() != other.getCount()) {
+                    playInsertSound(player);
+                } else {
+                    playInsertFailSound(player);
+                }
+
+                broadcastChangesOnContainerMenu(player);
+                return true;
+            }
         }
         return false;
     }
