@@ -52,7 +52,7 @@ public class FoodPouchItem extends Item {
         if (handler != null && stack.getCount() == 1) {
             ItemStack itemStack = slot.getItem();
             if (action == ClickAction.PRIMARY && !itemStack.isEmpty()) {
-                int freeSlot = getFreeSlot(handler, itemStack);
+                int freeSlot = getFreeSlotOrMatchingSlot(handler, itemStack);
                 if (freeSlot >= 0) {
                     ItemStack remaining = handler.insertItem(freeSlot, itemStack.copy(), false);
                     itemStack.setCount(remaining.getCount());
@@ -83,7 +83,7 @@ public class FoodPouchItem extends Item {
         }
         IItemHandler handler = stack.getCapability(Capabilities.ItemHandler.ITEM);
         if (handler != null && action == ClickAction.PRIMARY && !stack.isEmpty()) {
-            int freeSlot = getFreeSlot(handler, other);
+            int freeSlot = getFreeSlotOrMatchingSlot(handler, other);
             if (freeSlot >= 0) {
                 ItemStack remaining = handler.insertItem(freeSlot, other.copy(), false);
                 other.setCount(remaining.getCount());
@@ -118,10 +118,10 @@ public class FoodPouchItem extends Item {
         level.playSound(null, entity.blockPosition(), SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.PLAYERS, 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
     }
 
-    public int getFreeSlot(IItemHandler handler, ItemStack stack) {
+    public int getFreeSlotOrMatchingSlot(IItemHandler handler, ItemStack stack) {
         for(int i = 0; i < handler.getSlots(); ++i) {
             ItemStack slotStack = handler.getStackInSlot(i);
-            if (slotStack.isEmpty() || ItemStack.isSameItem(slotStack, stack) && handler.getSlotLimit(i) == slotStack.getCount()) {
+            if (ItemStack.isSameItem(slotStack, stack) || slotStack.isEmpty()) {
                 return i;
             }
         }
