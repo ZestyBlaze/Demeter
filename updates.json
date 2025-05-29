@@ -1,0 +1,10 @@
+{
+  "homepage": "https://www.curseforge.com/minecraft/mc-mods/xxxxxxx",
+  "1.21.5": {
+    "3.0.0": "Initial 1.21.5 Port"
+  },
+  "promos": {
+    "1.21.5-latest": "1.0.0a",
+    "1.21.5-recommended": "1.0.0a"
+  }
+}
