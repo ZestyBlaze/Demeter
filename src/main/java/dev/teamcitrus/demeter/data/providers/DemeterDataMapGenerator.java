@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import teamdraco.unnamedanimalmod.registry.EntityRegistry;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -41,6 +42,9 @@ public class DemeterDataMapGenerator extends DataMapProvider {
         Builder<AnimalData, EntityType<?>> animalData = builder(DataMapRegistry.ANIMAL_DATA);
         animalData.add(EntityType.CAMEL.builtInRegistryHolder(), new AnimalData(
                 Activity.DIURNAL, 10, 14, 11, 13
+        ), false);
+        animalData.add(EntityRegistry.CAPYBARA.get().builtInRegistryHolder(), new AnimalData(
+                Activity.DIURNAL, 8, 10, 14, 12
         ), false);
         animalData.add(EntityType.CAT.builtInRegistryHolder(), new AnimalData(
                 Activity.NOCTURNAL, 10, 20, 5, 7

@@ -133,6 +133,13 @@
       "daysToGrowUp": 7,
       "maxLifespan": 13,
       "minLifespan": 10
+    },
+    "unnamedanimalmod:capybara": {
+      "activity": "diurnal",
+      "daysPregnant": 14,
+      "daysToGrowUp": 12,
+      "maxLifespan": 10,
+      "minLifespan": 8
     }
   }
 }

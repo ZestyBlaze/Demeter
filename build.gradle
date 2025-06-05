@@ -25,6 +25,16 @@ repositories {
         name "Illusive Soulworks maven"
         url "https://maven.theillusivec4.top/"
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://cursemaven.com"
+            }
+        }
+        filter {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 base {
@@ -86,6 +96,8 @@ dependencies {
     implementation jarJar ("com.github.TeamCitrusMods:CitrusLib:${citrus_lib_version}")
     compileOnly ("top.theillusivec4.curios:curios-neoforge:${project.curios_version}+${project.minecraft_version}:api")
     runtimeOnly ("top.theillusivec4.curios:curios-neoforge:${project.curios_version}+${project.minecraft_version}")
+    compileOnly("curse.maven:capybara-uam-549031:${project.capybara_version}")
+    runtimeOnly("curse.maven:capybara-uam-549031:${project.capybara_version}")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
