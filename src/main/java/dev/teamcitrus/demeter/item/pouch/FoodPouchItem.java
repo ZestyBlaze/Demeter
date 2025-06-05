@@ -13,6 +13,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -103,7 +104,7 @@ public class FoodPouchItem extends Item {
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
-        return !stack.has(DataComponents.HIDE_TOOLTIP) && !stack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) ? Optional.ofNullable(stack.get(DataComponents.CONTAINER)).map(FoodPouchTooltip::new) : Optional.empty();
+        return Optional.ofNullable(stack.get(DataComponents.CONTAINER)).map(FoodPouchTooltip::new);
     }
 
     private static void playInsertSound(Entity entity) {
@@ -121,7 +122,7 @@ public class FoodPouchItem extends Item {
     public int getFreeSlotOrMatchingSlot(IItemHandler handler, ItemStack stack) {
         for(int i = 0; i < handler.getSlots(); ++i) {
             ItemStack slotStack = handler.getStackInSlot(i);
-            if (ItemStack.isSameItem(slotStack, stack) || slotStack.isEmpty()) {
+            if (ItemStack.isSameItem(slotStack, stack) && slotStack.getCount() != slotStack.getMaxStackSize() || slotStack.isEmpty()) {
                 return i;
             }
         }

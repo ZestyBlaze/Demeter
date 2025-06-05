@@ -1,6 +1,6 @@
-// 1.21.4	2025-02-09T18:23:07.5625357	Tags for minecraft:item mod id demeter
-b30a5c9a22b98ee1a9d5a93bbc5aa006f57631c6 data/accessories/tags/item/charm.json
-4ac46848a530edf43c2e88e55002c9dbecb54608 data/accessories/tags/item/necklace.json
+// 1.21.5	2025-05-29T15:01:50.4203752	Tags for minecraft:item mod id demeter
+b30a5c9a22b98ee1a9d5a93bbc5aa006f57631c6 data/curios/tags/item/charm.json
+4ac46848a530edf43c2e88e55002c9dbecb54608 data/curios/tags/item/necklace.json
 cf48fab1fcaea5a67a479862c45d4d06fb4becab data/c/tags/item/clocks.json
 ba644a67e5a9a13be9ee07c3ff41572f227f0b45 data/c/tags/item/fence_gates/wooden.json
 324782f73b27317c3854c789792b09f4ed259d94 data/c/tags/item/foods.json

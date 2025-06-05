@@ -23,6 +23,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -43,8 +44,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
 
@@ -110,16 +111,16 @@ public class WateringCanItem extends Item implements ITabFiller {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         if (stack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
-            tooltipComponents.add(
+            tooltipAdder.accept(
                     Component.translatable("item.demeter.watering_can.uses", Component.literal(
                                             calculateRemainingUses(stack) + "/" + calculateTotalUses(stack))
                                     .withStyle(ChatFormatting.AQUA))
                             .withStyle(ChatFormatting.DARK_GRAY)
             );
         } else {
-            tooltipComponents.add(
+            tooltipAdder.accept(
                     Component.translatable("item.demeter.watering_can.fail")
                             .withStyle(ChatFormatting.RED)
             );

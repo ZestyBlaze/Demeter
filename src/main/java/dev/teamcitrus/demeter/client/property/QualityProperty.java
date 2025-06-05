@@ -1,5 +1,6 @@
 package dev.teamcitrus.demeter.client.property;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.component.QualityLevel;
@@ -20,6 +21,11 @@ public class QualityProperty implements SelectItemModelProperty<QualityLevel> {
     @Override
     public @Nullable QualityLevel get(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i, ItemDisplayContext itemDisplayContext) {
         return itemStack.get(ComponentRegistry.QUALITY_LEVEL).level();
+    }
+
+    @Override
+    public Codec<QualityLevel> valueCodec() {
+        return QualityLevel.CODEC;
     }
 
     @Override

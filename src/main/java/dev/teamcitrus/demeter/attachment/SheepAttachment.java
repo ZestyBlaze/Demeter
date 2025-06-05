@@ -3,7 +3,7 @@ package dev.teamcitrus.demeter.attachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.teamcitrus.demeter.config.DemeterConfig;
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.sheep.Sheep;
 
 public class SheepAttachment {
     private int daysSinceSheared;

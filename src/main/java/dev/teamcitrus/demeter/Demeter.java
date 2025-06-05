@@ -3,7 +3,6 @@ package dev.teamcitrus.demeter;
 import dev.teamcitrus.citruslib.network.PayloadHelper;
 import dev.teamcitrus.citruslib.tab.TabFillingRegistry;
 import dev.teamcitrus.citruslib.util.ModUtil;
-import dev.teamcitrus.demeter.block.trough.TroughBlockEntity;
 import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchItemHandler;
@@ -84,10 +83,6 @@ public class Demeter {
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) ->
                 new FoodPouchItemHandler(stack),
                 ItemRegistry.FOOD_POUCH
-        );
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK,
-                BlockEntityRegistry.TROUGH.get(),
-                TroughBlockEntity::getCapability
         );
     }
 }

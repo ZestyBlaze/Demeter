@@ -143,7 +143,6 @@ public class DemeterClient {
         HUDRenderData hud = RENDERERS.get(mc.level.dimension());
         if (hud != null) {
             PoseStack matrix = graphics.pose();
-            RenderSystem.enableBlend();
             int x = hud.getX();
             int y = hud.getY();
             if (hud.isEnabled(mc)) {
@@ -165,7 +164,6 @@ public class DemeterClient {
                         (PlayerUtil.hasInHand(mc.player, DemeterItemTagsProvider.CLOCKS) || CuriosCompat.isWearing(mc.player, CuriosCompat.Items.POCKET_WATCH.get()))))
                     graphics.drawString(mc.font, hud.getFooter(mc), x + hud.getClockX(), y + hud.getClockY(), 0xFFFFFFFF);
             }
-            RenderSystem.disableBlend();
         }
     }
 

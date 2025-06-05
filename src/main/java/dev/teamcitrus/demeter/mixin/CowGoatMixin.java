@@ -1,12 +1,12 @@
 package dev.teamcitrus.demeter.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.AbstractCow;
 import net.minecraft.world.entity.animal.goat.Goat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin({Cow.class, Goat.class})
+@Mixin({AbstractCow.class, Goat.class})
 public class CowGoatMixin {
     @ModifyExpressionValue(
             method = "mobInteract",

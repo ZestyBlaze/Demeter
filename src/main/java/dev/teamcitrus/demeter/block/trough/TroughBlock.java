@@ -3,6 +3,7 @@ package dev.teamcitrus.demeter.block.trough;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,8 +40,9 @@ public class TroughBlock extends Block implements EntityBlock {
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
-            if (!(level.getBlockState(pos).getValue(FOOD_LEVEL) == 4)) {
+            if (!level.getBlockState(pos).getValue(FOOD_LEVEL).equals(4)) {
                 TroughBlockEntity entity = (TroughBlockEntity) level.getBlockEntity(pos);
+
                 if (entity != null) {
                     if (stack.is(DemeterItemTagsProvider.TROUGH_FOODS_HAY) && (level.getBlockState(pos).getValue(FOOD_TYPE).equals(FoodType.HAY)
                             || level.getBlockState(pos).getValue(FOOD_TYPE).equals(FoodType.NONE))) {
@@ -49,6 +52,7 @@ public class TroughBlock extends Block implements EntityBlock {
                                 .setValue(FOOD_TYPE, FoodType.HAY)
                                 .setValue(FOOD_LEVEL, state.getValue(FOOD_LEVEL) + 1)
                         );
+                        return InteractionResult.SUCCESS;
                     }
                     if (stack.is(DemeterItemTagsProvider.TROUGH_FOODS_SLOP) && (level.getBlockState(pos).getValue(FOOD_TYPE).equals(FoodType.SLOP)
                             || level.getBlockState(pos).getValue(FOOD_TYPE).equals(FoodType.NONE))) {
@@ -58,27 +62,12 @@ public class TroughBlock extends Block implements EntityBlock {
                                 .setValue(FOOD_TYPE, FoodType.SLOP)
                                 .setValue(FOOD_LEVEL, state.getValue(FOOD_LEVEL) + 1)
                         );
+                        return InteractionResult.SUCCESS;
                     }
                 }
             }
         }
         return InteractionResult.PASS;
-    }
-
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            TroughBlockEntity entity = (TroughBlockEntity) level.getBlockEntity(pos);
-            if (entity != null) {
-                IItemHandler stackHandler = entity.getCapability(null);
-                NonNullList<ItemStack> items = NonNullList.create();
-                for (int i = 0; i < stackHandler.getSlots(); i++) {
-                    ItemStack slotItem = stackHandler.getStackInSlot(i);
-                    if (!slotItem.isEmpty()) items.add(slotItem);
-                }
-                Containers.dropContents(level, pos, items);
-            }
-        }
     }
 
     @Override

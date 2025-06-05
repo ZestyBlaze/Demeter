@@ -71,20 +71,20 @@ public class DigProductsGoal extends Goal {
 
     @Nullable
     protected Vec3 getPosition() {
-        List<BlockPos> validPositions = allValidBlocksInArea(3, 8);
+        List<BlockPos> validPositions = allValidBlocksInArea();
         if (!validPositions.isEmpty()) {
             return validPositions.get(mob.level().random.nextInt(validPositions.size())).getBottomCenter();
         }
         return null;
     }
 
-    protected List<BlockPos> allValidBlocksInArea(int verticalRange, int horizontalSearchRange) {
+    private List<BlockPos> allValidBlocksInArea() {
         List<BlockPos> validPos = new ArrayList<>();
         BlockPos blockpos = this.mob.blockPosition();
         BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 
-        for (int k = 0; k >= -verticalRange; k--) {
-            for (int l = 0; l < horizontalSearchRange; ++l) {
+        for (int k = 0; k >= -3; k--) {
+            for (int l = 0; l < 8; ++l) {
                 for (int i1 = 0; i1 <= l; i1 = i1 > 0 ? -i1 : 1 - i1) {
                     for (int j1 = i1 < l && i1 > -l ? l : 0; j1 <= l; j1 = j1 > 0 ? -j1 : 1 - j1) {
                         blockpos$mutable.setWithOffset(blockpos, i1, k, j1);
@@ -119,7 +119,11 @@ public class DigProductsGoal extends Goal {
         this.mob.getNavigation().stop();
         if (mob.blockPosition().closerThan(new BlockPos((int) this.wantedX, (int) this.wantedY,
                         (int) this.wantedZ), 2.5)) {
-            for (ItemStack stack : products) {
+            List<ItemStack> productList = new ArrayList<>(products);
+            if (AnimalUtil.isAnimalHappy(mob)) {
+                productList.addAll(products);
+            }
+            for (ItemStack stack : productList) {
                 mob.spawnAtLocation((ServerLevel) mob.level(), stack);
             }
         }

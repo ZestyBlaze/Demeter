@@ -1,0 +1,25 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "demeter:block/feeding_tray"
+      }
+    },
+    {
+      "apply": {
+        "model": "demeter:block/seed_semi"
+      },
+      "when": {
+        "food_level": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "demeter:block/seed_full"
+      },
+      "when": {
+        "food_level": "2"
+      }
+    }
+  ]
+}

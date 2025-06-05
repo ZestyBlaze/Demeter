@@ -200,7 +200,7 @@ public class AnimalAttachment {
 
     public void setPregnant(Animal animal, boolean value, Animal otherParent) {
         this.isPregnant = value;
-        this.otherParentData = otherParent.serializeNBT(animal.level().registryAccess());
+        //this.otherParentData = otherParent.serializeNBT(animal.level().registryAccess());
         if (value) {
             AnimalData data = AnimalUtil.getStats(animal);
             if (data != null) {

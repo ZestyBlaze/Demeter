@@ -55,7 +55,7 @@ public class ClientFoodPouchTooltip implements ClientTooltipComponent {
 
     private void renderBundleWithItemsTooltip(Font font, int x, int y, int width, int height, GuiGraphics guiGraphics) {
         boolean flag = contents.getSlots() > 12;
-        List<ItemStack> list = getShownItems(5);
+        List<ItemStack> list = contents.stream().toList().subList(0, Math.min(contents.getSlots(), 5));
         int i = x + getContentXOffset(width) + 96;
         int j = y + gridSizeY() * 24;
         int k = 1;
@@ -72,11 +72,6 @@ public class ClientFoodPouchTooltip implements ClientTooltipComponent {
                 }
             }
         }
-    }
-
-    private List<ItemStack> getShownItems(int itemsToShow) {
-        int i = Math.min(contents.getSlots(), itemsToShow);
-        return contents.stream().toList().subList(0, i);
     }
 
     private static boolean shouldRenderSurplusText(boolean hasEnoughItems, int cellX, int cellY) {

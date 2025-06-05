@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.78'
+    id 'net.neoforged.moddev' version '2.0.89'
     id 'idea'
 }
 
@@ -15,7 +15,7 @@ group = mod_group_id
 repositories {
     mavenLocal()
     maven {
-        name "Jitpack"
+        name "Jitpack - CitrusLib"
         url "https://jitpack.io"
         content {
             includeGroup "com.github.TeamCitrusMods"
@@ -96,6 +96,8 @@ dependencies {
     implementation jarJar ("com.github.TeamCitrusMods:CitrusLib:${citrus_lib_version}")
     compileOnly ("top.theillusivec4.curios:curios-neoforge:${project.curios_version}+${project.minecraft_version}:api")
     runtimeOnly ("top.theillusivec4.curios:curios-neoforge:${project.curios_version}+${project.minecraft_version}")
+    //compileOnly("mezz.jei:jei-${project.minecraft_version}-neoforge-api:${project.jei_version}")
+    //runtimeOnly("mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}")
     compileOnly("curse.maven:capybara-uam-549031:${project.capybara_version}")
     runtimeOnly("curse.maven:capybara-uam-549031:${project.capybara_version}")
 }

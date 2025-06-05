@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class StrawberryBushBlock extends BushBlock implements BonemealableBlock {
-    public static final MapCodec<StrawberryBushBlock> CODEC = simpleCodec(StrawberryBushBlock::new);
+    public static final MapCodec<BushBlock> CODEC = simpleCodec(StrawberryBushBlock::new);
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
     public StrawberryBushBlock(Properties properties) {
@@ -28,11 +28,11 @@ public class StrawberryBushBlock extends BushBlock implements BonemealableBlock 
 
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
-        return Items.STICK.getDefaultInstance();
+        return new ItemStack(Items.STICK);
     }
 
     @Override
-    protected MapCodec<? extends BushBlock> codec() {
+    public MapCodec<BushBlock> codec() {
         return CODEC;
     }
 

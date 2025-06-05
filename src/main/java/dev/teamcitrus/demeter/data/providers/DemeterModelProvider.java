@@ -36,10 +36,11 @@ public class DemeterModelProvider extends ModelProvider {
         Set<DeferredHolder<Block, ? extends Block>> COPY = new HashSet<>(BLOCKS);
         COPY.remove(BlockRegistry.MAPLE_SYRUP_BLOCK);
         COPY.remove(BlockRegistry.DEAD_CROP);
+        COPY.remove(BlockRegistry.TROUGH);
+        COPY.remove(BlockRegistry.FEEDING_TRAY);
 
         COPY.remove(BlockRegistry.WINE);
         COPY.remove(BlockRegistry.NEST);
-        COPY.remove(BlockRegistry.FEEDING_TRAY);
         COPY.remove(BlockRegistry.MILK_CAN);
         return COPY.stream();
     }
@@ -49,6 +50,7 @@ public class DemeterModelProvider extends ModelProvider {
         Collection<DeferredHolder<Item, ? extends Item>> ITEMS = ItemRegistry.ITEMS.getEntries();
         Set<DeferredHolder<Item, ? extends Item>> COPY = new HashSet<>(ITEMS);
         COPY.remove(ItemRegistry.TRUFFLE);
+        COPY.remove(ItemRegistry.DIARY);
         return COPY.stream();
     }
 }

@@ -7,6 +7,8 @@ import dev.teamcitrus.demeter.block.MapleSyrupBlock;
 import dev.teamcitrus.demeter.block.experimental.BambooShootsBlock;
 import dev.teamcitrus.demeter.block.experimental.CounterBlock;
 import dev.teamcitrus.demeter.block.experimental.StrawberryBushBlock;
+import dev.teamcitrus.demeter.block.nest.NestBlock;
+import dev.teamcitrus.demeter.block.tray.FeedingTrayBlock;
 import dev.teamcitrus.demeter.block.trough.TroughBlock;
 import dev.teamcitrus.demeter.world.DemeterConfiguredFeature;
 import net.minecraft.core.registries.Registries;
@@ -55,8 +57,8 @@ public class BlockRegistry {
     public static final DeferredBlock<DeadCropBlock> DEAD_CROP = BLOCKS.register("dead_crop", () -> new DeadCropBlock(BlockBehaviour.Properties.of().sound(SoundType.CROP).instabreak().noCollission().setId(createID("dead_crop"))));
 
     public static final DeferredBlock<Block> MILK_CAN = BLOCKS.registerSimpleBlock("milk_can");
-    public static final DeferredBlock<Block> FEEDING_TRAY = BLOCKS.registerSimpleBlock("feeding_tray");
-    public static final DeferredBlock<Block> NEST = BLOCKS.registerSimpleBlock("nest");
+    public static final DeferredBlock<Block> FEEDING_TRAY = BLOCKS.register("feeding_tray", () -> new FeedingTrayBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB).setId(createID("feeding_tray"))));
+    public static final DeferredBlock<Block> NEST = BLOCKS.register("nest", () -> new NestBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).setId(createID("nest"))));
 
     //Flagged Blocks
     public static final DeferredBlock<Block> BAMBOO_SHOOTS = BLOCKS.register("bamboo_shoots", () -> new BambooShootsBlock(Block.Properties.of().noCollission().instabreak().sound(SoundType.GRASS).requiredFeatures(Demeter.EXPERIMENTAL).setId(createID("bamboo_shoots"))));

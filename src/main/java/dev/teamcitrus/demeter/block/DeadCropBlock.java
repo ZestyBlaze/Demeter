@@ -9,7 +9,7 @@ public class DeadCropBlock extends BushBlock {
     }
 
     @Override
-    protected MapCodec<? extends BushBlock> codec() {
+    public MapCodec<BushBlock> codec() {
         return simpleCodec(DeadCropBlock::new);
     }
 }

@@ -13,7 +13,7 @@ public class DemeterHud extends HUDRenderData {
         if (years >= 1) {
             days = days - (years * TimeUtil.YEAR_DAYS);
         }
-        return Component.translatable("Year %s, Day %s", 1 + years, 1 + days);
+        return Component.translatable("hud.demeter.year_day", 1 + years, 1 + days);
     }
 
     @Override

@@ -79,10 +79,14 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("config.demeter.qol_config", "QOL Config");
         add("config.demeter.qol_config.birth_alert", "Animal Birth Alert");
         add("enchantment.demeter.barber", "Barber");
+        add("enchantment.demeter.barber.desc", "Doubles the drops from shearing");
         add("enchantment.demeter.comfort", "Comfort");
+        add("enchantment.demeter.comfort.desc", "Exponentially increases the love from brushing per level");
         add("enchantment.demeter.spite", "Curse of Spite");
+        add("enchantment.demeter.spite.desc", "Makes animals hate you for brushing them");
         add("error.demeter.maxhighermin", "'maxChildrenPerBirth' is higher than 'maxChildrenPerBirth' for entity type `%s` resulting in the birth failing!");
         add("error.demeter.namesloadfail", "Error while loading names");
+        add("hud.demeter.year_day", "Year %s, Day %s");
         add("item.demeter.food_pouch.tooltip", "Can hold a mix of animal foods");
         add("item.demeter.milk_bottle.desc", "Removes one random negative potion effect");
         add("item.demeter.pocket_watch.error", "Since \"requireClockItemForTime\" is currently not true, this item is not required in gameplay");
