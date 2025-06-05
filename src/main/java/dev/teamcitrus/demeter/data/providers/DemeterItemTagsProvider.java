@@ -1,10 +1,9 @@
 package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
-import io.wispforest.accessories.api.data.AccessoriesTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -15,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
+import top.theillusivec4.curios.api.CuriosTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -70,7 +70,7 @@ public class DemeterItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.BUTTONS).add(BlockRegistry.MAPLE_BUTTON.asItem());
         tag(ItemTags.WOODEN_BUTTONS).add(BlockRegistry.MAPLE_BUTTON.asItem());
         tag(ItemTags.LEAVES).add(BlockRegistry.MAPLE_LEAVES.get().asItem());
-        tag(CLOCKS).add(Items.CLOCK).addOptional(AccessoriesCompat.Items.POCKET_WATCH.getId());
+        tag(CLOCKS).add(Items.CLOCK).addOptional(CuriosCompat.Items.POCKET_WATCH.getId());
         tag(TOOLS_ANIMAL_BRUSH).add(ItemRegistry.ANIMAL_BRUSH.get());
         tag(Tags.Items.TOOLS).addTag(TOOLS_ANIMAL_BRUSH);
         tag(TROUGH_FOODS).addTags(TROUGH_FOODS_HAY, TROUGH_FOODS_SLOP);
@@ -78,7 +78,7 @@ public class DemeterItemTagsProvider extends ItemTagsProvider {
         tag(TROUGH_FOODS_SLOP).add(Items.CARROT, Items.POTATO);
         tag(Tags.Items.FOODS).add(ItemRegistry.MAPLE_SYRUP_BOTTLE.get());
         tag(Tags.Items.POTIONS).add(ItemRegistry.MIRACLE_POTION.get());
-        tag(AccessoriesTags.CHARM_TAG).add(AccessoriesCompat.Items.BREEDING_CHARM.get());
-        tag(AccessoriesTags.NECKLACE_TAG).add(AccessoriesCompat.Items.POCKET_WATCH.get());
+        tag(CuriosTags.CHARM).add(CuriosCompat.Items.BREEDING_CHARM.get());
+        tag(CuriosTags.NECKLACE).add(CuriosCompat.Items.POCKET_WATCH.get());
     }
 }

@@ -2,7 +2,7 @@ package dev.teamcitrus.demeter.registry;
 
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.item.*;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchItem;
 import net.minecraft.core.Direction;
@@ -25,12 +25,13 @@ public class ItemRegistry {
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> {
                 if (!(item.get() instanceof WateringCanItem))
                     output.accept(item.get());
-                if (ModUtil.isModInstalled("accessories"))
-                    AccessoriesCompat.addItemsToTab(output);
+                if (ModUtil.isModInstalled("curios"))
+                    CuriosCompat.addItemsToTab(output);
             }))
             .build());
 
     public static final DeferredItem<Item> DEV_DEBUG_ITEM = ITEMS.register("dev_debug_item", DevDebugItem::new);
+    public static final DeferredItem<Item> DIARY = ITEMS.register("diary", () -> new DiaryItem(new Item.Properties().setId(createID("diary"))));
     public static final DeferredItem<Item> ANIMAL_TAG = ITEMS.register("animal_tag", AnimalTagItem::new);
     public static final DeferredItem<Item> ANIMAL_BRUSH = ITEMS.register("animal_brush", AnimalBrushItem::new);
     public static final DeferredItem<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", MilkBottleItem::new);
@@ -40,6 +41,8 @@ public class ItemRegistry {
     public static final DeferredItem<Item> TRUFFLE = ITEMS.registerSimpleItem("truffle");
     public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);
     public static final DeferredItem<Item> FOOD_POUCH = ITEMS.register("food_pouch", FoodPouchItem::new);
+    public static final DeferredItem<BlockItem> TROUGH = ITEMS.registerSimpleBlockItem(BlockRegistry.TROUGH);
+    public static final DeferredItem<BlockItem> NEST = ITEMS.registerSimpleBlockItem(BlockRegistry.NEST);
     public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_LOG);
     public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_WOOD);
     public static final DeferredItem<BlockItem> STRIPPED_MAPLE_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_MAPLE_LOG);
@@ -60,7 +63,6 @@ public class ItemRegistry {
     public static final DeferredItem<Item> MAPLE_BOAT = ITEMS.register("maple_boat", () -> new BoatItem(EntityTypeRegistry.MAPLE_BOAT.get(), new Item.Properties().stacksTo(1).setId(createID("maple_boat"))));
     public static final DeferredItem<Item> MAPLE_CHEST_BOAT = ITEMS.register("maple_chest_boat", () -> new BoatItem(EntityTypeRegistry.MAPLE_CHEST_BOAT.get(), new Item.Properties().stacksTo(1).setId(createID("maple_chest_boat"))));
     public static final DeferredItem<BlockItem> MAPLE_SYRUP_BLOCK = ITEMS.registerSimpleBlockItem(BlockRegistry.MAPLE_SYRUP_BLOCK);
-    public static final DeferredItem<BlockItem> TROUGH = ITEMS.registerSimpleBlockItem(BlockRegistry.TROUGH);
 
     //Experimental Items
     public static final DeferredItem<BlockItem> STRAWBERRIES = ITEMS.register("strawberries", () -> new BlockItem(BlockRegistry.STRAWBERRY_BUSH.get(), new Item.Properties().requiredFeatures(Demeter.EXPERIMENTAL).setId(createID("strawberries"))));

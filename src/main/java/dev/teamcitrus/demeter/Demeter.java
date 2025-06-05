@@ -4,7 +4,7 @@ import dev.teamcitrus.citruslib.network.PayloadHelper;
 import dev.teamcitrus.citruslib.tab.TabFillingRegistry;
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.block.trough.TroughBlockEntity;
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchItemHandler;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
@@ -55,8 +55,8 @@ public class Demeter {
         FluidRegistry.FLUIDS.register(bus);
         bus.register(this);
         
-        if (ModUtil.isModInstalled("accessories")) {
-            AccessoriesCompat.init(bus);
+        if (ModUtil.isModInstalled("curios")) {
+            CuriosCompat.init(bus);
         }
     }
 

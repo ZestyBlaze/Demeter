@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.core.HolderGetter;
@@ -49,7 +49,7 @@ public class DemeterRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(Items.PAPER))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, AccessoriesCompat.Items.BREEDING_CHARM)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, CuriosCompat.Items.BREEDING_CHARM)
                 .define('#', Items.IRON_NUGGET).define('m', ItemRegistry.TRUFFLE)
                 .define('b', Items.BONE_MEAL).define('t', Items.TORCHFLOWER)
                 .define('g', Items.GLASS_BOTTLE)
@@ -78,7 +78,7 @@ public class DemeterRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(Items.WHEAT))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, AccessoriesCompat.Items.POCKET_WATCH)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, CuriosCompat.Items.POCKET_WATCH)
                         .define('#', Items.CLOCK).define('R', Items.REDSTONE).define('C', Items.CHAIN)
                         .pattern("C ").pattern("#R")
                         .unlockedBy("has_item", has(Items.CLOCK))

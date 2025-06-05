@@ -3,7 +3,7 @@ package dev.teamcitrus.demeter.util;
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
@@ -25,7 +25,6 @@ public class AnimalUtil {
     }
 
     public static boolean isAnimalHappy(Animal animal) {
-        //TODO: Will be an equation that calculates hunger, warmth and love levels for a "happy" level
         return getAnimalData(animal).getLove() >= 80
                 && getAnimalData(animal).hasBeenFedToday();
     }
@@ -44,8 +43,8 @@ public class AnimalUtil {
             if (stats != null) {
                 int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.minChildrenPerBirth(), stats.maxChildrenPerBirth());
                 if (self.getLoveCause() != null) {
-                    if (ModUtil.isModInstalled("accessories")) {
-                        if (AccessoriesCompat.isWearing(self.getLoveCause(), AccessoriesCompat.Items.BREEDING_CHARM.get())) {
+                    if (ModUtil.isModInstalled("curios")) {
+                        if (CuriosCompat.isWearing(self.getLoveCause(), CuriosCompat.Items.BREEDING_CHARM.get())) {
                             numberOfTimes += 2;
                         }
                     }

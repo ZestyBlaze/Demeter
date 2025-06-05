@@ -9,7 +9,7 @@ import dev.teamcitrus.demeter.client.models.layer.TuskLayer;
 import dev.teamcitrus.demeter.client.models.model.TuskModel;
 import dev.teamcitrus.demeter.client.property.QualityProperty;
 import dev.teamcitrus.demeter.client.tooltip.ClientFoodPouchTooltip;
-import dev.teamcitrus.demeter.compat.accessories.AccessoriesCompat;
+import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
@@ -162,7 +162,7 @@ public class DemeterClient {
 
             if (DemeterConfig.displayClockInHUD.get()) {
                 if (!DemeterConfig.requireClockItemForTime.get() || (DemeterConfig.requireClockItemForTime.get() &&
-                        (PlayerUtil.hasInHand(mc.player, DemeterItemTagsProvider.CLOCKS) || AccessoriesCompat.isWearing(mc.player, AccessoriesCompat.Items.POCKET_WATCH.get()))))
+                        (PlayerUtil.hasInHand(mc.player, DemeterItemTagsProvider.CLOCKS) || CuriosCompat.isWearing(mc.player, CuriosCompat.Items.POCKET_WATCH.get()))))
                     graphics.drawString(mc.font, hud.getFooter(mc), x + hud.getClockX(), y + hud.getClockY(), 0xFFFFFFFF);
             }
             RenderSystem.disableBlend();

@@ -33,8 +33,8 @@ featureFlags="META-INF/feature_flags.json"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
-    modId="accessories"
+    modId="curios"
     type="optional"
-    versionRange="[1.0.0-beta.33,)"
+    versionRange="[11.0.1+1.21.5,)"
     ordering="NONE"
     side="BOTH"
