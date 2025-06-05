@@ -42,6 +42,7 @@ public class DemeterDatagen {
         event.addProvider(new DemeterEntityTagProvider(output, provider));
         event.addProvider(new DemeterRecipeProvider.Runner(output, provider));
         event.addProvider(new DemeterLootModifierProvider(output, provider));
+        event.addProvider(new DemeterCuriosProvider(output, provider));
 
         event.addProvider(new EnUsProvider(output));
 
