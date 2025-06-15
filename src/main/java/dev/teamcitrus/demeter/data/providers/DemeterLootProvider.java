@@ -41,9 +41,7 @@ public class DemeterLootProvider {
             dropSelf(BlockRegistry.MAPLE_PRESSURE_PLATE.get());
             dropSelf(BlockRegistry.MAPLE_BUTTON.get());
             dropSelf(BlockRegistry.MAPLE_SIGN.get());
-            dropSelf(BlockRegistry.MAPLE_WALL_SIGN.get());
             dropSelf(BlockRegistry.MAPLE_HANGING_SIGN.get());
-            dropSelf(BlockRegistry.MAPLE_WALL_HANGING_SIGN.get());
             dropSelf(BlockRegistry.MAPLE_SAPLING.get());
             dropPottedContents(BlockRegistry.POTTED_MAPLE_SAPLING.get());
             add(BlockRegistry.MAPLE_LEAVES.get(), createLeavesDrops(BlockRegistry.MAPLE_LEAVES.get(), BlockRegistry.MAPLE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
