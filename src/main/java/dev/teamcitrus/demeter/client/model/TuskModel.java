@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.client.models.model;
+package dev.teamcitrus.demeter.client.model;
 
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;

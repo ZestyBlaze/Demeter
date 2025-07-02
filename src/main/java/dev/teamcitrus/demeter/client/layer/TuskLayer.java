@@ -1,10 +1,10 @@
-package dev.teamcitrus.demeter.client.models.layer;
+package dev.teamcitrus.demeter.client.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.DemeterClient;
-import dev.teamcitrus.demeter.client.models.model.TuskModel;
+import dev.teamcitrus.demeter.client.model.TuskModel;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
 import net.minecraft.client.model.PigModel;
 import net.minecraft.client.model.geom.EntityModelSet;
