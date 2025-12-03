@@ -12,7 +12,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 
-@EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Demeter.MODID)
 public class MiscEvents {
     @SubscribeEvent
     public static void onBlockEntityValidBlocks(BlockEntityTypeAddBlocksEvent event) {

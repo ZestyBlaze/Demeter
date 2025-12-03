@@ -11,7 +11,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
-@EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Demeter.MODID)
 public class DataMapRegistry {
     public static final DataMapType<EntityType<?>, AnimalData> ANIMAL_DATA = DataMapType.builder(
             Demeter.id("animals"), Registries.ENTITY_TYPE, AnimalData.CODEC).synced(AnimalData.CODEC, false).build();

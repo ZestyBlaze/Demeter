@@ -19,7 +19,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Demeter.MODID, value = Dist.CLIENT)
 public class DemeterDatagen {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent.Client event) {

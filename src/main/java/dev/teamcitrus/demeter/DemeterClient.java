@@ -51,7 +51,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 
-@EventBusSubscriber(modid = Demeter.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Demeter.MODID, value = Dist.CLIENT)
 public class DemeterClient {
     public static final ResourceLocation WINE_TEXTURE = Demeter.id("block/fluids/wine");
 
