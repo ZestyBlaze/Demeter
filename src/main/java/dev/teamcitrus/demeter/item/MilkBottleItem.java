@@ -9,7 +9,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import static dev.teamcitrus.demeter.registry.ItemRegistry.createID;
