@@ -21,7 +21,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DEMETER_TAB = CREATIVE_MODE_TABS.register("demeter", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.demeter"))
-            .icon(ItemRegistry.MAPLE_LOG.get()::getDefaultInstance)
+            .icon(ItemRegistry.ANIMAL_BRUSH.get()::getDefaultInstance)
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> {
                 if (!(item.get() instanceof WateringCanItem))
                     output.accept(item.get());
