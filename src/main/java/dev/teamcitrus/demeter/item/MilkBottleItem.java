@@ -26,6 +26,7 @@ public class MilkBottleItem extends Item {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         tooltipAdder.accept(Component.translatable("item.demeter.milk_bottle.desc").withStyle(ChatFormatting.DARK_GRAY));
     }

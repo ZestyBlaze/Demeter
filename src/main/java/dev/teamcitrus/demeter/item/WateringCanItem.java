@@ -111,6 +111,7 @@ public class WateringCanItem extends Item implements ITabFiller {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         if (stack.has(ComponentRegistry.QUALITY_LEVEL.get())) {
             tooltipAdder.accept(
