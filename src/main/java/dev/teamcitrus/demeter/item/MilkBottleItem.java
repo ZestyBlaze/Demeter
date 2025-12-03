@@ -20,7 +20,8 @@ public class MilkBottleItem extends Item {
             .hasConsumeParticles(false).onConsume(ClearRandomNegativeEffect.INSTANCE).build();
 
     public MilkBottleItem() {
-        super(new Properties().craftRemainder(Items.GLASS_BOTTLE).component(DataComponents.CONSUMABLE, MILK_BOTTLE)
+        super(new Properties().craftRemainder(Items.GLASS_BOTTLE)
+                .component(DataComponents.CONSUMABLE, MILK_BOTTLE)
                 .usingConvertsTo(Items.GLASS_BOTTLE).stacksTo(16).setId(createID("milk_bottle")));
     }
 
