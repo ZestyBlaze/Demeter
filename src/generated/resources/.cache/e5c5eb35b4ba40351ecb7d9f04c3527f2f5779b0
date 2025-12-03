@@ -1,10 +1,10 @@
-// 1.21.5	2025-05-29T15:01:50.4223754	Advancements
+// 1.21.5	2025-12-03T22:59:44.1066806	Advancements
 cccafe424295a066e89576cc866c879861bb36cf data/demeter/advancement/acquire_food_pouch.json
 8557d9908e95be9768db9b21a873fc8f05081036 data/demeter/advancement/brushed_animal.json
 1207979523e109ab316cff4dc049247e848f194d data/demeter/advancement/love_max.json
 59cb176a66613c38f7eb64ec7d9f72ece9d9507d data/demeter/advancement/obtain_maple_syrup.json
 404942cb96466c5a32e16475945766e0c1cf537e data/demeter/advancement/pet_animal.json
-ee7290aae32803a95faef1f4d0beb3a5f42d8943 data/demeter/advancement/root.json
+b4414ea6e17be3f6bfb700441565b89f6f7d2b80 data/demeter/advancement/root.json
 9b4b36f8ffb6426bd90103bee45b25c182c2eb76 data/demeter/advancement/spiteful_brushed_animal.json
 1b2c927c76b49a21f1847fd1490b653b1b19af57 data/demeter/advancement/use_miracle_potion.json
 cee1fbe2650d784ae784c86c4f854e75ab75710c data/demeter/advancement/use_miracle_potion_on_frog.json

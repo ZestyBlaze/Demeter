@@ -32,10 +32,10 @@ public class DemeterAdvancementProvider extends AdvancementProvider {
         @Override
         public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver) {
             AdvancementHolder root = Advancement.Builder.advancement().display(
-                            Items.LEATHER,
+                            ItemRegistry.ANIMAL_BRUSH.get(),
                             Component.translatable("advancement.demeter.root"),
                             Component.translatable("advancement.demeter.root.desc"),
-                            ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png"),
+                            ResourceLocation.withDefaultNamespace("gui/advancements/backgrounds/husbandry"),
                             AdvancementType.TASK,
                             false, false, false
             ).addCriterion("acquire_crafting", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRAFTING_TABLE))

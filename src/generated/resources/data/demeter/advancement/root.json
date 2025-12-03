@@ -13,13 +13,13 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "background": "minecraft:gui/advancements/backgrounds/husbandry",
     "description": {
       "translate": "advancement.demeter.root.desc"
     },
     "icon": {
       "count": 1,
-      "id": "minecraft:leather"
+      "id": "demeter:animal_brush"
     },
     "show_toast": false,
     "title": {
