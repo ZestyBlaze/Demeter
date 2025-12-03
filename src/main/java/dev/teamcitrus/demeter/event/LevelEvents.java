@@ -77,9 +77,9 @@ public class LevelEvents {
                                 BlockPos immutablePos = blockpos$mutable.immutable();
                                 if (nest.getCapability(null).getStackInSlot(0).isEmpty()) {
                                     if (claimNest(immutablePos, chicken)) {
-                                        chicken.getData(AttachmentRegistry.NESTING).setNesting(true);
-                                        chicken.getData(AttachmentRegistry.NESTING).setTargetPos(immutablePos);
-                                        return;
+                                        chicken.getNavigation().moveTo(
+                                                immutablePos.getX(), immutablePos.getY(), immutablePos.getZ(),
+                                                0, 1.0d);
                                     }
                                 }
                             }

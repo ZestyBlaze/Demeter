@@ -4,7 +4,6 @@ import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.entity.ai.DigProductsGoal;
-import dev.teamcitrus.demeter.entity.ai.NestingGoal;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
 import dev.teamcitrus.demeter.registry.AdvancementRegistry;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -18,7 +17,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,9 +44,6 @@ public class EntityEvents {
             }
             if (AnimalUtil.getStats(animal) != null && !AnimalUtil.getStats(animal).diggableItems().isEmpty()) {
                 animal.goalSelector.addGoal(4, new DigProductsGoal(animal, 1, AnimalUtil.getStats(animal).diggableItems()));
-            }
-            if (animal instanceof Chicken chicken) {
-                animal.goalSelector.addGoal(0, new NestingGoal(chicken));
             }
         }
     }
