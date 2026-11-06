@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:clock",
-    {
-      "id": "demeter:pocket_watch",
-      "required": false
-    }
-  ]
-}

@@ -1,16 +1,17 @@
-package dev.teamcitrus.demeter.attachment;
+package dev.teamcitrus.demeter.attachment.chunk;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.teamcitrus.demeter.duck.CropBlockData;
 import net.minecraft.core.BlockPos;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class CropAttachment {
-    public static final Codec<CropAttachment> CODEC = RecordCodecBuilder.create(func -> func.group(
+public record CropsInChunkAttachment(Map<BlockPos, CropBlockData> locations) {
+    public static final Codec<CropsInChunkAttachment> CODEC = RecordCodecBuilder.create(func -> func.group(
             Codec.unboundedMap(Codec.STRING.flatXmap(
                             s -> {
                                 String[] parts = s.split(",");
@@ -29,22 +30,16 @@ public class CropAttachment {
                             },
                             p -> DataResult.success(p.getX() + "," + p.getY() + "," + p.getZ())
                     ),
-                    Codec.INT).xmap(HashMap::new, Function.identity()).fieldOf("locations").forGetter(o -> (HashMap<BlockPos, Integer>) o.locations)
-    ).apply(func, CropAttachment::new));
+                    CropBlockData.CODEC).xmap(HashMap::new, Function.identity()).fieldOf("locations").forGetter(o -> (HashMap<BlockPos, CropBlockData>) o.locations)
+    ).apply(func, CropsInChunkAttachment::new));
 
-    private final Map<BlockPos, Integer> locations;
-
-    public CropAttachment() {
+    public CropsInChunkAttachment() {
         this(new HashMap<>());
-    }
-
-    public CropAttachment(Map<BlockPos, Integer> locations) {
-        this.locations = locations;
     }
 
     public void addLocation(BlockPos pos) {
         if (!locations.containsKey(pos)) {
-            locations.put(pos, 0);
+            locations.put(pos, new CropBlockData());
         }
     }
 
@@ -52,18 +47,15 @@ public class CropAttachment {
         locations.remove(pos);
     }
 
-    public Map<BlockPos, Integer> getLocations() {
-        return locations;
-    }
-
     public void incrementDays(BlockPos pos) {
         if (locations.containsKey(pos)) {
-            int old = locations.get(pos);
-            locations.replace(pos, ++old);
+            CropBlockData data = locations.get(pos);
+            int old = data.age;
+            locations.replace(pos, new CropBlockData(++old));
         }
     }
 
     public int getDays(BlockPos pos) {
-        return locations.get(pos);
+        return locations.get(pos).age;
     }
 }

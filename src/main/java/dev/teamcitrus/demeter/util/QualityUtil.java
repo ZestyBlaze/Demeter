@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.util;
 
-import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.component.QualityLevelComponent;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.duck.QualityLevel;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.food.FoodProperties;
@@ -54,18 +54,6 @@ public class QualityUtil {
                     .saturationModifier(originalSat + 0.2f).build();
             case NETHERITE -> new FoodProperties.Builder().nutrition(originalProperties.nutrition() + 3)
                     .saturationModifier(originalSat + 0.4f).build();
-        };
-    }
-
-    public static int getNutrition(QualityLevel level, int original) {
-        return original;
-    }
-
-    public static float getSaturation(QualityLevel level, float original) {
-        return switch (level) {
-            case COPPER -> original + 0.1f;
-            case IRON -> original + 0.2f;
-            case NETHERITE -> original + 0.4f;
         };
     }
 

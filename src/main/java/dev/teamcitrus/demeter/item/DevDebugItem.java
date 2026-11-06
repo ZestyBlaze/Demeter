@@ -1,6 +1,6 @@
 package dev.teamcitrus.demeter.item;
 
-import dev.teamcitrus.demeter.attachment.AnimalAttachment;
+import dev.teamcitrus.demeter.attachment.entity.AnimalAttachment;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

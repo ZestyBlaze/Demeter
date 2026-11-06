@@ -32,7 +32,7 @@ public class FarmBlockMixin {
             at = @At("TAIL")
     )
     private static void demeter$turnToDirt(Entity entity, BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
-        level.getChunk(pos).getData(AttachmentRegistry.CROP).removeLocation(pos.above());
+        level.getChunk(pos).getData(AttachmentRegistry.CROPS_IN_CHUNK).removeLocation(pos.above());
     }
 
     @ModifyReturnValue(

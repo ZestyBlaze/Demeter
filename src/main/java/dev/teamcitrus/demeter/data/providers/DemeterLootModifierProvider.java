@@ -2,9 +2,11 @@ package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
 import dev.teamcitrus.demeter.glm.QualityLootModifier;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
@@ -21,21 +23,33 @@ public class DemeterLootModifierProvider extends GlobalLootModifierProvider {
         add("quality_wheat",
                 new QualityLootModifier(
                         new LootItemCondition[]{
-                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.WHEAT).build()
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.WHEAT)
+                                        .setProperties(
+                                                StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BlockStateProperties.AGE_7, 7))
+                                        .build()
                         }
                 )
         );
         add("quality_carrots",
                 new QualityLootModifier(
                         new LootItemCondition[]{
-                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.CARROTS).build()
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.CARROTS)
+                                        .setProperties(
+                                                StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BlockStateProperties.AGE_7, 7))
+                                        .build()
                         }
                 )
         );
         add("quality_potato",
                 new QualityLootModifier(
                         new LootItemCondition[]{
-                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.POTATOES).build()
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.POTATOES)
+                                        .setProperties(
+                                                StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BlockStateProperties.AGE_7, 7))
+                                        .build()
                         }
                 )
         );
@@ -56,7 +70,11 @@ public class DemeterLootModifierProvider extends GlobalLootModifierProvider {
         add("quality_beetroots",
                 new QualityLootModifier(
                         new LootItemCondition[]{
-                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.BEETROOTS).build()
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.BEETROOTS)
+                                        .setProperties(
+                                                StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BlockStateProperties.AGE_3, 3))
+                                        .build()
                         }
                 )
         );

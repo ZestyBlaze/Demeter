@@ -14,6 +14,8 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 public class NestBlockEntity extends BlockEntity {
     public static final ItemStackHandler HANDLER = new NestItemStackHandler();
 
+    public int tick;
+
     public NestBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistry.NEST.get(), pos, blockState);
     }

@@ -1,7 +1,8 @@
 package dev.teamcitrus.demeter.util;
 
-import dev.teamcitrus.demeter.attachment.CropAttachment;
+import dev.teamcitrus.demeter.attachment.chunk.CropsInChunkAttachment;
 import dev.teamcitrus.demeter.datamaps.CropData;
+import dev.teamcitrus.demeter.duck.CropBlockData;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.registry.DataMapRegistry;
 import net.minecraft.core.BlockPos;
@@ -13,12 +14,12 @@ import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public class CropUtil {
-    public static CropAttachment getCropData(ChunkAccess chunkAccess) {
-        return chunkAccess.getData(AttachmentRegistry.CROP);
+    public static CropsInChunkAttachment getCropData(ChunkAccess chunkAccess) {
+        return chunkAccess.getData(AttachmentRegistry.CROPS_IN_CHUNK);
     }
 
-    public static Map<BlockPos, Integer> getCropsInChunk(ChunkAccess chunkAccess) {
-        return chunkAccess.getData(AttachmentRegistry.CROP).getLocations();
+    public static Map<BlockPos, CropBlockData> getCropsInChunk(ChunkAccess chunkAccess) {
+        return chunkAccess.getData(AttachmentRegistry.CROPS_IN_CHUNK).locations();
     }
 
     @Nullable

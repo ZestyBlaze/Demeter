@@ -7,6 +7,12 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Sheep.class)
 public class SheepMixin {
-    @Redirect(method = "ate", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;setSheared(Z)V"))
+    @Redirect(
+            method = "ate",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;setSheared(Z)V"
+            )
+    )
     private void demeter$ate(Sheep instance, boolean sheared) {}
 }

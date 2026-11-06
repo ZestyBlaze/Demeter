@@ -3,12 +3,11 @@ package dev.teamcitrus.demeter.data.providers.lang;
 import dev.teamcitrus.citruslib.datagen.CitrusLanguageProvider;
 import dev.teamcitrus.citruslib.util.JavaUtil;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
-import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.data.providers.DemeterBiomesTagProvider;
 import dev.teamcitrus.demeter.data.providers.DemeterBlockTagsProvider;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
 import dev.teamcitrus.demeter.data.providers.experimental.DemeterEBiomeProvider;
+import dev.teamcitrus.demeter.duck.QualityLevel;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.FluidTypeRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
@@ -16,7 +15,6 @@ import net.minecraft.data.PackOutput;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class EnUsProvider extends CitrusLanguageProvider {
     public EnUsProvider(PackOutput output) {
@@ -92,7 +90,6 @@ public class EnUsProvider extends CitrusLanguageProvider {
         add("item.demeter.pocket_watch.error", "Since \"requireClockItemForTime\" is currently not true, this item is not required in gameplay");
         add("item.demeter.quality_tooltip", "Quality: %s");
         add("item.demeter.strawberries", "Strawberries");
-        add("item.demeter.watering_can", "Watering Can");
         add("item.demeter.watering_can.fail", "Something has gone wrong, this can has no data!");
         add("item.demeter.watering_can.uses", "Uses: %s");
         add("itemGroup.demeter", "Demeter");
@@ -122,8 +119,8 @@ public class EnUsProvider extends CitrusLanguageProvider {
         });
 
         generateBlockLanguageKeys(BlockRegistry.BLOCKS);
-        generateItemLanguageKeys(ItemRegistry.ITEMS, List.of(ItemRegistry.WATERING_CAN.get()));
-        generateItemLanguageKeys(CuriosCompat.Items.CURIOS_ITEMS);
+        generateItemLanguageKeys(ItemRegistry.ITEMS);
+        //generateItemLanguageKeys(CuriosCompat.Items.CURIOS_ITEMS);
         Arrays.stream(qualities).forEach(quality -> add("item.demeter.quality_tooltip." + quality.getName(), StringUtils.capitalize(quality.getName())));
     }
 }

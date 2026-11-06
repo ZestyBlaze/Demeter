@@ -1,9 +1,7 @@
 package dev.teamcitrus.demeter;
 
 import dev.teamcitrus.citruslib.network.PayloadHelper;
-import dev.teamcitrus.citruslib.tab.TabFillingRegistry;
 import dev.teamcitrus.citruslib.util.ModUtil;
-import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchItemHandler;
 import dev.teamcitrus.demeter.network.BirthNotificationPacket;
@@ -55,7 +53,7 @@ public class Demeter {
         bus.register(this);
         
         if (ModUtil.isModInstalled("curios")) {
-            CuriosCompat.init(bus);
+            //CuriosCompat.init(bus);
         }
     }
 
@@ -68,7 +66,6 @@ public class Demeter {
         event.enqueueWork(() -> {
             PayloadHelper.registerPayload(new BirthNotificationPacket.Provider());
             PayloadHelper.registerPayload(new SyncSexPacket.Provider());
-            TabFillingRegistry.register(ItemRegistry.DEMETER_TAB.getKey(), ItemRegistry.WATERING_CAN.get());
             Stats.CUSTOM.get(StatsRegistry.TIMES_PET.get(), StatFormatter.DEFAULT);
             Stats.CUSTOM.get(StatsRegistry.ANIMALS_FED.get(), StatFormatter.DEFAULT);
         });
@@ -78,7 +75,15 @@ public class Demeter {
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, context) ->
                 new FluidHandlerItemStack(ComponentRegistry.FLUID_HANDLER, itemstack, 1000),
-                ItemRegistry.WATERING_CAN
+                ItemRegistry.COPPER_WATERING_CAN
+        );
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, context) ->
+                        new FluidHandlerItemStack(ComponentRegistry.FLUID_HANDLER, itemstack, 1000),
+                ItemRegistry.IRON_WATERING_CAN
+        );
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, context) ->
+                        new FluidHandlerItemStack(ComponentRegistry.FLUID_HANDLER, itemstack, 1000),
+                ItemRegistry.NETHERITE_WATERING_CAN
         );
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) ->
                 new FoodPouchItemHandler(stack),

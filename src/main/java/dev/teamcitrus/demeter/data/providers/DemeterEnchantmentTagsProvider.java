@@ -10,6 +10,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static dev.teamcitrus.demeter.enchantment.DemeterEnchantments.*;
 
+@SuppressWarnings("unchecked")
 public class DemeterEnchantmentTagsProvider extends EnchantmentTagsProvider {
     public DemeterEnchantmentTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, lookupProvider, Demeter.MODID);

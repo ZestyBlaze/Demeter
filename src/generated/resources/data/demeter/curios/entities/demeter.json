@@ -1,9 +1,0 @@
-{
-  "entities": [
-    "#curios:player_like"
-  ],
-  "slots": [
-    "necklace",
-    "charm"
-  ]
-}

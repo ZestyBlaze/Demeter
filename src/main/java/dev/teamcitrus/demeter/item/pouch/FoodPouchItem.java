@@ -1,5 +1,6 @@
 package dev.teamcitrus.demeter.item.pouch;
 
+import dev.teamcitrus.demeter.Demeter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -7,7 +8,9 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
@@ -44,6 +47,36 @@ public class FoodPouchItem extends Item {
             }
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
+        //TODO Add interactions with entity
+        Demeter.LOGGER.warn("1");
+
+        if (!player.level().isClientSide()) {
+            if (interactionTarget instanceof Animal animal) {
+                IItemHandler handler = stack.getCapability(Capabilities.ItemHandler.ITEM);
+
+                Demeter.LOGGER.warn("2");
+
+                if (handler != null) {
+                    for (int i = 0; i < handler.getSlots(); i++) {
+                        Demeter.LOGGER.warn("3");
+                        ItemStack stackInSlot = handler.getStackInSlot(i);
+
+                        if (animal.isFood(stackInSlot)) {
+                            handler.extractItem(i, 1, false);
+                            Demeter.LOGGER.warn("4: Found food, extract");
+
+                            return InteractionResult.SUCCESS;
+                        }
+                    }
+                }
+            }
+        }
+
+        return InteractionResult.FAIL;
     }
 
     @Override

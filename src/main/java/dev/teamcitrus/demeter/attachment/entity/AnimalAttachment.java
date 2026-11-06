@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.attachment;
+package dev.teamcitrus.demeter.attachment.entity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -20,6 +20,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+@SuppressWarnings("depracation")
 public class AnimalAttachment {
     public static final Codec<AnimalAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("age").forGetter(o -> o.age),
@@ -200,7 +201,7 @@ public class AnimalAttachment {
 
     public void setPregnant(Animal animal, boolean value, Animal otherParent) {
         this.isPregnant = value;
-        //this.otherParentData = otherParent.serializeNBT(animal.level().registryAccess());
+        //this.otherParentData = otherParent.serialize(animal.level().registryAccess());
         if (value) {
             AnimalData data = AnimalUtil.getStats(animal);
             if (data != null) {

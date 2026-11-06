@@ -1,9 +1,9 @@
 package dev.teamcitrus.demeter.registry;
 
-import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
+import dev.teamcitrus.demeter.duck.QualityLevel;
 import dev.teamcitrus.demeter.item.*;
+import dev.teamcitrus.demeter.item.experimental.DiaryItem;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchItem;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,10 +24,9 @@ public class ItemRegistry {
             .title(Component.translatable("itemGroup.demeter"))
             .icon(ItemRegistry.ANIMAL_BRUSH.get()::getDefaultInstance)
             .displayItems((parameters, output) -> ItemRegistry.ITEMS.getEntries().forEach(item -> {
-                if (!(item.get() instanceof WateringCanItem))
-                    output.accept(item.get());
-                if (ModUtil.isModInstalled("curios"))
-                    CuriosCompat.addItemsToTab(output);
+                output.accept(item.get());
+                //if (ModUtil.isModInstalled("curios"))
+                    //CuriosCompat.addItemsToTab(output);
             }))
             .build());
 
@@ -40,7 +39,9 @@ public class ItemRegistry {
     public static final DeferredItem<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", MiraclePotionItem::new);
     public static final DeferredItem<Item> BUTTER = ITEMS.registerSimpleItem("butter");
     public static final DeferredItem<Item> TRUFFLE = ITEMS.registerSimpleItem("truffle");
-    public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.register("watering_can", WateringCanItem::new);
+    public static final DeferredItem<WateringCanItem> COPPER_WATERING_CAN = ITEMS.register("copper_watering_can", () -> new WateringCanItem(QualityLevel.COPPER));
+    public static final DeferredItem<WateringCanItem> IRON_WATERING_CAN = ITEMS.register("iron_watering_can", () -> new WateringCanItem(QualityLevel.IRON));
+    public static final DeferredItem<WateringCanItem> NETHERITE_WATERING_CAN = ITEMS.register("netherite_watering_can", () -> new WateringCanItem(QualityLevel.NETHERITE));
     public static final DeferredItem<Item> FOOD_POUCH = ITEMS.register("food_pouch", FoodPouchItem::new);
     public static final DeferredItem<BlockItem> TROUGH = ITEMS.registerSimpleBlockItem(BlockRegistry.TROUGH);
     public static final DeferredItem<BlockItem> NEST = ITEMS.registerSimpleBlockItem(BlockRegistry.NEST);

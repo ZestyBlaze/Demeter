@@ -7,11 +7,11 @@
     "AnimalMixin",
     "BreedGoalMixin",
     "ChickenMixin",
-    "CowGoatMixin",
     "CropBlockInvoker",
     "CropBlockMixin",
     "FarmBlockMixin",
     "IShearableMixin",
+    "RandomStrollGoalMixin",
     "SheepMixin",
     "ThrownEggMixin"
   ],

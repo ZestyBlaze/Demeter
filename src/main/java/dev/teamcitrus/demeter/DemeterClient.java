@@ -7,7 +7,7 @@ import dev.teamcitrus.demeter.client.DemeterHud;
 import dev.teamcitrus.demeter.client.HUDRenderData;
 import dev.teamcitrus.demeter.client.layer.TuskLayer;
 import dev.teamcitrus.demeter.client.model.TuskModel;
-import dev.teamcitrus.demeter.client.property.QualityProperty;
+import dev.teamcitrus.demeter.client.property.FilledProperty;
 import dev.teamcitrus.demeter.client.tooltip.ClientFoodPouchTooltip;
 import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
 import dev.teamcitrus.demeter.config.DemeterConfig;
@@ -16,7 +16,6 @@ import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.item.pouch.FoodPouchTooltip;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.EntityTypeRegistry;
-import dev.teamcitrus.demeter.registry.FluidRegistry;
 import dev.teamcitrus.demeter.registry.FluidTypeRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import dev.teamcitrus.demeter.util.PlayerUtil;
@@ -27,7 +26,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.BoatRenderer;
@@ -45,8 +43,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
@@ -66,8 +64,8 @@ public class DemeterClient {
         event.enqueueWork(() -> {
             Sheets.addWoodType(BlockRegistry.MAPLE_WOOD_TYPE);
             RENDERERS.put(Level.OVERWORLD, new DemeterHud());
-            ItemBlockRenderTypes.setRenderLayer(FluidRegistry.WINE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidRegistry.WINE_FLOWING.get(), RenderType.translucent());
+            //ItemBlockRenderTypes.setRenderLayer(FluidRegistry.WINE.get(), RenderType.translucent());
+            //ItemBlockRenderTypes.setRenderLayer(FluidRegistry.WINE_FLOWING.get(), RenderType.translucent());
         });
     }
 
@@ -97,8 +95,8 @@ public class DemeterClient {
     }
 
     @SubscribeEvent
-    public static void registerSelectItemModels(RegisterSelectItemModelPropertyEvent event) {
-        event.register(QualityProperty.QUALITY, QualityProperty.TYPE);
+    public static void registerConditionalItemModels(RegisterConditionalItemModelPropertyEvent event) {
+        event.register(FilledProperty.FILLED, FilledProperty.CODEC);
     }
 
     @SubscribeEvent

@@ -42,7 +42,9 @@ public class TroughBlock extends Block implements EntityBlock {
                     if (stack.is(DemeterItemTagsProvider.TROUGH_FOODS_HAY) && (level.getBlockState(pos).getValue(FOOD_TYPE).equals(FoodType.HAY)
                             || level.getBlockState(pos).getValue(FOOD_TYPE).equals(FoodType.NONE))) {
                         ItemStack remaining = entity.insertItem(stack.copy());
-                        stack.setCount(remaining.getCount());
+                        if (!player.isCreative()) {
+                            stack.setCount(remaining.getCount());
+                        }
                         level.setBlockAndUpdate(pos, level.getBlockState(pos)
                                 .setValue(FOOD_TYPE, FoodType.HAY)
                                 .setValue(FOOD_LEVEL, state.getValue(FOOD_LEVEL) + 1)

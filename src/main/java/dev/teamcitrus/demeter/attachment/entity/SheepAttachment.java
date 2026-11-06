@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.attachment;
+package dev.teamcitrus.demeter.attachment.entity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -21,10 +21,12 @@ public class SheepAttachment {
     }
 
     public void onNewDay(Sheep self) {
-        daysSinceSheared += 1;
-        if (daysSinceSheared >= DemeterConfig.woolGrowthDays.get()) {
-            self.setSheared(false);
-            daysSinceSheared = 0;
+        if (self.isSheared()) {
+            daysSinceSheared += 1;
+            if (daysSinceSheared >= DemeterConfig.woolGrowthDays.get()) {
+                self.setSheared(false);
+                daysSinceSheared = 0;
+            }
         }
     }
 }

@@ -10,9 +10,7 @@ public class DemeterHud extends HUDRenderData {
     public Component getHeader(Minecraft mc) {
         int days = TimeUtil.getElapsedDays(mc.level.getDayTime());
         int years = TimeUtil.getElapsedYears(mc.level.getDayTime());
-        if (years >= 1) {
-            days = days - (years * TimeUtil.YEAR_DAYS);
-        }
+        days = days - (years * TimeUtil.YEAR_DAYS);
         return Component.translatable("hud.demeter.year_day", 1 + years, 1 + days);
     }
 

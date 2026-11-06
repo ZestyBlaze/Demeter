@@ -1,7 +1,7 @@
 package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.attachment.CropAttachment;
+import dev.teamcitrus.demeter.attachment.chunk.CropsInChunkAttachment;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import net.minecraft.world.level.block.CropBlock;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -13,7 +13,7 @@ public class BlockEvents {
     @SubscribeEvent
     public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
         if (event.getPlacedBlock().getBlock() instanceof CropBlock) {
-            CropAttachment crop = event.getLevel().getChunk(event.getPos()).getData(AttachmentRegistry.CROP);
+            CropsInChunkAttachment crop = event.getLevel().getChunk(event.getPos()).getData(AttachmentRegistry.CROPS_IN_CHUNK);
             crop.addLocation(event.getPos());
         }
     }
@@ -21,7 +21,7 @@ public class BlockEvents {
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         if (event.getState().getBlock() instanceof CropBlock) {
-            CropAttachment crop = event.getLevel().getChunk(event.getPos()).getData(AttachmentRegistry.CROP);
+            CropsInChunkAttachment crop = event.getLevel().getChunk(event.getPos()).getData(AttachmentRegistry.CROPS_IN_CHUNK);
             crop.removeLocation(event.getPos());
         }
     }

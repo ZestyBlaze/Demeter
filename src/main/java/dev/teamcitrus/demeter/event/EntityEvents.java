@@ -1,6 +1,7 @@
 package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
+import dev.teamcitrus.demeter.attachment.entity.ChickenAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
 import dev.teamcitrus.demeter.entity.ai.DigProductsGoal;
@@ -10,6 +11,7 @@ import dev.teamcitrus.demeter.registry.AttachmentRegistry;
 import dev.teamcitrus.demeter.registry.StatsRegistry;
 import dev.teamcitrus.demeter.util.AnimalUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -17,6 +19,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,12 +31,15 @@ import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
 import net.neoforged.neoforge.event.entity.player.CanContinueSleepingEvent;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
 @EventBusSubscriber(modid = Demeter.MODID)
 public class EntityEvents {
+    private static int tick = 0;
+
     @SubscribeEvent
     public static void onEntityAdded(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Animal animal)) return;
@@ -110,6 +116,31 @@ public class EntityEvents {
         if (event.getCausedByPlayer() == null) return;
         ServerPlayer player = (ServerPlayer) event.getCausedByPlayer();
         PacketDistributor.sendToPlayer(player, new BirthNotificationPacket());
+    }
+
+    @SubscribeEvent
+    public static void onEntityTick(EntityTickEvent.Pre event) {
+        if (!event.getEntity().level().isClientSide()) {
+            if (event.getEntity() instanceof Chicken chicken) {
+                ChickenAttachment nestingAttachment = chicken.getData(AttachmentRegistry.CHICKEN);
+                if (nestingAttachment.isNesting()) {
+                    if (tick == 20 * 3) {
+                        if (!chicken.getNavigation().isInProgress()) {
+                            BlockPos pos = nestingAttachment.getTargetPos();
+
+                            chicken.getNavigation().moveTo(
+                                    pos.getX(), pos.getY(), pos.getZ(),
+                                    0, 1.0d
+                            );
+                        }
+
+                        tick = 0;
+                    } else {
+                        tick++;
+                    }
+                }
+            }
+        }
     }
 
     @SubscribeEvent

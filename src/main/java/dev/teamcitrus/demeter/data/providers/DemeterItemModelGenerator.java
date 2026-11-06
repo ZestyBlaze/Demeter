@@ -1,8 +1,7 @@
 package dev.teamcitrus.demeter.data.providers;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.client.property.QualityProperty;
-import dev.teamcitrus.demeter.component.QualityLevel;
+import dev.teamcitrus.demeter.client.property.FilledProperty;
 import dev.teamcitrus.demeter.registry.BlockRegistry;
 import dev.teamcitrus.demeter.registry.ItemRegistry;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -33,24 +32,20 @@ public class DemeterItemModelGenerator extends ItemModelGenerators {
         generateFlatItem(ItemRegistry.MAPLE_BOAT.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(ItemRegistry.MAPLE_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(ItemRegistry.FOOD_POUCH.get(), ModelTemplates.FLAT_ITEM);
-        createWateringCanItem(ItemRegistry.WATERING_CAN.get());
+        generateFlatItem(ItemRegistry.TRUFFLE.get(), ModelTemplates.FLAT_ITEM);
+        createWateringCanItem(ItemRegistry.COPPER_WATERING_CAN.get());
+        createWateringCanItem(ItemRegistry.IRON_WATERING_CAN.get());
+        createWateringCanItem(ItemRegistry.NETHERITE_WATERING_CAN.get());
         itemModelOutput.accept(BlockRegistry.COUNTER.asItem(), ItemModelUtils.plainModel(getPath("counter_straight")));
     }
 
     private void createWateringCanItem(Item wateringCanItem) {
-        ItemModel.Unbaked model$plain = ItemModelUtils.plainModel(createFlatItemModel(wateringCanItem, ModelTemplates.FLAT_ITEM));
-        ItemModel.Unbaked model$copper = ItemModelUtils.plainModel(createFlatItemModel(wateringCanItem, "_copper", ModelTemplates.FLAT_ITEM));
-        ItemModel.Unbaked model$iron = ItemModelUtils.plainModel(createFlatItemModel(wateringCanItem, "_iron", ModelTemplates.FLAT_ITEM));
-        ItemModel.Unbaked model$netherite = ItemModelUtils.plainModel(createFlatItemModel(wateringCanItem, "_netherite", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked model$filled = ItemModelUtils.plainModel(createFlatItemModel(wateringCanItem, "_filled", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked model$unfilled = ItemModelUtils.plainModel(createFlatItemModel(wateringCanItem, "_unfilled", ModelTemplates.FLAT_ITEM));
 
         itemModelOutput.accept(
                 wateringCanItem,
-                ItemModelUtils.select(new QualityProperty(),
-                        model$plain,
-                        ItemModelUtils.when(QualityLevel.COPPER, model$copper),
-                        ItemModelUtils.when(QualityLevel.IRON, model$iron),
-                        ItemModelUtils.when(QualityLevel.NETHERITE, model$netherite)
-                )
+                ItemModelUtils.conditional(new FilledProperty(), model$filled, model$unfilled)
         );
     }
 

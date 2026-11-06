@@ -1,4 +1,4 @@
-package dev.teamcitrus.demeter.item;
+package dev.teamcitrus.demeter.item.experimental;
 
 import dev.teamcitrus.demeter.Demeter;
 import net.minecraft.core.component.DataComponents;
@@ -27,7 +27,7 @@ public class DiaryItem extends Item {
         if (writtenBookContent != null) {
             itemStack.set(DataComponents.WRITTEN_BOOK_CONTENT, new WrittenBookContent(Filterable.passThrough(
                     itemStack.getItemName().getString()),
-                    "null", 1,
+                    "ZestyBlaze", 1,
                     List.of(
                             Filterable.passThrough(Component.literal("Test test")),
                             Filterable.passThrough(Component.literal("Page 2"))

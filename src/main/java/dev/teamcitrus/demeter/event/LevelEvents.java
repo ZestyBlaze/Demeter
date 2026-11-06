@@ -3,10 +3,12 @@ package dev.teamcitrus.demeter.event;
 import com.google.common.collect.Lists;
 import dev.teamcitrus.citruslib.event.NewDayEvent;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.attachment.CropAttachment;
+import dev.teamcitrus.demeter.attachment.chunk.CropsInChunkAttachment;
+import dev.teamcitrus.demeter.attachment.entity.ChickenAttachment;
 import dev.teamcitrus.demeter.block.nest.NestBlockEntity;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.CropData;
+import dev.teamcitrus.demeter.duck.CropBlockData;
 import dev.teamcitrus.demeter.event.internal.NewYearEvent;
 import dev.teamcitrus.demeter.mixin.CropBlockInvoker;
 import dev.teamcitrus.demeter.registry.AttachmentRegistry;
@@ -77,9 +79,10 @@ public class LevelEvents {
                                 BlockPos immutablePos = blockpos$mutable.immutable();
                                 if (nest.getCapability(null).getStackInSlot(0).isEmpty()) {
                                     if (claimNest(immutablePos, chicken)) {
-                                        chicken.getNavigation().moveTo(
-                                                immutablePos.getX(), immutablePos.getY(), immutablePos.getZ(),
-                                                0, 1.0d);
+                                        nest.tick = 0;
+
+                                        chicken.setData(AttachmentRegistry.CHICKEN, new ChickenAttachment(true, immutablePos));
+                                        chicken.getNavigation().stop();
                                     }
                                 }
                             }
@@ -112,8 +115,22 @@ public class LevelEvents {
                 record.forEach(poiRecord -> updatePositions.add(poiRecord.getPos()));
                 updatePositions.forEach(blockPos -> {
                     BlockState state = level.getBlockState(blockPos);
+                    BlockPos abovePos = blockPos.above();
+                    BlockState aboveState = level.getBlockState(abovePos);
+
+                    boolean frozenCheck = false;
+
+                    if (aboveState.getBlock() instanceof CropBlock) {
+                        if (CropUtil.getCropsInChunk(levelchunk).containsKey(abovePos)) {
+                            CropBlockData data = CropUtil.getCropsInChunk(levelchunk).get(abovePos);
+                            if (data.frozen) {
+                                frozenCheck = true;
+                            }
+                        }
+                    }
+
                     if (state.hasProperty(BlockStateProperties.MOISTURE) && state.getValue(BlockStateProperties.MOISTURE) != 7) {
-                        if (level.random.nextInt(100) < DemeterConfig.morningDirtChance.get()) {
+                        if (!frozenCheck && level.random.nextInt(100) < DemeterConfig.morningDirtChance.get()) {
                             FarmBlock.turnToDirt(null, state, level, blockPos);
                         }
                     } else {
@@ -122,26 +139,28 @@ public class LevelEvents {
                 });
                 updatePositions.clear();
 
-                CropUtil.getCropsInChunk(levelchunk).forEach((pos, originalDays) -> {
-                    BlockState state = level.getBlockState(pos);
-                    CropBlock block = (CropBlock) state.getBlock();
-                    CropData cropData = CropUtil.getCropData(block);
-                    if (cropData != null) {
-                        int days = cropData.daysToGrow();
+                CropUtil.getCropsInChunk(levelchunk).forEach((pos, cropExtraData) -> {
+                    if (!cropExtraData.frozen) {
+                        BlockState state = level.getBlockState(pos);
+                        CropBlock block = (CropBlock) state.getBlock();
+                        CropData cropData = CropUtil.getCropData(block);
+                        if (cropData != null) {
+                            int days = cropData.daysToGrow();
 
-                        CropAttachment data = CropUtil.getCropData(levelchunk);
-                        data.incrementDays(pos);
+                            CropsInChunkAttachment data = CropUtil.getCropData(levelchunk);
+                            data.incrementDays(pos);
 
-                        if(originalDays < days) {
-                            int stage = Mth.floor(block.getMaxAge() * ((float) data.getDays(pos) / days));
-                            IntegerProperty property = ((CropBlockInvoker)block).invokeGetAgeProperty();
-                            level.setBlockAndUpdate(pos, state.setValue(property, stage));
-                        }
+                            if (cropExtraData.age < days) {
+                                int stage = Mth.floor(block.getMaxAge() * ((float) data.getDays(pos) / days));
+                                IntegerProperty property = ((CropBlockInvoker) block).invokeGetAgeProperty();
+                                level.setBlockAndUpdate(pos, state.setValue(property, stage));
+                            }
 
-                        if (DemeterConfig.cropsWilt.get()) {
-                            if (data.getDays(pos) == days + DemeterConfig.daysToWilt.get()) {
-                                level.setBlockAndUpdate(pos, BlockRegistry.DEAD_CROP.get().defaultBlockState());
-                                updatePositions.add(pos);
+                            if (DemeterConfig.cropsWilt.get()) {
+                                if (data.getDays(pos) == days + DemeterConfig.daysToWilt.get()) {
+                                    level.setBlockAndUpdate(pos, BlockRegistry.DEAD_CROP.get().defaultBlockState());
+                                    updatePositions.add(pos);
+                                }
                             }
                         }
                     }

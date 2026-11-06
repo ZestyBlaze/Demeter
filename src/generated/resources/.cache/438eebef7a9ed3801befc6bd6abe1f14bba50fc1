@@ -1,4 +1,4 @@
-// 1.21.5	2025-05-29T19:32:55.57462	Model Definitions - demeter
+// 1.21.5	2026-01-23T12:20:19.8312475	Model Definitions - demeter
 8267223360d1461107d3a8868fad12030782b38e assets/demeter/blockstates/bamboo_shoots.json
 8e2f9acf55145c9a41b939435e4d1f5af5ab7c00 assets/demeter/blockstates/counter.json
 b2495319d239c54081860d654ed381f58452401b assets/demeter/blockstates/feeding_tray.json
@@ -30,9 +30,11 @@ e8551c1182c4a9873f6dc3a99b65d81569af07f6 assets/demeter/blockstates/wine.json
 3bf867fb3bdc25d8b3ba722c86cc1258b5ca5b67 assets/demeter/items/animal_tag.json
 401a0ac8ac1bd96e71e8e76994b9f2404eb349de assets/demeter/items/bamboo_shoots.json
 9360a66bcad39ca5b2a1da558fa7fca317e0d910 assets/demeter/items/butter.json
+b42df5b636ab062cc821911f5fbd4a8be78b5e2d assets/demeter/items/copper_watering_can.json
 c8b0d15532d4676f028d7596ee09936139a4349b assets/demeter/items/counter.json
 25da82e831f58084bc96bbf99463fb5ef79a887c assets/demeter/items/dev_debug_item.json
 66a4a14307243f070ec7a989b8ba8b06151e072f assets/demeter/items/food_pouch.json
+4eea0c2436b8d5e188c7a0d0ab7053b996877cbc assets/demeter/items/iron_watering_can.json
 10e074fac12e55853361d3073fa2d544ac5a64af assets/demeter/items/maple_boat.json
 b2328dc7d2d40403cddda1a68bec81a139326dc5 assets/demeter/items/maple_button.json
 65655f187f92946e5abef5dfb8cf0d505696ebc9 assets/demeter/items/maple_chest_boat.json
@@ -55,11 +57,12 @@ d8ba24f6356abe7b538a54025fa671aac9bed7f3 assets/demeter/items/maple_syrup_block.
 70e6e226c587b35db7a3fc01adfa63cf059dc28e assets/demeter/items/milk_bottle.json
 a3e9df8884b83229772ebdd0e7a5e61baac141ca assets/demeter/items/miracle_potion.json
 bf111e57380d729dcef4252bc81d160c13e1a3cc assets/demeter/items/nest.json
+51acb0983fd456ff0e7388dfd308f02a1513affc assets/demeter/items/netherite_watering_can.json
 c9619a7429d669da9b9cb23416461687d81b69a3 assets/demeter/items/strawberries.json
 05d6228b6e6f93dd16731d6b06dcced743c6c0f0 assets/demeter/items/stripped_maple_log.json
 355fc5ac8ad5c3179fde40860641138aedb143d5 assets/demeter/items/stripped_maple_wood.json
 200ff02882caf0788b20b1cb58ed16e7797819c8 assets/demeter/items/trough.json
-3b6c3cae87c94dadd989569e7ece1cd5a7e03eb1 assets/demeter/items/watering_can.json
+3537961534c3539ed4ef26d5207d6e5841aa8a0b assets/demeter/items/truffle.json
 aed64d4907ad480ce05b1f2fffc759b28fed22ea assets/demeter/models/block/bamboo_shoots.json
 53b6d9a023b541e9f117f3e19c618a567c5a802b assets/demeter/models/block/maple_button.json
 84577c2c196e67881fea17d7d05e7f4148c1d0d8 assets/demeter/models/block/maple_button_inventory.json
@@ -109,8 +112,12 @@ b60c87d9cc8c793e0ca421f00aa5db5cf03e1f26 assets/demeter/models/block/stripped_ma
 c679f7d57669ad853a684c3d1aad5093ef45e083 assets/demeter/models/item/animal_tag.json
 a8101cbab5007f79b12ba7a65e85d147ce1a8149 assets/demeter/models/item/bamboo_shoots.json
 757ed270a8161e18b65b5d1671ffced247f85d39 assets/demeter/models/item/butter.json
+69ab7dde104089c2fc3e91aaaf598f531d9f82be assets/demeter/models/item/copper_watering_can_filled.json
+8a9ff01c4b572e4c5791889d0580def30ec3ec12 assets/demeter/models/item/copper_watering_can_unfilled.json
 d7f8caed6f5021d67af880a2e777eb865d4d333b assets/demeter/models/item/dev_debug_item.json
 c55b7e640112e4527bccd786f89c5e0ed9e0324e assets/demeter/models/item/food_pouch.json
+7210b540ba3089201cf71f471127bf5b29b5ddec assets/demeter/models/item/iron_watering_can_filled.json
+0508e2cd496e69fa8f03666c8ab3b3e84895b7ff assets/demeter/models/item/iron_watering_can_unfilled.json
 0cd9cb61a16fb0f0f2806b8b72d4a062b25bc17d assets/demeter/models/item/maple_boat.json
 cdd6638b6527a025a148edd07751174fa7ff8314 assets/demeter/models/item/maple_chest_boat.json
 56cc72bb012806ee43a4787d259ddfba9b1c53ef assets/demeter/models/item/maple_door.json
@@ -120,8 +127,7 @@ a30bb8a2cae051a897f1108082e453e148cc74d5 assets/demeter/models/item/maple_saplin
 1bca9addbae9f20e8e517711b02a5fc375fe2d46 assets/demeter/models/item/maple_syrup_bottle.json
 5b9d48f10c95ed6db2b493e7ca53ef92002a55a0 assets/demeter/models/item/milk_bottle.json
 bdec1e3cdba6c899ca233a3cba3e2564e18f0b8b assets/demeter/models/item/miracle_potion.json
+8aa918b99939f9498067f60a11d8e1dfb3b27cba assets/demeter/models/item/netherite_watering_can_filled.json
+324d2be5fa4d7ea54033d3dda8288d7abd7c15cf assets/demeter/models/item/netherite_watering_can_unfilled.json
 f0fec215c8488b623555ea664cf54436a219fe9c assets/demeter/models/item/strawberries.json
-07027b188863695ff87ab835e9e918df1c856683 assets/demeter/models/item/watering_can.json
-953f47169878b6e63eff0311c6881b4ce9642e0d assets/demeter/models/item/watering_can_copper.json
-b02444a291e8a1b27cd3750b6a4fafcaa0704ca5 assets/demeter/models/item/watering_can_iron.json
-15ce465bdd0bec11133803e25895ef4a6e113eff assets/demeter/models/item/watering_can_netherite.json
+be9be1f00c3be4f16f3e06b58721c67c6fcdb584 assets/demeter/models/item/truffle.json

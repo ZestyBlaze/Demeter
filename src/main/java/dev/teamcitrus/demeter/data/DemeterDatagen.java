@@ -34,15 +34,14 @@ public class DemeterDatagen {
         event.addProvider(DemeterLootProvider.create(output, provider));
         CompletableFuture<HolderLookup.Provider> datapack = event.addProvider(new DemeterDatapackProvider(output, provider)).getRegistryProvider();
 
-        DemeterBlockTagsProvider blockTags = new DemeterBlockTagsProvider(output, provider);
-        event.addProvider(blockTags);
-        event.addProvider(new DemeterItemTagsProvider(output, provider, blockTags.contentsGetter()));
+        event.addProvider(new DemeterBlockTagsProvider(output, provider));
+        event.addProvider(new DemeterItemTagsProvider(output, provider));
         event.addProvider(new DemeterBiomesTagProvider(output, provider));
         event.addProvider(new DemeterEnchantmentTagsProvider(output, datapack));
         event.addProvider(new DemeterEntityTagProvider(output, provider));
         event.addProvider(new DemeterRecipeProvider.Runner(output, provider));
         event.addProvider(new DemeterLootModifierProvider(output, provider));
-        event.addProvider(new DemeterCuriosProvider(output, provider));
+        //event.addProvider(new DemeterCuriosProvider(output, provider));
 
         event.addProvider(new EnUsProvider(output));
 

@@ -8,6 +8,7 @@ import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Matrix3x2fStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,7 +22,8 @@ public class GuiGraphicsMixin {
 
     @Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"))
     private void demeter$renderItemDecorations(Font pFont, ItemStack pStack, int pX, int pY, String pText, CallbackInfo ci) {
-        if (pStack.isEmpty() || pStack.is(ItemRegistry.WATERING_CAN) || !pStack.has(ComponentRegistry.QUALITY_LEVEL) || QualityUtil.getQuality(pStack) == null) {
+        if (pStack.isEmpty() || pStack.is(ItemRegistry.COPPER_WATERING_CAN)
+                || !pStack.has(ComponentRegistry.QUALITY_LEVEL) || QualityUtil.getQuality(pStack) == null) {
             return;
         }
         this.pose.pushPose();

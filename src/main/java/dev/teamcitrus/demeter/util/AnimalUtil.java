@@ -2,8 +2,7 @@ package dev.teamcitrus.demeter.util;
 
 import dev.teamcitrus.citruslib.util.ModUtil;
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.attachment.AnimalAttachment;
-import dev.teamcitrus.demeter.compat.curios.CuriosCompat;
+import dev.teamcitrus.demeter.attachment.entity.AnimalAttachment;
 import dev.teamcitrus.demeter.config.DemeterConfig;
 import dev.teamcitrus.demeter.datamaps.AnimalData;
 import dev.teamcitrus.demeter.duck.AnimalSexes;
@@ -44,9 +43,11 @@ public class AnimalUtil {
                 int numberOfTimes = serverLevel.random.nextIntBetweenInclusive(stats.minChildrenPerBirth(), stats.maxChildrenPerBirth());
                 if (self.getLoveCause() != null) {
                     if (ModUtil.isModInstalled("curios")) {
+                        /*
                         if (CuriosCompat.isWearing(self.getLoveCause(), CuriosCompat.Items.BREEDING_CHARM.get())) {
                             numberOfTimes += 2;
                         }
+                         */
                     }
                 }
                 birth(self, serverLevel, otherEntity, numberOfTimes);

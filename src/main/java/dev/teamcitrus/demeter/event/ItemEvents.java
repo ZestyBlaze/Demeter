@@ -1,15 +1,18 @@
 package dev.teamcitrus.demeter.event;
 
 import dev.teamcitrus.demeter.Demeter;
-import dev.teamcitrus.demeter.component.QualityLevel;
 import dev.teamcitrus.demeter.data.providers.DemeterItemTagsProvider;
+import dev.teamcitrus.demeter.duck.CropBlockData;
+import dev.teamcitrus.demeter.duck.QualityLevel;
 import dev.teamcitrus.demeter.registry.ComponentRegistry;
+import dev.teamcitrus.demeter.util.CropUtil;
 import dev.teamcitrus.demeter.util.QualityUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.CropBlock;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
@@ -22,6 +25,17 @@ public class ItemEvents {
     public static void onItemUsedEvent(PlayerInteractEvent.RightClickItem event) {
         if (event.getItemStack().getItem() == Items.MILK_BUCKET) {
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getItemStack().is(Items.BLUE_ICE) && event.getLevel().getBlockState(event.getPos()).getBlock() instanceof CropBlock) {
+            if (CropUtil.getCropsInChunk(event.getLevel().getChunk(event.getPos())).containsKey(event.getPos())) {
+                CropBlockData data = CropUtil.getCropsInChunk(event.getLevel().getChunk(event.getPos())).get(event.getPos());
+                data.frozen = true;
+                event.setCanceled(true);
+            }
         }
     }
 
